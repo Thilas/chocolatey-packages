@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>serviio</id>
+    <version>1.3.1</version>
+    <title>Serviio</title>
+    <authors>Petr Nejedly</authors>
+    <owners>Thilas</owners>
+    <description>Serviio is a free media server. It allows you to stream your media files (music, video or images) to renderer devices (e.g. a TV set, Bluray player, games console or mobile phone) on your connected home network.
+There is also a paid for Pro edition which further enhances the possibilities of sharing content in your connected household.
+Serviio works with many devices from your connected home (TV, Playstation 3, XBox 360, smart phones, tablets, etc.). It supports profiles for particular devices so that it can be tuned to maximise the device's potential and/or minimize lack of media format playback support (via transcoding).
+Serviio is based on Java technology and therefore runs on most platforms, including Windows, Mac and Linux (incl. embedded systems, e.g. NAS).</description>
+    <releaseNotes>See all - http://www.serviio.org/news/9-release-notes/
+Release Notes - 1.3.1
+- added profile for Yamaha BD-A1020; ticket #695
+- added profile for Roku (via Chaneru)
+- added log warning if the server and the console are not the same version
+- adding new files to library uses less CPU and IO resources
+- uploading license will make immediate effect without the need to restart the console
+- fixed Pro evaluation period duration
+- fixed subtitles for WDTV live
+- fixed HLS transcoding for files with no audio
+- fixed extraction of some online resources that include quotes in the URL
+- fixed hardsubs on Linux and OSX
+- updated Lucene to 4.4.0
+Release Notes - 1.3
+- updated MediaBrowser to work on iOS devices (Pro only)
+- added Search to CDS API; ticket #607 (Pro only)
+- added thumbnails for folders to CDS API (Pro only); ticket #588
+- added default Access Group setting for renderers (Pro only); ticket #590
+- removed the watermark from MediaBrowser player (Pro only)
+- added the option to disable access to all new renderers by default
+- added thumbnails for folders; ticket #271
+- added support for higher resolution thumbnails; ticket #634
+- fixed re-invoking transcoding command when previous attempt fails due to a temporary condition; ticket #578
+- fixed delivering hardsubs for files including '&amp;' on Windows
+- fixed MP3 year metadata extraction for ID3 v2.3 tags TIME value
+- removed system tray icon on OSX, all the options are now present on the Serviio-Console dock icon
+- added the option to transcode to H264
+- added the option to transcode to HLS (Http Live Streaming); ticket #560
+- added Audio -> Albums browsing category; ticket #367
+- keeping metadata (incl. cover art) when trancsoding to mp3; ticket #650
+- added Release year browsing category for videos; ticket #609
+- added support for VTT subtitles
+- added support for MOV text subtitles
+- added serviio.onlineContentTimeout system property to control timeout for checking online content availability
+- added 'Last Listened' and 'Random Albums' audio categories; ticket #542
+- profile ID max. length increased to 20 characters
+- updated WebResource plugin logic when handling items that expire immediately; ticket #626
+- album tracks are now sorted by disc number, where available; ticket #486
+- it is possible to provide character encoding of subtitle files when using hardsubs; ticket #643
+- updated series sorting; ticket #511
+- added multi CPU support to thumbnail generation; ticket #464
+- it's now possible to retrieve online thumbnails with a specific user agent; ticket #659
+- added ServiioLink support in the console; ticket #541
+- added detection of the server waking up from sleep; ticket #192
+- added feed parsing re-try mechanism; ticket #639
+- changed episode title formatting in Titles view; ticket #676
+- implemented support for Artists audio category on XBox 360; ticket #605
+- it is now possible to filter out Series data from some browsing categories; ticket #610
+- added support for import/export of online resources; ticket #494
+- image resolutions are now configurable in profile; ticket #640
+- added support for mp2 audio files; ticket #679
+- added support for wavpack audio files; ticket #647
+- added profile for Philips NP Streamium; ticket #629
+- added support for Musepack and Monkey's audio files; ticket #370
+- updated series metadata search for file names including release year
+- updated the way profile is passed in CDS API
+- updated themoviedb.org adaptor to use API v3; ticket #663
+- fixed DAR enforcement for anamorphic files
+- fixed finding external subtitles files when no language is preferred; ticket #658
+- fixed bound IP address reassignment when DHCP server cannot be reached; ticket #661
+- fixed invoking FFmpeg if Serviio is installed on a path including dodgy characters (Windows)
+- reverted back AAC transcoding on some Bravia profiles
+- fixed "Can't assign requested address" on OSX with Java 1.6.0_45 and higher
+- fixed Windows firewall rules being duplicated when reinstalling (without uninstalling first)
+- updated Apache Derby to 10.10.1.1
+- updated FFmpeg to N-54096-ge41bf19
+Release Notes - 1.2.1
+- Sony BDP 2010 model is not detected by default
+- improved network discovery for the case of DHCP IP change while the server's running
+- added the possibility to re-try online metadata retrieval in a case of the online source being unreachable; ticket #646
+- improved FFmpeg failures logging; ticket #578
+- added support for binding to NICs with multiple IP addresses
+- added support for external subs in format filename.language_code.extension; ticket #651
+- fixed transcoding settings not being saved; ticket #641
+- fixed adding MKV files with many embedded subtitle tracks
+- made bound IP address retrieval more robust
+- fixed double subtitles (softsubs + hardsubs) being delivered in some cases
+- fixed encoding hardsubs for file names including characters [] and ,
+- release year of audio files is now included in the CDS responses properly</releaseNotes>
+    <summary>Serviio is a free media server. It allows you to stream your media files (music, video or images) to renderer devices (e.g. a TV set, Bluray player, games console or mobile phone) on your connected home network.</summary>
+    <projectUrl>http://www.serviio.org/</projectUrl>
+    <iconUrl>http://wiki.serviio.org/lib/tpl/vector/user/logo.png</iconUrl>
+    <licenseUrl>http://www.serviio.org/licence</licenseUrl>
+    <copyright>© 2009-2013 Petr Nejedly. All rights reserved.</copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>serviio dlna media server</tags>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

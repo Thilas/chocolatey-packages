@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <!-- Read this before publishing packages to chocolatey.org: https://github.com/chocolatey/chocolatey/wiki/CreatePackages -->
+    <id>imdisk</id>
+    <title>ImDisk Virtual Disk Driver</title>
+    <version>{{PackageVersion}}</version>
+    <authors>Olof Lagerkvist</authors>
+    <owners>Thilas</owners>
+    <!--<summary>__REPLACE__</summary>-->
+    <description>ImDisk is a virtual disk driver for Windows NT/2000/XP/Vista/7/8/8.1 or Windows Server 2003/2008/2012. It can create virtual hard disk, floppy or CD/DVD drives using image files or system memory.</description>
+    <projectUrl>http://www.ltr-data.se/opencode.html/#ImDisk</projectUrl>
+    <tags>imdisk admin virtual disk drive image iso</tags>
+    <copyright>Copyright © 2004-2015 Olof Lagerkvist</copyright>
+    <licenseUrl>http://www.ltr-data.se/files/license.txt</licenseUrl>
+    <releaseNotes>See all - http://www.ltr-data.se/opencode.html/changelog.html
+ImDisk Virtual Disk Driver 1.9.4.
+- Fixed bug in awealloc driver that appeared in version 1.9.3. This bug made it impossible to use physical RAM as storage for virtual disks.
+
+ImDisk Virtual Disk Driver 1.9.3.
+- Uninstall script now shows Control Panel applet if there are any existing drives that can be removed by user. If devices exist that are already in the process of being removed, uninstall carries on and may ask for reboot at the end.
+- Corrected bug in command line tool. The -m #: syntax did not work if it appeared before -a on the command line.
+- Fixed bug that could cause image file saving to fail. This happened when dismounting a memory backed disk from Explorer context menu and this disk had been created without using an image file.
+- Symbolic links are now created for each ImDisk device. Device number 0 can be opened using path \\?\ImDisk0 from a Win32 application.
+
+Bugfix release 1.9.2 of ImDisk Virtual Disk Driver.
+- Data corruption could occur when loading large disk images into virtual memory on Windows XP and older Windows versions. Thanks to v77 for reporting this bug.
+
+Bugfix release 1.9.1 of ImDisk Virtual Disk Driver.
+- There was a problem related to drive letters when mounting drives in Control Panel applet in 32 bit version of ImDisk Virtual Disk Driver 1.9.0. Thanks to v77 for reporting this bug.
+
+Release 1.9.0 of ImDisk Virtual Disk Driver.
+- AWEAlloc: "Error" event log records changed severity level to "Information".
+- AWEAlloc: Possible performance reducing code path corrected in AWEAlloc. Page mapping function had a local unwind from exception protection code. Some tests show that AWEAlloc memory disk access performance has increased by around 4-5 %.
+- ImDisk virtual disk objects now support ZwQueryInformationFile/FileStandardInformation to query size as file size.
+- devio.exe 3.03: Supports --novhd switch to disable dynamic vhd file detection.
+- devio.exe 3.03: Safer detection of dynamic vhd format (no longer detects diff format).
+- ImDisk "raw" (non-disk) mode now supports file pointer requests to emulate one single file volume.
+- Added a few more security checks to various function calls in ImDisk and AWEAlloc.
+- ImDisk now ignores any errors when attempting to read volume boot record to auto-detect geometry parameters.
+- ImDisk source code: Cleaned up annotations and debug asserts.
+- ImDisk API: New API functions for manually sending shell notifications for arrived or removed drive letters.
+- ImDisk, fixed bug: Notifications on drive removal did not remove MountPoints/MountPoints2 registry keys.
+- Fixed missing function exports in "core version" of imdisk.cpl.
+
+Release 1.8.5 of ImDisk Virtual Disk Driver.
+- Update/install scripts now make sure to kill any existing helper service process before updating any files. Hopefully this solves most of the cases where reboot have been needed after uninstall/upgrade.
+- API library change. When IMDISK_API_NO_BROADCAST_NOTIFY is active, create and remove routines now pass the DDD_NO_BROADCAST_SYSTEM flag to DefineDosDevice (on Windows 2000 or later).
+- Fixed some typos in help texts. Thanks to "v77".
+- Kernel driver change. Device threads now use NtReadFile/NtWriteFile instead of ZwReadFile/ZwWriteFile when reading and writing image files directly. This change is to improve performance and reduce risks for resource deadlocks in filesystem drivers.</releaseNotes>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/757a241735d83978161a9d0cb00bc736682c9e40/icons/imdisk.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!-- Important note about https://cdn.rawgit.com: Files are cached permanently after the first request. Use commit URLs when updating the icon. -->
+    <!--<dependencies>
+      <dependency id="" version="{{PackageVersion}}" />
+    </dependencies>-->
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

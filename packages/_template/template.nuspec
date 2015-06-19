@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>xxx</id>
+    <version></version>
+    <title>Xxx</title>
+    <authors></authors>
+    <owners>Thilas</owners>
+    <description></description>
+    <releaseNotes>See all - http://</releaseNotes>
+    <summary></summary>
+    <projectUrl></projectUrl>
+    <iconUrl></iconUrl>
+    <licenseUrl></licenseUrl>
+    <copyright></copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>xxx</tags>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
