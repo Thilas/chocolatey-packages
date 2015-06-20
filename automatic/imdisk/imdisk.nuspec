@@ -2,13 +2,11 @@
 <!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <!-- Read this before publishing packages to chocolatey.org: https://github.com/chocolatey/chocolatey/wiki/CreatePackages -->
     <id>imdisk</id>
     <title>ImDisk Virtual Disk Driver</title>
     <version>{{PackageVersion}}</version>
     <authors>Olof Lagerkvist</authors>
     <owners>Thilas</owners>
-    <!--<summary>__REPLACE__</summary>-->
     <description>ImDisk is a virtual disk driver for Windows NT/2000/XP/Vista/7/8/8.1 or Windows Server 2003/2008/2012. It can create virtual hard disk, floppy or CD/DVD drives using image files or system memory.</description>
     <projectUrl>http://www.ltr-data.se/opencode.html/#ImDisk</projectUrl>
     <tags>imdisk admin virtual disk drive image iso</tags>
@@ -51,10 +49,6 @@ Release 1.8.5 of ImDisk Virtual Disk Driver.
 - Kernel driver change. Device threads now use NtReadFile/NtWriteFile instead of ZwReadFile/ZwWriteFile when reading and writing image files directly. This change is to improve performance and reduce risks for resource deadlocks in filesystem drivers.</releaseNotes>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/757a241735d83978161a9d0cb00bc736682c9e40/icons/imdisk.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <!-- Important note about https://cdn.rawgit.com: Files are cached permanently after the first request. Use commit URLs when updating the icon. -->
-    <!--<dependencies>
-      <dependency id="" version="{{PackageVersion}}" />
-    </dependencies>-->
   </metadata>
   <files>
     <file src="tools\**" target="tools" />

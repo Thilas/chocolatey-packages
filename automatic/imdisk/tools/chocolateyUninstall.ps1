@@ -1,12 +1,4 @@
-﻿#Items that could be replaced based on what you call chocopkgup.exe with
-#{{PackageName}} - Package Name (should be same as nuspec file and folder) |/p
-#{{PackageVersion}} - The updated version | /v
-#{{DownloadUrl}} - The url for the native file | /u
-#{{PackageFilePath}} - Downloaded file if including it in package | /pp
-#{{PackageGuid}} - This will be used later | /pg
-#{{DownloadUrlx64}} - The 64bit url for the native file | /u64
-
-# stop on all errors
+﻿# stop on all errors
 $ErrorActionPreference = 'Stop';
  
 $packageName = '{{PackageName}}'
@@ -20,6 +12,16 @@ $local_key6432 = "HKCU:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Un
 $machine_key = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
 $machine_key6432 = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
 
+function Resolve-Path {
+  param ($file)
+  (".;" + $env:PATH).Split(";") | ForEach-Object {
+    $testPath = Join-Path $_ $file
+    if (Test-Path $testPath) {
+      return $testPath
+    }
+  }
+}
+
 $file = @($local_key, $local_key6432, $machine_key, $machine_key6432) `
   | ?{ Test-Path $_ } `
   | Get-ItemProperty `
@@ -30,7 +32,8 @@ if ($file -eq $null -or $file -eq '') {
   $shouldUninstall = $false
 }
 
-# The below is somewhat naive and built for EXE installers
+$file = Resolve-Path $file
+
 $installerType = 'exe'
 $silentArgs = '-y'
 $validExitCodes = @(0)
@@ -49,7 +52,7 @@ if ($shouldUninstall) {
   
   # Detach all virtual disks
   $exeToRun = 'cmd.exe'
-  $statements = '/c if exist "%SystemRoot%\system32\imdisk.exe" for /f %a in (''imdisk -l -n'') do @imdisk -D -u %~a'
+  $statements = '/s /c "if exist "%SystemRoot%\system32\imdisk.exe" for /f %a in (''imdisk -l -n'') do @imdisk -D -u %~a"'
   Start-ChocolateyProcessAsAdmin $statements $exeToRun
   
   Uninstall-ChocolateyPackage -PackageName $packageName -FileType $installerType -SilentArgs $silentArgs -validExitCodes $validExitCodes -File $file

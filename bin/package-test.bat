@@ -1,5 +1,5 @@
-@echo off
-cd "%~1"
-for %%p in (*.nupkg) do rd /S /Q "%ChocolateyInstall%\lib\%%~np"
-call cinst --force --debug --verbose "%~n1" --source "%cd%"
-pause
+@cd "%~1"
+@for %%f in (*.nuspec) do rd /S /Q "%ChocolateyInstall%\lib\%%~nf"
+@for %%f in (*.nupkg) do rd /S /Q "%ChocolateyInstall%\lib\%%~nf"
+@for %%f in (*.nuspec) do call cinst --force --debug --verbose "%%~nf" --source "%cd%"
+@pause

@@ -1,5 +1,4 @@
-@echo off
-cd "%~1"
-for %%p in (*.nupkg) do del "%%~p"
-call cinst --force --debug --verbose "%~n1.nuspec"
-pause
+@cd "%~1"
+@for %%f in (*.nupkg) do del /s /q "%%~f"
+@for %%f in (*.nuspec) do call cinst --force --debug --verbose "%%~f"
+@pause
