@@ -7,11 +7,14 @@
     <version>{{PackageVersion}}</version>
     <authors>Olof Lagerkvist</authors>
     <owners>Thilas</owners>
+    <summary>ImDisk is a virtual disk driver for Windows.</summary>
     <description>ImDisk is a virtual disk driver for Windows NT/2000/XP/Vista/7/8/8.1 or Windows Server 2003/2008/2012. It can create virtual hard disk, floppy or CD/DVD drives using image files or system memory.</description>
     <projectUrl>http://www.ltr-data.se/opencode.html/#ImDisk</projectUrl>
     <tags>imdisk admin virtual disk drive image iso</tags>
     <copyright>Copyright © 2004-2015 Olof Lagerkvist</copyright>
     <licenseUrl>http://www.ltr-data.se/files/license.txt</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/757a241735d83978161a9d0cb00bc736682c9e40/icons/imdisk.png</iconUrl>
     <releaseNotes>See all - http://www.ltr-data.se/opencode.html/changelog.html
 ImDisk Virtual Disk Driver 1.9.4.
 - Fixed bug in awealloc driver that appeared in version 1.9.3. This bug made it impossible to use physical RAM as storage for virtual disks.
@@ -47,8 +50,6 @@ Release 1.8.5 of ImDisk Virtual Disk Driver.
 - API library change. When IMDISK_API_NO_BROADCAST_NOTIFY is active, create and remove routines now pass the DDD_NO_BROADCAST_SYSTEM flag to DefineDosDevice (on Windows 2000 or later).
 - Fixed some typos in help texts. Thanks to "v77".
 - Kernel driver change. Device threads now use NtReadFile/NtWriteFile instead of ZwReadFile/ZwWriteFile when reading and writing image files directly. This change is to improve performance and reduce risks for resource deadlocks in filesystem drivers.</releaseNotes>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/757a241735d83978161a9d0cb00bc736682c9e40/icons/imdisk.png</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />

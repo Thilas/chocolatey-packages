@@ -35,7 +35,7 @@ if ($file -eq $null -or $file -eq '') {
 $file = Resolve-Path $file
 
 $installerType = 'exe'
-$silentArgs = '-y'
+$silentArgs = '-y' # "/s /S /q /Q /quiet /silent /SILENT /VERYSILENT" # try any of these to get the silent installer #msi is always /quiet
 $validExitCodes = @(0)
 
 if (!(Test-Path $file)) {

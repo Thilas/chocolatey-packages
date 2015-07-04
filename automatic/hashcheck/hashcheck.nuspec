@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>hashcheck</id>
+    <title>HashCheck Shell Extension</title>
+    <version>{{PackageVersion}}</version>
+    <authors>Kai Liu and Christopher Gurnee</authors>
+    <owners>Thilas</owners>
+    <summary>The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer.</summary>
+    <description>The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer. In addition to integrating file checksumming functionality into Windows, HashCheck can also create and verify SFV files (and other forms of checksum files, such as .md5 files).
+It is fast and efficient, with a very light disk and memory footprint, and it is open-source.</description>
+    <projectUrl>https://github.com/gurnec/HashCheck</projectUrl>
+    <tags>hashcheck admin shell extension checksum hash</tags>
+    <copyright>Copyright © 2008-2009 Kai Liu. All rights reserved.
+Copyright © 2014 Christopher Gurnee.  All rights reserved.</copyright>
+    <licenseUrl>https://github.com/gurnec/HashCheck/blob/master/license.txt</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/7a3c4f4863596657c0ebe23d64b12bbaa4433d53/icons/hashcheck.png</iconUrl>
+    <releaseNotes>See all - https://github.com/gurnec/HashCheck/releases
+2015/03/07 - 2.2.3
+- Associate .asc files with HashCheck
+
+2014/12/07 - 2.2.2
+- Add support for SHA-256
+
+2009/07/01 - 2.1.11
+- [Bug #184] [Installer] On Windows 7 RC and newer, Windows will no longer incorrectly display the "This program might not have installed correctly" message after installation.
+- [Bug #202] [HashSave] Fixed a bug that prevented HashCheck from appearing in the context menu when invoked from Total Commander on versions of Windows prior to Vista.
+- [Bug #203, #204] [Localizations] Added Russian and Ukrainian translations. (translator: Yurii Petrashko)
+- [Bug #205] [Installer] Moved the installer's UAC elevation to right before the actual installation, instead of when the installer is first launched.</releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
