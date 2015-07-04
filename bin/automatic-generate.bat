@@ -12,4 +12,4 @@ for /f "tokens=1-2 delims=:" %%a in ('time /t') do (set mytime=%%a%%b)
 del /s /q "C:\CODE\_work" 1>nul 2>&1
 rd /s /q "..\_output" 1>nul 2>&1
 
-ketarin /silent /install="%~1" /log="%~n1.%mydate%_%mytime%.log"
+ketarin /silent /log="automatic-generate.%mydate%_%mytime%.log"
