@@ -2,12 +2,10 @@
 $ErrorActionPreference = 'Stop';
  
 $packageName = '{{PackageName}}'
-# registry uninstaller key name is the key that is found at HKLM:\Software\Windows\CurrentVersion\Uninstall\ THE NAME
-$registryUninstallerKeyName = '{{PackageName}}' #ensure this is the value in the registry
+$registryUninstallerKeyName = '{{PackageName}}'
 $shouldUninstall = $true
 
 $local_key = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
-# local key 6432 probably never exists
 $local_key6432 = "HKCU:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
 $machine_key = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
 $machine_key6432 = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
@@ -35,7 +33,7 @@ if ($file -eq $null -or $file -eq '') {
 $file = Resolve-Path $file
 
 $installerType = 'exe'
-$silentArgs = '-y' # "/s /S /q /Q /quiet /silent /SILENT /VERYSILENT" # try any of these to get the silent installer #msi is always /quiet
+$silentArgs = '-y'
 $validExitCodes = @(0)
 
 if (!(Test-Path $file)) {
