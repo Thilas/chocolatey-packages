@@ -2,8 +2,9 @@
 <Jobs>
    <ApplicationJob xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                   Guid="c01e8d05-85cd-4f2b-8bf0-5b77c8901130">
-      <SourceTemplate><![CDATA[<Jobs>
+                   Guid="1a357476-6fb3-4ed1-a709-bd81c1436a45">
+      <SourceTemplate><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Jobs>
   <ApplicationJob xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Guid="0fb30714-8ed0-4611-8f1b-cb8fec9dae91">
     <WebsiteUrl />
     <UserAgent>Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.168 Safari/535.19</UserAgent>
@@ -30,7 +31,7 @@
             <RegexRightToLeft>false</RegexRightToLeft>
             <VariableType>StartEnd</VariableType>
             <Regex />
-            <Url><placeholder name="Url with version information" value="http://www.ltr-data.se/opencode.html/#ImDisk" /></Url>
+            <Url><placeholder name="Url with version information" value="https://github.com/Nevcairiel/LAVFilters/releases" /></Url>
             <StartText>&lt;TABLE cellspacing ="1" cellpadding ="6" border = "0"&gt;
   &lt;TR&gt;
     &lt;TH class="Title" align="center" width=90&gt;7-Zip </StartText>
@@ -67,15 +68,15 @@
     <FileHippoId />
     <LastUpdated>2012-05-23T02:09:37.7748325</LastUpdated>
     <TargetPath>C:\Chocolatey\_work\</TargetPath>
-    <FixedDownloadUrl><placeholder name="Download Url - Optional" value="http://www.ltr-data.se/files/imdiskinst.exe" /></FixedDownloadUrl>
-    <Name><placeholder name="Name" value="imdisk" /></Name>
+    <FixedDownloadUrl><placeholder name="Download Url - Optional" value="https://github.com/Nevcairiel/LAVFilters/releases/download/{version}/LAVFilters-{version}-Installer.exe" /></FixedDownloadUrl>
+    <Name><placeholder name="Name" value="lavfilters" /></Name>
   </ApplicationJob>
 </Jobs>]]></SourceTemplate>
       <WebsiteUrl/>
       <UserAgent/>
       <UserNotes/>
-      <LastFileSize>361472</LastFileSize>
-      <LastFileDate>2015-07-04T17:48:56.5468056</LastFileDate>
+      <LastFileSize>8858704</LastFileSize>
+      <LastFileDate>2015-04-21T14:38:07+02:00</LastFileDate>
       <IgnoreFileInformation>false</IgnoreFileInformation>
       <DownloadBeta>Default</DownloadBeta>
       <DownloadDate xsi:nil="true"/>
@@ -96,9 +97,9 @@
                   <RegexRightToLeft>false</RegexRightToLeft>
                   <VariableType>StartEnd</VariableType>
                   <Regex/>
-                  <Url>http://www.ltr-data.se/opencode.html/#ImDisk</Url>
-                  <StartText>&lt;h3&gt;Current version </StartText>
-                  <EndText> built </EndText>
+                  <Url>https://github.com/Nevcairiel/LAVFilters/releases</Url>
+                  <StartText>href="/Nevcairiel/LAVFilters/tree/</StartText>
+                  <EndText>"</EndText>
                   <TextualContent/>
                   <Name>version</Name>
                </UrlVariable>
@@ -129,9 +130,9 @@
       <DeletePreviousFile>true</DeletePreviousFile>
       <Enabled>true</Enabled>
       <FileHippoId/>
-      <LastUpdated>2015-07-04T17:48:56.5468056</LastUpdated>
+      <LastUpdated>2015-07-14T17:18:04.8849631+02:00</LastUpdated>
       <TargetPath>C:\CODE\_work\</TargetPath>
-      <FixedDownloadUrl>http://www.ltr-data.se/files/imdiskinst.exe</FixedDownloadUrl>
-      <Name>imdisk</Name>
+      <FixedDownloadUrl>https://github.com/Nevcairiel/LAVFilters/releases/download/{version}/LAVFilters-{version}-Installer.exe</FixedDownloadUrl>
+      <Name>lavfilters</Name>
    </ApplicationJob>
 </Jobs>

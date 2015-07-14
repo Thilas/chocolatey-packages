@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>lavfilters</id>
+    <title>LAV Filters</title>
+    <version>{{PackageVersion}}</version>
+    <authors>Hendrik Leppkes</authors>
+    <owners>Thilas</owners>
+    <summary>Open-Source DirectShow Media Splitter and Decoders</summary>
+    <description>LAV Filters are a set of DirectShow filters based on the libavformat and libavcodec libraries from the ffmpeg project, which will allow you to play virtually any format in a DirectShow player.</description>
+    <projectUrl>https://github.com/Nevcairiel/LAVFilters</projectUrl>
+    <tags>lavfilters admin ffmpeg DirectShow codec video audio subtitles</tags>
+    <copyright>Copyright © 2010-2015 Hendrik Leppkes</copyright>
+    <licenseUrl>https://github.com/Nevcairiel/LAVFilters/blob/master/COPYING</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/e53beb71643e5d4a4b31c3ad4fb79d36aaf6003a/icons/lavfilters.png</iconUrl>
+    <releaseNotes>See all - https://github.com/Nevcairiel/LAVFilters/releases
+0.65.0 - 2015/04/21
+LAV Splitter
+- NEW: Support for MKV subtitle Cues to show subtitles immediately after a seek
+- NEW: Attachments and embedded cover art images are exported through the IDSMResourceBag interface
+- Fixed: Improved demuxing of HEVC in MPEG-TS and increased the reliability of the SPS/PPS/VPS extraction
+- Fixed: Demuxing Blu-rays/MPEG-TS where the first stream was not a video stream could result in broken timestamps
+- Fixed: Seeking in MKVs which are currently being written is more reliable
+LAV Video
+- Fixed: Improved HEVC DXVA2 decoding on a few samples
+- Fixed: Playback of VFR MPEG-4 in AVI had wrong timestamps in 0.64
+- Fixed: Improved handling of DVD subtitles without timestamps
+LAV Audio:
+- NEW: Native DTS-HD decoding using libdcadec
+- Changed: 5.1 audio prefers the speaker mask with side channels, to match recent specifications</releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

@@ -3,8 +3,7 @@
    <ApplicationJob xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                    Guid="0a139da3-02d0-4743-a3aa-c5529e5fca8d">
-      <SourceTemplate><![CDATA[<?xml version="1.0" encoding="utf-8"?>
-<Jobs>
+      <SourceTemplate><![CDATA[<Jobs>
   <ApplicationJob xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Guid="0fb30714-8ed0-4611-8f1b-cb8fec9dae91">
     <WebsiteUrl />
     <UserAgent>Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.168 Safari/535.19</UserAgent>
@@ -76,7 +75,7 @@
       <UserAgent/>
       <UserNotes/>
       <LastFileSize>212350</LastFileSize>
-      <LastFileDate>2015-03-07T00:30:28+01:00</LastFileDate>
+      <LastFileDate>2015-07-04T18:10:49.0723948</LastFileDate>
       <IgnoreFileInformation>false</IgnoreFileInformation>
       <DownloadBeta>Default</DownloadBeta>
       <DownloadDate xsi:nil="true"/>
@@ -130,7 +129,7 @@
       <DeletePreviousFile>true</DeletePreviousFile>
       <Enabled>true</Enabled>
       <FileHippoId/>
-      <LastUpdated>2015-07-04T11:22:14.3416587+02:00</LastUpdated>
+      <LastUpdated>2015-07-04T18:10:49.0723948</LastUpdated>
       <TargetPath>C:\CODE\_work\</TargetPath>
       <FixedDownloadUrl>https://github.com/gurnec/HashCheck/releases/download/v{version}/HashCheckSetup.exe</FixedDownloadUrl>
       <Name>hashcheck</Name>
