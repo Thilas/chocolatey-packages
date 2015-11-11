@@ -15,34 +15,7 @@
     <licenseUrl>http://www.ltr-data.se/files/license.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/757a241735d83978161a9d0cb00bc736682c9e40/icons/imdisk.png</iconUrl>
-    <releaseNotes>See all - http://www.ltr-data.se/opencode.html/changelog.html
-ImDisk Virtual Disk Driver 2.0.6.
-- Device list in Control Panel applet did not auto-refresh when new virtual disks where added or removed by other applications, such as command line tool. This has now been corrected and it should no longer be necessary to manually click refresh button in this case.
-
-ImDisk Virtual Disk Driver 2.0.5.
-- Device list in Control Panel applet did not correctly show memory backed virtual disk that had been intialized with an image file.
-- Support for sending an image path (or any custom string) through to proxy server. Syntax is server:port://path where :port just like previously is optional and defaults to 9000. The //path part is sent through to server end as an IMDPROXY_REQ_CONNECT request and makes it possible for one proxy service listening to one single port to handle requests for many different images.
-
-ImDisk Virtual Disk Driver 2.0.4.
-- Fixed problem that could cause formatting to fail in some cases.
-
-ImDisk Virtual Disk Driver 2.0.3.
-- Fixed serious issue with wrong drive formatted by command line tool.
-
-ImDisk Virtual Disk Driver 2.0.2.
-- Fixed issue with saving virtual disk as image file from Control Panel applet or Explorer context menu.
-- New command line option -o shared that forces driver to open images in shared write mode.
-
-ImDisk Virtual Disk Driver 2.0.1. Finalized version of earlier beta, with these additions/changes.
-- Fixed issue with using directories as mount point.
-- Separate "zero range" and "unmap range" requests sent to proxy, when proxy indicates support for such requests.
-
-ImDisk Virtual Disk Driver beta 2.0.0.
-- Rewritten I/O request logic to allow fully parallel I/O. This is by default only used when communicating with AWEAlloc driver for physical memory virtual disks, but can be turned on for any virtual disks backed by an image file or another kernel level driver, provided that the underlying driver supports it. Use -o par command line option to turn on this feature. This change should give better physical RAM disk performance. It should also give better performance for instance when using ImDisk to mount offsets of \\?\PhysicalDrive objects as virtual disks.
-- AWEAlloc driver rewritten to support multiple requests simultaneously, which means that ImDisk no longer need to queue requests and switch to a worker thread to complete requests to a physical memory RAM disk.
-- Support for TRIM requests sent from filesystem drivers on Windows 7 and later. Forwarded as either file level TRIM requests to image file or in case image file is a sparse file, as "zero data" requests. TRIM requests can optionally also be forwarded to proxy applications if proxy application supports it. This should make it easier to develop proxy services that support freeing parts of a virtual disks that are no longer in use.
-- Bugfix: Fixed problem which caused sparse files to sometimes be created as fully allocated files.
-- Bugfix: Impossible to specify a device number when calling ImDiskCreateDeviceEx. Automatic device number was always used.</releaseNotes>
+    <releaseNotes>http://www.ltr-data.se/opencode.html/changelog.html</releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
