@@ -1,7 +1,7 @@
 ﻿# stop on all errors
 $ErrorActionPreference = 'Stop';
  
-$packageName = '{{PackageName}}'
+$packageName = 'lavfilters'
 $registryUninstallerKeyName = 'lavfilters_is1'
 $shouldUninstall = $true
 

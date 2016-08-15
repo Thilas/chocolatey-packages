@@ -1,7 +1,7 @@
 ﻿# stop on all errors
 $ErrorActionPreference = 'Stop';
  
-$packageName = '{{PackageName}}'
+$packageName = 'hashcheck'
 
 $installerType = 'exe'
 $silentArgs = '/s /u /i /n C:\Windows\System32\ShellExt\HashCheck.dll'

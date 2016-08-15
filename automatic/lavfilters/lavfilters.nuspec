@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>lavfilters</id>
     <title>LAV Filters</title>
-    <version>{{PackageVersion}}</version>
+    <version>0.68.1.20160815</version>
     <authors>Hendrik Leppkes</authors>
     <owners>Thilas</owners>
     <summary>Open-Source DirectShow Media Splitter and Decoders</summary>
@@ -14,7 +14,7 @@
     <projectSourceUrl>https://github.com/Nevcairiel/LAVFilters</projectSourceUrl>
     <mailingListUrl>http://forum.doom9.org/showthread.php?t=156191</mailingListUrl>
     <bugTrackerUrl>https://github.com/Nevcairiel/LAVFilters/issues</bugTrackerUrl>
-    <tags>lavfilters admin ffmpeg DirectShow codec video audio subtitles</tags>
+    <tags>lavfilters admin ffmpeg DirectShow filter codec video audio subtitles</tags>
     <copyright>Copyright © Hendrik Leppkes</copyright>
     <licenseUrl>https://github.com/Nevcairiel/LAVFilters/blob/master/COPYING</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

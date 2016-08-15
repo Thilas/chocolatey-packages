@@ -1,8 +1,8 @@
 ﻿# stop on all errors
 $ErrorActionPreference = 'Stop';
  
-$packageName = '{{PackageName}}'
-$registryUninstallerKeyName = '{{PackageName}}'
+$packageName = 'imdisk'
+$registryUninstallerKeyName = 'imdisk'
 $shouldUninstall = $true
 
 $local_key = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"

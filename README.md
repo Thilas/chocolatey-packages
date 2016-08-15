@@ -9,4 +9,3 @@ Reminders
 ---------
 
 * Get the production url (for **icons**) by pasting the raw url [here](https://rawgit.com/) and using the right (CDN) result.
-* Export your _Ketarin_ settings and [clean them up](https://github.com/Thilas/chocolatey-packages/tree/master/bin).

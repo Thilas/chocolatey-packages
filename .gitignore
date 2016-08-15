@@ -1,8 +1,3 @@
-/jobs.db
-*.nupkg
-*.log
-*.log.full
-Thumbs.db
-*.lnk
-
 automatic/_output/
+*.lnk
+*.nupkg
