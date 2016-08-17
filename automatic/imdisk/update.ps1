@@ -40,5 +40,4 @@ function global:au_SearchReplace {
   }
 }
 
-if ($PSBoundParameters.Keys -contains 'Force') { $global:au_Force = $Force }
-Update-Package -ChecksumFor 32
+Update-Package -ChecksumFor 32 -Force:$Force
