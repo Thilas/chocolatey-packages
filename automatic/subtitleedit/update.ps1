@@ -26,11 +26,11 @@ function global:au_SearchReplace {
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
       "^(\s*url\s*=\s*)'.*'$"               = "`$1'$($Latest.Url32)'"
-      "^(\s*unzipLocation\s*=\s*)'.*'$"     = "`$1[IO.Path]::Combine($env:TEMP, 'chocolatey', '$($Latest.PackageName)')"
+      "^(\s*unzipLocation\s*=\s*).*$"       = "`$1[IO.Path]::Combine(`$env:TEMP, '$($Latest.PackageName)')"
       "^(\s*checksum\s*=\s*)'.*'$"          = "`$1'$($Latest.Checksum32)'"
       "^(\s*checksumType\s*=\s*)'.*'$"      = "`$1'$($Latest.ChecksumType32)'"
       "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
-      "^(\s*file\s*=\s*)'.*'$"              = "`$1[IO.Path]::Combine($env:TEMP, 'chocolatey', '$($Latest.PackageName)', '$($Latest.File32)')"
+      "^(\s*file\s*=\s*).*$"                = "`$1[IO.Path]::Combine(`$env:TEMP, '$($Latest.PackageName)', '$($Latest.File32)')"
       "^(\s*silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.SilentArgs)'"
       "^(\s*validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.ValidExitCodes))"
     }
