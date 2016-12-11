@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>subtitleedit</id>
+    <title>Subtitle Edit</title>
+    <version>3.4.13</version>
+    <authors>Nikolaj Lynge Olsson</authors>
+    <owners>Thilas Waterdrop</owners>
+    <summary>Subtitle Edit is a free (open source) editor for video subtitles - a subtitle editor :)</summary>
+    <description>With SE you can easily adjust a subtitle if it is out of sync with the video in several different ways. You can also use SE for making new subtitles from scratch (do use the time-line/waveform/spectrogram) or translating subtitles.</description>
+    <projectUrl>http://www.nikse.dk/SubtitleEdit/</projectUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/automatic/subtitleedit</packageSourceUrl>
+    <projectSourceUrl>https://github.com/SubtitleEdit/subtitleedit</projectSourceUrl>
+    <mailingListUrl>https://gitter.im/SubtitleEdit/subtitleedit</mailingListUrl>
+    <bugTrackerUrl>https://github.com/SubtitleEdit/subtitleedit/issues</bugTrackerUrl>
+    <tags>subtitleedit subtitle editor video OCR sync merge split convert</tags>
+    <copyright>Copyright © Nikse</copyright>
+    <licenseUrl>https://github.com/SubtitleEdit/subtitleedit/blob/master/LICENSE.txt</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/ba3e29c8383df66f2ffe8f1d38d06f71906a9027/icons/subtitleedit.png</iconUrl>
+    <releaseNotes>https://github.com/SubtitleEdit/subtitleedit/releases</releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
