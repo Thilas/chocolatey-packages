@@ -4,7 +4,7 @@
   <metadata>
     <id>lavfilters</id>
     <title>LAV Filters</title>
-    <version>0.68.1.20160815</version>
+    <version>0.69</version>
     <authors>Hendrik Leppkes</authors>
     <owners>Thilas</owners>
     <summary>Open-Source DirectShow Media Splitter and Decoders</summary>
