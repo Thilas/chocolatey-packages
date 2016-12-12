@@ -21,7 +21,7 @@ if ($file -eq $null -or $file -eq '') {
 }
 
 $installerType = 'exe'
-$silentArgs = '/VERYSILENT'
+$silentArgs = '/VERYSILENT /SUPPRESSMSGBOXES'
 $validExitCodes = @(0)
 
 $file = $file.Replace('"', '')
