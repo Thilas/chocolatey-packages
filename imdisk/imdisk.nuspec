@@ -10,13 +10,13 @@
     <summary>ImDisk is a virtual disk driver for Windows.</summary>
     <description>ImDisk is a virtual disk driver for Windows NT/2000/XP/Vista/7/8/8.1 or Windows Server 2003/2008/2012. It can create virtual hard disk, floppy or CD/DVD drives using image files or system memory.</description>
     <projectUrl>http://www.ltr-data.se/opencode.html/#ImDisk</projectUrl>
-    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/automatic/imdisk</packageSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/imdisk</packageSourceUrl>
     <mailingListUrl>http://reboot.pro/forum/59-imdisk/</mailingListUrl>
     <tags>imdisk admin virtual disk drive image iso</tags>
     <copyright>Copyright © Olof Lagerkvist</copyright>
     <licenseUrl>http://www.ltr-data.se/files/license.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/757a241735d83978161a9d0cb00bc736682c9e40/icons/imdisk.png</iconUrl>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/90d6238c8db69f85cbfb32e3bcd7021c2303aba3/imdisk/icon.png</iconUrl>
     <releaseNotes>http://www.ltr-data.se/opencode.html/changelog.html</releaseNotes>
   </metadata>
   <files>

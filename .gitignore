@@ -1,3 +1,13 @@
-automatic/_output/
-*.lnk
 *.nupkg
+/update_vars.ps1
+/Update-AUPackages.md
+/update_info.xml
+/api_key
+/Update-History.md
+/Update-Force-Test*.md
+.vscode
+*.exe
+*.7z
+*.msi
+*.rar
+*.zip

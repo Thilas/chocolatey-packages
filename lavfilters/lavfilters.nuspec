@@ -10,7 +10,7 @@
     <summary>Open-Source DirectShow Media Splitter and Decoders</summary>
     <description>LAV Filters are a set of DirectShow filters based on the libavformat and libavcodec libraries from the ffmpeg project, which will allow you to play virtually any format in a DirectShow player.</description>
     <projectUrl>https://github.com/Nevcairiel/LAVFilters</projectUrl>
-    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/automatic/lavfilters</packageSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/lavfilters</packageSourceUrl>
     <projectSourceUrl>https://github.com/Nevcairiel/LAVFilters</projectSourceUrl>
     <mailingListUrl>http://forum.doom9.org/showthread.php?t=156191</mailingListUrl>
     <bugTrackerUrl>https://github.com/Nevcairiel/LAVFilters/issues</bugTrackerUrl>
@@ -18,7 +18,7 @@
     <copyright>Copyright © Hendrik Leppkes</copyright>
     <licenseUrl>https://github.com/Nevcairiel/LAVFilters/blob/master/COPYING</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/e53beb71643e5d4a4b31c3ad4fb79d36aaf6003a/icons/lavfilters.png</iconUrl>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/90d6238c8db69f85cbfb32e3bcd7021c2303aba3/lavfilters/icon.png</iconUrl>
     <releaseNotes>https://github.com/Nevcairiel/LAVFilters/releases</releaseNotes>
   </metadata>
   <files>

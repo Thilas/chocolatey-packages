@@ -10,7 +10,7 @@
     <summary>Subtitle Edit is a free (open source) editor for video subtitles - a subtitle editor :)</summary>
     <description>With SE you can easily adjust a subtitle if it is out of sync with the video in several different ways. You can also use SE for making new subtitles from scratch (do use the time-line/waveform/spectrogram) or translating subtitles.</description>
     <projectUrl>http://www.nikse.dk/SubtitleEdit/</projectUrl>
-    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/automatic/subtitleedit</packageSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/subtitleedit</packageSourceUrl>
     <projectSourceUrl>https://github.com/SubtitleEdit/subtitleedit</projectSourceUrl>
     <mailingListUrl>https://gitter.im/SubtitleEdit/subtitleedit</mailingListUrl>
     <bugTrackerUrl>https://github.com/SubtitleEdit/subtitleedit/issues</bugTrackerUrl>
@@ -18,7 +18,7 @@
     <copyright>Copyright © Nikse</copyright>
     <licenseUrl>https://github.com/SubtitleEdit/subtitleedit/blob/master/LICENSE.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/ba3e29c8383df66f2ffe8f1d38d06f71906a9027/icons/subtitleedit.png</iconUrl>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/90d6238c8db69f85cbfb32e3bcd7021c2303aba3/subtitleedit/icon.png</iconUrl>
     <releaseNotes>https://github.com/SubtitleEdit/subtitleedit/releases</releaseNotes>
   </metadata>
   <files>

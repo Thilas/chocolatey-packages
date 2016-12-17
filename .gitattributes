@@ -1,4 +1,0 @@
-# Generally disable end of line conversion,
-# which overrides the settings of core.autocrlf
-
-* -text
