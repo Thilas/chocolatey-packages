@@ -7,6 +7,13 @@
 This repository contains [chocolatey automatic packages](https://chocolatey.org/docs/automatic-packages).  
 The repository is setup so that you can manage your packages entirely from the GitHub web interface (using AppVeyor to update and push packages) and/or using the local repository copy.
 
+All packages in this repo should be in conformity with the [contributing guidelines](https://github.com/Thilas/chocolatey-packages/wiki/Contributing-guidelines).
+
+Reminders
+---------
+
+* Get the production url (for **icons**) by pasting the raw url [here](https://rawgit.com/) and using the right (CDN) result.
+
 ## Prerequisites
 
 To run locally you will need:
