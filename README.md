@@ -1,6 +1,6 @@
 [![](https://ci.appveyor.com/api/projects/status/github/Thilas/chocolatey-packages?svg=true)](https://ci.appveyor.com/project/Thilas/chocolatey-packages)
 [![](http://transparent-favicon.info/favicon.ico)](#)[![](http://transparent-favicon.info/favicon.ico)](#)
-[Update status](https://gist.github.com/Thilas/b8d96c52ebb22e0a1e5cd2bfdb861348)
+[Update status](https://gist.github.com/Thilas/c09573f2f23bc2aa904d90ff63de2cfe)
 [![](http://transparent-favicon.info/favicon.ico)](#)
 [chocolatey/Thilas](https://chocolatey.org/profiles/Thilas)
 

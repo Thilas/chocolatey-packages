@@ -1,25 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>lavfilters</id>
-    <title>LAV Filters</title>
     <version>0.69</version>
+    <title>LAV Filters</title>
     <authors>Hendrik Leppkes</authors>
     <owners>Thilas</owners>
-    <summary>Open-Source DirectShow Media Splitter and Decoders</summary>
-    <description>LAV Filters are a set of DirectShow filters based on the libavformat and libavcodec libraries from the ffmpeg project, which will allow you to play virtually any format in a DirectShow player.</description>
+    <licenseUrl>https://github.com/Nevcairiel/LAVFilters/blob/master/COPYING</licenseUrl>
     <projectUrl>https://github.com/Nevcairiel/LAVFilters</projectUrl>
-    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/lavfilters</packageSourceUrl>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/90d6238c8db69f85cbfb32e3bcd7021c2303aba3/lavfilters/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>LAV Filters are a set of DirectShow filters based on the libavformat and libavcodec libraries from the ffmpeg project, which will allow you to play virtually any format in a DirectShow player.</description>
+    <summary>Open-Source DirectShow Media Splitter and Decoders</summary>
+    <releaseNotes>https://github.com/Nevcairiel/LAVFilters/releases</releaseNotes>
+    <copyright>Copyright © Hendrik Leppkes</copyright>
+    <tags>lavfilters admin ffmpeg DirectShow filter codec video audio subtitles</tags>
     <projectSourceUrl>https://github.com/Nevcairiel/LAVFilters</projectSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/lavfilters</packageSourceUrl>
     <mailingListUrl>http://forum.doom9.org/showthread.php?t=156191</mailingListUrl>
     <bugTrackerUrl>https://github.com/Nevcairiel/LAVFilters/issues</bugTrackerUrl>
-    <tags>lavfilters admin ffmpeg DirectShow filter codec video audio subtitles</tags>
-    <copyright>Copyright © Hendrik Leppkes</copyright>
-    <licenseUrl>https://github.com/Nevcairiel/LAVFilters/blob/master/COPYING</licenseUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/90d6238c8db69f85cbfb32e3bcd7021c2303aba3/lavfilters/icon.png</iconUrl>
-    <releaseNotes>https://github.com/Nevcairiel/LAVFilters/releases</releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />

@@ -1,23 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>imdisk</id>
-    <title>ImDisk Virtual Disk Driver</title>
     <version>2.0.9.20160815</version>
+    <title>ImDisk Virtual Disk Driver</title>
     <authors>Olof Lagerkvist</authors>
     <owners>Thilas</owners>
-    <summary>ImDisk is a virtual disk driver for Windows.</summary>
-    <description>ImDisk is a virtual disk driver for Windows NT/2000/XP/Vista/7/8/8.1 or Windows Server 2003/2008/2012. It can create virtual hard disk, floppy or CD/DVD drives using image files or system memory.</description>
+    <licenseUrl>http://www.ltr-data.se/files/license.txt</licenseUrl>
     <projectUrl>http://www.ltr-data.se/opencode.html/#ImDisk</projectUrl>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/90d6238c8db69f85cbfb32e3bcd7021c2303aba3/imdisk/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ImDisk is a virtual disk driver for Windows NT/2000/XP/Vista/7/8/8.1 or Windows Server 2003/2008/2012. It can create virtual hard disk, floppy or CD/DVD drives using image files or system memory.</description>
+    <summary>ImDisk is a virtual disk driver for Windows.</summary>
+    <releaseNotes>http://www.ltr-data.se/opencode.html/changelog.html</releaseNotes>
+    <copyright>Copyright © Olof Lagerkvist</copyright>
+    <tags>imdisk admin virtual disk drive image iso</tags>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/imdisk</packageSourceUrl>
     <mailingListUrl>http://reboot.pro/forum/59-imdisk/</mailingListUrl>
-    <tags>imdisk admin virtual disk drive image iso</tags>
-    <copyright>Copyright © Olof Lagerkvist</copyright>
-    <licenseUrl>http://www.ltr-data.se/files/license.txt</licenseUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/90d6238c8db69f85cbfb32e3bcd7021c2303aba3/imdisk/icon.png</iconUrl>
-    <releaseNotes>http://www.ltr-data.se/opencode.html/changelog.html</releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
