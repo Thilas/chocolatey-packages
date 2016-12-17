@@ -1,4 +1,5 @@
-﻿$packageArgs = @{
+﻿# *** Automatically filled ***
+$packageArgs = @{
   packageName    = 'imdisk'
   fileType       = 'exe'
   url            = 'http://www.ltr-data.se/files/imdiskinst_2.0.9.exe'
@@ -7,6 +8,7 @@
   checksumType   = 'sha256'
   validExitCodes = @(0)
 }
+# *** Automatically filled ***
 
 $installOverride = $env:chocolateyInstallOverride
 if (!$installOverride) {

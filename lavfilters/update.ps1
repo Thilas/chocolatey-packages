@@ -3,14 +3,13 @@
 Import-Module au
 
 function global:au_GetLatest {
-  $releasesUrl     = 'https://api.github.com/repos/Nevcairiel/LAVFilters/releases/latest'
-  $versionPattern  = '^(.+)$'
-  $fileType        = 'exe'
-  $silentArgs      = '/SILENT'
-  $validExitCodes  = '0'
+  $releasesUrl    = 'https://api.github.com/repos/Nevcairiel/LAVFilters/releases/latest'
+  $fileType       = 'exe'
+  $silentArgs     = '/SILENT'
+  $validExitCodes = '0'
 
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $version = $releases.tag_name -Match $versionPattern
+  $version = $releases.tag_name -Match '^(.+)$'
   if (!$version) { Throw [System.InvalidOperationException]'Version invalid.' }
   $version = $Matches[1]
 

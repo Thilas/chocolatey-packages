@@ -1,4 +1,5 @@
-﻿$packageArgs = @{
+﻿# *** Automatically filled ***
+$packageArgs = @{
   packageName    = 'lavfilters'
   fileType       = 'exe'
   url            = 'https://github.com/Nevcairiel/LAVFilters/releases/download/0.69/LAVFilters-0.69-Installer.exe'
@@ -7,5 +8,6 @@
   checksumType   = 'sha256'
   validExitCodes = @(0)
 }
+# *** Automatically filled ***
 
 Install-ChocolateyPackage @packageArgs

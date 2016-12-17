@@ -3,10 +3,10 @@
 Import-Module au
 
 function global:au_GetLatest {
-  $releasesUrl     = 'https://api.github.com/repos/SubtitleEdit/subtitleedit/releases/latest'
-  $fileType        = 'exe'
-  $silentArgs      = '/VERYSILENT'
-  $validExitCodes  = '0'
+  $releasesUrl    = 'https://api.github.com/repos/SubtitleEdit/subtitleedit/releases/latest'
+  $fileType       = 'exe'
+  $silentArgs     = '/VERYSILENT'
+  $validExitCodes = '0'
 
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
   $version = $releases.tag_name -Match '^(.+)$'

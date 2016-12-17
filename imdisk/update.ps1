@@ -5,14 +5,13 @@ Import-Module au
 function global:au_GetLatest {
   $baseUrl        = 'http://www.ltr-data.se'
   $releasesPath   = 'opencode.html'
-  $versionPattern = 'Current version (.+) built'
   $fileType       = 'exe'
   $silentArgs     = '-y'
   $validExitCodes = '0'
 
   $releasesUrl = (New-Object System.Uri([System.Uri]($baseUrl), $releasesPath)).ToString()
   $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
-  $version = $releases.Content -Match $versionPattern
+  $version = $releases.Content -Match 'Current version (.+) built'
   if (!$version) { Throw [System.InvalidOperationException]'Version invalid.' }
   $version = $Matches[1]
 

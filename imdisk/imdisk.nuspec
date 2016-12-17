@@ -15,7 +15,7 @@
     <summary>ImDisk is a virtual disk driver for Windows.</summary>
     <releaseNotes>http://www.ltr-data.se/opencode.html/changelog.html</releaseNotes>
     <copyright>Copyright © Olof Lagerkvist</copyright>
-    <tags>imdisk admin virtual disk drive image iso</tags>
+    <tags>virtual disk drive image iso</tags>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/imdisk</packageSourceUrl>
     <mailingListUrl>http://reboot.pro/forum/59-imdisk/</mailingListUrl>
   </metadata>

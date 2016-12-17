@@ -4,7 +4,6 @@ Import-Module au
 
 function global:au_GetLatest {
   $releasesUrl     = 'https://api.github.com/repos/gurnec/HashCheck/releases/latest'
-  $versionPattern  = '^v(.+)$'
   $fileType        = 'exe'
   $checksumType    = 'sha256'
   $checksumPattern = '^(.+) \*'
@@ -12,7 +11,7 @@ function global:au_GetLatest {
   $validExitCodes  = '0'
 
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $version = $releases.tag_name -Match $versionPattern
+  $version = $releases.tag_name -Match '^v(.+)$'
   if (!$version) { Throw [System.InvalidOperationException]'Version invalid.' }
   $version = $Matches[1]
 
