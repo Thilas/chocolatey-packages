@@ -1,14 +1,20 @@
 ﻿# stop on all errors
 $ErrorActionPreference = 'Stop';
  
-$packageName = ''
-$registryUninstallerKeyName = ''
+# *** Automatically filled ***
+$packageName              = ''
+$uninstallRegistryKeyName = ''
+$uninstallFileType        = ''
+$uninstallSilentArgs      = ''
+$uninstallValidExitCodes  = @(0)
+# *** Automatically filled ***
+
 $shouldUninstall = $true
 
-$local_key = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
-$local_key6432 = "HKCU:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
-$machine_key = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
-$machine_key6432 = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
+$local_key = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
+$local_key6432 = "HKCU:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
+$machine_key = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
+$machine_key6432 = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
 
 $file = @($local_key, $local_key6432, $machine_key, $machine_key6432) `
   | ?{ Test-Path $_ } `
@@ -20,10 +26,6 @@ if ($file -eq $null -or $file -eq '') {
   $shouldUninstall = $false
 }
 
-$installerType = 'exe'
-$silentArgs = '/SILENT'
-$validExitCodes = @(0)
-
 $file = $file.Replace('"', '')
 
 if (!(Test-Path $file)) {
@@ -32,5 +34,5 @@ if (!(Test-Path $file)) {
 }
 
 if ($shouldUninstall) {
-  Uninstall-ChocolateyPackage -PackageName $packageName -FileType $installerType -SilentArgs $silentArgs -validExitCodes $validExitCodes -File $file
+  Uninstall-ChocolateyPackage -PackageName $packageName -FileType $uninstallFileType -SilentArgs $uninstallSilentArgs -validExitCodes $uninstallValidExitCodes -File $file
 }

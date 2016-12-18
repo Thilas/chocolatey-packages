@@ -8,6 +8,11 @@ function global:au_GetLatest {
   $silentArgs     = '/S'
   $validExitCodes = '0'
 
+  $uninstallRegistryKeyName = 'Serviio'
+  $uninstallFileType        = 'exe'
+  $uninstallSilentArgs      = '/S'
+  $uninstallValidExitCodes  = '0'
+
   $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
   $version = $releases.Content -Match 'The latest released version is ([^ ]+) '
   if (!$version) { Throw [System.InvalidOperationException]'Version invalid.' }
@@ -30,6 +35,13 @@ function global:au_SearchReplace {
       "^(\s*checksum\s*=\s*)'.*'$"          = "`$1'$($Latest.Checksum32)'"
       "^(\s*checksumType\s*=\s*)'.*'$"      = "`$1'$($Latest.ChecksumType32)'"
       "^(\s*validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.ValidExitCodes))"
+    }
+    'tools\chocolateyUninstall.ps1' = @{
+      "^([$]packageName\s*=\s*)'.*'$"                = "`$1'$($Latest.PackageName)'"
+      "^([$]uninstallRegistryKeyName\s*=\s*)'.*'$"   = "`$1'$($Latest.UninstallRegistryKeyName)'"
+      "^([$]uninstallFileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
+      "^([$]uninstallSilentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
+      "^([$]uninstallValidExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"
     }
   }
 }
