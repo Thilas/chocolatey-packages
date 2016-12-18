@@ -1,11 +1,11 @@
-﻿# stop on all errors
+# stop on all errors
 $ErrorActionPreference = 'Stop';
  
 # *** Automatically filled ***
-$packageName              = ''
-$uninstallRegistryKeyName = ''
-$uninstallFileType        = ''
-$uninstallSilentArgs      = ''
+$packageName              = 'serviio'
+$uninstallRegistryKeyName = 'Serviio'
+$uninstallFileType        = 'exe'
+$uninstallSilentArgs      = '/S'
 $uninstallValidExitCodes  = @(0)
 # *** Automatically filled ***
 
