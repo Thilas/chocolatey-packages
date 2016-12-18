@@ -1,4 +1,4 @@
-# AU Packages Template: https://github.com/majkinetor/au-packages-template
+﻿# AU Packages Template: https://github.com/majkinetor/au-packages-template
 # Copy this file to update_vars.ps1 and set the variables there. Do not include it in the repository.
 
 $Env:mail_user        = ''

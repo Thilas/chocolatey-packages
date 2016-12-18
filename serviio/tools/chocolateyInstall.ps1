@@ -1,4 +1,4 @@
-# *** Automatically filled ***
+﻿# *** Automatically filled ***
 $packageArgs = @{
   packageName    = 'serviio'
   fileType       = 'exe'

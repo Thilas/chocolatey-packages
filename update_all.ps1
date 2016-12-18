@@ -1,4 +1,4 @@
-# AU Packages Template: https://github.com/majkinetor/au-packages-template
+﻿# AU Packages Template: https://github.com/majkinetor/au-packages-template
 
 param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot)
 

@@ -1,4 +1,4 @@
-# stop on all errors
+﻿# stop on all errors
 $ErrorActionPreference = 'Stop';
  
 # *** Automatically filled ***
