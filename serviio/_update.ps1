@@ -22,7 +22,7 @@ function global:au_GetLatest {
   if ($paths.Length -ne 1) { Throw [System.InvalidOperationException]'Url not found.' }
   $url = $paths[0].href
 
-  return @{ Version = $version; Url32 = $url; FileType = $fileType; SilentArgs = $silentArgs; ValidExitCodes = $validExitCodes }
+  return @{ Version = $version; Url32 = $url; FileType = $fileType; SilentArgs = $silentArgs; ValidExitCodes = $validExitCodes; UninstallRegistryKeyName = $uninstallRegistryKeyName; UninstallFileType = $uninstallFileType; UninstallSilentArgs = $uninstallSilentArgs; UninstallValidExitCodes = $uninstallValidExitCodes }
 }
 
 function global:au_SearchReplace {
