@@ -13,7 +13,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>LAV Filters are a set of DirectShow filters based on the libavformat and libavcodec libraries from the ffmpeg project, which will allow you to play virtually any format in a DirectShow player.</description>
     <summary>Open-Source DirectShow Media Splitter and Decoders</summary>
-    <releaseNotes>https://github.com/Nevcairiel/LAVFilters/releases</releaseNotes>
+    <releaseNotes>[Releases](https://github.com/Nevcairiel/LAVFilters/releases)</releaseNotes>
     <copyright>Copyright © Hendrik Leppkes</copyright>
     <tags>ffmpeg DirectShow filter codec video audio subtitles</tags>
     <projectSourceUrl>https://github.com/Nevcairiel/LAVFilters</projectSourceUrl>

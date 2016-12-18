@@ -13,7 +13,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Description</description>
     <summary>Summary</summary>
-    <releaseNotes>https://release-notes</releaseNotes>
+    <releaseNotes>[Release Notes](https://release-notes)</releaseNotes>
     <copyright>Copyright © Author</copyright>
     <tags>tags</tags>
     <projectSourceUrl>http://project-source-url</projectSourceUrl>
