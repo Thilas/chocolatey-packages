@@ -19,14 +19,15 @@ if ($file -eq $null -or $file -eq '') {
   Write-Host "$packageName has already been uninstalled by other means."
   $shouldUninstall = $false
 }
+else {
+  $file = $file.Replace('"', '')
+}
 
 $installerType = 'exe'
 $silentArgs = '/VERYSILENT /SUPPRESSMSGBOXES'
 $validExitCodes = @(0)
 
-$file = $file.Replace('"', '')
-
-if (!(Test-Path $file)) {
+if ($shouldUninstall -and !(Test-Path $file)) {
   Write-Host "$packageName has already been uninstalled by other means."
   $shouldUninstall = $false
 }

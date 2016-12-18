@@ -29,14 +29,15 @@ if ($file -eq $null -or $file -eq '') {
   Write-Host "$packageName has already been uninstalled by other means."
   $shouldUninstall = $false
 }
-
-$file = Resolve-Path $file
+else {
+  $file = Resolve-Path $file
+}
 
 $installerType = 'exe'
 $silentArgs = '-y'
 $validExitCodes = @(0)
 
-if (!(Test-Path $file)) {
+if ($shouldUninstall -and !(Test-Path $file)) {
   Write-Host "$packageName has already been uninstalled by other means."
   $shouldUninstall = $false
 }
