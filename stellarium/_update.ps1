@@ -2,13 +2,18 @@
 
 Import-Module au
 
+function ToHttps([string] $url) {
+  if (![String]::IsNullOrEmpty($url) -and $url.StartsWith('http://')) { $url = $url.Insert(4, 's') }
+  $url
+}
+
 function global:au_GetLatest {
   $releasesUrl    = 'http://www.stellarium.org/'
   $fileType       = 'exe'
   $silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
   $validExitCodes = '0'
 
-  $uninstallRegistryKeyName = 'Stellarium*'
+  $uninstallRegistryKeyName = 'Stellarium_is1'
   $uninstallFileType        = 'exe'
   $uninstallSilentArgs      = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
   $uninstallValidExitCodes  = '0'
@@ -20,8 +25,8 @@ function global:au_GetLatest {
 
   $paths = @($releases.Links | Where-Object href -Like "*$version*.$fileType*")
   if ($paths.Length -ne 2) { Throw [System.InvalidOperationException]'Url not found.' }
-  $url32 = $paths[0].href
-  $url64 = $paths[1].href
+  $url32 = ToHttps($paths[0].href)
+  $url64 = ToHttps($paths[1].href)
 
   return @{ Version = $version; Url32 = $url32; Url64 = $url64; FileType = $fileType; SilentArgs = $silentArgs; ValidExitCodes = $validExitCodes; UninstallRegistryKeyName = $uninstallRegistryKeyName; UninstallFileType = $uninstallFileType; UninstallSilentArgs = $uninstallSilentArgs; UninstallValidExitCodes = $uninstallValidExitCodes }
 }
@@ -50,4 +55,4 @@ function global:au_SearchReplace {
   }
 }
 
-Update-Package -ChecksumFor 32 -Force:$Force
+Update-Package -ChecksumFor all -Force:$Force

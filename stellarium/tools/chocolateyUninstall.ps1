@@ -2,10 +2,10 @@
 $ErrorActionPreference = 'Stop';
  
 # *** Automatically filled ***
-$packageName              = ''
-$uninstallRegistryKeyName = ''
-$uninstallFileType        = ''
-$uninstallSilentArgs      = ''
+$packageName              = 'stellarium'
+$uninstallRegistryKeyName = 'Stellarium_is1'
+$uninstallFileType        = 'exe'
+$uninstallSilentArgs      = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
 $uninstallValidExitCodes  = @(0)
 # *** Automatically filled ***
 
