@@ -23,10 +23,12 @@ function global:au_GetLatest {
   if (!$version) { Throw [System.InvalidOperationException]'Version invalid.' }
   $version = $Matches[1]
 
-  $paths = @($releases.Links | Where-Object href -Like "*$version*.$fileType*")
-  if ($paths.Length -ne 2) { Throw [System.InvalidOperationException]'Url not found.' }
+  $paths = @($releases.Links | Where-Object href -Like "*$version*win32*.$fileType*")
+  if ($paths.Length -ne 1) { Throw [System.InvalidOperationException]'Url x86 not found.' }
   $url32 = ToHttps($paths[0].href)
-  $url64 = ToHttps($paths[1].href)
+  $paths = @($releases.Links | Where-Object href -Like "*$version*win64*.$fileType*")
+  if ($paths.Length -ne 1) { Throw [System.InvalidOperationException]'Url x64 not found.' }
+  $url64 = ToHttps($paths[0].href)
 
   return @{ Version = $version; Url32 = $url32; Url64 = $url64; FileType = $fileType; SilentArgs = $silentArgs; ValidExitCodes = $validExitCodes; UninstallRegistryKeyName = $uninstallRegistryKeyName; UninstallFileType = $uninstallFileType; UninstallSilentArgs = $uninstallSilentArgs; UninstallValidExitCodes = $uninstallValidExitCodes }
 }
