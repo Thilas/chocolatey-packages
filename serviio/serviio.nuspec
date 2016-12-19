@@ -19,7 +19,7 @@ Serviio is based on Java technology and therefore runs on most platforms, includ
     <summary>Serviio is a free media server. It allows you to stream your media files (music, video or images) to renderer devices (e.g. a TV set, Bluray player, games console or mobile phone) on your connected home network.</summary>
     <releaseNotes>[Release Notes](http://serviio.org/news/9-release-notes/)</releaseNotes>
     <copyright>Copyright © Petr Nejedly. All rights reserved.</copyright>
-    <tags>serviio dlna mediaserver media video music streaming</tags>
+    <tags>admin dlna mediaserver media video music streaming</tags>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/serviio</packageSourceUrl>
     <docsUrl>http://serviio.org/component/content/article/10-uncategorised/5-getting-started</docsUrl>
   </metadata>

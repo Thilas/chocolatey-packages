@@ -15,7 +15,7 @@
     <summary>Summary</summary>
     <releaseNotes>[Release Notes](https://release-notes)</releaseNotes>
     <copyright>Copyright © Author</copyright>
-    <tags>tags</tags>
+    <tags>admin tags</tags>
     <projectSourceUrl>http://project-source-url</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/id</packageSourceUrl>
     <docsUrl>http://docs-url</docsUrl>
