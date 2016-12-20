@@ -2,24 +2,17 @@
 $ErrorActionPreference = 'Stop';
  
 # *** Automatically filled ***
-$packageName              = ''
-$uninstallRegistryKeyName = ''
-$uninstallFileType        = ''
-$uninstallSilentArgs      = ''
-$uninstallValidExitCodes  = @(0)
+$packageName             = ''
+$uninstallSoftwareName   = ''
+$uninstallFileType       = ''
+$uninstallSilentArgs     = ''
+$uninstallValidExitCodes = @(0)
 # *** Automatically filled ***
 
 $shouldUninstall = $true
 
-$local_key = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
-$local_key6432 = "HKCU:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
-$machine_key = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
-$machine_key6432 = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
-
-$file = @($local_key, $local_key6432, $machine_key, $machine_key6432) `
-  | ?{ Test-Path $_ } `
-  | Get-ItemProperty `
-  | Select-Object -ExpandProperty UninstallString
+[array]$key = Get-UninstallRegistryKey -SoftwareName $uninstallSoftwareName
+$file = $key.UninstallString
 
 if ($file -eq $null -or $file -eq '') {
   Write-Host "$packageName has already been uninstalled by other means."
