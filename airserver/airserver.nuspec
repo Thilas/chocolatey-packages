@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>airserver</id>
-    <version>0.0.0</version>
+    <version>5.1.2</version>
     <title>AirServer</title>
     <authors>App Dynamic</authors>
     <owners>Thilas</owners>
