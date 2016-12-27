@@ -1,39 +1,16 @@
-﻿# stop on all errors
-$ErrorActionPreference = 'Stop';
- 
-# *** Automatically filled ***
-$packageName              = 'stellarium'
-$uninstallRegistryKeyName = 'Stellarium_is1'
-$uninstallFileType        = 'exe'
-$uninstallSilentArgs      = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-$uninstallValidExitCodes  = @(0)
+﻿# *** Automatically filled ***
+$softwareName   = ''
+$packageName    = 'stellarium'
+$fileType       = 'exe'
+$silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+$validExitCodes = @(0)
 # *** Automatically filled ***
 
-$shouldUninstall = $true
+$file = (Get-UninstallRegistryKey -SoftwareName $softwareName).UninstallString
+if (![string]::IsNullOrEmpty($file)) { $file = $file.Replace('"', '') }
 
-$local_key = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
-$local_key6432 = "HKCU:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
-$machine_key = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
-$machine_key6432 = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$uninstallRegistryKeyName"
-
-$file = @($local_key, $local_key6432, $machine_key, $machine_key6432) `
-  | ?{ Test-Path $_ } `
-  | Get-ItemProperty `
-  | Select-Object -ExpandProperty UninstallString
-
-if ($file -eq $null -or $file -eq '') {
+if (![string]::IsNullOrEmpty($file) -and (Test-Path $file)) {
+  Uninstall-ChocolateyPackage -PackageName $packageName -FileType $fileType -SilentArgs $silentArgs -ValidExitCodes $validExitCodes -File $file
+} else {
   Write-Host "$packageName has already been uninstalled by other means."
-  $shouldUninstall = $false
-}
-else {
-  $file = $file.Replace('"', '')
-}
-
-if ($shouldUninstall -and !(Test-Path $file)) {
-  Write-Host "$packageName has already been uninstalled by other means."
-  $shouldUninstall = $false
-}
-
-if ($shouldUninstall) {
-  Uninstall-ChocolateyPackage -PackageName $packageName -FileType $uninstallFileType -SilentArgs $uninstallSilentArgs -validExitCodes $uninstallValidExitCodes -File $file
 }
