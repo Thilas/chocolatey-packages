@@ -1,5 +1,5 @@
 ﻿# *** Automatically filled ***
-$softwareName   = ''
+$softwareName   = 'Stellarium *'
 $packageName    = 'stellarium'
 $fileType       = 'exe'
 $silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
