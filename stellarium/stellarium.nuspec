@@ -9,7 +9,7 @@
     <owners>Thilas dtgm</owners>
     <licenseUrl>http://bazaar.launchpad.net/~stellarium/stellarium/trunk/view/head:/COPYING</licenseUrl>
     <projectUrl>http://www.stellarium.org/</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/e6c44088f2106edb585ecc56a8316182488bdca3/stellarium/icon.png</iconUrl>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/8ef5d8c85c2a0dbef6eefad0a8a31de8d953c339/stellarium/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope. It is being used in planetarium projectors. Just set your coordinates and go.</description>
     <summary>Stellarium is a free GPL software which renders realistic skies in real time with OpenGL. With Stellarium, you really see what you can see with your eyes, binoculars or a small telescope. Stellarium is also used in real planetariums.</summary>
