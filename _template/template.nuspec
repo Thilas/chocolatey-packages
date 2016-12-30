@@ -2,6 +2,7 @@
 <!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
+    <!-- Read this before publishing packages to chocolatey.org: https://github.com/chocolatey/chocolatey/wiki/CreatePackages -->
     <id>id</id>
     <version>0.0.0</version>
     <title>Title</title>
@@ -15,7 +16,7 @@
     <summary>Summary</summary>
     <releaseNotes>[Release Notes](https://release-notes)</releaseNotes>
     <copyright>Copyright © Author</copyright>
-    <tags>admin tags</tags>
+    <tags>tags admin</tags>
     <projectSourceUrl>http://project-source-url</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/id</packageSourceUrl>
     <docsUrl>http://docs-url</docsUrl>

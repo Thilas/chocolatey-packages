@@ -4,11 +4,12 @@ Import-Module au
 
 function global:au_GetLatest {
   $releasesUrl    = 'https://api.github.com/repos/user/project/releases/latest'
+
   $fileType       = 'exe'
   $silentArgs     = '/SILENT'
   $validExitCodes = '0'
 
-  $uninstallSoftwareName   = ''
+  $uninstallSoftwareName   = 'Title *'
   $uninstallFileType       = 'exe'
   $uninstallSilentArgs     = '/SILENT'
   $uninstallValidExitCodes = '0'
@@ -25,7 +26,18 @@ function global:au_GetLatest {
   if ($urls.Length -ne 1) { Throw [System.InvalidOperationException]'Url x64 not found.' }
   $url64 = $urls[0].browser_download_url
 
-  return @{ Version = $version; Url32 = $url32; Url64 = $url64; FileType = $fileType; SilentArgs = $silentArgs; ValidExitCodes = $validExitCodes; UninstallSoftwareName = $uninstallSoftwareName; UninstallFileType = $uninstallFileType; UninstallSilentArgs = $uninstallSilentArgs; UninstallValidExitCodes = $uninstallValidExitCodes }
+  return @{
+    Version                 = $version
+    Url32                   = $url32
+    Url64                   = $url64
+    FileType                = $fileType
+    SilentArgs              = $silentArgs
+    ValidExitCodes          = $validExitCodes
+    UninstallSoftwareName   = $uninstallSoftwareName
+    UninstallFileType       = $uninstallFileType
+    UninstallSilentArgs     = $uninstallSilentArgs
+    UninstallValidExitCodes = $uninstallValidExitCodes
+  }
 }
 
 function global:au_SearchReplace {
@@ -43,11 +55,11 @@ function global:au_SearchReplace {
       "^(\s*validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.ValidExitCodes))"
     }
     'tools\chocolateyUninstall.ps1' = @{
-      "^([$]packageName\s*=\s*)'.*'$"                = "`$1'$($Latest.PackageName)'"
-      "^([$]uninstallSoftwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
-      "^([$]uninstallFileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
-      "^([$]uninstallSilentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
-      "^([$]uninstallValidExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"
+      "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
+      "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+      "^([$]fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
+      "^([$]silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
+      "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"
     }
   }
 }

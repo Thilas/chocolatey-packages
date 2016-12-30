@@ -28,7 +28,7 @@ Features:
 * Encrypted AirPlay</description>
     <releaseNotes>[Release Notes](https://www.airserver.com/Download/MacPC)</releaseNotes>
     <copyright>Copyright © App Dynamic ehf. All Rights Reserved</copyright>
-    <tags>admin trial airplay googlecast miracast screen mirroring appletv chromecast</tags>
+    <tags>airplay googlecast miracast screen mirroring appletv chromecast trial admin</tags>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/airserver</packageSourceUrl>
     <docsUrl>http://support.airserver.com/</docsUrl>
   </metadata>

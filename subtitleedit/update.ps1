@@ -4,9 +4,15 @@ Import-Module au
 
 function global:au_GetLatest {
   $releasesUrl    = 'https://api.github.com/repos/SubtitleEdit/subtitleedit/releases/latest'
+
   $fileType       = 'exe'
   $silentArgs     = '/VERYSILENT'
   $validExitCodes = '0'
+
+  $uninstallSoftwareName   = 'Subtitle Edit *'
+  $uninstallFileType       = 'exe'
+  $uninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES'
+  $uninstallValidExitCodes = '0'
 
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
   $version = $releases.tag_name -Match '^(.+)$'
@@ -18,7 +24,18 @@ function global:au_GetLatest {
   $url = $urls[0].browser_download_url
   $file = [IO.Path]::ChangeExtension($urls[0].name, $fileType)
 
-  return @{ Version = $version; Url32 = $url; FileType = $fileType; File32 = $file; SilentArgs = $silentArgs; ValidExitCodes = $validExitCodes }
+  return @{
+    Version = $version
+    Url32 = $url
+    FileType = $fileType
+    File32 = $file
+    SilentArgs = $silentArgs
+    ValidExitCodes = $validExitCodes
+    UninstallSoftwareName = $uninstallSoftwareName
+    UninstallFileType = $uninstallFileType
+    UninstallSilentArgs = $uninstallSilentArgs
+    UninstallValidExitCodes = $uninstallValidExitCodes
+  }
 }
 
 function global:au_SearchReplace {
@@ -35,7 +52,11 @@ function global:au_SearchReplace {
       "^(\s*validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.ValidExitCodes))"
     }
     'tools\chocolateyUninstall.ps1' = @{
+      "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
       "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+      "^([$]fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
+      "^([$]silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
+      "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"
     }
   }
 }

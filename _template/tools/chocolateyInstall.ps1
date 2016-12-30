@@ -9,7 +9,7 @@ $packageArgs = @{
   checksumType   = ''
   checksum64     = ''
   checksumType64 = ''
-  validExitCodes = @(0)
+  validExitCodes = @()
 }
 # *** Automatically filled ***
 

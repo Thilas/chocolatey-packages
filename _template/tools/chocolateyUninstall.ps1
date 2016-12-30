@@ -1,32 +1,16 @@
-﻿# stop on all errors
-$ErrorActionPreference = 'Stop';
- 
-# *** Automatically filled ***
-$packageName             = ''
-$uninstallSoftwareName   = ''
-$uninstallFileType       = ''
-$uninstallSilentArgs     = ''
-$uninstallValidExitCodes = @(0)
+﻿# *** Automatically filled ***
+$softwareName   = ''
+$packageName    = ''
+$fileType       = ''
+$silentArgs     = ''
+$validExitCodes = @()
 # *** Automatically filled ***
 
-$shouldUninstall = $true
+$file = (Get-UninstallRegistryKey -SoftwareName $softwareName).UninstallString
+if (![string]::IsNullOrEmpty($file)) { $file = $file.Replace('"', '') }
 
-[array]$key = Get-UninstallRegistryKey -SoftwareName $uninstallSoftwareName
-$file = $key.UninstallString
-
-if ($file -eq $null -or $file -eq '') {
+if (![string]::IsNullOrEmpty($file) -and (Test-Path $file)) {
+  Uninstall-ChocolateyPackage -PackageName $packageName -FileType $fileType -SilentArgs $silentArgs -ValidExitCodes $validExitCodes -File $file
+} else {
   Write-Host "$packageName has already been uninstalled by other means."
-  $shouldUninstall = $false
-}
-else {
-  $file = $file.Replace('"', '')
-}
-
-if ($shouldUninstall -and !(Test-Path $file)) {
-  Write-Host "$packageName has already been uninstalled by other means."
-  $shouldUninstall = $false
-}
-
-if ($shouldUninstall) {
-  Uninstall-ChocolateyPackage -PackageName $packageName -FileType $uninstallFileType -SilentArgs $uninstallSilentArgs -validExitCodes $uninstallValidExitCodes -File $file
 }

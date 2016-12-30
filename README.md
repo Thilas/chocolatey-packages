@@ -1,4 +1,7 @@
-[![](https://ci.appveyor.com/api/projects/status/github/Thilas/chocolatey-packages?svg=true)](https://ci.appveyor.com/project/Thilas/chocolatey-packages)
+Thilas Packages
+===============
+
+[![Build status](https://ci.appveyor.com/api/projects/status/github/Thilas/chocolatey-packages?svg=true)](https://ci.appveyor.com/project/Thilas/chocolatey-packages)
 [![](http://transparent-favicon.info/favicon.ico)](#)[![](http://transparent-favicon.info/favicon.ico)](#)
 [Update status](https://gist.github.com/Thilas/c09573f2f23bc2aa904d90ff63de2cfe)
 [![](http://transparent-favicon.info/favicon.ico)](#)
@@ -28,7 +31,6 @@ To create a new package see [Creating the package updater script](https://github
 ## Testing the package
 
 In a package directory run: `Test-Package`. This function can be used to start testing in [chocolatey-test-environment](https://github.com/majkinetor/chocolatey-test-environment) via `Vagrant` parameter or it can test packages locally.
-
 
 ## Automatic package update
 
@@ -63,6 +65,20 @@ $au_Push      = $false       #Do not push to chocolatey
 You can also call AU method `Update-AUPackages` (alias `updateall`) on its own in the repository root. This will just run the updater for the each package without any other option from `update_all.ps1` script. For example to force update of all packages with a single command execute:
 
     updateall -Options ([ordered]@{ Force = $true })
+
+## Testing all packages
+
+You can force the update of all or subset of packages to see how they behave when complete update procedure is done:
+
+
+```powershell
+./test_all.ps1                            # Test force update on all packages
+./test_all.ps1 'cdrtfe','freecad', 'p*'   # Test force update on only given packages
+./test_all.ps1 'random 3'                 # Split packages in 3 groups and randomly select and test 1 of those each time
+```
+
+
+**Note**: If you run this locally your packages will get updated. Use `git reset --hard` after running this to revert the changes.
 
 ## Pushing To Community Repository Via Commit Message
 

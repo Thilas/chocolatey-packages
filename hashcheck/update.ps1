@@ -3,12 +3,14 @@
 Import-Module au
 
 function global:au_GetLatest {
-  $releasesUrl     = 'https://api.github.com/repos/gurnec/HashCheck/releases/latest'
-  $fileType        = 'exe'
-  $checksumType    = 'sha256'
-  $checksumPattern = '^(.+) \*'
-  $silentArgs      = '/S'
-  $validExitCodes  = '0'
+  $releasesUrl    = 'https://api.github.com/repos/gurnec/HashCheck/releases/latest'
+
+  $fileType       = 'exe'
+  $silentArgs     = '/S'
+  $checksumType   = 'sha256'
+  $validExitCodes = '0'
+
+  $uninstallValidExitCodes = '0'
 
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
   $version = $releases.tag_name -Match '^v(.+)$'
@@ -23,11 +25,20 @@ function global:au_GetLatest {
   if ($urls.Length -ne 1) { Throw [System.InvalidOperationException]'Checksum not found.' }
   $checksumUrl = $urls[0].browser_download_url
   $checksum = (New-Object System.Net.WebClient).DownloadString($checksumUrl)
-  $checksum = $checksum -Match $checksumPattern
+  $checksum = $checksum -Match '^(.+) \*'
   if (!$checksum) { Throw [System.InvalidOperationException]'Checksum invalid.' }
   $checksum = $Matches[1]
 
-  return @{ Version = $version; Url32 = $url; Checksum32 = $checksum; ChecksumType32 = $checksumType; FileType = $fileType; SilentArgs = $silentArgs; ValidExitCodes = $validExitCodes }
+  return @{
+    Version = $version
+    Url32 = $url
+    Checksum32 = $checksum
+    ChecksumType32 = $checksumType
+    FileType = $fileType
+    SilentArgs = $silentArgs
+    ValidExitCodes = $validExitCodes
+    UninstallValidExitCodes = $uninstallValidExitCodes
+  }
 }
 
 function global:au_SearchReplace {
@@ -43,6 +54,7 @@ function global:au_SearchReplace {
     }
     'tools\chocolateyUninstall.ps1' = @{
       "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+      "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"
     }
   }
 }

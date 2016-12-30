@@ -1,37 +1,16 @@
-﻿# stop on all errors
-$ErrorActionPreference = 'Stop';
- 
-$packageName = 'subtitleedit'
-$registryUninstallerKeyName = 'SubtitleEdit_is1'
-$shouldUninstall = $true
-
-$local_key = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
-$local_key6432 = "HKCU:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
-$machine_key = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
-$machine_key6432 = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
-
-$file = @($local_key, $local_key6432, $machine_key, $machine_key6432) `
-  | ?{ Test-Path $_ } `
-  | Get-ItemProperty `
-  | Select-Object -ExpandProperty UninstallString
-
-if ($file -eq $null -or $file -eq '') {
-  Write-Host "$packageName has already been uninstalled by other means."
-  $shouldUninstall = $false
-}
-else {
-  $file = $file.Replace('"', '')
-}
-
-$installerType = 'exe'
-$silentArgs = '/VERYSILENT /SUPPRESSMSGBOXES'
+﻿# *** Automatically filled ***
+$softwareName   = 'Subtitle Edit *'
+$packageName    = 'subtitleedit'
+$fileType       = 'exe'
+$silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES'
 $validExitCodes = @(0)
+# *** Automatically filled ***
 
-if ($shouldUninstall -and !(Test-Path $file)) {
+$file = (Get-UninstallRegistryKey -SoftwareName $softwareName).UninstallString
+if (![string]::IsNullOrEmpty($file)) { $file = $file.Replace('"', '') }
+
+if (![string]::IsNullOrEmpty($file) -and (Test-Path $file)) {
+  Uninstall-ChocolateyPackage -PackageName $packageName -FileType $fileType -SilentArgs $silentArgs -ValidExitCodes $validExitCodes -File $file
+} else {
   Write-Host "$packageName has already been uninstalled by other means."
-  $shouldUninstall = $false
-}
-
-if ($shouldUninstall) {
-  Uninstall-ChocolateyPackage -PackageName $packageName -FileType $installerType -SilentArgs $silentArgs -validExitCodes $validExitCodes -File $file
 }
