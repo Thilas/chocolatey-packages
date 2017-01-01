@@ -40,18 +40,17 @@ function global:au_GetLatest {
 
   $releasesUrl = 'https://api.github.com/repos/user/project/releases/latest'
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $version = $releases.tag_name -Match '^(.+)$'
+  $version = $releases.tag_name -Match '^(?<version>.+)$'
   if (!$version) { throw 'Version not found.' }
-  $version = $Matches[1]
+  $version = $Matches['version']
 
-  $urls = @($releases.assets | Where-Object name -Like "*$version*x86*.$fileType")
+  $urls = @($releases.assets | ? name -Like "*$version*x86*.$fileType")
   if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
   $url32 = $urls[0].browser_download_url
-  $urls = @($releases.assets | Where-Object name -Like "*$version*x64*.$fileType")
+  $urls = @($releases.assets | ? name -Like "*$version*x64*.$fileType")
   if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
   $url64 = $urls[0].browser_download_url
 
-  $checksumType = 'sha256'
   return @{
     Version                 = $version
     FileType                = $fileType
