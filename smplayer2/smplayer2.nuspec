@@ -10,16 +10,16 @@
     <licenseUrl>https://github.com/rossy/SMPlayer2/blob/master/COPYING</licenseUrl>
     <projectUrl>https://github.com/rossy/SMPlayer2</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>SMPlayer2 is no longer maintained by its main developer. I suggest you to try mpv instead.
+    <description>**NOTE:** This package has been deprecated because SMPlayer2 is no longer maintained by its main developer. It is recommended to use mpv instead.
 
-    A great mplayer2 front-end.</description>
+A great mplayer2 front-end.</description>
     <summary>A fork of SMPlayer, targeted at mplayer2 users. Note, this is just a temporary solution until mplayer2 gets a new IPC mechanism!</summary>
-    <copyright>Copyright © 2012 Martin Herkt &lt;lachs0r@srsfckn.biz&gt;</copyright>
+    <copyright>Copyright © 2012 Martin Herkt</copyright>
     <tags>video media player smplayer mplayer2 multimedia</tags>
     <projectSourceUrl>https://github.com/rossy/SMPlayer2</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/smplayer2</packageSourceUrl>
     <dependencies>
-      <dependency id="mpv" version="2016.12.25" />
+      <dependency id="mpv" />
     </dependencies>
   </metadata>
   <files>
