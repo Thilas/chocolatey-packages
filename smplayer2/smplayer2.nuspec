@@ -17,5 +17,10 @@
     <tags>video media player smplayer mplayer2 multimedia</tags>
     <projectSourceUrl>https://github.com/rossy/SMPlayer2</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/smplayer2</packageSourceUrl>
+    <dependencies>
+      <dependency id="mpv" version="2016.12.25" />
+    </dependencies>
   </metadata>
+  <files>
+  </files>
 </package>
