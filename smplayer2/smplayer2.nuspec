@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>smplayer2</id>
+    <version>0.7.3</version>
+    <title>SMPlayer2</title>
+    <authors>Martin Herkt</authors>
+    <owners>Thilas</owners>
+    <licenseUrl>http://www.gnu.org/licenses/gpl-2.0.html</licenseUrl>
+    <projectUrl>https://github.com/lachs0r/SMPlayer2</projectUrl>
+    <iconUrl>https://github.com/lachs0r/SMPlayer2/blob/master/icons/smplayer2_icon64.png?raw=true</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A great mplayer2 front-end</description>
+    <summary>A fork of SMPlayer, targeted at mplayer2 users. Note, this is just a temporary solution until mplayer2 gets a new IPC mechanism!</summary>
+    <copyright>© 2012 Martin Herkt &lt;lachs0r@srsfckn.biz&gt;</copyright>
+    <tags>smplayer2 video media player multimedia</tags>
+  </metadata>
+</package>
