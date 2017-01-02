@@ -3,13 +3,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>cutepdf</id>
-    <version>3.0</version>
+    <version>3.1</version>
     <title>CutePDF Writer</title>
     <authors>Acro Software Inc.</authors>
     <owners>Redsandro Thilas</owners>
     <licenseUrl>http://www.cutepdf.com/Info/legal.asp</licenseUrl>
     <projectUrl>http://www.cutepdf.com/products/cutepdf/writer.asp</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/commit/cutepdf/icon.png</iconUrl>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/efe20ea2b75a499ebf062adaf96f1ca2ca694135/cutepdf/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Portable Document Format (PDF) is the de facto standard for the secure and reliable distribution and exchange of electronic documents and forms around the world.  CutePDF Writer is the free version of commercial PDF converter software. CutePDF Writer installs itself as a "printer subsystem". This enables virtually any Windows applications (must be able to print) to convert to professional quality PDF documents - with just a push of a button!
  
