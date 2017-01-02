@@ -2,9 +2,9 @@
 #   $f = 'C:\path\to\chocolateyInstall.ps1'
 #   gc $f | ? {$_ -notmatch "^\s*#"} | % {$_ -replace '(^.*?)\s*?[^``]#.*','$1'} | Out-File $f+".~" -en utf8; mv -fo $f+".~" $f
 
-$ErrorActionPreference = 'Stop'; # stop on all errors
+$ErrorActionPreference = 'Stop'
 
-#$toolsDir     = Split-Path -Parent $MyInvocation.MyCommand.Definition
+#$toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 # *** Automatically filled ***
 $packageArgs = @{
@@ -24,6 +24,7 @@ $packageArgs = @{
 # *** Automatically filled ***
 
 Install-ChocolateyPackage @packageArgs # https://chocolatey.org/docs/helpers-install-chocolatey-package
+
 #Install-ChocolateyZipPackage @packageArgs # https://chocolatey.org/docs/helpers-install-chocolatey-zip-package
 ## If you are making your own internal packages (organizations), you can embed the installer or
 ## put on internal file share and use the following instead (you'll need to add $file to the above)

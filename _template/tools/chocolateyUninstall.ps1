@@ -10,7 +10,7 @@
 ## Auto Uninstaller should be able to detect and handle registry uninstalls (if it is turned on, it is in preview for 0.9.9).
 ## - https://chocolatey.org/docs/helpers-uninstall-chocolatey-package
 
-$ErrorActionPreference = 'Stop'; # stop on all errors
+$ErrorActionPreference = 'Stop'
 
 # *** Automatically filled ***
 $packageName    = ''
