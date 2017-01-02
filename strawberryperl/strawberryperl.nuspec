@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>strawberryperl</id>
+    <version>5.20.1.1</version>
+    <title>Strawberry Perl</title>
+    <authors>KMX, Curtis Jewell and Adam Kennedy</authors>
+    <owners>alanstevens Thilas</owners>
+    <licenseUrl>https://github.com/StrawberryPerl/Perl-Dist-Strawberry/blob/master/LICENSE</licenseUrl>
+    <projectUrl>http://strawberryperl.com/</projectUrl>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/58d4825d117dae7fcf9100ba5d4fa0e4563ff7f7/strawberryperl/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>**Perl** is a programming language suitable for writing simple scripts as well as complex applications - see https://www.perl.org
+
+**Strawberry Perl** is a perl environment for MS Windows containing all you need to run and develop perl applications. It is designed to be as close as possible to perl environment on UNIX systems.
+
+It includes perl binaries, compiler (gcc) + related tools, all the external libraries (crypto, math, graphics, xml ...), all the bundled database clients and all you expect from Strawberry Perl.</description>
+    <summary>Strawberry Perl is a binary distribution of Perl for the Windows operating system.</summary>
+    <releaseNotes>[Releases](http://strawberryperl.com/releases.html)</releaseNotes>
+    <copyright>Copyright © KMX</copyright>
+    <tags>strawberryperl admin perl script gcc cpan</tags>
+    <projectSourceUrl>https://github.com/StrawberryPerl/Perl-Dist-Strawberry</projectSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/strawberryperl</packageSourceUrl>
+    <docsUrl>http://strawberryperl.com/support.html</docsUrl>
+    <mailingListUrl>http://www.mail-archive.com/win32-vanilla@perl.org/maillist.html</mailingListUrl>
+    <bugTrackerUrl>https://rt.cpan.org/Public/Dist/Display.html?Name=Perl-Dist-Strawberry</bugTrackerUrl>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
