@@ -19,8 +19,8 @@ function global:au_GetLatest {
   #$silentArgs     = '-s -u'                                         # Ghost
   $validExitCodes = '0'
   #$fileType       = 'msi/msu'
-  #$silentArgs    = "/qn /norestart /l*v ```"`$env:TEMP\`$env:chocolateyPackageName.`$env:chocolateyPackageVersion.MsiInstall.log```"" # ALLUSERS=1 DISABLEDESKTOPSHORTCUT=1 ADDDESKTOPICON=0 ADDSTARTMENU=0
-  #$validExitCodes= @(0, 3010, 1641) # https://msdn.microsoft.com/en-us/library/aa376931(v=vs.85).aspx
+  #$silentArgs     = "/qn /norestart /l*v ```"`$env:TEMP\`$env:chocolateyPackageName.`$env:chocolateyPackageVersion.MsiInstall.log```"" # ALLUSERS=1 DISABLEDESKTOPSHORTCUT=1 ADDDESKTOPICON=0 ADDSTARTMENU=0
+  #$validExitCodes = '0, 3010, 1641' # https://msdn.microsoft.com/en-us/library/aa376931(v=vs.85).aspx
 
   $uninstallSoftwareName   = 'Title *' # part or all of the Display Name as you see it in Programs and Features. It should be enough to be unique.
   $uninstallFileType       = 'exe'

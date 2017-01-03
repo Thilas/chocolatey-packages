@@ -3,9 +3,6 @@
 Import-Module au
 
 function global:au_GetLatest {
-  $baseUrl        = 'http://www.ltr-data.se'
-  $releasesPath   = 'opencode.html'
-
   $fileType       = 'exe'
   $silentArgs     = '-y'
   $validExitCodes = '0'
@@ -15,25 +12,27 @@ function global:au_GetLatest {
   $uninstallSilentArgs     = '-y'
   $uninstallValidExitCodes = '0'
 
+  $baseUrl = 'http://www.ltr-data.se'
+  $releasesPath = 'opencode.html'
   $releasesUrl = (New-Object System.Uri([System.Uri]($baseUrl), $releasesPath)).ToString()
   $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
-  $version = $releases.Content -Match 'Current version (.+) built'
-  if (!$version) { Throw [System.InvalidOperationException]'Version invalid.' }
-  $version = $Matches[1]
+  $version = $releases.Content -Match 'Current version (?<version>.+) built'
+  if (!$version) { throw 'Version not found.' }
+  $version = $Matches['version']
 
-  $urls = @($releases.Links | Where-Object href -Like "*$version*.$fileType")
-  if ($urls.Length -ne 1) { Throw [System.InvalidOperationException]'Url not found.' }
+  $urls = @($releases.Links | ? href -Like "*$version*.$fileType")
+  if ($urls.Length -ne 1) { throw 'Url not found.' }
   $url = (New-Object System.Uri([System.Uri]($baseUrl), $urls[0].href)).ToString()
 
   return @{
-    Version = $version
-    Url32 = $url
-    FileType = $fileType
-    SilentArgs = $silentArgs
-    ValidExitCodes = $validExitCodes
-    UninstallSoftwareName = $uninstallSoftwareName
-    UninstallFileType = $uninstallFileType
-    UninstallSilentArgs = $uninstallSilentArgs
+    Version                 = $version
+    FileType                = $fileType
+    Url32                   = $url
+    SilentArgs              = $silentArgs
+    ValidExitCodes          = $validExitCodes
+    UninstallSoftwareName   = $uninstallSoftwareName
+    UninstallFileType       = $uninstallFileType
+    UninstallSilentArgs     = $uninstallSilentArgs
     UninstallValidExitCodes = $uninstallValidExitCodes
   }
 }
@@ -50,8 +49,8 @@ function global:au_SearchReplace {
       "^(\s*validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.ValidExitCodes))"
     }
     'tools\chocolateyUninstall.ps1' = @{
-      "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
       "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+      "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
       "^([$]fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
       "^([$]silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
       "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"

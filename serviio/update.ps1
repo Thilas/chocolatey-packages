@@ -3,8 +3,6 @@
 Import-Module au
 
 function global:au_GetLatest {
-  $releasesUrl    = 'http://serviio.org/download'
-
   $fileType       = 'exe'
   $silentArgs     = '/S'
   $validExitCodes = '0'
@@ -12,26 +10,27 @@ function global:au_GetLatest {
   $uninstallSoftwareName   = 'Serviio'
   $uninstallFileType       = 'exe'
   $uninstallSilentArgs     = '/S'
-  $uninstallValidExitCodes = @(0)
+  $uninstallValidExitCodes = '0'
 
+  $releasesUrl = 'http://serviio.org/download'
   $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
-  $version = $releases.Content -Match 'The latest released version is ([^ ]+) '
-  if (!$version) { Throw [System.InvalidOperationException]'Version invalid.' }
-  $version = $Matches[1]
+  $version = $releases.Content -Match 'The latest released version is (?<version>[^ ]+) '
+  if (!$version) { throw 'Version not found.' }
+  $version = $Matches['version']
 
-  $urls = @($releases.Links | Where-Object href -Like "*$version*.$fileType")
-  if ($urls.Length -ne 1) { Throw [System.InvalidOperationException]'Url not found.' }
+  $urls = @($releases.Links | ? href -Like "*$version*.$fileType")
+  if ($urls.Length -ne 1) { throw 'Url not found.' }
   $url = $urls[0].href
 
   return @{
-    Version = $version
-    Url32 = $url
-    FileType = $fileType
-    SilentArgs = $silentArgs
-    ValidExitCodes = $validExitCodes
-    UninstallSoftwareName = $uninstallSoftwareName
-    UninstallFileType = $uninstallFileType
-    UninstallSilentArgs = $uninstallSilentArgs
+    Version                 = $version
+    FileType                = $fileType
+    Url32                   = $url
+    SilentArgs              = $silentArgs
+    ValidExitCodes          = $validExitCodes
+    UninstallSoftwareName   = $uninstallSoftwareName
+    UninstallFileType       = $uninstallFileType
+    UninstallSilentArgs     = $uninstallSilentArgs
     UninstallValidExitCodes = $uninstallValidExitCodes
   }
 }
@@ -48,8 +47,8 @@ function global:au_SearchReplace {
       "^(\s*validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.ValidExitCodes))"
     }
     'tools\chocolateyUninstall.ps1' = @{
-      "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
       "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+      "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
       "^([$]fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
       "^([$]silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
       "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"

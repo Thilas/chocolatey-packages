@@ -15,7 +15,7 @@
     <summary>Subtitle Edit is a free (open source) editor for video subtitles - a subtitle editor :)</summary>
     <releaseNotes>[Blog](http://www.nikse.dk/)</releaseNotes>
     <copyright>Copyright © Nikse</copyright>
-    <tags>subtitle editor video OCR sync merge split convert admin</tags>
+    <tags>subtitleedit admin subtitle editor video OCR sync merge split convert</tags>
     <projectSourceUrl>https://github.com/SubtitleEdit/subtitleedit</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/subtitleedit</packageSourceUrl>
     <mailingListUrl>https://gitter.im/SubtitleEdit/subtitleedit</mailingListUrl>

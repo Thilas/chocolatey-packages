@@ -1,4 +1,6 @@
-﻿# *** Automatically filled ***
+﻿$ErrorActionPreference = 'Stop'
+
+# *** Automatically filled ***
 $packageArgs = @{
   packageName    = 'serviio'
   fileType       = 'exe'

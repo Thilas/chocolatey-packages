@@ -9,10 +9,10 @@ $ErrorActionPreference = 'Stop'
 # *** Automatically filled ***
 $packageArgs = @{
   packageName    = ''
-  #unzipLocation  = $toolsDir
   fileType       = ''
   url            = ''
   url64bit       = ''
+  #unzipLocation  = $toolsDir
   #file           = Join-Path $toolsDir 'NAME_OF_EMBEDDED_INSTALLER_FILE'
   silentArgs     = ''
   checksum       = ''

@@ -1,9 +1,10 @@
-﻿# *** Automatically filled ***
+﻿$ErrorActionPreference = 'Stop'
+
+# *** Automatically filled ***
 $packageName    = 'hashcheck'
 $validExitCodes = @(0)
 # *** Automatically filled ***
 
-$ErrorActionPreference = 'Stop';
 $file = 'regsvr32.exe'
 
 $dll = Join-Path $env:SystemRoot 'SysWOW64\ShellExt\HashCheck.dll'

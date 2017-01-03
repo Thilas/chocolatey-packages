@@ -3,8 +3,6 @@
 Import-Module au
 
 function global:au_GetLatest {
-  $releasesUrl    = 'https://api.github.com/repos/gurnec/HashCheck/releases/latest'
-
   $fileType       = 'exe'
   $silentArgs     = '/S'
   $checksumType   = 'sha256'
@@ -12,31 +10,32 @@ function global:au_GetLatest {
 
   $uninstallValidExitCodes = '0'
 
+  $releasesUrl = 'https://api.github.com/repos/gurnec/HashCheck/releases/latest'
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $version = $releases.tag_name -Match '^v(.+)$'
-  if (!$version) { Throw [System.InvalidOperationException]'Version invalid.' }
-  $version = $Matches[1]
+  $version = $releases.tag_name -Match '^v(?<version>.+)$'
+  if (!$version) { throw 'Version not found.' }
+  $version = $Matches['version']
 
-  $urls = @($releases.assets | Where-Object name -Like "*$version*.$fileType")
-  if ($urls.Length -ne 1) { Throw [System.InvalidOperationException]'Url not found.' }
+  $urls = @($releases.assets | ? name -Like "*$version*.$fileType")
+  if ($urls.Length -ne 1) { throw 'Url not found.' }
   $url = $urls[0].browser_download_url
 
-  $urls = @($releases.assets | Where-Object name -Like "*$version*.$checksumType")
-  if ($urls.Length -ne 1) { Throw [System.InvalidOperationException]'Checksum not found.' }
+  $urls = @($releases.assets | ? name -Like "*$version*.$checksumType")
+  if ($urls.Length -ne 1) { throw 'Checksum url not found.' }
   $checksumUrl = $urls[0].browser_download_url
   $checksum = (New-Object System.Net.WebClient).DownloadString($checksumUrl)
-  $checksum = $checksum -Match '^(.+) \*'
-  if (!$checksum) { Throw [System.InvalidOperationException]'Checksum invalid.' }
-  $checksum = $Matches[1]
+  $checksum = $checksum -Match '^(?<checksum>.+) \*'
+  if (!$checksum) { throw 'Checksum not found.' }
+  $checksum = $Matches['checksum']
 
   return @{
-    Version = $version
-    Url32 = $url
-    Checksum32 = $checksum
-    ChecksumType32 = $checksumType
-    FileType = $fileType
-    SilentArgs = $silentArgs
-    ValidExitCodes = $validExitCodes
+    Version                 = $version
+    FileType                = $fileType
+    Url32                   = $url
+    SilentArgs              = $silentArgs
+    Checksum32              = $checksum
+    ChecksumType32          = $checksumType
+    ValidExitCodes          = $validExitCodes
     UninstallValidExitCodes = $uninstallValidExitCodes
   }
 }
@@ -59,4 +58,4 @@ function global:au_SearchReplace {
   }
 }
 
-Update-Package -ChecksumFor 32 -Force:$Force
+Update-Package -ChecksumFor none -Force:$Force

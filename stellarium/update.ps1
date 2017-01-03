@@ -8,8 +8,6 @@ function ToHttps([string] $url) {
 }
 
 function global:au_GetLatest {
-  $releasesUrl    = 'http://www.stellarium.org/'
-
   $fileType       = 'exe'
   $silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
   $validExitCodes = '0'
@@ -19,19 +17,31 @@ function global:au_GetLatest {
   $uninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
   $uninstallValidExitCodes = '0'
 
+  $releasesUrl = 'http://www.stellarium.org/'
   $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
-  $version = $releases.Content -Match '>latest version is ([^<]+)<'
-  if (!$version) { Throw [System.InvalidOperationException]'Version invalid.' }
-  $version = $Matches[1]
+  $version = $releases.Content -Match '>latest version is (?<version>[^<]+)<'
+  if (!$version) { throw 'Version not found.' }
+  $version = $Matches['version']
 
-  $urls = @($releases.Links | Where-Object href -Like "*$version*win32*.$fileType*")
-  if ($urls.Length -ne 1) { Throw [System.InvalidOperationException]'Url x86 not found.' }
+  $urls = @($releases.Links | ? href -Like "*$version*win32*.$fileType*")
+  if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
   $url32 = ToHttps($urls[0].href)
-  $urls = @($releases.Links | Where-Object href -Like "*$version*win64*.$fileType*")
-  if ($urls.Length -ne 1) { Throw [System.InvalidOperationException]'Url x64 not found.' }
+  $urls = @($releases.Links | ? href -Like "*$version*win64*.$fileType*")
+  if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
   $url64 = ToHttps($urls[0].href)
 
-  return @{ Version = $version; Url32 = $url32; Url64 = $url64; FileType = $fileType; SilentArgs = $silentArgs; ValidExitCodes = $validExitCodes; UninstallSoftwareName = $uninstallSoftwareName; UninstallFileType = $uninstallFileType; UninstallSilentArgs = $uninstallSilentArgs; UninstallValidExitCodes = $uninstallValidExitCodes }
+  return @{
+    Version                 = $version
+    FileType                = $fileType
+    Url32                   = $url32
+    Url64                   = $url64
+    SilentArgs              = $silentArgs
+    ValidExitCodes          = $validExitCodes
+    UninstallSoftwareName   = $uninstallSoftwareName
+    UninstallFileType       = $uninstallFileType
+    UninstallSilentArgs     = $uninstallSilentArgs
+    UninstallValidExitCodes = $uninstallValidExitCodes
+  }
 }
 
 function global:au_SearchReplace {
@@ -49,8 +59,8 @@ function global:au_SearchReplace {
       "^(\s*validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.ValidExitCodes))"
     }
     'tools\chocolateyUninstall.ps1' = @{
-      "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
       "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+      "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
       "^([$]fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
       "^([$]silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
       "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"

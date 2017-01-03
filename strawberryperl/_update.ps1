@@ -17,9 +17,9 @@ function global:au_GetLatest {
   if ($urls.Length -lt 1) { throw 'Url (x64) not found.' }
   $url64 = (New-Object System.Uri([System.Uri]($releasesUrl), $urls[0].href)).ToString()
 
-  $version = $url32 -Match "-([^-]+)-[^-]*32bit[^-]*\.$fileType$"
-  if (!$version) { Throw [System.InvalidOperationException]'Version invalid.' }
-  $version = $Matches[1]
+  $version = $url32 -Match "-(?<version>[^-]+)-[^-]*32bit[^-]*\.$fileType$"
+  if (!$version) { throw 'Version not found.' }
+  $version = $Matches['version']
 
   return @{
     Version                 = $version

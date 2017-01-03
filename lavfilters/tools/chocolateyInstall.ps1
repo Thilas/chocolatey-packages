@@ -1,4 +1,6 @@
-﻿# *** Automatically filled ***
+﻿$ErrorActionPreference = 'Stop'
+
+# *** Automatically filled ***
 $packageArgs = @{
   packageName    = 'lavfilters'
   fileType       = 'exe'

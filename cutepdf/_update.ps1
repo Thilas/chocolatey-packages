@@ -11,7 +11,7 @@ function global:au_GetLatest {
   $releasesUrl = 'http://www.cutepdf.com/products/cutepdf/writer.asp'
   $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
   $version = $releases.Content -Match '\(Ver\. (?<version>[^ ]+);'
-  if (!$version) { Throw [System.InvalidOperationException]'Version invalid.' }
+  if (!$version) { throw 'Version not found.' }
   $version = $Matches['version']
 
   return @{

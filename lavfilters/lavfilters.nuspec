@@ -15,7 +15,7 @@
     <summary>Open-Source DirectShow Media Splitter and Decoders</summary>
     <releaseNotes>[Releases](https://github.com/Nevcairiel/LAVFilters/releases)</releaseNotes>
     <copyright>Copyright © Hendrik Leppkes</copyright>
-    <tags>ffmpeg DirectShow filter codec video audio subtitles admin</tags>
+    <tags>lavfilters admin ffmpeg DirectShow filter codec video audio subtitles</tags>
     <projectSourceUrl>https://github.com/Nevcairiel/LAVFilters</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/lavfilters</packageSourceUrl>
     <mailingListUrl>http://forum.doom9.org/showthread.php?t=156191</mailingListUrl>
