@@ -6,7 +6,7 @@
     <version>3.5.1</version>
     <title>Subtitle Edit</title>
     <authors>Nikolaj Lynge Olsson</authors>
-    <owners>Thilas Waterdrop</owners>
+    <owners>Thilas,Waterdrop</owners>
     <licenseUrl>https://github.com/SubtitleEdit/subtitleedit/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>http://www.nikse.dk/SubtitleEdit/</projectUrl>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/90d6238c8db69f85cbfb32e3bcd7021c2303aba3/subtitleedit/icon.png</iconUrl>

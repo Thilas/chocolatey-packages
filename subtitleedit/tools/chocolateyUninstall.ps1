@@ -8,11 +8,6 @@ $silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES'
 $validExitCodes = @(0)
 # *** Automatically filled ***
 
-# Get-UninstallRegistryKey is new to 0.9.10, if supporting 0.9.9.x and below,
-# take a dependency on "chocolatey-uninstall.extension" in your nuspec file.
-# This is only a fuzzy search if $softwareName includes '*'. Otherwise it is 
-# exact. In the case of versions in key names, we recommend removing the version
-# and using '*'.
 [array]$key = Get-UninstallRegistryKey -SoftwareName $softwareName
 
 if ($key.Count -eq 1) {
