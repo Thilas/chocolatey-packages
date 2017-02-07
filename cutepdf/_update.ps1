@@ -7,6 +7,7 @@ function global:au_GetLatest {
   $url32          = 'http://www.cutepdf.com/download/CuteWriter.exe'
   $silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
   $validExitCodes = '0'
+  $softwareName   = 'cutepdf*'
 
   $releasesUrl = 'http://www.cutepdf.com/products/cutepdf/writer.asp'
   $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
@@ -20,6 +21,7 @@ function global:au_GetLatest {
     Url32                   = $url32
     SilentArgs              = $silentArgs
     ValidExitCodes          = $validExitCodes
+    SoftwareName            = $softwareName
   }
 }
 
@@ -33,6 +35,7 @@ function global:au_SearchReplace {
       "^(\s*checksum\s*=\s*)'.*'$"          = "`$1'$($Latest.Checksum32)'"
       "^(\s*checksumType\s*=\s*)'.*'$"      = "`$1'$($Latest.ChecksumType32)'"
       "^(\s*validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.ValidExitCodes))"
+      "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
     }
   }
 }

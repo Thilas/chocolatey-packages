@@ -9,6 +9,7 @@ $packageArgs = @{
   checksum       = '2d9e07f25358c9d2317bc639afcdeddb893d1fcfd43bb66ff372dba11e169ee1'
   checksumType   = 'sha256'
   validExitCodes = @(0)
+  softwareName   = 'cutepdf*'
 }
 # *** Automatically filled ***
 

@@ -6,7 +6,7 @@
     <version>3.1</version>
     <title>CutePDF Writer</title>
     <authors>Acro Software Inc.</authors>
-    <owners>Redsandro Thilas</owners>
+    <owners>chocolatey,Redsandro,Thilas</owners>
     <licenseUrl>http://www.cutepdf.com/Info/legal.asp</licenseUrl>
     <projectUrl>http://www.cutepdf.com/products/cutepdf/writer.asp</projectUrl>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/efe20ea2b75a499ebf062adaf96f1ca2ca694135/cutepdf/icon.png</iconUrl>
