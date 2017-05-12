@@ -4,7 +4,7 @@
 $packageName    = 'subtitleedit'
 $softwareName   = 'Subtitle Edit *'
 $fileType       = 'exe'
-$silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES'
+$silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
 $validExitCodes = @(0)
 # *** Automatically filled ***
 
