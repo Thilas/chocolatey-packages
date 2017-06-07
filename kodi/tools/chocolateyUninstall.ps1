@@ -1,11 +1,11 @@
 ﻿$ErrorActionPreference = 'Stop'
 
 # *** Automatically filled ***
-$packageName    = ''
-$softwareName   = ''
-$fileType       = ''
-$silentArgs     = ''
-$validExitCodes = @()
+$packageName    = 'kodi'
+$softwareName   = 'Kodi*'
+$fileType       = 'exe'
+$silentArgs     = '/S'
+$validExitCodes = @(0)
 # *** Automatically filled ***
 
 [array]$key = Get-UninstallRegistryKey -SoftwareName $softwareName
