@@ -4,7 +4,7 @@
 $packageName    = 'lavfilters'
 $softwareName   = 'LAV Filters *'
 $fileType       = 'exe'
-$silentArgs     = '/SILENT'
+$silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
 $validExitCodes = @(0)
 # *** Automatically filled ***
 
