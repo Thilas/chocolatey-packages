@@ -16,10 +16,13 @@ $packageArgs = @{
 Install-ChocolateyZipPackage @packageArgs
 
 @('procmon') | % {
-  New-Item "$toolsDir\$_.exe.gui" -Type file -Force | Out-Null
+  New-Item (Join-Path $toolsDir "$_.exe.gui") -Type file -Force | Out-Null
 }
 
-New-Item "HKCU:\SOFTWARE\Sysinternals" -Force | Out-Null
-@('Process Monitor') | % {
-  New-Item (Join-Path -Path 'HKCU:\SOFTWARE\Sysinternals' -ChildPath "$_") -Force | New-ItemProperty -Name "EulaAccepted" -Value 1 -Force | Out-Null
+New-Item 'HKCU:\SOFTWARE\Sysinternals\Process Monitor' -Force | New-ItemProperty -Name 'EulaAccepted' -Value 1 -Force | Out-Null
+
+$shortcutPath = Join-Path $([Environment]::GetFolderPath('CommonPrograms')) 'Process Monitor.lnk'
+If (-not (Test-Path $shortcutPath)) {
+  $targetPath = Join-Path $toolsDir 'procmon.exe'
+  Install-ChocolateyShortcut -ShortcutFilePath $shortcutPath -TargetPath $targetPath
 }

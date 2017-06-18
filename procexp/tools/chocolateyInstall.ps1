@@ -16,10 +16,13 @@ $packageArgs = @{
 Install-ChocolateyZipPackage @packageArgs
 
 @('procexp', 'procexp64') | % {
-  New-Item "$toolsDir\$_.exe.gui" -Type file -Force | Out-Null
+  New-Item (Join-Path $toolsDir "$_.exe.gui") -Type file -Force | Out-Null
 }
 
-New-Item "HKCU:\SOFTWARE\Sysinternals" -Force | Out-Null
-@('Process Explorer') | % {
-  New-Item (Join-Path -Path 'HKCU:\SOFTWARE\Sysinternals' -ChildPath "$_") -Force | New-ItemProperty -Name "EulaAccepted" -Value 1 -Force | Out-Null
+New-Item 'HKCU:\SOFTWARE\Sysinternals\Process Explorer' -Force | New-ItemProperty -Name 'EulaAccepted' -Value 1 -Force | Out-Null
+
+$shortcutPath = Join-Path $([Environment]::GetFolderPath('CommonPrograms')) 'Process Explorer.lnk'
+If (-not (Test-Path $shortcutPath)) {
+  $targetPath = Join-Path $toolsDir $(If ([Environment]::Is64BitOperatingSystem) { 'procexp64.exe' } else { 'procexp.exe' })
+  Install-ChocolateyShortcut -ShortcutFilePath $shortcutPath -TargetPath $targetPath
 }
