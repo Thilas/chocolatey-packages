@@ -8,7 +8,7 @@
     <authors>Marble Team</authors>
     <owners>Thilas</owners>
     <licenseUrl>https://cgit.kde.org/marble.git/tree/LICENSE.txt</licenseUrl>
-    <projectUrl>https://cgit.kde.org/marble.git/</projectUrl>
+    <projectUrl>https://marble.kde.org/</projectUrl>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/5cb1f2e767a74ecc8261fa6e4f5376e1b04fe953/marble/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Marble is a Virtual Globe and World Atlas that you can use to learn more about Earth: You can pan and zoom around and you can look up places and roads. A mouse click on a place label will provide the respective Wikipedia article.</description>
@@ -22,7 +22,7 @@
     <mailingListUrl>https://mail.kde.org/mailman/listinfo/marble-devel</mailingListUrl>
     <bugTrackerUrl>https://marble.kde.org/support.php</bugTrackerUrl>
     <dependencies>
-      <dependency id="vcredist2013" />
+      <dependency id="vcredist2013" version="12.0.30501.20150616" />
     </dependencies>
   </metadata>
   <files>
