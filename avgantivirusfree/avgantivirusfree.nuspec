@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>avgantivirusfree</id>
+    <version>15.0.6140</version>
+    <title>AVG Antivirus Free</title>
+    <authors>AVG Technologies</authors>
+    <owners>dtgm,Thilas</owners>
+    <licenseUrl>http://www.avg.com/eula</licenseUrl>
+    <projectUrl>http://free.avg.com/</projectUrl>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/02aa2a68eb365843accd2b582985118e151c531e/avgantivirusfree/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Essential free protection that won't let you down
+
+* Stop viruses, spyware, &amp; other malware
+* Block unsafe links, downloads, &amp; email attachments
+* Scan for PC performance problems
+* Get real time-security updates</description>
+    <summary>Free antivirus that includes real-time security updates, scans for both malware and performance issues, and even catches malicious downloads before they reach your PC. It’s also got an all-new, refreshingly simple design that shows you exactly how you’re protected.</summary>
+    <releaseNotes>[Release Notes](http://www.avg.com/avg-release-notes)</releaseNotes>
+    <copyright>Copyright © AVG Technologies</copyright>
+    <tags>avgantivirusfree admin security antivirus antispyware freeware</tags>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/avgantivirusfree</packageSourceUrl>
+    <docsUrl>https://support.avg.com/</docsUrl>
+    <bugTrackerUrl>https://support.avg.com/support_contact_form</bugTrackerUrl>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
