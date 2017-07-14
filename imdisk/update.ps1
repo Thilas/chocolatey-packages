@@ -12,9 +12,7 @@ function global:au_GetLatest {
   $uninstallSilentArgs     = '-y'
   $uninstallValidExitCodes = '0'
 
-  $baseUrl = 'http://www.ltr-data.se'
-  $releasesPath = 'opencode.html'
-  $releasesUrl = (New-Object System.Uri([System.Uri]($baseUrl), $releasesPath)).ToString()
+  $releasesUrl = 'http://www.ltr-data.se/opencode.html'
   $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
   $version = $releases.Content -Match 'Current version (?<version>.+) built'
   if (!$version) { throw 'Version not found.' }
@@ -22,7 +20,7 @@ function global:au_GetLatest {
 
   $urls = @($releases.Links | ? href -Like "*$version*.$fileType")
   if ($urls.Length -ne 1) { throw 'Url not found.' }
-  $url = (New-Object System.Uri([System.Uri]($baseUrl), $urls[0].href)).ToString()
+  $url = (New-Object System.Uri([System.Uri]($releasesUrl), $urls[0].href)).ToString()
 
   return @{
     Version                 = $version

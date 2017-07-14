@@ -10,7 +10,7 @@ If (Test-Path $sysinternalsPath) {
   }
 }
 
-$shortcutPath = Join-Path $([Environment]::GetFolderPath('CommonPrograms')) 'Process Monitor.lnk'
+$shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) 'Process Monitor.lnk'
 If (Test-Path $shortcutPath) {
   Remove-Item $shortcutPath
 }

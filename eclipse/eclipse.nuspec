@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>eclipse</id>
+    <version>4.5.1</version>
+    <title>Eclipse</title>
+    <authors>Eclipse Foundation</authors>
+    <owners>Utrecht,Almere,Thilas</owners>
+    <licenseUrl>https://www.eclipse.org/org/documents/epl-v10.php</licenseUrl>
+    <projectUrl>https://www.eclipse.org/</projectUrl>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/8e49b572ba0d78626a9cff9c09d932d76274795b/eclipse/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Eclipse is famous for our Java Integrated Development Environment (IDE), but our C/C++ IDE and PHP IDE are pretty cool too. You can easily combine language support and other features into any of our default packages, and the Eclipse Marketplace allows for virtually unlimited customization and extension.
+
+### Eclipse IDE for Java EE Developers
+Tools for Java developers creating Java EE and Web applications, including a Java IDE, tools for Java EE, JPA, JSF, Mylyn, EGit and others.
+
+**This package includes:**
+
+ * Data Tools Platform
+ * Git integration for Eclipse
+ * Eclipse Java Development Tools
+ * Eclipse Java EE Developer Tools
+ * JavaScript Development Tools
+ * Maven Integration for Eclipse
+ * Mylyn Task List
+ * Eclipse Plug-in Development Environment
+ * Remote System Explorer
+ * Code Recommenders Tools for Java Developers
+ * Eclipse XML Editors and Tools
+
+### Package Parameters
+The following package parameters can be set:
+
+ * `/InstallationPath` or `/InstallLocation` - Where to install the binaries to - defaults to "`$Env:ProgramFiles\Eclipse Foundation\$packageVersion`"
+
+These parameters can be passed to the installer with the use of `--params`.
+For example: `--params "'/InstallationPath=C:\path\to\installation'"`.</description>
+    <summary>Eclipse IDE for Java EE Developers. Windows 32 and 64 bit. Default install location: `C:\Program Files\Eclipse Foundation`. This IDE can be made suitable for developers of other languages than Java as well by installing additional software.</summary>
+    <releaseNotes>[Announcements](https://www.eclipse.org/community/news/eclipsenews.php)</releaseNotes>
+    <copyright>Copyright © Eclipse Foundation</copyright>
+    <tags>eclipse ide jdk8 jee java scala birt python ruby groovy clojure haskell go</tags>
+    <projectSourceUrl>https://git.eclipse.org/c/</projectSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/eclipse</packageSourceUrl>
+    <docsUrl>https://wiki.eclipse.org/</docsUrl>
+    <mailingListUrl>https://dev.eclipse.org/mailman/listinfo</mailingListUrl>
+    <bugTrackerUrl>https://bugs.eclipse.org/bugs/</bugTrackerUrl>
+    <dependencies>
+      <dependency id="jdk8" version="8.0.131" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

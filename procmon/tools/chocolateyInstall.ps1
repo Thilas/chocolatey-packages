@@ -21,7 +21,7 @@ Install-ChocolateyZipPackage @packageArgs
 
 New-Item 'HKCU:\SOFTWARE\Sysinternals\Process Monitor' -Force | New-ItemProperty -Name 'EulaAccepted' -Value 1 -Force | Out-Null
 
-$shortcutPath = Join-Path $([Environment]::GetFolderPath('CommonPrograms')) 'Process Monitor.lnk'
+$shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) 'Process Monitor.lnk'
 If (-not (Test-Path $shortcutPath)) {
   $targetPath = Join-Path $toolsDir 'procmon.exe'
   Install-ChocolateyShortcut -ShortcutFilePath $shortcutPath -TargetPath $targetPath
