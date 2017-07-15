@@ -20,13 +20,13 @@ Write-Verbose "Installation Path: $installationPath"
 # *** Automatically filled ***
 $packageArgs = @{
   packageName    = 'eclipse'
-  url            = 'http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-win32.zip'
-  url64bit       = 'http://eclipse.mirror.triple-it.nl/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-win32-x86_64.zip'
+  url            = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-win32.zip&r=1'
+  url64bit       = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-win32-x86_64.zip&r=1'
   unzipLocation  = $installationPath
-  checksum       = 'fd0e5ceebc2a5b40274cb6146e78a4c3'
-  checksumType   = 'md5'
-  checksum64     = '2917778fd8604cd2ba58453c6cb7a6bc'
-  checksumType64 = 'md5'
+  checksum       = 'ed99165e51fc24d18e54ea47c7fe73e9c23353c13c76b951c74b4a2bc370166c'
+  checksumType   = 'sha256'
+  checksum64     = '1250d72beb576e546a9426592558b9f8d13b02e8d7be93ee433b39455e52a4df'
+  checksumType64 = 'sha256'
 }
 # *** Automatically filled ***
 
