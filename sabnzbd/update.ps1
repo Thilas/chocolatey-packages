@@ -1,4 +1,4 @@
-﻿param([switch] $Force)
+﻿param([switch] $Force, [switch] $SkipPrerelease)
 
 Import-Module au
 
@@ -12,13 +12,20 @@ function global:au_GetLatest {
   $uninstallSilentArgs     = '/S'
   $uninstallValidExitCodes = '0'
 
-  $releasesUrl = 'https://api.github.com/repos/sabnzbd/sabnzbd/releases/latest'
+  if ($SkipPrerelease) {
+    $releasesUrl = 'https://api.github.com/repos/sabnzbd/sabnzbd/releases/latest'
+  } else {
+    $releasesUrl = 'https://api.github.com/repos/sabnzbd/sabnzbd/releases'
+  }
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $version = $releases.tag_name -Match '^(?<version>.+)$'
+  $releases = $releases | Select-Object -First 1
+  $tag = $releases.tag_name
+  $version = $tag -Match '^(?<version>[\d.]+)(?<prerelease>[^\d.].*)?$'
   if (!$version) { throw 'Version not found.' }
   $version = $Matches['version']
+  if ($Matches['prerelease']) { $version = "$version-$($Matches['prerelease'])" }
 
-  $urls = @($releases.assets | ? name -Like "*$version*.$fileType")
+  $urls = @($releases.assets | ? name -Like "*$tag*.$fileType")
   if ($urls.Length -ne 1) { throw 'Url not found.' }
   $url = $urls[0].browser_download_url
 

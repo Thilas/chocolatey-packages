@@ -1,4 +1,4 @@
-﻿param([switch] $Force)
+﻿param([switch] $Force, [switch] $SkipPrerelease)
 
 Import-Module au
 
@@ -12,18 +12,25 @@ function global:au_GetLatest {
   $uninstallSilentArgs     = '/S'
   $uninstallValidExitCodes = '0'
 
-  $releasesUrl = 'https://api.github.com/repos/xbmc/xbmc/releases/latest'
+  if ($SkipPrerelease) {
+    $releasesUrl = 'https://api.github.com/repos/xbmc/xbmc/releases/latest'
+  } else {
+    $releasesUrl = 'https://api.github.com/repos/xbmc/xbmc/releases'
+  }
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $version = $releases.tag_name -Match '^(?<version>.+)-'
+  $releases = $releases | Select-Object -First 1
+  $tag = $releases.tag_name
+  $version = $tag -Match '^(?<version>[\d.]+)(?<prerelease>[^\d.].*)?-'
   if (!$version) { throw 'Version not found.' }
   $version = $Matches['version']
+  if ($Matches['prerelease']) { $version = "$version-$($Matches['prerelease'])" }
 
   $downloadsUrl = 'https://kodi.tv/download/849'
   $downloads = Invoke-WebRequest -Uri $downloadsUrl -UseBasicParsing
-  $urls = @($downloads.Links | ? href -Like "*win32*$version*.$fileType")
+  $urls = @($downloads.Links | ? href -Like "*win32*$tag*.$fileType")
   if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
   $url32 = $urls[0].href
-  $urls = @($downloads.Links | ? href -Like "*win64*$version*.$fileType")
+  $urls = @($downloads.Links | ? href -Like "*win64*$tag*.$fileType")
   if ($urls.Length -gt 0) {
     if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
     $url64 = $urls[0].href
