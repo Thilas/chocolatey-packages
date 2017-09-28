@@ -2,10 +2,10 @@
 
 # *** Automatically filled ***
 $packageName    = 'atom'
-$softwareName   = ''
+$softwareName   = 'atom'
 $fileType       = 'exe'
-$silentArgs     = '--uninstall'
-$validExitCodes = @()
+$silentArgs     = '--uninstall -s'
+$validExitCodes = @(0)
 # *** Automatically filled ***
 
 [array]$key = Get-UninstallRegistryKey -SoftwareName $softwareName
