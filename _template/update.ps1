@@ -2,7 +2,7 @@
 #   $f = 'C:\path\to\update.ps1'
 #   gc $f | ? {$_ -notmatch "^\s*#"} | % {$_ -replace '(^.*?)\s*?[^``]#.*','$1'} | Out-File $f+".~" -en utf8; mv -fo $f+".~" $f
 
-param([switch] $Force)
+param([switch] $Force, [switch] $SkipPrerelease)
 
 Import-Module au
 
@@ -38,16 +38,23 @@ function global:au_GetLatest {
   #$uninstallSilentArgs     = '/qn /norestart'
   #$uninstallValidExitCodes = '0, 3010, 1605, 1614, 1641' # https://msdn.microsoft.com/en-us/library/aa376931(v=vs.85).aspx
 
-  $releasesUrl = 'https://api.github.com/repos/user/project/releases/latest'
+  if ($SkipPrerelease) {
+    $releasesUrl = 'https://api.github.com/repos/user/project/releases/latest'
+  } else {
+    $releasesUrl = 'https://api.github.com/repos/user/project/releases'
+  }
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $version = $releases.tag_name -Match '^(?<version>.+)$'
+  $releases = $releases | Select-Object -First 1
+  $tag = $releases.tag_name
+  $version = $tag -Match '^v?(?<version>\d+(?:\.\d+)*)(?:-?(?<prerelease>.+))?$'
   if (!$version) { throw 'Version not found.' }
   $version = $Matches['version']
+  if ($Matches['prerelease']) { $version = "$version-$($Matches['prerelease'])" }
 
-  $urls = @($releases.assets | ? name -Like "*$version*x86*.$fileType")
+  $urls = @($releases.assets | ? name -Like "*$tag*x86*.$fileType")
   if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
   $url32 = $urls[0].browser_download_url
-  $urls = @($releases.assets | ? name -Like "*$version*x64*.$fileType")
+  $urls = @($releases.assets | ? name -Like "*$tag*x64*.$fileType")
   if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
   $url64 = $urls[0].browser_download_url
 
