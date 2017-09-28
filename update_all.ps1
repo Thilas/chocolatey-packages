@@ -5,11 +5,19 @@ param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot
 if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
 
 $Options = [ordered]@{
+    WhatIf        = $au_WhatIf                              #WhatIf all packages
+    Force         = $false                                  #Force all packages
     Timeout       = 100                                     #Connection timeout in seconds
     UpdateTimeout = 1200                                    #Update timeout in seconds
     Threads       = 10                                      #Number of background jobs to use
     Push          = $Env:au_Push -eq 'true'                 #Push to chocolatey
     PluginPath    = ''                                      #Path to user plugins
+    RepeatOn      = @(
+        'The request was canceled'
+    )
+    IgnoreOn      = @(
+        'The request was canceled'
+    )
 
     Report = @{
         Type = 'markdown'                                   #Report type: markdown or text
@@ -25,7 +33,7 @@ $Options = [ordered]@{
     }
 
     History = @{
-        Lines = 30                                          #Number of lines to show
+        Lines = 120                                         #Number of lines to show
         Github_UserRepo = $Env:github_user_repo             #User repo to be link to commits
         Path = "$PSScriptRoot\Update-History.md"            #Path where to save history
     }

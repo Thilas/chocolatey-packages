@@ -1,17 +1,19 @@
-﻿[Title Chocolatey Package](https://chocolatey.org/packages/id)
+# <img src="https://cdn.rawgit.com/Thilas/chocolatey-packages/commit/id/icon.png" width="48" height="48"/> [Title](https://chocolatey.org/packages/id)
 
-## Summary
+Description using MarkDown
+
+### Summary
 How do I create packages? See https://chocolatey.org/docs/create-packages
 
 If you are submitting packages to the community feed (https://chocolatey.org)
 always try to ensure you have read, understood and adhere to the create
 packages wiki link above.
 
-## Automatic Packaging Updates?
+### Automatic Packaging Updates?
 Consider making this package an automatic package, for the best 
 maintainability over time. Read up at https://chocolatey.org/docs/automatic-packages
 
-## Shim Generation
+### Shim Generation
 Any executables you include in the package or download (but don't call 
 install against using the built-in functions) will be automatically shimmed.
 
@@ -30,7 +32,7 @@ named 'name.exe.ignore' e.g. 'bob.exe' would need a file named
 'bob.exe.ignore'. 
 See https://chocolatey.org/docs/create-packages#how-do-i-exclude-executables-from-getting-shims
 
-## Self-Contained? 
+### Self-Contained? 
 If you have a self-contained package, you can remove the automation scripts 
 entirely and just include the executables, they will automatically get shimmed, 
 which puts them on the path. Ensure you have the legal right to distribute 
@@ -39,12 +41,12 @@ the application though. See https://chocolatey.org/docs/legal.
 You should read up on the Shim Generation section to familiarize yourself 
 on what to do with GUI applications and/or ignoring shims.
 
-## Automation Scripts
+### Automation Scripts
 You have a powerful use of Chocolatey, as you are using PowerShell. So you
 can do just about anything you need. Choco has some very handy built-in 
 functions that you can use, these are sometimes called the helpers.
 
-### Built-In Functions
+#### Built-In Functions
 https://chocolatey.org/docs/helpers-reference
 
 A note about a couple:
@@ -52,14 +54,14 @@ A note about a couple:
 * Install-BinFile - used for non-exe files - executables are automatically shimmed... - see https://chocolatey.org/docs/helpers-install-bin-file
 * Uninstall-BinFile - used for non-exe files - executables are automatically shimmed - see https://chocolatey.org/docs/helpers-uninstall-bin-file
 
-### Getting package specific information
+#### Getting package specific information
 Use the package parameters pattern - see https://chocolatey.org/docs/how-to-parse-package-parameters-argument
 
-### Need to mount an ISO?
+#### Need to mount an ISO?
 https://chocolatey.org/docs/how-to-mount-an-iso-in-chocolatey-package
 
 
-### Environment Variables
+#### Environment Variables
 Chocolatey makes a number of environment variables available (You can access any of these with $env:TheVariableNameBelow):
 
  * TEMP = Overridden to the CacheLocation, but may be the same as the original TEMP folder
@@ -68,7 +70,7 @@ Chocolatey makes a number of environment variables available (You can access any
  * chocolateyPackageVersion = The version of the package, equivalent to the version in the nuspec (0.9.9+)
  * chocolateyPackageFolder = The top level location of the package folder
 
-#### Advanced Environment Variables
+##### Advanced Environment Variables
 The following are more advanced settings:
 
  * chocolateyPackageParameters = (0.9.8.22+)
@@ -81,7 +83,7 @@ The following are more advanced settings:
  * OS_NAME = The reported name of the OS. (0.9.9+)
  * IS_PROCESSELEVATED = Is the process elevated? (0.9.9+)
  
-#### Experimental Environment Variables
+##### Experimental Environment Variables
 The following are experimental or use not recommended:
 
  * OS_IS64BIT = This may not return correctly - it may depend on the process the app is running under (0.9.9+)
@@ -90,4 +92,3 @@ The following are experimental or use not recommended:
  * IS_ADMIN = Is the user an administrator? But doesn't tell you if the process is elevated. (0.9.9+)
  * chocolateyInstallOverride = Not for use in package automation scripts. (0.9.9+)
  * chocolateyInstallArguments = the installer arguments meant for the native installer. You should use chocolateyPackageParameters intead. (0.9.9+)
-

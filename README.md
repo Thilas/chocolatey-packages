@@ -19,8 +19,8 @@ The repository is setup so that you can manage your packages entirely from the G
 
 To run locally you will need:
 
-- Powershell 5+: `cinst powershell`
-- [Chocolatey Automatic Package Updater Module](https://github.com/majkinetor/au): `Install-Module au` or `cinst au`
+- Powershell 5+: `cinst powershell`.
+- [Chocolatey Automatic Package Updater Module](https://github.com/majkinetor/au): `Install-Module au` or `cinst au`.
 
 In order to setup AppVeyor update runner please take a look at the AU wiki [AppVeyor section](https://github.com/majkinetor/au/wiki/AppVeyor).
 
