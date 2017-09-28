@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>avgantivirusfree</id>
-    <version>17.0.1817</version>
+    <version>17.0.1817.20170928</version>
     <title>AVG Antivirus Free</title>
     <authors>AVG Technologies</authors>
     <owners>dtgm,Thilas</owners>
@@ -11,12 +11,13 @@
     <projectUrl>http://free.avg.com/</projectUrl>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/02aa2a68eb365843accd2b582985118e151c531e/avgantivirusfree/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Essential free protection that won't let you down
+    <description><![CDATA[Essential free protection that won't let you down
 
-* Stop viruses, spyware, &amp; other malware
-* Block unsafe links, downloads, &amp; email attachments
+* Stop viruses, spyware, & other malware
+* Block unsafe links, downloads, & email attachments
 * Scan for PC performance problems
-* Get real time-security updates</description>
+* Get real time-security updates
+]]></description>
     <summary>Free antivirus that includes real-time security updates, scans for both malware and performance issues, and even catches malicious downloads before they reach your PC. It’s also got an all-new, refreshingly simple design that shows you exactly how you’re protected.</summary>
     <releaseNotes>[Release Notes](http://www.avg.com/avg-release-notes)</releaseNotes>
     <copyright>Copyright © AVG Technologies</copyright>
