@@ -10,10 +10,10 @@ function global:au_GetLatest {
   $releasesUrl = 'http://strawberryperl.com/releases.html'
   $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
 
-  $urls = @($releases.Links | ? href -Like "*32bit*.$fileType")
+  $urls = @($releases.Links | ? href -Like "*32bit*.$fileType" | ? onclick)
   if ($urls.Length -lt 1) { throw 'Url (x86) not found.' }
   $url32 = (New-Object System.Uri([System.Uri]($releasesUrl), $urls[0].href)).ToString()
-  $urls = @($releases.Links | ? href -Like "*64bit*.$fileType")
+  $urls = @($releases.Links | ? href -Like "*64bit*.$fileType" | ? onclick)
   if ($urls.Length -lt 1) { throw 'Url (x64) not found.' }
   $url64 = (New-Object System.Uri([System.Uri]($releasesUrl), $urls[0].href)).ToString()
 
