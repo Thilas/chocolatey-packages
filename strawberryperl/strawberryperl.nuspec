@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>strawberryperl</id>
-    <version>5.26.0.2</version>
+    <version>5.26.1.1</version>
     <title>Strawberry Perl</title>
     <authors>KMX, Curtis Jewell and Adam Kennedy</authors>
     <owners>alanstevens,Thilas</owners>
@@ -11,11 +11,12 @@
     <projectUrl>http://strawberryperl.com/</projectUrl>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/58d4825d117dae7fcf9100ba5d4fa0e4563ff7f7/strawberryperl/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>**Perl** is a programming language suitable for writing simple scripts as well as complex applications - see https://www.perl.org
+    <description><![CDATA[**Perl** is a programming language suitable for writing simple scripts as well as complex applications - see https://www.perl.org
 
 **Strawberry Perl** is a perl environment for MS Windows containing all you need to run and develop perl applications. It is designed to be as close as possible to perl environment on UNIX systems.
 
-It includes perl binaries, compiler (gcc) + related tools, all the external libraries (crypto, math, graphics, xml ...), all the bundled database clients and all you expect from Strawberry Perl.</description>
+It includes perl binaries, compiler (gcc) + related tools, all the external libraries (crypto, math, graphics, xml ...), all the bundled database clients and all you expect from Strawberry Perl.
+]]></description>
     <summary>Strawberry Perl is a binary distribution of Perl for the Windows operating system.</summary>
     <releaseNotes>[Releases](http://strawberryperl.com/releases.html)</releaseNotes>
     <copyright>Copyright © KMX</copyright>

@@ -20,12 +20,12 @@ Write-Verbose "Installation Path: $installationPath"
 # *** Automatically filled ***
 $packageArgs = @{
   packageName    = 'eclipse'
-  url            = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-win32.zip&r=1'
-  url64bit       = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-win32-x86_64.zip&r=1'
+  url            = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/1/eclipse-jee-oxygen-1-win32.zip&r=1'
+  url64bit       = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/1/eclipse-jee-oxygen-1-win32-x86_64.zip&r=1'
   unzipLocation  = $installationPath
-  checksum       = 'ed99165e51fc24d18e54ea47c7fe73e9c23353c13c76b951c74b4a2bc370166c'
+  checksum       = '442b407d3036f03e8f11d2ba0e45bd5ebc8f66832d1b847dd85f25a33e4c82c3'
   checksumType   = 'sha256'
-  checksum64     = '1250d72beb576e546a9426592558b9f8d13b02e8d7be93ee433b39455e52a4df'
+  checksum64     = 'a7301b170d171ea04b34eae72302f7ec47643b82e5bfa855f28d28e8d310c20c'
   checksumType64 = 'sha256'
 }
 # *** Automatically filled ***

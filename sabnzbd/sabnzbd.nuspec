@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>2.2.1</version>
+    <version>2.3.0</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>dtgm,Thilas</owners>
@@ -11,7 +11,7 @@
     <projectUrl>https://sabnzbd.org/</projectUrl>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/7de16ead548f4491ce159aa5c8704cb1ed9412b2/sabnzbd/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>SABnzbd is a program to download binary files from Usenet servers. Many people upload all sorts of interesting material to Usenet and you need a special program to get this material with the least effort.
+    <description><![CDATA[SABnzbd is a program to download binary files from Usenet servers. Many people upload all sorts of interesting material to Usenet and you need a special program to get this material with the least effort.
 
 ### It runs anywhere
 SABnzbd runs on Windows, macOS, Unix and NAS devices. You can access and manage SABnzbd from any device with a webbrowser, including iOS and Android phones and tablets.
@@ -27,7 +27,8 @@ SABnzbd can also read and process RSS feeds, activate custom scripts and notify 
 ### In 16 languages
 SABnzbd now ships with 16 localizations: English, Dansk, Deutsch, Español (castellano), Français, Nederlands, Norsk bokmål, Polski, Português Brasileiro, Româna, Suomi, Svenska, русский язык, српски, עִבְרִית, 简体中文.
 
-SABnzbd is an open-source cross-platform binary newsreader written in Python. It simplifies the process of downloading from Usenet dramatically, thanks to its web-based user interface and advanced built-in post-processing options that automatically verify, repair, extract and clean up posts downloaded from Usenet.</description>
+SABnzbd is an open-source cross-platform binary newsreader written in Python. It simplifies the process of downloading from Usenet dramatically, thanks to its web-based user interface and advanced built-in post-processing options that automatically verify, repair, extract and clean up posts downloaded from Usenet.
+]]></description>
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes>[Changelog](https://sabnzbd.org/downloads)</releaseNotes>
     <copyright>Copyright © The SABnzbd-team</copyright>
