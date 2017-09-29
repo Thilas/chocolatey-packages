@@ -2,11 +2,6 @@
 
 Import-Module au
 
-function ToHttps([string] $url) {
-  if (![String]::IsNullOrEmpty($url) -and $url.StartsWith('http://')) { $url = $url.Insert(4, 's') }
-  $url
-}
-
 function global:au_GetLatest {
   $fileType       = 'exe'
   $silentArgs     = '/mode=offline /install=fmw,zen,bav /langid=$((Get-UICulture).LCID) /silent=true'
@@ -27,10 +22,10 @@ function global:au_GetLatest {
 
   $urls = @($releases.Links | ? href -Like "*.$fileType" | ? href -Like '*x86*')
   if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
-  $url32 = ToHttps($urls[0].href)
+  $url32 = $urls[0].href
   $urls = @($releases.Links | ? href -Like "*.$fileType" | ? href -Like '*x64*')
   if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
-  $url64 = ToHttps($urls[0].href)
+  $url64 = $urls[0].href
 
   return @{
     Version                 = $version

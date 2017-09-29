@@ -4,8 +4,8 @@
 $packageArgs = @{
   packageName    = 'avgantivirusfree'
   fileType       = 'exe'
-  url            = 'https://files-download.avg.com/inst/mp/Antivirus_Free_x86_1819.exe'
-  url64bit       = 'https://files-download.avg.com/inst/mp/Antivirus_Free_x64_1818.exe'
+  url            = 'http://files-download.avg.com/inst/mp/Antivirus_Free_x86_1819.exe'
+  url64bit       = 'http://files-download.avg.com/inst/mp/Antivirus_Free_x64_1818.exe'
   silentArgs     = "/mode=offline /install=fmw,zen,bav /langid=$((Get-UICulture).LCID) /silent=true"
   checksum       = 'ab910549ed460b7b9c19f3a57492eb8685b93da40d7f5cb21f395a1b5c28839c'
   checksumType   = 'sha256'
