@@ -1,8 +1,6 @@
 ﻿param([switch] $Force, [switch] $SkipPrerelease)
 
-Import-Module au
-
-function global:au_GetLatest {
+function getLatest {
   $fileType       = 'exe'
   $silentArgs     = '/S'
   $validExitCodes = '0'
@@ -20,7 +18,7 @@ function global:au_GetLatest {
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
   $releases = $releases | Select-Object -First 1
   $tag = $releases.tag_name
-  $version = $tag -Match '^(?<version>[\d.]+)(?<prerelease>[^\d.].*)?-'
+  $version = $tag -Match '^(?<version>\d+(?:\.\d+)*)(?<prerelease>.+)?-'
   if (!$version) { throw 'Version not found.' }
   $version = $Matches['version']
   if ($Matches['prerelease']) { $version = "$version-$($Matches['prerelease'])" }
@@ -52,7 +50,7 @@ function global:au_GetLatest {
   }
 }
 
-function global:au_SearchReplace {
+function searchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -76,4 +74,4 @@ function global:au_SearchReplace {
   }
 }
 
-Update-Package -ChecksumFor all -Force:$Force
+. '..\Update-Package.ps1' -AllowLowerVersion -ChecksumFor all -Force:$Force

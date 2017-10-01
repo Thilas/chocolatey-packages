@@ -1,8 +1,6 @@
 ﻿param([switch] $Force)
 
-Import-Module au
-
-function global:au_GetLatest {
+function getLatest {
   $fileType       = 'msi'
   $silentArgs     = '/qn /norestart'
   $validExitCodes = '0, 3010, 1641'
@@ -17,7 +15,7 @@ function global:au_GetLatest {
   if ($urls.Length -lt 1) { throw 'Url (x64) not found.' }
   $url64 = (New-Object System.Uri([System.Uri]($releasesUrl), $urls[0].href)).ToString()
 
-  $version = $url32 -Match "-(?<version>[^-]+)-[^-]*32bit[^-]*\.$fileType$"
+  $version = $url32 -Match "-(?<version>\d+(?:\.\d+)*)-[^-]*32bit[^-]*\.$fileType$"
   if (!$version) { throw 'Version not found.' }
   $version = $Matches['version']
 
@@ -31,7 +29,7 @@ function global:au_GetLatest {
   }
 }
 
-function global:au_SearchReplace {
+function searchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -48,4 +46,4 @@ function global:au_SearchReplace {
   }
 }
 
-Update-Package -ChecksumFor all -Force:$Force
+. '..\Update-Package.ps1' -AllowLowerVersion -ChecksumFor all -Force:$Force

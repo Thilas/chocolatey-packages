@@ -1,8 +1,6 @@
 ﻿param([switch] $Force)
 
-Import-Module au
-
-function global:au_GetLatest {
+function getLatest {
   $fileType       = 'exe'
   $silentArgs     = '/mode=offline /install=fmw,zen,bav /langid=$((Get-UICulture).LCID) /silent=true'
   $validExitCodes = '0'
@@ -41,7 +39,7 @@ function global:au_GetLatest {
   }
 }
 
-function global:au_SearchReplace {
+function searchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -65,4 +63,4 @@ function global:au_SearchReplace {
   }
 }
 
-Update-Package -ChecksumFor all -Force:$Force
+. '..\Update-Package.ps1' -ChecksumFor all -Force:$Force

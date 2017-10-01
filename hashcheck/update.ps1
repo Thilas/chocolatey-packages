@@ -1,8 +1,6 @@
 ﻿param([switch] $Force)
 
-Import-Module au
-
-function global:au_GetLatest {
+function getLatest {
   $fileType       = 'exe'
   $silentArgs     = '/S'
   $checksumType   = 'sha256'
@@ -40,7 +38,7 @@ function global:au_GetLatest {
   }
 }
 
-function global:au_SearchReplace {
+function searchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -58,4 +56,4 @@ function global:au_SearchReplace {
   }
 }
 
-Update-Package -ChecksumFor none -Force:$Force
+. '..\Update-Package.ps1' -ChecksumFor none -Force:$Force
