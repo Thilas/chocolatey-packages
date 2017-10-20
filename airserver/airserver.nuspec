@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>airserver</id>
-    <version>5.4.4</version>
+    <version>5.4.6</version>
     <title>AirServer</title>
     <authors>App Dynamic</authors>
     <owners>Thilas</owners>
@@ -11,7 +11,7 @@
     <projectUrl>https://www.airserver.com/</projectUrl>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/cf999b124e8c68ab583d69f278e12ee9772853e1/airserver/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>AirServer is the most advanced screen mirroring software receiver for Mac, PC and Xbox One. It allows you to receive AirPlay, Google Cast and Miracast streams, similar to an Apple TV or a Chromecast device.
+    <description><![CDATA[AirServer is the most advanced screen mirroring software receiver for Mac, PC and Xbox One. It allows you to receive AirPlay, Google Cast and Miracast streams, similar to an Apple TV or a Chromecast device.
 
 This is a 7-day trial.
 
@@ -25,7 +25,8 @@ Features:
 * Android Compatible
 * Live streaming to YouTube
 * Retina quality mirroring
-* Encrypted AirPlay</description>
+* Encrypted AirPlay
+]]></description>
     <summary>AirServer is the most advanced screen mirroring software receiver for Mac, PC and Xbox One. It allows you to receive AirPlay, Google Cast and Miracast streams, similar to an Apple TV or a Chromecast device.</summary>
     <releaseNotes>[Release Notes](https://www.airserver.com/Download/MacPC)</releaseNotes>
     <copyright>Copyright © App Dynamic ehf. All Rights Reserved</copyright>
