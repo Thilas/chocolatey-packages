@@ -4,12 +4,12 @@
 $packageArgs = @{
   packageName    = 'atom'
   fileType       = 'exe'
-  url            = 'https://github.com/atom/atom/releases/download/v1.21.1/AtomSetup.exe'
-  url64bit       = 'https://github.com/atom/atom/releases/download/v1.21.1/AtomSetup-x64.exe'
+  url            = 'https://github.com/atom/atom/releases/download/v1.22.0-beta1/AtomSetup.exe'
+  url64bit       = 'https://github.com/atom/atom/releases/download/v1.22.0-beta1/AtomSetup-x64.exe'
   silentArgs     = '--silent'
-  checksum       = '7efef302abc1ece629c0cc9be4b771e443b19fdf75db7f028d860ec03d925230'
+  checksum       = 'fa708088a3e7d3e8050dc8bbc6eb933fcd761aa66c423f1f523bbe68d1e30a3b'
   checksumType   = 'sha256'
-  checksum64     = 'bc84ad0076a3730fd35592c3ee384daff1b27dc3740a0c597ff37f64e26793bc'
+  checksum64     = 'aa6f4d759aef9edd5b5739de70baf79e5c582026e9c14af96e025144c10c75b6'
   checksumType64 = 'sha256'
   validExitCodes = @(0)
 }
