@@ -1,27 +1,17 @@
-﻿param([switch] $Force)
+﻿[CmdletBinding()]
+param([switch] $Force)
 
-function getLatest {
-  $fileType = 'zip'
-  $validExitCodes = '0'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $releasesUrl = 'https://technet.microsoft.com/en-us/sysinternals/processmonitor'
-  $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
-  $version = $releases.Content -Match '>Process Monitor v(?<version>[^<]+)<'
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-
-  $urls = @($releases.Links | ? href -Like "*.$fileType" | select -Unique)
-  if ($urls.Length -ne 1) { throw 'Url not found.' }
-  $url = $urls[0].href
-
-  return @{
-    Version                 = $version
-    Url32                   = $url
-    ValidExitCodes          = $validExitCodes
-  }
+function global:au_GetLatest {
+  return Get-BasicLatest -ReleaseUrl 'https://docs.microsoft.com/en-us/sysinternals/downloads/procmon' `
+                         -TagNamePattern '>Process Monitor v(?<tagName>[^<]+)<' `
+                         -SkipTagName `
+                         -FileType 'zip' `
+                         -Latest @{ ValidExitCodes = '0' }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -33,4 +23,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -ChecksumFor 32 -Force:$Force
+Update-Package -ChecksumFor 32 -Force:$Force

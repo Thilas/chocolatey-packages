@@ -1,44 +1,19 @@
-﻿param([switch] $Force)
+﻿[CmdletBinding()]
+param([switch] $Force)
 
-function getLatest {
-  $fileType       = 'exe'
-  $silentArgs     = '/S'
-  $checksumType   = 'sha256'
-  $validExitCodes = '0'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $uninstallValidExitCodes = '0'
-
-  $releasesUrl = 'https://api.github.com/repos/gurnec/HashCheck/releases/latest'
-  $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $version = $releases.tag_name -Match '^v(?<version>.+)$'
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-
-  $urls = @($releases.assets | ? name -Like "*$version*.$fileType")
-  if ($urls.Length -ne 1) { throw 'Url not found.' }
-  $url = $urls[0].browser_download_url
-
-  $urls = @($releases.assets | ? name -Like "*$version*.$checksumType")
-  if ($urls.Length -ne 1) { throw 'Checksum url not found.' }
-  $checksumUrl = $urls[0].browser_download_url
-  $checksum = (New-Object System.Net.WebClient).DownloadString($checksumUrl)
-  $checksum = $checksum -Match '^(?<checksum>.+) \*'
-  if (!$checksum) { throw 'Checksum not found.' }
-  $checksum = $Matches['checksum']
-
-  return @{
-    Version                 = $version
-    FileType                = $fileType
-    Url32                   = $url
-    SilentArgs              = $silentArgs
-    Checksum32              = $checksum
-    ChecksumType32          = $checksumType
-    ValidExitCodes          = $validExitCodes
-    UninstallValidExitCodes = $uninstallValidExitCodes
-  }
+function global:au_GetLatest {
+  return Get-GitHubLatest -Repository 'gurnec/HashCheck' `
+                          -FileType 'exe' `
+                          -Latest @{
+                            SilentArgs              = '/S'
+                            ValidExitCodes          = '0'
+                            UninstallValidExitCodes = '0'
+                          }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -56,4 +31,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -ChecksumFor none -Force:$Force
+Update-Package -ChecksumFor 32 -Force:$Force

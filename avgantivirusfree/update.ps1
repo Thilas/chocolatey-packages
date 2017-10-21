@@ -1,45 +1,32 @@
-﻿param([switch] $Force)
+﻿[CmdletBinding()]
+param([switch] $Force)
 
-function getLatest {
-  $fileType       = 'exe'
-  $silentArgs     = '/mode=offline /install=fmw,zen,bav /langid=$((Get-UICulture).LCID) /silent=true'
-  $validExitCodes = '0'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $uninstallSoftwareName   = 'AVG Protection'
-  $uninstallFileType       = 'exe'
-  $uninstallSilentArgs     = '/mode=offline /uninstall=fmw,zen,bav /silent=true'
-  $uninstallValidExitCodes = '0'
-
-  $releasesUrl = 'http://www.avg.com/download.prd-gsr-free'
-  $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
-  $urls = @($releases.Links | ? href -Like "*.$fileType" | ? href -NotLike '*x86*' | ? href -NotLike '*x64*')
-  if ($urls.Length -ne 1) { throw 'Version not found (1).' }
-  $version = $urls[0].href -Match "_(?<version>\d+)\.$fileType"
-  if (!$version) { throw 'Version not found (2).' }
-  $version = "$([System.DateTime]::UtcNow.Year % 100).0.$($Matches['version'])"
-
-  $urls = @($releases.Links | ? href -Like "*.$fileType" | ? href -Like '*x86*')
-  if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
-  $url32 = $urls[0].href
-  $urls = @($releases.Links | ? href -Like "*.$fileType" | ? href -Like '*x64*')
-  if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
-  $url64 = $urls[0].href
-
-  return @{
-    Version                 = $version
-    FileType                = $fileType
-    Url32                   = $url32
-    Url64                   = $url64
-    SilentArgs              = $silentArgs
-    ValidExitCodes          = $validExitCodes
-    UninstallSoftwareName   = $uninstallSoftwareName
-    UninstallFileType       = $uninstallFileType
-    UninstallSilentArgs     = $uninstallSilentArgs
-    UninstallValidExitCodes = $uninstallValidExitCodes
-  }
+function global:au_GetLatest {
+  return Get-BasicLatest -ReleaseUrl 'http://www.avg.com/download.prd-gsr-free' `
+                         -GetTagName { param($Release)
+                           $urls = @($Release.Links | ? { $_.href -like '*.exe' -and $_.href -notlike '*x86*' -and $_.href -notlike '*x64*' })
+                           if ($urls.Length -ne 1) { throw 'Tag name not found (1).' }
+                           if ($urls[0].href -notmatch '_(?<tagName>\d+)\.exe') { throw 'Tag name not found (2).' }
+                           "{0}.0.{1}" -f ([datetime]::UtcNow.Year % 100), $Matches['tagName']
+                         } `
+                         -SkipTagName `
+                         -FileType 'exe' `
+                         -IsUrl32 { param($Url) $Url -like '*x86*' } `
+                         -IsUrl64 { param($Url) $Url -like '*x64*' } `
+                         -ForceHttps `
+                         -Latest @{
+                           SilentArgs              = '/mode=offline /install=fmw,zen,bav /langid=$((Get-UICulture).LCID) /silent=true'
+                           ValidExitCodes          = '0'
+                           UninstallSoftwareName   = 'AVG Protection'
+                           UninstallFileType       = 'exe'
+                           UninstallSilentArgs     = '/mode=offline /uninstall=fmw,zen,bav /silent=true'
+                           UninstallValidExitCodes = '0'
+                         }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -63,4 +50,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -ChecksumFor all -Force:$Force
+Update-Package -ChecksumFor all -Force:$Force

@@ -1,50 +1,25 @@
-﻿param([switch] $Force, [switch] $SkipPrerelease)
+﻿[CmdletBinding()]
+param($Include, [switch] $Force)
 
-function getLatest {
-  $fileType       = 'exe'
-  $silentArgs     = '--silent'
-  $validExitCodes = '0'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $uninstallSoftwareName   = 'atom'
-  $uninstallFileType       = 'exe'
-  $uninstallSilentArgs     = '--uninstall -s'
-  $uninstallValidExitCodes = '0'
-
-  if ($SkipPrerelease) {
-    $releasesUrl = 'https://api.github.com/repos/atom/atom/releases/latest'
-  } else {
-    $releasesUrl = 'https://api.github.com/repos/atom/atom/releases'
-  }
-  $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $releases = $releases | Select-Object -First 1
-  $tag = $releases.tag_name
-  $version = $tag -Match '^v(?<version>\d+(?:\.\d+)*)(?:-(?<prerelease>.+))?$'
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-  if ($Matches['prerelease']) { $version = "$version-$($Matches['prerelease'])" }
-
-  $urls = @($releases.assets | ? browser_download_url -Like "*$tag*.$fileType" | ? name -NotLike '*x64*')
-  if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
-  $url32 = $urls[0].browser_download_url
-  $urls = @($releases.assets | ? browser_download_url -Like "*$tag*x64*.$fileType")
-  if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
-  $url64 = $urls[0].browser_download_url
-
-  return @{
-    Version                 = $version
-    FileType                = $fileType
-    Url32                   = $url32
-    Url64                   = $url64
-    SilentArgs              = $silentArgs
-    ValidExitCodes          = $validExitCodes
-    UninstallSoftwareName   = $uninstallSoftwareName
-    UninstallFileType       = $uninstallFileType
-    UninstallSilentArgs     = $uninstallSilentArgs
-    UninstallValidExitCodes = $uninstallValidExitCodes
-  }
+function global:au_GetLatest {
+  return Get-GitHubLatest -Repository 'atom/atom' `
+                          -StreamFieldCount 2 `
+                          -FileType 'exe' `
+                          -IsUrl32 { param($Url) $Url -notlike '*x64*' } `
+                          -IsUrl64 { param($Url) $Url -like '*x64*' } `
+                          -Latest @{
+                            SilentArgs              = '--silent'
+                            ValidExitCodes          = '0'
+                            UninstallSoftwareName   = 'atom'
+                            UninstallFileType       = 'exe'
+                            UninstallSilentArgs     = '--uninstall -s'
+                            UninstallValidExitCodes = '0'
+                          }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -68,4 +43,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -AllowLowerVersion -ChecksumFor all -Force:$Force
+Update-Package -ChecksumFor all -Include $Include -Force:$Force

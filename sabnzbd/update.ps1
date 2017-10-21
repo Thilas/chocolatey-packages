@@ -1,46 +1,22 @@
-﻿param([switch] $Force, [switch] $SkipPrerelease)
+﻿[CmdletBinding()]
+param([switch] $Force)
 
-function getLatest {
-  $fileType       = 'exe'
-  $silentArgs     = '/S'
-  $validExitCodes = '0'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $uninstallSoftwareName   = 'SABnzbd*'
-  $uninstallFileType       = 'exe'
-  $uninstallSilentArgs     = '/S'
-  $uninstallValidExitCodes = '0'
-
-  if ($SkipPrerelease) {
-    $releasesUrl = 'https://api.github.com/repos/sabnzbd/sabnzbd/releases/latest'
-  } else {
-    $releasesUrl = 'https://api.github.com/repos/sabnzbd/sabnzbd/releases'
-  }
-  $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $releases = $releases | Select-Object -First 1
-  $tag = $releases.tag_name
-  $version = $tag -Match '^(?<version>\d+(?:\.\d+)*)(?<prerelease>.+)?$'
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-  if ($Matches['prerelease']) { $version = "$version-$($Matches['prerelease'])" }
-
-  $urls = @($releases.assets | ? name -Like "*$tag*.$fileType")
-  if ($urls.Length -ne 1) { throw 'Url not found.' }
-  $url = $urls[0].browser_download_url
-
-  return @{
-    Version                 = $version
-    FileType                = $fileType
-    Url32                   = $url
-    SilentArgs              = $silentArgs
-    ValidExitCodes          = $validExitCodes
-    UninstallSoftwareName   = $uninstallSoftwareName
-    UninstallFileType       = $uninstallFileType
-    UninstallSilentArgs     = $uninstallSilentArgs
-    UninstallValidExitCodes = $uninstallValidExitCodes
-  }
+function global:au_GetLatest {
+  return Get-GitHubLatest -Repository 'sabnzbd/sabnzbd' `
+                          -FileType 'exe' `
+                          -Latest @{
+                            SilentArgs              = '/S'
+                            ValidExitCodes          = '0'
+                            UninstallSoftwareName   = 'SABnzbd*'
+                            UninstallFileType       = 'exe'
+                            UninstallSilentArgs     = '/S'
+                            UninstallValidExitCodes = '0'
+                          }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyBeforeModify.ps1' = @{
       "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -66,4 +42,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -AllowLowerVersion -ChecksumFor 32 -Force:$Force
+Update-Package -ChecksumFor 32 -Force:$Force

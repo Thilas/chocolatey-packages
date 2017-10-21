@@ -1,39 +1,22 @@
-﻿param([switch] $Force)
+﻿[CmdletBinding()]
+param([switch] $Force)
 
-function getLatest {
-  $fileType       = 'exe'
-  $silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-  $validExitCodes = '0'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $uninstallSoftwareName   = 'LAV Filters *'
-  $uninstallFileType       = 'exe'
-  $uninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-  $uninstallValidExitCodes = '0'
-
-  $releasesUrl = 'https://api.github.com/repos/Nevcairiel/LAVFilters/releases/latest'
-  $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $version = $releases.tag_name -Match '^(?<version>.+)$'
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-
-  $urls = @($releases.assets | ? name -Like "*$version*.$fileType")
-  if ($urls.Length -ne 1) { throw 'Url not found.' }
-  $url = $urls[0].browser_download_url
-
-  return @{
-    Version                 = $version
-    FileType                = $fileType
-    Url32                   = $url
-    SilentArgs              = $silentArgs
-    ValidExitCodes          = $validExitCodes
-    UninstallSoftwareName   = $uninstallSoftwareName
-    UninstallFileType       = $uninstallFileType
-    UninstallSilentArgs     = $uninstallSilentArgs
-    UninstallValidExitCodes = $uninstallValidExitCodes
-  }
+function global:au_GetLatest {
+  return Get-GitHubLatest -Repository 'Nevcairiel/LAVFilters' `
+                          -FileType 'exe' `
+                          -Latest @{
+                            SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+                            ValidExitCodes          = '0'
+                            UninstallSoftwareName   = 'LAV Filters *'
+                            UninstallFileType       = 'exe'
+                            UninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+                            UninstallValidExitCodes = '0'
+                          }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -54,4 +37,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -ChecksumFor 32 -Force:$Force
+Update-Package -ChecksumFor 32 -Force:$Force

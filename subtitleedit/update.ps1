@@ -1,41 +1,29 @@
-﻿param([switch] $Force)
+﻿[CmdletBinding()]
+param([switch] $Force)
 
-function getLatest {
-  $fileType       = 'exe'
-  $silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-  $validExitCodes = '0'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $uninstallSoftwareName   = 'Subtitle Edit *'
-  $uninstallFileType       = 'exe'
-  $uninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-  $uninstallValidExitCodes = '0'
-
-  $releasesUrl = 'https://api.github.com/repos/SubtitleEdit/subtitleedit/releases/latest'
-  $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $version = $releases.tag_name -Match '^(?<version>.+)$'
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-
-  $urls = @($releases.assets | ? name -Like "*-Setup.zip")
-  if ($urls.Length -ne 1) { throw 'Url not found.' }
-  $url = $urls[0].browser_download_url
-  $file = [IO.Path]::ChangeExtension($urls[0].name, $fileType)
-
-  return @{
-    Version                 = $version
-    FileType                = $fileType
-    Url32                   = $url
-    File32                  = $file
-    SilentArgs              = $silentArgs
-    ValidExitCodes          = $validExitCodes
-    UninstallSoftwareName   = $uninstallSoftwareName
-    UninstallFileType       = $uninstallFileType
-    UninstallSilentArgs     = $uninstallSilentArgs
-    UninstallValidExitCodes = $uninstallValidExitCodes
-  }
+function global:au_GetLatest {
+  $latest = Get-GitHubLatest -Repository 'SubtitleEdit/subtitleedit' `
+                             -FileType 'zip' `
+                             -IsUrl32 { param($Url) $Url -like '*Setup*' } `
+                             -Latest @{
+                               FileType                = 'exe'
+                               SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+                               ValidExitCodes          = '0'
+                               UninstallSoftwareName   = 'Subtitle Edit *'
+                               UninstallFileType       = 'exe'
+                               UninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+                               UninstallValidExitCodes = '0'
+                             }
+  $file = [uri]::new($latest.Url32).Segments | select -Last 1
+  Write-Verbose ("File: {0}" -f $file)
+  $latest += @{ File32 = [System.IO.Path]::ChangeExtension($file, $latest.FileType) }
+  Write-Verbose ("File32: {0}" -f $latest.File32)
+  return $latest
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -57,4 +45,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -ChecksumFor 32 -Force:$Force
+Update-Package -ChecksumFor 32 -Force:$Force

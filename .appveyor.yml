@@ -83,7 +83,7 @@ build_script:
                     if (!$package_dir) { Write-Warning "Can't find package '$package'"; continue }
                     pushd $package_dir
                       if (Test-Path update.ps1 -ea 0) { ./update.ps1 }
-                      choco pack; Push-Package;
+                      choco pack; Push-Package -All;
                     popd
                 }
                 return
@@ -91,7 +91,7 @@ build_script:
         }
     }
 
-    ./update_all.ps1 -ForcedPackages $forced
+    ./update_all.ps1 -ForcedPackages $forced -PushAll
     7z a au_temp.zip $Env:TEMP\chocolatey\au\*
 
 artifacts:
