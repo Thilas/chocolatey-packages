@@ -7,9 +7,9 @@ $packageArgs = @{
   url            = 'http://files-download.avg.com/inst/mp/Antivirus_Free_x86_1819.exe'
   url64bit       = 'http://files-download.avg.com/inst/mp/Antivirus_Free_x64_1818.exe'
   silentArgs     = "/mode=offline /install=fmw,zen,bav /langid=$((Get-UICulture).LCID) /silent=true"
-  checksum       = 'ab910549ed460b7b9c19f3a57492eb8685b93da40d7f5cb21f395a1b5c28839c'
+  checksum       = 'c2db9fa6d0ac417d819cf8975670a2e35851097f86a1fceaf56400d1c2539a34'
   checksumType   = 'sha256'
-  checksum64     = '38a12cbdc4b8494be0c64052e45727fb19535416af217d8b2798274e916e52d3'
+  checksum64     = '6647f490bcbdd9477e3b935ec6b3cda43da64b4fecc4d2dcf8c34b948ff08362'
   checksumType64 = 'sha256'
   validExitCodes = @(0)
 }
