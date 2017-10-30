@@ -1,39 +1,23 @@
-﻿param([switch] $Force)
+﻿[CmdletBinding()]
+param([switch] $Force)
 
-function getLatest {
-  $fileType       = 'exe'
-  $silentArgs     = '/S'
-  $validExitCodes = '0'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $uninstallSoftwareName   = 'Serviio'
-  $uninstallFileType       = 'exe'
-  $uninstallSilentArgs     = '/S'
-  $uninstallValidExitCodes = '0'
-
-  $releasesUrl = 'http://serviio.org/download'
-  $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
-  $version = $releases.Content -Match 'The latest released version is (?<version>[^ ]+) '
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-
-  $urls = @($releases.Links | ? href -Like "*$version*.$fileType")
-  if ($urls.Length -ne 1) { throw 'Url not found.' }
-  $url = $urls[0].href
-
-  return @{
-    Version                 = $version
-    FileType                = $fileType
-    Url32                   = $url
-    SilentArgs              = $silentArgs
-    ValidExitCodes          = $validExitCodes
-    UninstallSoftwareName   = $uninstallSoftwareName
-    UninstallFileType       = $uninstallFileType
-    UninstallSilentArgs     = $uninstallSilentArgs
-    UninstallValidExitCodes = $uninstallValidExitCodes
-  }
+function global:au_GetLatest {
+  return Get-BasicLatest -ReleaseUrl 'http://serviio.org/download' `
+                         -TagNamePattern 'The latest released version is (?<tagName>[^ ]+) ' `
+                         -FileType 'exe' `
+                         -Latest @{
+                           SilentArgs              = '/S'
+                           ValidExitCodes          = '0'
+                           UninstallSoftwareName   = 'Serviio'
+                           UninstallFileType       = 'exe'
+                           UninstallSilentArgs     = '/S'
+                           UninstallValidExitCodes = '0'
+                         }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -54,4 +38,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -ChecksumFor 32 -Force:$Force
+Update-Package -ChecksumFor 32 -Force:$Force

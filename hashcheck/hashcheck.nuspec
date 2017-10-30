@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>hashcheck</id>
-    <version>2.4.0</version>
+    <version>2.4.0.24-beta</version>
     <title>HashCheck Shell Extension</title>
     <authors>Kai Liu and Christopher Gurnee</authors>
     <owners>Thilas</owners>
@@ -11,7 +11,8 @@
     <projectUrl>http://code.kliu.org/hashcheck/</projectUrl>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/90d6238c8db69f85cbfb32e3bcd7021c2303aba3/hashcheck/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer. In addition to integrating file checksumming functionality into Windows, HashCheck can also create and verify SFV files (and other forms of checksum files, such as .md5 files). It is fast and efficient, with a very light disk and memory footprint, and it is open-source.</description>
+    <description><![CDATA[The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer. In addition to integrating file checksumming functionality into Windows, HashCheck can also create and verify SFV files (and other forms of checksum files, such as .md5 files). It is fast and efficient, with a very light disk and memory footprint, and it is open-source.
+]]></description>
     <summary>The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer.</summary>
     <releaseNotes>[Releases](https://github.com/gurnec/HashCheck/releases)</releaseNotes>
     <copyright>Copyright © Kai Liu. All rights reserved.

@@ -1,35 +1,22 @@
-﻿param([switch] $Force)
+﻿[CmdletBinding()]
+param($Include, [switch] $Force)
 
-function getLatest {
-  $fileType       = 'msi'
-  $silentArgs     = '/qn /norestart'
-  $validExitCodes = '0, 3010, 1641'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $releasesUrl = 'http://strawberryperl.com/releases.html'
-  $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
-
-  $urls = @($releases.Links | ? href -Like "*32bit*.$fileType" | ? onclick)
-  if ($urls.Length -lt 1) { throw 'Url (x86) not found.' }
-  $url32 = (New-Object System.Uri([System.Uri]($releasesUrl), $urls[0].href)).ToString()
-  $urls = @($releases.Links | ? href -Like "*64bit*.$fileType" | ? onclick)
-  if ($urls.Length -lt 1) { throw 'Url (x64) not found.' }
-  $url64 = (New-Object System.Uri([System.Uri]($releasesUrl), $urls[0].href)).ToString()
-
-  $version = $url32 -Match "-(?<version>\d+(?:\.\d+)*)-[^-]*32bit[^-]*\.$fileType$"
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-
-  return @{
-    Version                 = $version
-    FileType                = $fileType
-    Url32                   = $url32
-    Url64                   = $url64
-    SilentArgs              = $silentArgs
-    ValidExitCodes          = $validExitCodes
-  }
+function global:au_GetLatest {
+  return Get-LinksLatest -ReleasesUrl 'http://strawberryperl.com/releases.html' `
+                         -StreamFieldCount 2 `
+                         -FileType 'msi' `
+                         -IsLink { !$_.onclick } `
+                         -IsUrl32 { param($Url) $Url -like '*32bit*' } `
+                         -IsUrl64 { param($Url) $Url -like '*64bit*' } `
+                         -Latest @{
+                           SilentArgs              = '/qn /norestart'
+                           ValidExitCodes          = '0, 3010, 1641'
+                         }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -46,4 +33,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -AllowLowerVersion -ChecksumFor all -Force:$Force
+Update-Package -ChecksumFor all -Include $Include -Force:$Force

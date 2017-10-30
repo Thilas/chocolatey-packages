@@ -1,39 +1,23 @@
-﻿param([switch] $Force)
+﻿[CmdletBinding()]
+param([switch] $Force)
 
-function getLatest {
-  $fileType       = 'exe'
-  $silentArgs     = '-y'
-  $validExitCodes = '0'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $uninstallSoftwareName   = 'ImDisk *'
-  $uninstallFileType       = 'exe'
-  $uninstallSilentArgs     = '-y'
-  $uninstallValidExitCodes = '0'
-
-  $releasesUrl = 'http://www.ltr-data.se/opencode.html'
-  $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
-  $version = $releases.Content -Match 'Current version (?<version>.+) built'
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-
-  $urls = @($releases.Links | ? href -Like "*$version*.$fileType")
-  if ($urls.Length -ne 1) { throw 'Url not found.' }
-  $url = (New-Object System.Uri([System.Uri]($releasesUrl), $urls[0].href)).ToString()
-
-  return @{
-    Version                 = $version
-    FileType                = $fileType
-    Url32                   = $url
-    SilentArgs              = $silentArgs
-    ValidExitCodes          = $validExitCodes
-    UninstallSoftwareName   = $uninstallSoftwareName
-    UninstallFileType       = $uninstallFileType
-    UninstallSilentArgs     = $uninstallSilentArgs
-    UninstallValidExitCodes = $uninstallValidExitCodes
-  }
+function global:au_GetLatest {
+  return Get-BasicLatest -ReleaseUrl 'http://www.ltr-data.se/opencode.html' `
+                         -TagNamePattern 'Current version (?<tagName>.+) built' `
+                         -FileType 'exe' `
+                         -Latest @{
+                           SilentArgs              = '-y'
+                           ValidExitCodes          = '0'
+                           UninstallSoftwareName   = 'ImDisk *'
+                           UninstallFileType       = 'exe'
+                           UninstallSilentArgs     = '-y'
+                           UninstallValidExitCodes = '0'
+                         }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -54,4 +38,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -ChecksumFor 32 -Force:$Force
+Update-Package -ChecksumFor 32 -Force:$Force

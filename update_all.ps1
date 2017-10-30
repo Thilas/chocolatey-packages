@@ -1,6 +1,6 @@
 ﻿# AU Packages Template: https://github.com/majkinetor/au-packages-template
 
-param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot)
+param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot, [switch] $PushAll)
 
 if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
 
@@ -11,6 +11,7 @@ $Options = [ordered]@{
     UpdateTimeout = 1200                                    #Update timeout in seconds
     Threads       = 10                                      #Number of background jobs to use
     Push          = $Env:au_Push -eq 'true'                 #Push to chocolatey
+    PushAll       = $PushAll
     PluginPath    = ''                                      #Path to user plugins
     RepeatOn      = @(
         'The request was canceled'
@@ -71,11 +72,14 @@ $Options = [ordered]@{
     ForcedPackages = $ForcedPackages -split ' '
     BeforeEach = {
         param($PackageName, $Options )
-        $p = $Options.ForcedPackages | ? { $_ -match "^${PackageName}(?:\:(.+))*$" }
+        $pattern = "^azer(?:\\(?<stream>[^:]+))?(?:\:(?<version>.+))?$"
+        $p = $Options.ForcedPackages | ? { $_ -match $pattern }
         if (!$p) { return }
 
+        $p -match $pattern
         $global:au_Force   = $true
-        $global:au_Version = ($p -split ':')[1]
+        $global:au_Version = $Matches['stream']
+        $global:au_Include = $Matches['version']
     }
 }
 

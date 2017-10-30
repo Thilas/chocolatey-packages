@@ -1,56 +1,50 @@
-﻿param([switch] $Force, [switch] $SkipPrerelease)
+﻿[CmdletBinding()]
+param([switch] $Force)
 
-function getLatest {
-  $fileType       = 'exe'
-  $silentArgs     = '/S'
-  $validExitCodes = '0'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $uninstallSoftwareName   = 'Kodi*'
-  $uninstallFileType       = 'exe'
-  $uninstallSilentArgs     = '/S'
-  $uninstallValidExitCodes = '0'
+function global:au_GetLatest {
+  $releaseUrl = 'https://api.github.com/repos/xbmc/xbmc/releases'
+  $release = (Invoke-WebRequest -Uri $releaseUrl -UseBasicParsing).Content | ConvertFrom-Json
+  $release = $release | Select-Object -First 1
+  $tagName = $release.tag_name -replace '-.+$'
+  Write-Verbose ("TagName: {0}" -f $tagName)
+  $version = Get-Version $tagName
+  Write-Verbose ("Version: {0}" -f $version)
 
-  if ($SkipPrerelease) {
-    $releasesUrl = 'https://api.github.com/repos/xbmc/xbmc/releases/latest'
-  } else {
-    $releasesUrl = 'https://api.github.com/repos/xbmc/xbmc/releases'
-  }
-  $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $releases = $releases | Select-Object -First 1
-  $tag = $releases.tag_name
-  $version = $tag -Match '^(?<version>\d+(?:\.\d+)*)(?<prerelease>.+)?-'
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-  if ($Matches['prerelease']) { $version = "$version-$($Matches['prerelease'])" }
+  $downloadUrl = 'https://kodi.tv/download/849'
+  $download = Invoke-WebRequest -Uri $downloadUrl -UseBasicParsing
 
-  $downloadsUrl = 'https://kodi.tv/download/849'
-  $downloads = Invoke-WebRequest -Uri $downloadsUrl -UseBasicParsing
-  $urls = @($downloads.Links | ? href -Like "*win32*$tag*.$fileType")
+  $links = $download.Links
+  $links = $links | ? { $_.href -like "*{0}*{1}*.exe" -f $version.Version, $version.Prerelease }
+
+  $urls = @($links | ? { $_.href -like '*win32*' } | % { $_.href } | select -Unique)
   if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
-  $url32 = $urls[0].href
-  $urls = @($downloads.Links | ? href -Like "*win64*$tag*.$fileType")
+  $url32 = Get-Url $downloadUrl $urls[0]
+  Write-Verbose ("Url32: {0}" -f $url32)
+  $urls = @($links | ? { $_.href -like '*win64*' } | % { $_.href } | select -Unique)
   if ($urls.Length -gt 0) {
     if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
-    $url64 = $urls[0].href
+    $url64 = Get-Url $downloadUrl $urls[0]
+    Write-Verbose ("Url64: {0}" -f $url64)
   } else {
     $url64 = $url32
   }
 
   return @{
     Version                 = $version
-    FileType                = $fileType
     Url32                   = $url32
     Url64                   = $url64
-    SilentArgs              = $silentArgs
-    ValidExitCodes          = $validExitCodes
-    UninstallSoftwareName   = $uninstallSoftwareName
-    UninstallFileType       = $uninstallFileType
-    UninstallSilentArgs     = $uninstallSilentArgs
-    UninstallValidExitCodes = $uninstallValidExitCodes
+    SilentArgs              = '/S'
+    ValidExitCodes          = '0'
+    UninstallSoftwareName   = 'Kodi*'
+    UninstallFileType       = 'exe'
+    UninstallSilentArgs     = '/S'
+    UninstallValidExitCodes = '0'
   }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -74,4 +68,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -AllowLowerVersion -ChecksumFor all -Force:$Force
+Update-Package -ChecksumFor all -Force:$Force

@@ -1,28 +1,21 @@
-﻿param([switch] $Force)
+﻿[CmdletBinding()]
+param([switch] $Force)
 
-function getLatest {
-  $releasesUrl = 'https://www.eclipse.org/downloads/eclipse-packages/?osType=win32'
-  $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
-  $version = $releases.Content -Match 'Eclipse (?<name>\w+) \((?<version>[^ ]+)\)'
-  if (!$version) { throw 'Version not found.' }
-  $name = $Matches['name'].ToLowerInvariant()
-  $version = $Matches['version']
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $urls = @($releases.Links | ? href -Like "*jee*$name*.zip" | ? href -NotLike '*x86_64*')
-  if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
-  $url32 = (New-Object System.Uri([System.Uri]($releasesUrl), $urls[0].href)).ToString() + '&r=1'
-  $urls = @($releases.Links | ? href -Like "*jee*$name*.zip" | ? href -Like '*x86_64*')
-  if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
-  $url64 = (New-Object System.Uri([System.Uri]($releasesUrl), $urls[0].href)).ToString() + '&r=1'
-
-  return @{
-    Version                 = $version
-    Url32                   = $url32
-    Url64                   = $url64
-  }
+function global:au_GetLatest {
+  $latest = Get-BasicLatest -ReleaseUrl 'https://www.eclipse.org/downloads/eclipse-packages/?osType=win32' `
+                            -TagNamePattern 'Eclipse .+ \((?<tagName>[^)]+)\) +Release' `
+                            -SkipTagName `
+                            -FileType 'zip' `
+                            -IsUrl32 { param($Url) $Url -like "*jee*" -and $Url -notlike '*x86_64*' } `
+                            -IsUrl64 { param($Url) $Url -like "*jee*" -and $Url -like '*x86_64*' }
+  $latest.Url32 += '&r=1'
+  $latest.Url64 += '&r=1'
+  return $latest
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -36,4 +29,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -ChecksumFor all -Force:$Force
+Update-Package -ChecksumFor all -Force:$Force

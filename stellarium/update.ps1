@@ -1,43 +1,27 @@
-﻿param([switch] $Force)
+﻿[CmdletBinding()]
+param([switch] $Force)
 
-function getLatest {
-  $fileType       = 'exe'
-  $silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-  $validExitCodes = '0'
+. (Join-Path $PSScriptRoot '..\Common.ps1')
 
-  $uninstallSoftwareName   = 'Stellarium *'
-  $uninstallFileType       = 'exe'
-  $uninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-  $uninstallValidExitCodes = '0'
-
-  $releasesUrl = 'http://www.stellarium.org/'
-  $releases = Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing
-  $version = $releases.Content -Match '>latest version is (?<version>[^<]+)<'
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-
-  $urls = @($releases.Links | ? href -Like "*$version*win32*.$fileType*")
-  if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
-  $url32 = ToHttps($urls[0].href)
-  $urls = @($releases.Links | ? href -Like "*$version*win64*.$fileType*")
-  if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
-  $url64 = ToHttps($urls[0].href)
-
-  return @{
-    Version                 = $version
-    FileType                = $fileType
-    Url32                   = $url32
-    Url64                   = $url64
-    SilentArgs              = $silentArgs
-    ValidExitCodes          = $validExitCodes
-    UninstallSoftwareName   = $uninstallSoftwareName
-    UninstallFileType       = $uninstallFileType
-    UninstallSilentArgs     = $uninstallSilentArgs
-    UninstallValidExitCodes = $uninstallValidExitCodes
-  }
+function global:au_GetLatest {
+  return Get-BasicLatest -ReleaseUrl 'http://www.stellarium.org/' `
+                         -TagNamePattern '>latest version is (?<tagName>[^<]+)<' `
+                         -FileType 'exe*' `
+                         -IsUrl32 { param($Url) $Url -like '*win32*' } `
+                         -IsUrl64 { param($Url) $Url -like '*win64*' } `
+                         -ForceHttps `
+                         -Latest @{
+                           FileType                = 'exe'
+                           SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+                           ValidExitCodes          = '0'
+                           UninstallSoftwareName   = 'Stellarium *'
+                           UninstallFileType       = 'exe'
+                           UninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+                           UninstallValidExitCodes = '0'
+                         }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -61,4 +45,4 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -ChecksumFor all -Force:$Force
+Update-Package -ChecksumFor all -Force:$Force

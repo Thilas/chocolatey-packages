@@ -2,9 +2,12 @@
 #   $f = 'C:\path\to\update.ps1'
 #   gc $f | ? {$_ -notmatch "^\s*#"} | % {$_ -replace '(^.*?)\s*?[^``]#.*','$1'} | Out-File $f+".~" -en utf8; mv -fo $f+".~" $f
 
-param([switch] $Force, [switch] $SkipPrerelease)
+[CmdletBinding()]
+param($Include, [switch] $Force)
 
-function getLatest {
+. (Join-Path $PSScriptRoot '..\Common.ps1')
+
+function global:au_GetLatest {
   $fileType       = 'exe'
   # Uncomment matching EXE type (sorted by most to least common)
   #$silentArgs     = '/S'                                            # NSIS
@@ -36,41 +39,53 @@ function getLatest {
   #$uninstallSilentArgs     = '/qn /norestart'
   #$uninstallValidExitCodes = '0, 3010, 1605, 1614, 1641' # https://msdn.microsoft.com/en-us/library/aa376931(v=vs.85).aspx
 
-  if ($SkipPrerelease) {
-    $releasesUrl = 'https://api.github.com/repos/user/project/releases/latest'
-  } else {
-    $releasesUrl = 'https://api.github.com/repos/user/project/releases'
-  }
-  $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $releases = $releases | Select-Object -First 1
-  $tag = $releases.tag_name
-  $version = $tag -Match '^v?(?<version>\d+(?:\.\d+)*)(?:-?(?<prerelease>.+))?$'
-  if (!$version) { throw 'Version not found.' }
-  $version = $Matches['version']
-  if ($Matches['prerelease']) { $version = "$version-$($Matches['prerelease'])" }
-
-  $urls = @($releases.assets | ? name -Like "*$tag*x86*.$fileType")
-  if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
-  $url32 = $urls[0].browser_download_url
-  $urls = @($releases.assets | ? name -Like "*$tag*x64*.$fileType")
-  if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
-  $url64 = $urls[0].browser_download_url
-
-  return @{
-    Version                 = $version
-    FileType                = $fileType
-    Url32                   = $url32
-    Url64                   = $url64
-    SilentArgs              = $silentArgs
-    ValidExitCodes          = $validExitCodes
-    UninstallSoftwareName   = $uninstallSoftwareName
-    UninstallFileType       = $uninstallFileType
-    UninstallSilentArgs     = $uninstallSilentArgs
-    UninstallValidExitCodes = $uninstallValidExitCodes
-  }
+  return Get-BasicLatest -ReleaseUrl 'https://' `
+                         -TagNamePattern 'Version (?<tagName>[^ ]+) ' `
+                         #-GetTagName { param($Release) '1.0.0' } `
+                         #-SkipTagName `
+                         -FileType $fileType `
+                         #-IsUrl32 { param($Url, $TagName, $Version, $Matches) $Url -like '*x86*' } `
+                         #-IsUrl64 { param($Url, $TagName, $Version, $Matches) $Url -like '*x64*' } `
+                         #-ForceHttps `
+                         -Latest @{
+                           SilentArgs              = $silentArgs
+                           ValidExitCodes          = $validExitCodes
+                           UninstallSoftwareName   = $uninstallSoftwareName
+                           UninstallFileType       = $uninstallFileType
+                           UninstallSilentArgs     = $uninstallSilentArgs
+                           UninstallValidExitCodes = $uninstallValidExitCodes
+                         }
+  return Get-GitHubLatest -Repository 'user/project' `
+                          #-StreamFieldCount 2 `
+                          -FileType $fileType `
+                          #-IsUrl32 { param($Url, $TagName, $Version) $Url -like '*x86*' } `
+                          #-IsUrl64 { param($Url, $TagName, $Version) $Url -like '*x64*' } `
+                          -Latest @{
+                            SilentArgs              = $silentArgs
+                            ValidExitCodes          = $validExitCodes
+                            UninstallSoftwareName   = $uninstallSoftwareName
+                            UninstallFileType       = $uninstallFileType
+                            UninstallSilentArgs     = $uninstallSilentArgs
+                            UninstallValidExitCodes = $uninstallValidExitCodes
+                          }
+  return Get-LinksLatest -ReleasesUrl 'https://' `
+                         -StreamFieldCount 2 `
+                         -FileType $fileType `
+                         #-IsLink { param($Url) $Url -like '*' } `
+                         #-IsUrl32 { param($Url, $Version) $Url -like '*x86*' } `
+                         #-IsUrl64 { param($Url, $Version) $Url -like '*x64*' } `
+                         #-ForceHttps `
+                         -Latest @{
+                           SilentArgs              = $silentArgs
+                           ValidExitCodes          = $validExitCodes
+                           UninstallSoftwareName   = $uninstallSoftwareName
+                           UninstallFileType       = $uninstallFileType
+                           UninstallSilentArgs     = $uninstallSilentArgs
+                           UninstallValidExitCodes = $uninstallValidExitCodes
+                         }
 }
 
-function searchReplace {
+function global:au_SearchReplace {
   @{
     'tools\chocolateyInstall.ps1' = @{
       "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
@@ -94,4 +109,5 @@ function searchReplace {
   }
 }
 
-. '..\Update-Package.ps1' -AllowLowerVersion -ChecksumFor all -Force:$Force
+# ChecksumFor: 'all', '32', '64', 'none'
+Update-Package -ChecksumFor all -Include $Include -Force:$Force
