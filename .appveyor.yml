@@ -13,8 +13,9 @@ branches:
 
 environment:
   # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
-  au_version: master
+  au_version: streams
   au_push: true
+  au_pushall: true
   # Force test: use 1 to test all, or N to split testing into N groups
   au_test_groups: 1
 
@@ -91,7 +92,7 @@ build_script:
         }
     }
 
-    ./update_all.ps1 -ForcedPackages $forced -PushAll
+    ./update_all.ps1 -ForcedPackages $forced
     7z a au_temp.zip $Env:TEMP\chocolatey\au\*
 
 artifacts:

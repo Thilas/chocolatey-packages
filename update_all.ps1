@@ -1,6 +1,6 @@
 ﻿# AU Packages Template: https://github.com/majkinetor/au-packages-template
 
-param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot, [switch] $PushAll)
+param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot)
 
 if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
 
@@ -11,7 +11,7 @@ $Options = [ordered]@{
     UpdateTimeout = 1200                                    #Update timeout in seconds
     Threads       = 10                                      #Number of background jobs to use
     Push          = $Env:au_Push -eq 'true'                 #Push to chocolatey
-    PushAll       = $PushAll
+    PushAll       = $Env:au_PushAll -eq 'true'              #Allow to push multiple packages at once
     PluginPath    = ''                                      #Path to user plugins
     RepeatOn      = @(
         'The request was canceled'
