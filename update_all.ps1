@@ -50,6 +50,11 @@ $Options = [ordered]@{
         Password = $Env:github_api_key                      #Password if username is not empty, otherwise api key
     }
 
+    GitReleases  = @{
+        ApiToken    = $Env:github_api_key                   #Your github api key
+        ReleaseType = 'package'                             #Either 1 release per date, or 1 release per package
+    }
+
     RunInfo = @{
         Exclude = 'password', 'apikey'                      #Option keys which contain those words will be removed
         Path    = "$PSScriptRoot\update_info.xml"           #Path where to save the run info
@@ -72,14 +77,14 @@ $Options = [ordered]@{
     ForcedPackages = $ForcedPackages -split ' '
     BeforeEach = {
         param($PackageName, $Options )
-        $pattern = "^azer(?:\\(?<stream>[^:]+))?(?:\:(?<version>.+))?$"
+        $pattern = "^${PackageName}(?:\\(?<stream>[^:]+))?(?:\:(?<version>.+))?$"
         $p = $Options.ForcedPackages | ? { $_ -match $pattern }
         if (!$p) { return }
 
         $p -match $pattern
         $global:au_Force   = $true
-        $global:au_Version = $Matches['stream']
-        $global:au_Include = $Matches['version']
+        $global:au_Include = $Matches['stream']
+        $global:au_Version = $Matches['version']
     }
 }
 
@@ -88,4 +93,4 @@ $global:au_Root = $Root                                    #Path to the AU packa
 $global:info = updateall -Name $Name -Options $Options
 
 #Uncomment to fail the build on AppVeyor on any package error
-if ($global:info.error_count.total) { throw 'Errors during update' }
+#if ($global:info.error_count.total) { throw 'Errors during update' }
