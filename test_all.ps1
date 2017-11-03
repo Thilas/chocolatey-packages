@@ -1,6 +1,6 @@
 ﻿#Name can be 'random N' to randomly force the Nth group of packages.
 
-param( [string[]] $Name, [string] $Root = "$PSScriptRoot" )
+param( [string[]] $Name, [string] $Root = "$PSScriptRoot", [switch]$ThrowOnErrors )
 
 if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
 $global:au_root = Resolve-Path $Root
@@ -20,17 +20,28 @@ if (($Name.Length -gt 0) -and ($Name[0] -match '^random (.+)')) {
 }
 
 $options = [ordered]@{
-    Force = $true
-    Push = $false
+    Force   = $true
+    Push    = $false
+    Threads = 10 
+
+    IgnoreOn = @(                                      #Error message parts to set the package ignore status
+    )
+    RepeatOn = @(                                      #Error message parts on which to repeat package updater
+        'Could not create SSL/TLS secure channel'
+        'Could not establish trust relationship'
+        'Unable to connect'
+    )
+    RepeatSleep   = 60                                      #How much to sleep between repeats in seconds, by default 0
+    RepeatCount   = 2                                       #How many times to repeat on errors, by default 1
 
     Report = @{
         Type = 'markdown'                                   #Report type: markdown or text
         Path = "$PSScriptRoot\Update-Force-Test-${n}.md"      #Path where to save the report
         Params= @{                                          #Report parameters:
             Github_UserRepo = $Env:github_user_repo         #  Markdown: shows user info in upper right corner
-            NoAppVeyor  = $false                            #  Markdown: do not show AppVeyor build shield
+            NoAppVeyor  = $true                             #  Markdown: do not show AppVeyor build shield
             Title       = "Update Force Test - Group ${n}"
-            UserMessage = "[Update report](https://gist.github.com/$Env:gist_id) | **USING AU NEXT VERSION**"       #  Markdown, Text: Custom user message to show
+            UserMessage = "[Ignored](#ignored) | [Update report](https://gist.github.com/$Env:gist_id) | [Build](https://ci.appveyor.com/project/Thilas/chocolatey-packages-ure9y) | **USING AU NEXT VERSION**"       #  Markdown, Text: Custom user message to show
         }
     }
 
@@ -44,3 +55,9 @@ $options = [ordered]@{
 
 
 $global:info = updateall -Name $Name -Options $Options
+
+$au_errors = $global:info | ? { $_.Error } | select -ExpandProperty Error
+
+if ($ThrowOnErrors -and $au_errors.Count -gt 0) {
+    throw 'Errors during update'
+}

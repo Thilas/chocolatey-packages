@@ -13,12 +13,15 @@ $Options = [ordered]@{
     Push          = $Env:au_Push -eq 'true'                 #Push to chocolatey
     PushAll       = $true                                   #Allow to push multiple packages at once
     PluginPath    = ''                                      #Path to user plugins
-    RepeatOn      = @(
-        'The request was canceled'
+    IgnoreOn      = @(                                      #Error message parts to set the package ignore status
     )
-    IgnoreOn      = @(
-        'The request was canceled'
+    RepeatOn      = @(                                      #Error message parts on which to repeat package updater
+        'Could not create SSL/TLS secure channel'
+        'Could not establish trust relationship'
+        'Unable to connect'
     )
+    RepeatSleep   = 0                                       #How much to sleep between repeats in seconds, by default 0
+    RepeatCount   = 1                                       #How many times to repeat on errors, by default 1
 
     Report = @{
         Type = 'markdown'                                   #Report type: markdown or text
@@ -26,7 +29,7 @@ $Options = [ordered]@{
         Params= @{                                          #Report parameters:
             Github_UserRepo = $Env:github_user_repo         #  Markdown: shows user info in upper right corner
             NoAppVeyor  = $false                            #  Markdown: do not show AppVeyor build shield
-            UserMessage = "[History](#update-history) | [Force Test](https://gist.github.com/$Env:gist_id_test) | **USING AU NEXT VERSION**"       #  Markdown, Text: Custom user message to show
+            UserMessage = "[Ignored](#ignored) | [History](#update-history) | [Force Test](https://gist.github.com/$Env:gist_id_test) | [Releases](https://github.com/Thilas/chocolatey-packages/tags) | **USING AU NEXT VERSION**"      #  Markdown, Text: Custom user message to show
             NoIcons     = $false                            #  Markdown: don't show icon
             IconSize    = 32                                #  Markdown: icon size
             Title       = ''                                #  Markdown, Text: TItle of the report, by default 'Update-AUPackages'
@@ -69,7 +72,7 @@ $Options = [ordered]@{
                 Port       = $Env:mail_port
                 EnableSsl  = $Env:mail_enablessl -eq 'true'
                 Attachment = "$PSScriptRoot\update_info.xml"
-                UserMessage = "<p>Update status: https://gist.github.com/$Env:gist_id</p>"
+                UserMessage = "Update status: https://gist.github.com/$Env:gist_id"
                 SendAlways  = $false                        #Send notifications every time
              }
            } else {}
