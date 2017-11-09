@@ -3,7 +3,7 @@
 #   gc $f | ? {$_ -notmatch "^\s*#"} | % {$_ -replace '(^.*?)\s*?[^``]#.*','$1'} | Out-File $f+".~" -en utf8; mv -fo $f+".~" $f
 
 [CmdletBinding()]
-param($Include, [switch] $Force)
+param($IncludeStream, [switch] $Force)
 
 . (Join-Path $PSScriptRoot '..\Common.ps1')
 
@@ -110,4 +110,4 @@ function global:au_SearchReplace {
 }
 
 # ChecksumFor: 'all', '32', '64', 'none'
-Update-Package -ChecksumFor all -Include $Include -Force:$Force
+Update-Package -ChecksumFor all -IncludeStream $IncludeStream -Force:$Force

@@ -71,12 +71,14 @@ function Get-GitHubLatest {
   )
   $releasesUrl = "https://api.github.com/repos/$Repository/releases?per_page=10"
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
+  $releases = $releases | sort { Get-Date -Date $_.published_at } -Descending
   $releases | % { $_ | Add-Member 'Version' (Get-Version $_.tag_name) }
   $streams = $releases | group { $_.Version.ToString($StreamFieldCount) }
 
   function Get-Stream($stream, $releases) {
     Write-Verbose ("Stream: {0}" -f $stream)
     $release = $releases | sort Version -Descending | select -First 1
+    Write-Verbose ("  Date: {0}" -f $release.published_at)
     Write-Verbose ("  Version: {0}" -f $release.Version)
     $assets = $release.assets | ? { $_.browser_download_url -like ("*{0}*.$FileType" -f $release.tag_name) }
 
@@ -106,15 +108,15 @@ function Get-GitHubLatest {
       Write-Verbose ("  Url64: {0}" -f $stream.Url64)
     }
 
-    return $stream + $Latest
+    return $stream
   }
 
-  $result = @{}
+  $result = [ordered] @{}
   $streams | % { $result.Add($_.Name, (Get-Stream $_.Name $_.Group)) }
   if ($StreamFieldCount -eq 0) {
-    return $result.Values | select -First 1
+    return ($result.Values | select -First 1) + $Latest
   } else {
-    return @{ Streams = $result }
+    return @{ Streams = $result } + $Latest
   }
 }
 
@@ -171,12 +173,12 @@ function Get-LinksLatest {
       Write-Verbose ("  Url64: {0}" -f $stream.Url64)
     }
 
-    return $stream + $Latest
+    return $stream
   }
 
-  $result = @{}
+  $result = [ordered] @{}
   $streams | % { $result.Add($_.Name, (Get-Stream $_.Name $_.Group)) }
-  return @{ Streams = $result }
+  return @{ Streams = $result } + $Latest
 }
 
 function Get-Url([uri] $BaseUrl, [string] $RelativeUrl, [switch] $ForceHttps) {

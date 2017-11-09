@@ -86,7 +86,7 @@ $Options = [ordered]@{
 
         $p -match $pattern
         $global:au_Force   = $true
-        $global:au_Include = $Matches['stream']
+        $global:au_IncludeStream = $Matches['stream']
         $global:au_Version = $Matches['version']
     }
 }
