@@ -71,14 +71,17 @@ function Get-GitHubLatest {
   )
   $releasesUrl = "https://api.github.com/repos/$Repository/releases?per_page=10"
   $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $releases = $releases | sort { Get-Date -Date $_.published_at } -Descending
   $releases | % { $_ | Add-Member 'Version' (Get-Version $_.tag_name) }
   $streams = $releases | group { $_.Version.ToString($StreamFieldCount) }
+  if ($StreamFieldCount -ge 2) {
+    $streams = $streams | sort { [version] $_.Name } -Descending
+  } elseif ($StreamFieldCount -eq 1) {
+    $streams = $streams | sort { [int] $_.Name } -Descending
+  }
 
   function Get-Stream($stream, $releases) {
     Write-Verbose ("Stream: {0}" -f $stream)
     $release = $releases | sort Version -Descending | select -First 1
-    Write-Verbose ("  Date: {0}" -f $release.published_at)
     Write-Verbose ("  Version: {0}" -f $release.Version)
     $assets = $release.assets | ? { $_.browser_download_url -like ("*{0}*.$FileType" -f $release.tag_name) }
 
@@ -139,6 +142,11 @@ function Get-LinksLatest {
   if ($IsLink) { $links = $links | ? { & $IsLink -Url $_.href } }
   $links | % { $_ | Add-Member 'Version' (Get-Version $_.href) }
   $streams = $links | group { $_.Version.ToString($StreamFieldCount) }
+  if ($StreamFieldCount -ge 2) {
+    $streams = $streams | sort { [version] $_.Name } -Descending
+  } elseif ($StreamFieldCount -eq 1) {
+    $streams = $streams | sort { [int] $_.Name } -Descending
+  }
 
   function Get-Stream($stream, $release) {
     Write-Verbose ("Stream: {0}" -f $stream)
