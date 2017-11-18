@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
   return Get-BasicLatest -ReleaseUrl 'http://www.airserver.com/Download/MacPC' `
-                         -TagNamePattern 'Download for PC[\w\W]+Version (?<tagName>[^ ]+) ' `
+                         -TagNamePattern 'Download for PC[\w\W]+?Version (?<tagName>[^ ]+) ' `
                          -FileType 'msi' `
                          -IsUrl32 { param($Url) $Url -like '*x86*' } `
                          -IsUrl64 { param($Url) $Url -like '*x64*' } `
