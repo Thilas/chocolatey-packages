@@ -4,12 +4,12 @@
 $packageArgs = @{
   packageName    = 'kodi'
   fileType       = 'exe'
-  url            = 'http://mirrors.kodi.tv/releases/windows/win32/kodi-17.5-Krypton-x86.exe'
-  url64bit       = 'http://mirrors.kodi.tv/releases/windows/win32/kodi-17.5-Krypton-x86.exe'
+  url            = 'http://mirrors.kodi.tv/releases/windows/win32/kodi-17.6-Krypton-x86.exe'
+  url64bit       = 'http://mirrors.kodi.tv/releases/windows/win32/kodi-17.6-Krypton-x86.exe'
   silentArgs     = '/S'
-  checksum       = '3bed2f5e0f7dce622a4775ed848e86a98b48e45f7c7b1bd7635bafe559ff1a1b'
+  checksum       = '6f4ae208ea5e8cd57df5c034b17a2f5e294b3f59b273987762cd8bed805afb0a'
   checksumType   = 'sha256'
-  checksum64     = '3bed2f5e0f7dce622a4775ed848e86a98b48e45f7c7b1bd7635bafe559ff1a1b'
+  checksum64     = '6f4ae208ea5e8cd57df5c034b17a2f5e294b3f59b273987762cd8bed805afb0a'
   checksumType64 = 'sha256'
   validExitCodes = @(0)
 }
