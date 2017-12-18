@@ -4,12 +4,19 @@ param([switch] $Force)
 . (Join-Path $PSScriptRoot '..\Common.ps1')
 
 function global:au_GetLatest {
-  return Get-BasicLatest -ReleaseUrl 'http://www.avg.com/download.prd-gsr-free' `
+  $ReleaseUrl = 'http://www.avg.com/download.prd-gsr-free'
+  return Get-BasicLatest -ReleaseUrl $ReleaseUrl `
                          -GetTagName { param($Release)
                            $urls = @($Release.Links | ? { $_.href -like '*.exe' -and $_.href -notlike '*x86*' -and $_.href -notlike '*x64*' })
                            if ($urls.Length -ne 1) { throw 'Tag name not found (1).' }
                            if ($urls[0].href -notmatch '_(?<tagName>\d+)\.exe') { throw 'Tag name not found (2).' }
-                           "{0}.0.{1}" -f ([datetime]::UtcNow.Year % 100), $Matches['tagName']
+                           $releaseFileUrl = Get-Url $ReleaseUrl $urls[0].href -ForceHttps
+                           $releaseFile = Invoke-WebRequest -Uri $releaseFileUrl -UseBasicParsing
+                           $releaseDateTime = [datetime]::Parse($releaseFile.Headers['Last-Modified'])
+                           $major = $releaseDateTime.Year % 100
+                           $minor = $Matches['tagName']
+                           $build = $releaseDateTime.ToString('MMdd')
+                           "$major.$minor.$build"
                          } `
                          -SkipTagName `
                          -FileType 'exe' `
