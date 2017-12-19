@@ -41,7 +41,7 @@ For example: `--params "'/InstallationPath=C:\path\to\installation'"`.
     <summary>Eclipse IDE for Java EE Developers. Windows 32 and 64 bit. Default install location: `C:\Program Files\Eclipse Foundation`. This IDE can be made suitable for developers of other languages than Java as well by installing additional software.</summary>
     <releaseNotes>[Announcements](https://www.eclipse.org/community/news/eclipsenews.php)</releaseNotes>
     <copyright>Copyright © Eclipse Foundation</copyright>
-    <tags>eclipse ide jdk8 jee java scala birt python ruby groovy clojure haskell go</tags>
+    <tags>eclipse foss cross-platform ide jdk8 jee java scala birt python ruby groovy clojure haskell go</tags>
     <projectSourceUrl>https://git.eclipse.org/c/</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/eclipse</packageSourceUrl>
     <docsUrl>https://wiki.eclipse.org/</docsUrl>

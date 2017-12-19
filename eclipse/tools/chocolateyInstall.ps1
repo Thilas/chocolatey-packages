@@ -17,6 +17,8 @@ If ($packageParameters.ContainsKey('InstallationPath')) {
 }
 Write-Verbose "Installation Path: $installationPath"
 
+$multiUser = $packageParameters.ContainsKey('Multi-User')
+
 # *** Automatically filled ***
 $packageArgs = @{
   packageName    = 'eclipse'
@@ -35,6 +37,27 @@ Install-ChocolateyZipPackage @packageArgs
 $logPath = Join-Path $Env:ChocolateyPackageFolder "eclipse.$packageVersion.txt"
 Set-Content $logPath $installationPath -Encoding UTF8 -Force
 
-$shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) "Eclipse $packageVersion.lnk"
-$targetPath = Join-Path $installationPath 'eclipse\eclipse.exe'
-Install-ChocolateyShortcut -ShortcutFilePath $shortcutPath -TargetPath $targetPath -PinToTaskbar
+$shortcutName = "Eclipse $packageVersion.lnk"
+$eclipsePath = Join-Path $installationPath 'eclipse\eclipse.exe'
+
+If ($multiUser) {
+  $shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonDesktopDirectory)) $shortcutName
+  $targetPath = Join-Path $installationPath 'eclipse.bat'
+  $targetContent = @"
+@echo off
+
+set ECLIPSEDIR="%LOCALAPPDATA%\Eclipse.$packageVersion"
+
+if not exist %ECLIPSEDIR% (
+  mkdir %ECLIPSEDIR%
+)
+
+start "Eclipse" "$eclipsePath" -configuration %ECLIPSEDIR%
+
+"@
+  Set-Content $targetPath $targetContent -Encoding Ascii -Force
+  Install-ChocolateyShortcut -ShortcutFilePath $shortcutPath -TargetPath $targetPath -IconLocation $eclipsePath
+} Else {
+  $shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) $shortcutName
+  Install-ChocolateyShortcut -ShortcutFilePath $shortcutPath -TargetPath $eclipsePath -PinToTaskbar
+}

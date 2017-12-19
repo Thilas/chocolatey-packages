@@ -2,6 +2,23 @@
 
 Description using MarkDown
 
+### Features
+Bullet list with basic software functionality
+
+### Package Parameters
+The following package parameters can be set:
+
+* `/Parameter1` - Description - defaults to "`value1`"
+* `/Parameter2` - Description - defaults to "`value2`"
+
+These parameters can be passed to the installer with the use of `--params`.
+For example: `--params "'/Parameter1=value1 /Parameter2=value2'"`.
+
+### Notes
+Bullet list with any special information to the user if any
+
+---
+
 ### Summary
 How do I create packages? See https://chocolatey.org/docs/create-packages
 
@@ -59,7 +76,6 @@ Use the package parameters pattern - see https://chocolatey.org/docs/how-to-pars
 
 #### Need to mount an ISO?
 https://chocolatey.org/docs/how-to-mount-an-iso-in-chocolatey-package
-
 
 #### Environment Variables
 Chocolatey makes a number of environment variables available (You can access any of these with $env:TheVariableNameBelow):

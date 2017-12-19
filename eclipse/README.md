@@ -23,6 +23,7 @@ Tools for Java developers creating Java EE and Web applications, including a Jav
 The following package parameters can be set:
 
 * `/InstallationPath` or `/InstallLocation` - Where to install the binaries to - defaults to "`$Env:ProgramFiles\Eclipse Foundation\$packageVersion`"
+* `/Multi-User` - Configure Eclipse as a multi-user install or not
 
 These parameters can be passed to the installer with the use of `--params`.
-For example: `--params "'/InstallationPath=C:\path\to\installation'"`.
+For example: `--params "'/InstallationPath=C:\path\to\installation /Multi-User'"`.

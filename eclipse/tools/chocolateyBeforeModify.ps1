@@ -5,8 +5,15 @@ $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 $packageVersion = $Env:ChocolateyPackageVersion
 
-$shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) "Eclipse $packageVersion.lnk"
-Uninstall-ChocolateyShortcut $shortcutPath -UnpinFromTaskbar
+$shortcutName = "Eclipse $packageVersion.lnk"
+$shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) $shortcutName
+If (Test-Path $shortcutPath) {
+  Uninstall-ChocolateyShortcut $shortcutPath -UnpinFromTaskbar
+}
+$shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonDesktopDirectory)) $shortcutName
+If (Test-Path $shortcutPath) {
+  Uninstall-ChocolateyShortcut $shortcutPath
+}
 
 $logPath = Join-Path $Env:ChocolateyPackageFolder "eclipse.$packageVersion.txt"
 $installationPath = Get-Content $logPath

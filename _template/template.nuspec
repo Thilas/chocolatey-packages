@@ -37,6 +37,14 @@ This is a nuspec. It mostly adheres to https://docs.nuget.org/create/Nuspec-Refe
     <releaseNotes>[Release Notes](https://release-notes)</releaseNotes>
     <copyright>Copyright © Author</copyright>
     <tags>id admin tags</tags>
+    <!--
+      foss            for all free and open source packages
+      cross-platform  for all packages available on other platforms then Windows
+      freeware        for all freeware but not open source packages
+      trial           for all propriatery commercial tools that require license
+      cli             for all command line tools
+      games           for all games
+    -->
     <projectSourceUrl>http://project-source-url</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/id</packageSourceUrl>
     <docsUrl>http://docs-url</docsUrl>
