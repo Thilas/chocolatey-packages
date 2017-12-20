@@ -10,7 +10,7 @@ function global:au_GetLatest {
                            $urls = @($Release.Links | ? { $_.href -like '*.exe' -and $_.href -notlike '*x86*' -and $_.href -notlike '*x64*' })
                            if ($urls.Length -ne 1) { throw 'Tag name not found (1).' }
                            if ($urls[0].href -notmatch '_(?<tagName>\d+)\.exe') { throw 'Tag name not found (2).' }
-                           $releaseFileUrl = Get-Url $ReleaseUrl $urls[0].href -ForceHttps
+                           $releaseFileUrl = Get-Url $ReleaseUrl $urls[0].href
                            $releaseFile = Invoke-WebRequest -Uri $releaseFileUrl -UseBasicParsing
                            $releaseDateTime = [datetime]::Parse($releaseFile.Headers['Last-Modified'])
                            $major = $releaseDateTime.Year % 100
@@ -22,7 +22,6 @@ function global:au_GetLatest {
                          -FileType 'exe' `
                          -IsUrl32 { param($Url) $Url -like '*x86*' } `
                          -IsUrl64 { param($Url) $Url -like '*x64*' } `
-                         -ForceHttps `
                          -Latest @{
                            SilentArgs              = '/mode=offline /install=fmw,zen,bav /langid=$((Get-UICulture).LCID) /silent=true'
                            ValidExitCodes          = '0'
