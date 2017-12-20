@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>eclipse</id>
-    <version>4.7.1.20171009</version>
+    <version>4.7.1.20171220</version>
     <title>Eclipse</title>
     <authors>Eclipse Foundation</authors>
     <owners>Utrecht,Almere,Thilas</owners>
@@ -34,9 +34,10 @@ Tools for Java developers creating Java EE and Web applications, including a Jav
 The following package parameters can be set:
 
 * `/InstallationPath` or `/InstallLocation` - Where to install the binaries to - defaults to "`$Env:ProgramFiles\Eclipse Foundation\$packageVersion`"
+* `/Multi-User` - Configure Eclipse as a multi-user install or not
 
 These parameters can be passed to the installer with the use of `--params`.
-For example: `--params "'/InstallationPath=C:\path\to\installation'"`.
+For example: `--params "'/InstallationPath=C:\path\to\installation /Multi-User'"`.
 ]]></description>
     <summary>Eclipse IDE for Java EE Developers. Windows 32 and 64 bit. Default install location: `C:\Program Files\Eclipse Foundation`. This IDE can be made suitable for developers of other languages than Java as well by installing additional software.</summary>
     <releaseNotes>[Announcements](https://www.eclipse.org/community/news/eclipsenews.php)</releaseNotes>
