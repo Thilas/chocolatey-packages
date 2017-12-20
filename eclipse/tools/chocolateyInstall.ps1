@@ -22,12 +22,12 @@ $multiUser = $packageParameters.ContainsKey('Multi-User')
 # *** Automatically filled ***
 $packageArgs = @{
   packageName    = 'eclipse'
-  url            = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/1a/eclipse-jee-oxygen-1a-win32.zip&r=1'
-  url64bit       = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/1a/eclipse-jee-oxygen-1a-win32-x86_64.zip&r=1'
+  url            = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/2/eclipse-jee-oxygen-2-win32.zip&r=1'
+  url64bit       = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/2/eclipse-jee-oxygen-2-win32-x86_64.zip&r=1'
   unzipLocation  = $installationPath
-  checksum       = 'c3c0cbb83ed351e027dd5867cc0ebbd947aff5bb78f68c4f7abb16ff77f05729'
+  checksum       = '01188e8392cb2457759859a9079720c1ef8900ff286050642cbdc60cd09aae83'
   checksumType   = 'sha256'
-  checksum64     = 'a12a6054afc830f9dd4896607b4d77448826e9356747af57002a41a5963f7416'
+  checksum64     = '9fa5405cd5f52760aff91479e70f283d805895ce1aede08af1697d1c26ed1066'
   checksumType64 = 'sha256'
 }
 # *** Automatically filled ***
