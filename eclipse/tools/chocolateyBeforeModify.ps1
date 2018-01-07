@@ -18,5 +18,9 @@ If (Test-Path $shortcutPath) {
 $logPath = Join-Path $Env:ChocolateyPackageFolder "eclipse.$packageVersion.txt"
 $installationPath = Get-Content $logPath
 Write-Verbose "Previous Installation Path: $installationPath"
+Remove-Item -Path $logPath -ErrorAction SilentlyContinue
 
 Remove-Item -Path $installationPath -ErrorAction SilentlyContinue -Recurse -Force
+
+$logPath = Join-Path $Env:ChocolateyPackageFolder '*.zip.txt'
+Remove-Item -Path $logPath -ErrorAction SilentlyContinue
