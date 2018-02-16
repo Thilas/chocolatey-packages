@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>serviio</id>
-    <version>1.9</version>
+    <version>1.9.1</version>
     <title>Serviio</title>
     <authors>Petr Nejedly</authors>
     <owners>Thilas</owners>
@@ -11,11 +11,12 @@
     <projectUrl>http://serviio.org/</projectUrl>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/7e36bae0ecdd1f4fe555c7f5b9d1a16925904b3a/serviio/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>There is also a paid for Pro edition which further enhances the possibilities of sharing content in your connected household.
+    <description><![CDATA[There is also a paid for Pro edition which further enhances the possibilities of sharing content in your connected household.
 
 Serviio works with many devices from your connected home (TV, Playstation 3, XBox 360, smart phones, tablets, etc.). It supports profiles for particular devices so that it can be tuned to maximise the device's potential and/or minimize lack of media format playback support (via transcoding).
 
-Serviio is based on Java technology and therefore runs on most platforms, including Windows, Mac and Linux (incl. embedded systems, e.g. NAS).</description>
+Serviio is based on Java technology and therefore runs on most platforms, including Windows, Mac and Linux (incl. embedded systems, e.g. NAS).
+]]></description>
     <summary>Serviio is a free media server. It allows you to stream your media files (music, video or images) to renderer devices (e.g. a TV set, Bluray player, games console or mobile phone) on your connected home network.</summary>
     <releaseNotes>[Release Notes](http://serviio.org/news/9-release-notes/)</releaseNotes>
     <copyright>Copyright © Petr Nejedly. All rights reserved.</copyright>
