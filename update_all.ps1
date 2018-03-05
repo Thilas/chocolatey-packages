@@ -5,7 +5,7 @@ param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot
 if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
 
 $Options = [ordered]@{
-    WhatIf        = $au_WhatIf                              #WhatIf all packages
+    WhatIf        = $au_WhatIf                              #Whatif all packages
     Force         = $false                                  #Force all packages
     Timeout       = 100                                     #Connection timeout in seconds
     UpdateTimeout = 1200                                    #Update timeout in seconds
@@ -14,14 +14,27 @@ $Options = [ordered]@{
     PushAll       = $true                                   #Allow to push multiple packages at once
     PluginPath    = ''                                      #Path to user plugins
     IgnoreOn      = @(                                      #Error message parts to set the package ignore status
+      'Could not create SSL/TLS secure channel'
+      'Could not establish trust relationship'
+      'The operation has timed out'
+      'Internal Server Error'
+      'Service Temporarily Unavailable'
+      'The connection was closed unexpectedly.'
     )
     RepeatOn      = @(                                      #Error message parts on which to repeat package updater
-        'Could not create SSL/TLS secure channel'
-        'Could not establish trust relationship'
-        'Unable to connect'
+      'Could not create SSL/TLS secure channel'             # https://github.com/chocolatey/chocolatey-coreteampackages/issues/718
+      'Could not establish trust relationship'              # -||-
+      'Unable to connect'
+      'The remote name could not be resolved'
+      'Choco pack failed with exit code 1'                  # https://github.com/chocolatey/chocolatey-coreteampackages/issues/721
+      'The operation has timed out'
+      'Internal Server Error'
+      'An exception occurred during a WebClient request'
+      'remote session failed with an unexpected state'
+      'The connection was closed unexpectedly.'
     )
-    RepeatSleep   = 0                                       #How much to sleep between repeats in seconds, by default 0
-    RepeatCount   = 1                                       #How many times to repeat on errors, by default 1
+    #RepeatSleep   = 250                                    #How much to sleep between repeats in seconds, by default 0
+    #RepeatCount   = 2                                      #How many times to repeat on errors, by default 1
 
     Report = @{
         Type = 'markdown'                                   #Report type: markdown or text
@@ -29,7 +42,7 @@ $Options = [ordered]@{
         Params= @{                                          #Report parameters:
             Github_UserRepo = $Env:github_user_repo         #  Markdown: shows user info in upper right corner
             NoAppVeyor  = $false                            #  Markdown: do not show AppVeyor build shield
-            UserMessage = "[Ignored](#ignored) | [History](#update-history) | [Force Test](https://gist.github.com/$Env:gist_id_test) | [Releases](https://github.com/Thilas/chocolatey-packages/tags) | **USING AU NEXT VERSION**"      #  Markdown, Text: Custom user message to show
+            UserMessage = "[Ignored](#ignored) | [History](#update-history) | [Force Test](https://gist.github.com/$Env:gist_id_test) | [Releases](https://github.com/$Env:github_user_repo/tags) | **USING AU NEXT VERSION**"       #  Markdown, Text: Custom user message to show
             NoIcons     = $false                            #  Markdown: don't show icon
             IconSize    = 32                                #  Markdown: icon size
             Title       = ''                                #  Markdown, Text: TItle of the report, by default 'Update-AUPackages'
@@ -59,7 +72,7 @@ $Options = [ordered]@{
     }
 
     RunInfo = @{
-        Exclude = 'password', 'apikey'                      #Option keys which contain those words will be removed
+        Exclude = 'password', 'apikey', 'apitoken'          #Option keys which contain those words will be removed
         Path    = "$PSScriptRoot\update_info.xml"           #Path where to save the run info
     }
 
@@ -80,16 +93,19 @@ $Options = [ordered]@{
     ForcedPackages = $ForcedPackages -split ' '
     BeforeEach = {
         param($PackageName, $Options )
+
         $pattern = "^${PackageName}(?:\\(?<stream>[^:]+))?(?:\:(?<version>.+))?$"
         $p = $Options.ForcedPackages | ? { $_ -match $pattern }
         if (!$p) { return }
 
-        $p -match $pattern
-        $global:au_Force   = $true
+        $global:au_Force         = $true
         $global:au_IncludeStream = $Matches['stream']
-        $global:au_Version = $Matches['version']
+        $global:au_Version       = $Matches['version']
     }
 }
+
+# gist wont work without this: https://gitter.im/chocolatey/choco?at=5a93bb0e6fba1a703a9f9532
+[System.Net.ServicePointManager]::SecurityProtocol = 3072 -bor 768 -bor [System.Net.SecurityProtocolType]::Tls -bor [System.Net.SecurityProtocolType]::Ssl3
 
 if ($ForcedPackages) { Write-Host "FORCED PACKAGES: $ForcedPackages" }
 $global:au_Root = $Root                                    #Path to the AU packages
