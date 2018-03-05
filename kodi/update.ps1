@@ -4,9 +4,8 @@ param([switch] $Force)
 . (Join-Path $PSScriptRoot '..\Common.ps1')
 
 function global:au_GetLatest {
-  $releaseUrl = 'https://api.github.com/repos/xbmc/xbmc/releases'
+  $releaseUrl = 'https://api.github.com/repos/xbmc/xbmc/releases/latest'
   $release = (Invoke-WebRequest -Uri $releaseUrl -UseBasicParsing).Content | ConvertFrom-Json
-  $release = $release | Select-Object -First 1
   $tagName = $release.tag_name -replace '-.+$'
   Write-Verbose ("TagName: {0}" -f $tagName)
   $version = Get-Version $tagName
