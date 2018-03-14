@@ -64,6 +64,7 @@ function Get-GitHubLatest {
   param(
     [string] $Repository,
     [int] $StreamFieldCount = 0, # optional, 0 means single stream
+    [switch] $SkipTagName,
     [string] $FileType,
     [scriptblock] $IsUrl32, # optional callback, param($Url, $TagName, $Version)
     [scriptblock] $IsUrl64, # optional callback, param($Url, $TagName, $Version)
@@ -83,7 +84,8 @@ function Get-GitHubLatest {
     Write-Verbose ("Stream: {0}" -f $stream)
     $release = $releases | sort Version -Descending | select -First 1
     Write-Verbose ("  Version: {0}" -f $release.Version)
-    $assets = $release.assets | ? { $_.browser_download_url -like ("*{0}*.$FileType" -f $release.tag_name) }
+    $assets = $release.assets | ? { $_.browser_download_url -like "*.$FileType" }
+    if (!$SkipTagName) { $assets = $assets | ? { $_.browser_download_url -like ('*{0}*' -f $release.tag_name) } }
 
     $urls = $assets
     if ($IsUrl32) { $urls = $urls | ? { & $IsUrl32 -Url $_.browser_download_url -TagName $release.tag_name -Version $release.Version } }

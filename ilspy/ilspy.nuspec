@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>ilspy</id>
+    <version>2.4.0.1963</version>
+    <title>ILSpy</title>
+    <authors>SharpDevelop Team</authors>
+    <owners>dtgm, Thilas</owners>
+    <licenseUrl>https://github.com/icsharpcode/ILSpy#license</licenseUrl>
+    <projectUrl>http://www.ilspy.net/</projectUrl>
+    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/02e39ee2c2509f429162c3afb6919cbdb5999278/ilspy/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description></description>
+    <summary>ILSpy is the open-source .NET assembly browser and decompiler.</summary>
+    <releaseNotes>[Releases](https://github.com/icsharpcode/ILSpy/releases)</releaseNotes>
+    <copyright>Copyright © SharpDevelop Team</copyright>
+    <tags>ilspy foss dotnet assembly decompiler</tags>
+    <projectSourceUrl>https://github.com/icsharpcode/ILSpy</projectSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/ilspy</packageSourceUrl>
+    <docsUrl>https://github.com/icsharpcode/ILSpy/wiki</docsUrl>
+    <mailingListUrl>http://community.sharpdevelop.net/forums/69.aspx</mailingListUrl>
+    <bugTrackerUrl>https://github.com/icsharpcode/ILSpy/issues</bugTrackerUrl>
+    <dependencies>
+      <dependency id="dotnet4.6.1" version="4.6.01055.20170308" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
