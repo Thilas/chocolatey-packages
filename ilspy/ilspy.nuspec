@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>ilspy</id>
-    <version>2.4.0.1963</version>
+    <version>3.0.1</version>
     <title>ILSpy</title>
     <authors>SharpDevelop Team</authors>
     <owners>dtgm, Thilas</owners>
@@ -11,7 +11,18 @@
     <projectUrl>http://www.ilspy.net/</projectUrl>
     <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/02e39ee2c2509f429162c3afb6919cbdb5999278/ilspy/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description></description>
+    <description><![CDATA[ILSpy is the open-source .NET assembly browser and decompiler.
+
+### Features
+* Decompilation to C#
+* Whole-project decompilation (csproj, not sln!)
+* Search for types/methods/properties (substring)
+* Hyperlink-based type/method/property navigation
+* Base/Derived types navigation, history
+* BAML to XAML decompiler
+* Extensible via [plugins](https://github.com/icsharpcode/ILSpy/wiki/Plugins) (MEF)
+* Check out the [language support status](https://github.com/icsharpcode/ILSpy/issues/829)
+]]></description>
     <summary>ILSpy is the open-source .NET assembly browser and decompiler.</summary>
     <releaseNotes>[Releases](https://github.com/icsharpcode/ILSpy/releases)</releaseNotes>
     <copyright>Copyright © SharpDevelop Team</copyright>
