@@ -19,8 +19,8 @@ function global:au_GetLatest {
 function global:au_SearchReplace {
     @{
         'tools\chocolateyBeforeModify.ps1' = @{
-            "^([$]packageName\s*=\s*)'.*'$"  = "`$1'$($Latest.PackageName)'"
-            "^([$]softwareName\s*=\s*)'.*'$" = "`$1'$($Latest.UninstallSoftwareName)'"
+            "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+            "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
         }
         'tools\chocolateyInstall.ps1'      = @{
             "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
