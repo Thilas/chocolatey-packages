@@ -8,18 +8,18 @@ $ErrorActionPreference = 'Stop'
 
 # *** Automatically filled ***
 $packageArgs = @{
-  packageName    = ''
-  fileType       = ''
-  url            = ''
-  url64bit       = ''
-  #unzipLocation  = $toolsDir
-  #file           = Join-Path $toolsDir 'NAME_OF_EMBEDDED_INSTALLER_FILE'
-  silentArgs     = ''
-  checksum       = ''
-  checksumType   = ''
-  checksum64     = ''
-  checksumType64 = ''
-  validExitCodes = @()
+    packageName    = ''
+    fileType       = ''
+    url            = ''
+    url64bit       = ''
+    #unzipLocation  = $toolsDir
+    #file           = Join-Path $toolsDir 'NAME_OF_EMBEDDED_INSTALLER_FILE'
+    silentArgs     = ''
+    checksum       = ''
+    checksumType   = ''
+    checksum64     = ''
+    checksumType64 = ''
+    validExitCodes = @()
 }
 # *** Automatically filled ***
 

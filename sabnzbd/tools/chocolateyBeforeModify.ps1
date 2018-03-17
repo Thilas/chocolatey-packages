@@ -10,19 +10,19 @@ $softwareName = 'SABnzbd*'
 Write-Host 'Stopping services if they''re running...'
 Stop-Service '*' -Include 'SABnzbd', 'SABhelper' -Force
 
-. (Join-Path $toolsDir 'Get-InstallPath.ps1')
+. "$toolsDir\Get-InstallPath.ps1"
 $installPath = Get-InstallPath $packageName $softwareName
 
 if ($installPath) {
-  Push-Location $installPath
+    Push-Location $installPath
 
-  Write-Host 'Uninstalling services...'
+    Write-Host 'Uninstalling services...'
 
-  $service = 'SABnzbd-service.exe'
-  if (Test-Path $service) { & ".\$service" remove }
+    $service = 'SABnzbd-service.exe'
+    if (Test-Path $service) { & ".\$service" remove }
   
-  $helper = 'SABnzbd-helper.exe'
-  if (Test-Path $helper) { & ".\$helper" remove }
+    $helper = 'SABnzbd-helper.exe'
+    if (Test-Path $helper) { & ".\$helper" remove }
 
-  Pop-Location
+    Pop-Location
 }

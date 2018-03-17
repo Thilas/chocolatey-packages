@@ -1,6 +1,6 @@
 ﻿#Name can be 'random N' to randomly force the Nth group of packages.
 
-param( [string[]] $Name, [string] $Root = "$PSScriptRoot", [switch]$ThrowOnErrors )
+param( [string[]] $Name, [string] $Root = "$PSScriptRoot", [switch] $ThrowOnErrors )
 
 if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
 $global:au_root = Resolve-Path $Root
@@ -8,7 +8,7 @@ $global:au_root = Resolve-Path $Root
 if (($Name.Length -gt 0) -and ($Name[0] -match '^random (.+)')) {
     [array] $lsau = lsau
 
-    $group = [int]$Matches[1]
+    $group = [int] $Matches[1]
     $n = (Get-Random -Maximum $group)
     Write-Host "TESTING GROUP $($n+1) of $group"
 

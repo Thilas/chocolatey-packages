@@ -7,12 +7,12 @@ $packageVersion = $Env:ChocolateyPackageVersion
 
 $shortcutName = "Eclipse $packageVersion.lnk"
 $shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) $shortcutName
-If (Test-Path $shortcutPath) {
-  Uninstall-ChocolateyShortcut $shortcutPath -UnpinFromTaskbar
+if (Test-Path $shortcutPath) {
+    Uninstall-ChocolateyShortcut $shortcutPath -UnpinFromTaskbar
 }
 $shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonDesktopDirectory)) $shortcutName
-If (Test-Path $shortcutPath) {
-  Uninstall-ChocolateyShortcut $shortcutPath
+if (Test-Path $shortcutPath) {
+    Uninstall-ChocolateyShortcut $shortcutPath
 }
 
 $logPath = Join-Path $Env:ChocolateyPackageFolder "eclipse.$packageVersion.txt"
