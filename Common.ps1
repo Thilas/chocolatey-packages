@@ -63,6 +63,7 @@ function Get-GitHubLatest {
     [CmdletBinding()]
     param(
         [string] $Repository,
+        [scriptblock] $GetTagName, # optional callback, param($TagName, $Release)
         [int] $StreamFieldCount = 0, # optional, 0 means single stream
         [string] $FileType,
         [scriptblock] $IsUrl32, # optional callback, param($Url, $TagName, $Version)
@@ -71,7 +72,13 @@ function Get-GitHubLatest {
     )
     $releasesUrl = "https://api.github.com/repos/$Repository/releases?per_page=10"
     $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
-    $releases | % { $_ | Add-Member 'Version' (Get-Version $_.tag_name) }
+    $releases | % {
+        $tagName = $_.tag_name
+        if ($GetTagName) {
+            $tagName = & $GetTagName -TagName $tagName -Release $release
+        }
+        $_ | Add-Member 'Version' (Get-Version $tagName)
+    }
     $streams = $releases | group { $_.Version.ToString($StreamFieldCount) }
     if ($StreamFieldCount -ge 2) {
         $streams = $streams | sort { [version] $_.Name } -Descending

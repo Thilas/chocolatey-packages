@@ -5,6 +5,9 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     return Get-GitHubLatest -Repository 'icsharpcode/ILSpy' `
+                            -GetTagName { param($TagName)
+                                $TagName -replace '-final$', ''
+                            } `
                             -FileType 'zip' `
                             -IsUrl32 { param($Url, $TagName, $Version) $Url -like '*binaries*' }
 }

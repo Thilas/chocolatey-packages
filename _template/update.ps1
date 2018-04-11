@@ -56,6 +56,7 @@ function global:au_GetLatest {
                                UninstallValidExitCodes = $uninstallValidExitCodes
                            }
     return Get-GitHubLatest -Repository 'user/project' `
+                            #-GetTagName { param($TagName, $Release) '1.0.0' } `
                             #-StreamFieldCount 2 `
                             -FileType $fileType `
                             #-IsUrl32 { param($Url, $TagName, $Version) $Url -like '*x86*' } `
