@@ -5,9 +5,9 @@ $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 # *** Automatically filled ***
 $packageArgs = @{
     packageName   = 'ilspy'
-    url           = 'https://github.com/icsharpcode/ILSpy/releases/download/v3.1-beta1/ILSpy_binaries_Net46_Win_3.1.0.3599-beta1.zip'
+    url           = 'https://github.com/icsharpcode/ILSpy/releases/download/v3.1-final/ILSpy_binaries_3.1.0.3652.zip'
     unzipLocation = $toolsDir
-    checksum      = '3f486a9fb33252fb2d23461795df932f6927c1b9c3cba1f57fe8058c3e6105a3'
+    checksum      = 'e458fe54609da0e292d53d9126738df1a4c89960a18dbc54e595ecc0550aab1f'
     checksumType  = 'sha256'
 }
 # *** Automatically filled ***
