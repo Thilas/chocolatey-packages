@@ -14,7 +14,7 @@
             $file = Split-Path $file
 
             if ($file -and (Test-Path $file)) {
-                return $file
+                $installPath = $file
             } else {
                 Write-Warning "$packageName install not found: $file"
             }
@@ -27,5 +27,5 @@
         $key | % {Write-Warning "- $_.DisplayName"}
     }
 
-    return $null
+    return $installPath
 }

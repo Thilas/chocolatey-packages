@@ -23,23 +23,24 @@ $installPath = Get-InstallPath $packageName $softwareName
 
 if ($installPath) {
     Push-Location $installPath
+    try {
+        Write-Host 'Installing services...'
 
-    Write-Host 'Installing services...'
+        $helper = 'SABnzbd-helper.exe'
+        if (Test-Path $helper) {
+            & ".\$helper" install
+            Set-Service 'SABhelper' -StartupType Automatic
+        }
 
-    $helper = 'SABnzbd-helper.exe'
-    if (Test-Path $helper) {
-        & ".\$helper" install
-        Set-Service 'SABhelper' -StartupType Automatic
+        $service = 'SABnzbd-service.exe'
+        if (Test-Path $service) {
+            $iniPath = Join-Path $Env:LOCALAPPDATA 'sabnzbd\sabnzbd.ini'
+            & ".\$service" -f $iniPath install
+            Set-Service 'SABnzbd' -StartupType Automatic
+        }
+    } finally {
+        Pop-Location
     }
-
-    $service = 'SABnzbd-service.exe'
-    if (Test-Path $service) {
-        $iniPath = Join-Path $Env:LOCALAPPDATA 'sabnzbd\sabnzbd.ini'
-        & ".\$service" -f $iniPath install
-        Set-Service 'SABnzbd' -StartupType Automatic
-    }
-
-    Pop-Location
 }
 
 Write-Host 'Starting services...'
