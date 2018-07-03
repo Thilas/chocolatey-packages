@@ -135,6 +135,7 @@ function Get-LinksLatest {
     [CmdletBinding()]
     param(
         [string] $ReleasesUrl,
+        [scriptblock] $GetVersion, # optional callback, param($Url)
         [int] $StreamFieldCount,
         [string] $FileType,
         [scriptblock] $IsLink, # optional callback, param($Url)
@@ -145,9 +146,10 @@ function Get-LinksLatest {
     )
     $releases = Invoke-WebRequest -Uri $ReleasesUrl -UseBasicParsing
 
+    if (!$GetVersion) { $GetVersion = { param($Url) Get-Version $Url } }
     $links = $releases.Links | ? { $_.href -like "*.$FileType" }
     if ($IsLink) { $links = $links | ? { & $IsLink -Url $_.href } }
-    $links | % { $_ | Add-Member 'Version' (Get-Version $_.href) }
+    $links | % { $_ | Add-Member 'Version' (& $GetVersion -Url $_.href) }
     $streams = $links | group { $_.Version.ToString($StreamFieldCount) }
     if ($StreamFieldCount -ge 2) {
         $streams = $streams | sort { [version] $_.Name } -Descending
@@ -157,12 +159,12 @@ function Get-LinksLatest {
 
     function Get-Stream($stream, $release) {
         Write-Verbose ("Stream: {0}" -f $stream)
-        $versions = @($release | select -Unique 'Version' )
-        if ($versions.Length -ne 1) { throw "Version not found for stream $stream." }
-        $version = $versions[0].Version
-        Write-Verbose ("  Version: {0}" -f $version)
+        $group = $release | group { $_.Version } | sort { & $GetVersion -Url $_.Name } -Descending | select -First 1
+        if (!$group) { throw "Version not found for stream $stream." }
+        $version = & $GetVersion -Url $group.Name
+        Write-Verbose "  Version: $version"
 
-        $urls = $release
+        $urls = $group.Group
         if ($IsUrl32) { $urls = $urls | ? { & $IsUrl32 -Url $_.href -Version $version } }
         $urls = @($urls | % { $_.href } | select -Unique)
         if ($urls.Length -ne 1) {
@@ -177,7 +179,7 @@ function Get-LinksLatest {
         Write-Verbose ("  Url32: {0}" -f $stream.Url32)
 
         if ($IsUrl64) {
-            $urls = $release | ? { & $IsUrl64 -Url $_.href -TagName $tagName -Version $version -Matches $Matches }
+            $urls = $group.Group | ? { & $IsUrl64 -Url $_.href -TagName $tagName -Version $version -Matches $Matches }
             $urls = @($urls | % { $_.href } | select -Unique)
             if ($urls.Length -ne 1) {
                 Write-Verbose 'Urls:'
