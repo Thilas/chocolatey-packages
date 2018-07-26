@@ -4,12 +4,12 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    $latest = Get-BasicLatest -ReleaseUrl 'https://www.eclipse.org/downloads/eclipse-packages/?osType=win32' `
-                              -TagNamePattern 'Eclipse .+ \((?<tagName>[^)]+)\) +Release' `
+    $latest = Get-BasicLatest -ReleaseUrl 'https://www.eclipse.org/downloads/packages/' `
+                              -TagNamePattern '<a href="/downloads/packages/">Eclipse .+ \((?<TagName>[^)]+)\)</a>' `
                               -SkipTagName `
                               -FileType 'zip' `
-                              -IsUrl32 { param($Url) $Url -like "*jee*" -and $Url -notlike '*x86_64*' } `
-                              -IsUrl64 { param($Url) $Url -like "*jee*" -and $Url -like '*x86_64*' }
+                              -IsUrl32 { param($Url) $Url -like "*jee*win32*" -and $Url -notlike '*x86_64*' } `
+                              -IsUrl64 { param($Url) $Url -like "*jee*win32*" -and $Url -like '*x86_64*' }
     $latest.Url32 += '&r=1'
     $latest.Url64 += '&r=1'
     return $latest

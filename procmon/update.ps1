@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     return Get-BasicLatest -ReleaseUrl 'https://docs.microsoft.com/en-us/sysinternals/downloads/procmon' `
-                           -TagNamePattern '>Process Monitor v(?<tagName>[^<]+)<' `
+                           -TagNamePattern '>Process Monitor v(?<TagName>[^<]+)<' `
                            -SkipTagName `
                            -FileType 'zip' `
                            -Latest @{ ValidExitCodes = '0' }

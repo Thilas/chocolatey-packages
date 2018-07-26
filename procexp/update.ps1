@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     return Get-BasicLatest -ReleaseUrl 'https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer' `
-                           -TagNamePattern '>Process Explorer v(?<tagName>[^<]+)<' `
+                           -TagNamePattern '>Process Explorer v(?<TagName>[^<]+)<' `
                            -SkipTagName `
                            -FileType 'zip' `
                            -Latest @{ ValidExitCodes = '0' }

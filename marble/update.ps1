@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     return Get-BasicLatest -ReleaseUrl 'https://marble.kde.org/install.php' `
-                           -TagNamePattern '>Marble (?<tagName>[^ ]+) \(Windows ' `
+                           -TagNamePattern '>Marble (?<TagName>[^ ]+) \(Windows ' `
                            -FileType 'exe' `
                            -IsUrl32 { param($Url) $Url -like '*x86*' } `
                            -IsUrl64 { param($Url) $Url -like '*x64*' } `

@@ -6,7 +6,7 @@ function Get-BasicLatest {
     [CmdletBinding()]
     param(
         [string] $ReleaseUrl,
-        [string] $TagNamePattern, # optional
+        [string] $TagNamePattern, # optional, must include a TagName capture
         [scriptblock] $GetTagName, # optional callback, param($Release)
         [switch] $SkipTagName,
         [string] $FileType,
@@ -20,7 +20,7 @@ function Get-BasicLatest {
         $tagName = & $GetTagName -Release $release
     } else {
         if ($release.Content -notmatch $TagNamePattern) { throw 'Tag name not found.' }
-        $tagName = $Matches['tagName']
+        $tagName = $Matches.TagName
     }
     Write-Verbose ("TagName: {0}" -f $tagName)
     $version = Get-Version $tagName

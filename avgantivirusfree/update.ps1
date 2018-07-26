@@ -9,12 +9,12 @@ function global:au_GetLatest {
                            -GetTagName { param($Release)
                                $urls = @($Release.Links | ? { $_.href -like '*.exe' -and $_.href -notlike '*x86*' -and $_.href -notlike '*x64*' })
                                if ($urls.Length -ne 1) { throw 'Tag name not found (1).' }
-                               if ($urls[0].href -notmatch '_(?<tagName>\d+)\.exe') { throw 'Tag name not found (2).' }
+                               if ($urls[0].href -notmatch '_(?<TagName>\d+)\.exe') { throw 'Tag name not found (2).' }
                                $releaseFileUrl = Get-Url $ReleaseUrl $urls[0].href
                                $releaseFile = Invoke-WebRequest -Uri $releaseFileUrl -UseBasicParsing
                                $releaseDateTime = [datetime]::Parse($releaseFile.Headers['Last-Modified'])
                                $major = $releaseDateTime.Year % 100
-                               $minor = $Matches['tagName']
+                               $minor = $Matches.TagName
                                $build = $releaseDateTime.ToString('MMdd')
                                "$major.$minor.$build"
                            } `

@@ -40,7 +40,7 @@ function global:au_GetLatest {
     #$uninstallValidExitCodes = '0, 3010, 1605, 1614, 1641' # https://msdn.microsoft.com/en-us/library/aa376931(v=vs.85).aspx
 
     return Get-BasicLatest -ReleaseUrl 'https://' `
-                           -TagNamePattern 'Version (?<tagName>[^ ]+) ' `
+                           -TagNamePattern 'Version (?<TagName>[^ ]+) ' `
                            #-GetTagName { param($Release) '1.0.0' } `
                            #-SkipTagName `
                            -FileType $fileType `

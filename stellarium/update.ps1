@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     return Get-BasicLatest -ReleaseUrl 'http://www.stellarium.org/' `
-                           -TagNamePattern '>latest version is (?<tagName>[^<]+)<' `
+                           -TagNamePattern '>latest version is (?<TagName>[^<]+)<' `
                            -FileType 'exe*' `
                            -IsUrl32 { param($Url) $Url -like '*win32*' } `
                            -IsUrl64 { param($Url) $Url -like '*win64*' } `

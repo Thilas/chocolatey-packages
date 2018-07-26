@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     return Get-BasicLatest -ReleaseUrl 'http://www.ltr-data.se/opencode.html' `
-                           -TagNamePattern 'Current version (?<tagName>.+) built' `
+                           -TagNamePattern 'Current version (?<TagName>.+) built' `
                            -FileType 'exe' `
                            -Latest @{
                                SilentArgs              = '-y'
