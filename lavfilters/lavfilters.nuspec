@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>lavfilters</id>
-    <version>0.71</version>
+    <version>0.73</version>
     <title>LAV Filters</title>
     <authors>Hendrik Leppkes</authors>
     <owners>Thilas</owners>
