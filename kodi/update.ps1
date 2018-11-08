@@ -19,12 +19,12 @@ function global:au_GetLatest {
 
     $urls = @($links | ? { $_.href -like '*win32*' } | % { $_.href } | select -Unique)
     if ($urls.Length -ne 1) { throw 'Url (x86) not found.' }
-    $url32 = Get-Url $downloadUrl $urls[0]
+    $url32 = Get-Url $downloadUrl $urls[0] -ForceHttps
     Write-Verbose ("Url32: {0}" -f $url32)
     $urls = @($links | ? { $_.href -like '*win64*' } | % { $_.href } | select -Unique)
     if ($urls.Length -gt 0) {
         if ($urls.Length -ne 1) { throw 'Url (x64) not found.' }
-        $url64 = Get-Url $downloadUrl $urls[0]
+        $url64 = Get-Url $downloadUrl $urls[0] -ForceHttps
         Write-Verbose ("Url64: {0}" -f $url64)
     } else {
         $url64 = $url32

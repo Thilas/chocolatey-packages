@@ -23,24 +23,24 @@ $validExitCodes = @()
 [array] $key = Get-UninstallRegistryKey -SoftwareName $softwareName
 
 if ($key.Count -eq 1) {
-    $key | % { 
-        if ($_.UninstallString) {
-            function Split-CommandLine {
-                param([string] $file)
-                return $file
-            }
-            # Remove quotes and trailing arguments if any
-            $file = Invoke-Expression "Split-CommandLine $($_.UninstallString)"
-        }
-
-        if ($file -and (Test-Path $file)) {
+    function Get-File ([string] $path) {
+        # Remove quotes and trailing arguments if any
+        if (!$path) { return }
+        if (Test-Path $path) { return $path }
+        function Split-CommandLine ([string] $path) { $path }
+        $path = Invoke-Expression "Split-CommandLine $path"
+        if (Test-Path $path) { return $path }
+    }
+    $key | % {
+        $file = Get-File $_.UninstallString
+        if ($file) {
             Uninstall-ChocolateyPackage -PackageName $packageName `
                                         -FileType $fileType `
                                         -SilentArgs $silentArgs `
                                         -ValidExitCodes $validExitCodes `
-                                        -File $file
+                                        -File $file | Out-Null
         } else {
-            Write-Warning "$packageName has already been uninstalled by other means. Unknown uninstaller: $file ($($_.UninstallString))."
+            Write-Warning "Unknown uninstaller: $($_.UninstallString)"
         }
 
         # The Product Code GUID is all that should be passed for MSI, and very 
@@ -57,7 +57,7 @@ if ($key.Count -eq 1) {
         #                            -FileType $fileType `
         #                            -SilentArgs $silentArgs `
         #                            -ValidExitCodes $validExitCodes `
-        #                            -File $file
+        #                            -File $file | Out-Null
     }
 } elseif ($key.Count -eq 0) {
     Write-Warning "$packageName has already been uninstalled by other means."

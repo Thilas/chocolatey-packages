@@ -18,7 +18,7 @@ $dll = Join-Path $env:SystemRoot 'System32\ShellExt\HashCheck.dll'
 if (Test-Path $dll) {
     $fileType = 'exe'
     $silentArgs = "/s /u /i /n $dll"
-    Uninstall-ChocolateyPackage -PackageName $packageName -FileType $fileType -SilentArgs $silentArgs -ValidExitCodes $validExitCodes -File $file
+    Uninstall-ChocolateyPackage -PackageName $packageName -FileType $fileType -SilentArgs $silentArgs -ValidExitCodes $validExitCodes -File $file | Out-Null
 } else {
     Write-Host "$packageName has already been uninstalled by other means."
 }
