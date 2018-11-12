@@ -25,6 +25,11 @@ function global:au_SearchReplace {
             "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"
         }
+        'tools\VERIFICATION.txt' = @{
+            '(^Version\s+:).*'      = "`${1} $($Latest.Version)"
+            '(^URL\s+:).*'          = "`${1} $($Latest.URL32)"
+            '(^Checksum\s+:).*'     = "`${1} $($Latest.Checksum32)"
+        }
     }
 }
 
