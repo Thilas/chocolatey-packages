@@ -6,7 +6,9 @@ param([switch] $Force)
 function global:au_GetLatest {
     return Get-BasicLatest -ReleaseUrl 'http://www.ltr-data.se/opencode.html' `
                            -TagNamePattern 'Current version (?<TagName>.+) built' `
+                           -SkipTagName `
                            -FileType 'exe' `
+                           -IsUrl32 { param($Url) $Url -like '*/imdiskinst.exe' } `
                            -Latest @{
                                SilentArgs              = '-y'
                                ValidExitCodes          = '0'
