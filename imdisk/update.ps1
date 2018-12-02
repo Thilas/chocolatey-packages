@@ -6,9 +6,7 @@ param([switch] $Force)
 function global:au_GetLatest {
     return Get-BasicLatest -ReleaseUrl 'http://www.ltr-data.se/opencode.html' `
                            -TagNamePattern 'Current version (?<TagName>.+) built' `
-                           -SkipTagName `
                            -FileType 'exe' `
-                           -IsUrl32 { param($Url) $Url -like '*/imdiskinst.exe' } `
                            -Latest @{
                                SilentArgs              = '-y'
                                ValidExitCodes          = '0'
@@ -17,6 +15,11 @@ function global:au_GetLatest {
                                UninstallSilentArgs     = '-y'
                                UninstallValidExitCodes = '0'
                            }
+}
+
+function global:au_BeforeUpdate() {
+    $Latest.ChecksumType32 = 'sha256'
+    $Latest.Checksum32 = Get-RemoteChecksum -Url $Latest.Url32 -Algorithm $Latest.ChecksumType32 
 }
 
 function global:au_SearchReplace {
@@ -40,4 +43,4 @@ function global:au_SearchReplace {
     }
 }
 
-Update-Package -ChecksumFor 32 -Force:$Force
+Update-Package -ChecksumFor none -Force:$Force
