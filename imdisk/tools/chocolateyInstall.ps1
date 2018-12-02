@@ -4,9 +4,9 @@
 $packageArgs = @{
     packageName    = 'imdisk'
     fileType       = 'exe'
-    url            = 'http://www.ltr-data.se/files/imdiskinst_2.0.9.exe'
+    url            = 'http://www.ltr-data.se/files/imdiskinst_2.0.10.exe'
     silentArgs     = '-y'
-    checksum       = '11a0d1c855c7f085c98a2fbaba92a14372e479510c9f6f8bed1e8ec449d1e5f1'
+    checksum       = '1e5291ad53e8b90f88882eeef791e8b5f162aef020e55a633cec4d1581acce4e'
     checksumType   = 'sha256'
     validExitCodes = @(0)
 }
