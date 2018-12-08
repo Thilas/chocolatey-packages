@@ -9,7 +9,7 @@
     <owners>alanstevens,Thilas</owners>
     <licenseUrl>https://github.com/StrawberryPerl/Perl-Dist-Strawberry/blob/master/LICENSE</licenseUrl>
     <projectUrl>http://strawberryperl.com/</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/58d4825d117dae7fcf9100ba5d4fa0e4563ff7f7/strawberryperl/icon.png</iconUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@58d4825d117dae7fcf9100ba5d4fa0e4563ff7f7/strawberryperl/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[**Perl** is a programming language suitable for writing simple scripts as well as complex applications - see https://www.perl.org
 

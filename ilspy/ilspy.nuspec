@@ -9,7 +9,7 @@
     <owners>dtgm, Thilas</owners>
     <licenseUrl>https://github.com/icsharpcode/ILSpy#license</licenseUrl>
     <projectUrl>http://www.ilspy.net/</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/02e39ee2c2509f429162c3afb6919cbdb5999278/ilspy/icon.png</iconUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@02e39ee2c2509f429162c3afb6919cbdb5999278/ilspy/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[ILSpy is the open-source .NET assembly browser and decompiler.
 
