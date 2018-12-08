@@ -19,7 +19,7 @@ function global:au_GetLatest {
 
 function global:au_BeforeUpdate() {
     $Latest.ChecksumType32 = 'sha256'
-    $Latest.Checksum32 = Get-RemoteChecksum -Url $Latest.Url32 -Algorithm $Latest.ChecksumType32 
+    $Latest.Checksum32 = Get-RemoteChecksum -Url $Latest.Url32 -Algorithm $Latest.ChecksumType32
 }
 
 function global:au_SearchReplace {
