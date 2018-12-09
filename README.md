@@ -13,7 +13,7 @@ The repository is setup so that you can manage your packages entirely from the G
 ## Reminders
 
 * All packages in this repo should be in conformity with the [contributing guidelines](https://github.com/Thilas/chocolatey-packages/wiki/Contributing-guidelines).
-* Get the production url (for **icons**) by pasting the raw url [here](https://rawgit.com/) and using the right (CDN) result.
+* Get the production url (for **icons**) by pasting the raw url [here](https://www.jsdelivr.com/) and using the right (CDN) result.
 
 ## Prerequisites
 

@@ -1,4 +1,4 @@
-# <img src="https://cdn.rawgit.com/Thilas/chocolatey-packages/commit/id/icon.png" width="48" height="48"/> [Title](https://chocolatey.org/packages/id)
+# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@commit/id/icon.png" width="48" height="48"/> [Title](https://chocolatey.org/packages/id)
 
 Description using MarkDown
 
