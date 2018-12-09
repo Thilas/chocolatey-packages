@@ -1,4 +1,4 @@
-<img src="https://cdn.rawgit.com/Thilas/chocolatey-packages/02e39ee2c2509f429162c3afb6919cbdb5999278/ilspy/icon.png" width="48" height="48"/> [ILSpy](https://chocolatey.org/packages/ilspy)
+<img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@02e39ee2c2509f429162c3afb6919cbdb5999278/ilspy/icon.png" width="48" height="48"/> [ILSpy](https://chocolatey.org/packages/ilspy)
 
 ILSpy is the open-source .NET assembly browser and decompiler.
 

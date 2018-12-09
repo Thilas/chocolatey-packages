@@ -1,3 +1,3 @@
-# <img src="https://cdn.rawgit.com/Thilas/chocolatey-packages/90d6238c8db69f85cbfb32e3bcd7021c2303aba3/hashcheck/icon.png" width="48" height="48"/> [HashCheck Shell Extension](https://chocolatey.org/packages/hashcheck)
+# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@90d6238c8db69f85cbfb32e3bcd7021c2303aba3/hashcheck/icon.png" width="48" height="48"/> [HashCheck Shell Extension](https://chocolatey.org/packages/hashcheck)
 
 The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer. In addition to integrating file checksumming functionality into Windows, HashCheck can also create and verify SFV files (and other forms of checksum files, such as .md5 files). It is fast and efficient, with a very light disk and memory footprint, and it is open-source.

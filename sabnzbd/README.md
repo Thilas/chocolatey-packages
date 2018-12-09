@@ -1,4 +1,4 @@
-# <img src="https://cdn.rawgit.com/Thilas/chocolatey-packages/7de16ead548f4491ce159aa5c8704cb1ed9412b2/sabnzbd/icon.png" width="48" height="48"/> [SABnzbd](https://chocolatey.org/packages/sabnzbd)
+# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@7de16ead548f4491ce159aa5c8704cb1ed9412b2/sabnzbd/icon.png" width="48" height="48"/> [SABnzbd](https://chocolatey.org/packages/sabnzbd)
 
 SABnzbd is a program to download binary files from Usenet servers. Many people upload all sorts of interesting material to Usenet and you need a special program to get this material with the least effort.
 
