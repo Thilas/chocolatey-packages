@@ -48,9 +48,6 @@ For example: `--params "'/InstallationPath=C:\path\to\installation /Multi-User'"
     <docsUrl>https://wiki.eclipse.org/</docsUrl>
     <mailingListUrl>https://dev.eclipse.org/mailman/listinfo</mailingListUrl>
     <bugTrackerUrl>https://bugs.eclipse.org/bugs/</bugTrackerUrl>
-    <dependencies>
-      <dependency id="jdk8" version="8.0.131" />
-    </dependencies>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
