@@ -74,8 +74,10 @@ if (Test-Path $OtherKey) {
 $UninstallKey = 'hklm:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HashCheck Shell Extension'
 if (Test-Path $UninstallKey) {
    Set-ItemProperty $UninstallKey -Name 'DisplayIcon' -Value $NewDllpath -Force
+   $UninstallString = "regsvr32.exe /u /i /n `"$NewDllpath`""
+   Set-ItemProperty $UninstallKey -Name 'UninstallString' -Value $UninstallString -Force
 
-   $NewUninstallString = "regsvr32.exe /u /i /n /s `"$NewDllpath`""
-   Set-ItemProperty $UninstallKey -Name 'QuietUninstallString' -Value $NewUninstallString -Force
+   $QuietUninstallString = $UninstallString -replace ' /u ',' /s /u '
+   Set-ItemProperty $UninstallKey -Name 'QuietUninstallString' -Value $QuietUninstallString -Force
 }
 
