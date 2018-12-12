@@ -21,20 +21,26 @@ New-Item "$fileLocation.ignore" -Type file -Force | Out-Null
 #    https://github.com/gurnec/HashCheck/issues/15
 # The manipulations below should "fix" the HashCheck install.
 
-# Move dlls
 $OldPath = 'ShellExt\HashCheck.dll'
-$Dllpath = "$env:ProgramFiles\HashCheck\HashCheck.dll"
-$Dll32path = "${env:ProgramFiles(x86)}\HashCheck\HashCheck.dll"
+$NewDllpath = Join-Path $env:ProgramFiles 'HashCheck\HashCheck.dll'
+$NewDll32path = Join-Path ${env:ProgramFiles(x86)} 'HashCheck\HashCheck.dll'
 
-if (test-path "$env:systemroot\System32\$OldPath") {
-    $null = New-Item -ItemType File -Path $Dllpath -Force
-    Copy-Item "$env:systemroot\System32\$OldPath" $Dllpath -Force
-    Remove-Item -Path "$env:systemroot\System32\$OldPath" -Force -ErrorAction SilentlyContinue
+# Move the sysnative version
+if (Test-Path "$env:systemroot\System32\$OldPath") {
+   if (-not (Test-Path (Split-Path $NewDllpath))) {
+      $null = New-Item -ItemType Directory -Path (Split-Path $NewDllpath) -Force
+   }
+   Copy-Item "$env:systemroot\System32\$OldPath" $NewDllpath -Force
+   Remove-Item -Path "$env:systemroot\System32\$OldPath" -Force -ErrorAction SilentlyContinue
 }
-if (test-path "$env:systemroot\SysWOW64\$OldPath") {
-    $null = New-Item -ItemType File -Path $Dll32path -Force
-    Copy-Item "$env:systemroot\SysWOW64\$OldPath" $Dll32path -Force
-    Remove-Item -Path "$env:systemroot\SysWOW64\$OldPath" -Force -ErrorAction SilentlyContinue
+
+# Then the 32-bit version on 64-bit systems
+if (Test-Path "$env:systemroot\SysWOW64\$OldPath") {
+   if (-not (Test-Path (Split-Path $NewDll32path))) {
+      $null = New-Item -ItemType Directory -Path (Split-Path $NewDll32path) -Force
+   }
+   Copy-Item "$env:systemroot\SysWOW64\$OldPath" $NewDll32path -Force
+   Remove-Item -Path "$env:systemroot\SysWOW64\$OldPath" -Force -ErrorAction SilentlyContinue
 }
 
 # modify registry
@@ -43,13 +49,13 @@ $DefaultKeys = @(
     'hklm:\SOFTWARE\Classes\CLSID\{705977C7-86CB-4743-BFAF-6908BD19B7B0}\InprocServer32',
     'hklm:\SOFTWARE\Classes\Wow6432Node\CLSID\{705977C7-86CB-4743-BFAF-6908BD19B7B0}\InprocServer32',
     'hklm:\SOFTWARE\Wow6432Node\Classes\CLSID\{705977C7-86CB-4743-BFAF-6908BD19B7B0}\InprocServer32'
-    'hklm:\SOFTWARE\Classes\HashCheck\DefaultIcon',
+    'hklm:\SOFTWARE\Classes\HashCheck\DefaultIcon'
 )
 foreach ($key in $DefaultKeys) {
     if (Test-Path $key) {
         $value = (Get-ItemProperty $key).'(Default)'
-        $NewValue = $value -replace [regex]::Escape("$env:systemroot\System32\$OldPath"),$Dllpath
-        $NewValue = $NewValue -replace [regex]::Escape("$env:systemroot\SysWOW64\$OldPath"),$Dll32path
+        $NewValue = $value -replace [regex]::Escape("$env:systemroot\System32\$OldPath"),$NewDllpath
+        $NewValue = $NewValue -replace [regex]::Escape("$env:systemroot\SysWOW64\$OldPath"),$NewDll32path
         if ($value -ne $NewValue) {
             Set-ItemProperty $key -Name '(Default)' -Value $NewValue -Force
         } 
@@ -59,24 +65,17 @@ foreach ($key in $DefaultKeys) {
 $OtherKey = 'hklm:\SOFTWARE\Classes\HashCheck'
 if (Test-Path $OtherKey) {
     $value = (Get-ItemProperty $OtherKey).FriendlyTypeName
-    $NewValue = $value -replace [regex]::Escape("$env:systemroot\System32\$OldPath"),$Dllpath
+    $NewValue = $value -replace [regex]::Escape("$env:systemroot\System32\$OldPath"),$NewDllpath
     if ($value -ne $NewValue) {
         Set-ItemProperty $OtherKey -Name 'FriendlyTypeName' -Value $NewValue -Force
     }
 }
 
-$LastKey = 'hklm:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HashCheck Shell Extension'
-if (Test-Path $LastKey) {
-    $value = (Get-ItemProperty $LastKey).DisplayIcon
-    $NewValue = $value -replace [regex]::Escape("$env:systemroot\System32\$OldPath"),$Dllpath
-    if ($value -ne $NewValue) {
-        Set-ItemProperty $LastKey -Name 'DisplayIcon' -Value $NewValue
-    }
+$UninstallKey = 'hklm:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HashCheck Shell Extension'
+if (Test-Path $UninstallKey) {
+   Set-ItemProperty $UninstallKey -Name 'DisplayIcon' -Value $NewDllpath -Force
 
-    $value = (Get-ItemProperty $LastKey).UninstallString
-    $NewValue = $value -replace [regex]::Escape("$env:systemroot\System32\$OldPath"),$Dllpath
-    if ($value -ne $NewValue) {
-        Set-ItemProperty $LastKey -Name 'UninstallString' -Value $NewValue
-    }
+   $NewUninstallString = "regsvr32.exe /u /i /n /s `"$NewDllpath`""
+   Set-ItemProperty $UninstallKey -Name 'QuietUninstallString' -Value $NewUninstallString -Force
 }
 
