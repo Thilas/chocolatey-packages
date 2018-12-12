@@ -9,7 +9,7 @@
     <owners>Thilas,Waterdrop</owners>
     <licenseUrl>https://github.com/SubtitleEdit/subtitleedit/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>http://www.nikse.dk/SubtitleEdit/</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/90d6238c8db69f85cbfb32e3bcd7021c2303aba3/subtitleedit/icon.png</iconUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@90d6238c8db69f85cbfb32e3bcd7021c2303aba3/subtitleedit/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[With SE you can easily adjust a subtitle if it is out of sync with the video in several different ways. You can also use SE for making new subtitles from scratch (do use the time-line/waveform/spectrogram) or translating subtitles.
 ]]></description>

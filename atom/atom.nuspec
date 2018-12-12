@@ -3,13 +3,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>atom</id>
-    <version>1.33.0-beta2</version>
+    <version>1.34.0-beta0</version>
     <title>Atom</title>
     <authors>GitHub Inc.</authors>
     <owners>bradgearon,Thilas</owners>
     <licenseUrl>https://github.com/atom/atom/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://atom.io/</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/058df13746c9cfa791d72eedd05f888d48a1bc1a/atom/icon.png</iconUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@058df13746c9cfa791d72eedd05f888d48a1bc1a/atom/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[Atom is a text editor that's modern, approachable, yet hackable to the core—a tool you can customize to do anything but also use productively without ever touching a config file.
 

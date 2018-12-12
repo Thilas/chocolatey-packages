@@ -30,7 +30,7 @@ This is a nuspec. It mostly adheres to https://docs.nuget.org/create/Nuspec-Refe
     <owners>Thilas</owners>
     <licenseUrl>http://license-url</licenseUrl>
     <projectUrl>http://project-url</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/commit/id/icon.png</iconUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@commit/id/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Description using MarkDown</description>
     <summary>Summary</summary>

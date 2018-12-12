@@ -13,7 +13,6 @@
     <projectUrl>http://code.kliu.org/hashcheck/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@90d6238c8db69f85cbfb32e3bcd7021c2303aba3/hashcheck/icon.png</iconUrl>
     <copyright>Copyright © Kai Liu. All rights reserved.  
-    
     Copyright © Christopher Gurnee.  All rights reserved.</copyright>
     <licenseUrl>https://github.com/gurnec/HashCheck/blob/master/license.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

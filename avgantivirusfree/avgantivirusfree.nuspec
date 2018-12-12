@@ -9,7 +9,7 @@
     <owners>dtgm,Thilas</owners>
     <licenseUrl>http://www.avg.com/eula</licenseUrl>
     <projectUrl>http://free.avg.com/</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/Thilas/chocolatey-packages/02aa2a68eb365843accd2b582985118e151c531e/avgantivirusfree/icon.png</iconUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@02aa2a68eb365843accd2b582985118e151c531e/avgantivirusfree/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[Essential free protection that won't let you down
 

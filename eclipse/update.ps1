@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     return Get-Latest -ReleasesUrl 'https://www.eclipse.org/downloads/packages/' `
-                      -TagNamePattern 'Eclipse \w+ \((?<TagName>[^)]+)\)' `
+                      -TagNamePattern 'Eclipse [\w-]+ \((?<TagName>[^)]+)\)' `
                       -LinkPattern '/downloads/packages/(release/[^/]+/(?<Build>\d+)(?<Revision>a)?)?' `
                       -VersionCount 3 `
                       -StreamFieldCount 2
