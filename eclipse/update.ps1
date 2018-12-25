@@ -1,5 +1,5 @@
 ﻿[CmdletBinding()]
-param([switch] $Force)
+param($IncludeStream, [switch] $Force)
 
 . "$PSScriptRoot\..\Common.ps1"
 
@@ -65,4 +65,4 @@ function global:au_SearchReplace {
     }
 }
 
-Update-Package -ChecksumFor all -Force:$Force
+Update-Package -ChecksumFor all -IncludeStream $IncludeStream -Force:$Force
