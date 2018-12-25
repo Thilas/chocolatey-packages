@@ -40,7 +40,9 @@ function Get-Latest {
                                   -GetTagName { $version } `
                                   -SkipTagName `
                                   -FileType 'zip' `
-                                  -IsUrl32 { param($Url) $Url -like "*jee*win32*" -and $Url -notlike '*x86_64*' } `
+                                  -IsUrl32 { param($Url, $Version) $Url -like "*jee*win32*" -and (
+                                      $Url -notlike '*x86_64*' -or ($Version -ge '4.10' -and $Url -like '*x86_64*')
+                                  )} `
                                   -IsUrl64 { param($Url) $Url -like "*jee*win32*" -and $Url -like '*x86_64*' } `
                                   -ForceHttps
         $latest.Url32 += '&r=1'
