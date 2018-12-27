@@ -9,10 +9,6 @@ function global:au_GetLatest {
                             -Latest @{
                                 SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
                                 ValidExitCodes          = '0'
-                                UninstallSoftwareName   = 'LAV Filters *'
-                                UninstallFileType       = 'exe'
-                                UninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-                                UninstallValidExitCodes = '0'
                             }
 }
 

@@ -12,10 +12,6 @@ function global:au_GetLatest {
                             -Latest @{
                                 SilentArgs              = '--silent'
                                 ValidExitCodes          = '0'
-                                UninstallSoftwareName   = 'atom'
-                                UninstallFileType       = 'exe'
-                                UninstallSilentArgs     = '--uninstall -s'
-                                UninstallValidExitCodes = '0'
                             }
 }
 

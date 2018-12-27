@@ -12,10 +12,6 @@ function global:au_GetLatest {
                            -Latest @{
                                SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
                                ValidExitCodes          = '0'
-                               UninstallSoftwareName   = 'Marble *'
-                               UninstallFileType       = 'exe'
-                               UninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-                               UninstallValidExitCodes = '0'
                            }
 }
 

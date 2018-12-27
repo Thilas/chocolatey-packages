@@ -14,10 +14,6 @@ function global:au_GetLatest {
                                FileType                = 'exe'
                                SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
                                ValidExitCodes          = '0'
-                               UninstallSoftwareName   = 'Stellarium *'
-                               UninstallFileType       = 'exe'
-                               UninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-                               UninstallValidExitCodes = '0'
                            }
 }
 
