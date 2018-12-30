@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>hashcheck</id>
-    <version>2.4.0.24-beta</version>
+    <version>2.4.0.20181230</version>
     <title>HashCheck Shell Extension</title>
     <authors>Kai Liu and Christopher Gurnee</authors>
     <owners>Thilas</owners>
@@ -15,7 +15,7 @@
 ]]></description>
     <summary>The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer.</summary>
     <releaseNotes>[Releases](https://github.com/gurnec/HashCheck/releases)</releaseNotes>
-    <copyright>Copyright © Kai Liu. All rights reserved.
+    <copyright>Copyright © Kai Liu. All rights reserved.  
 Copyright © Christopher Gurnee.  All rights reserved.</copyright>
     <tags>hashcheck admin shell extension checksum md5 sha1 sha2 sha256 sha512 hash</tags>
     <projectSourceUrl>https://github.com/gurnec/HashCheck</projectSourceUrl>
@@ -25,5 +25,6 @@ Copyright © Christopher Gurnee.  All rights reserved.</copyright>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
+    <file src="legal\**" target="legal" />
   </files>
 </package>
