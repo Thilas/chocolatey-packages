@@ -14,11 +14,7 @@ $packageArgs = @{
 
 $packageArgs.file = Get-Item ("$toolsDir\*.{0}" -f $packageArgs.fileType)
 
-$installOverride = $env:chocolateyInstallOverride
-if (!$installOverride) {
-    $env:IMDISK_SILENT_SETUP = 1
-    Write-Host "Silent mode set"
-}
+$env:IMDISK_SILENT_SETUP = 1
 
 Install-ChocolateyInstallPackage @packageArgs
 Remove-Item $packageArgs.file -ErrorAction SilentlyContinue
