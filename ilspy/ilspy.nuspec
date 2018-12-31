@@ -7,7 +7,7 @@
     <title>ILSpy</title>
     <authors>SharpDevelop Team</authors>
     <owners>dtgm, Thilas</owners>
-    <licenseUrl>https://github.com/icsharpcode/ILSpy#license</licenseUrl>
+    <licenseUrl>https://github.com/icsharpcode/ILSpy/blob/master/doc/license.txt</licenseUrl>
     <projectUrl>http://www.ilspy.net/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@02e39ee2c2509f429162c3afb6919cbdb5999278/ilspy/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -37,6 +37,7 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="legal\**" target="legal" />
     <file src="tools\**" target="tools" />
   </files>
 </package>
