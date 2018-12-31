@@ -24,7 +24,7 @@ Copyright © Christopher Gurnee.  All rights reserved.</copyright>
     <bugTrackerUrl>https://github.com/gurnec/HashCheck/issues</bugTrackerUrl>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
     <file src="legal\**" target="legal" />
+    <file src="tools\**" target="tools" />
   </files>
 </package>

@@ -24,12 +24,16 @@ $packageArgs = @{
 }
 # *** Automatically filled ***
 
+#$packageArgs.file = Get-Item ("$toolsDir\*.{0}" -f $packageArgs.fileType)
+
 Install-ChocolateyPackage @packageArgs # https://chocolatey.org/docs/helpers-install-chocolatey-package
 
 #Install-ChocolateyZipPackage @packageArgs # https://chocolatey.org/docs/helpers-install-chocolatey-zip-package
+
 ## If you are making your own internal packages (organizations), you can embed the installer or
 ## put on internal file share and use the following instead (you'll need to add $file to the above)
 #Install-ChocolateyInstallPackage @packageArgs # https://chocolatey.org/docs/helpers-install-chocolatey-install-package
+#Remove-Item $packageArgs.file -ErrorAction SilentlyContinue
 
 ## Main helper functions - these have error handling tucked into them already
 ## see https://chocolatey.org/docs/helpers-reference

@@ -21,6 +21,7 @@
     <mailingListUrl>http://reboot.pro/forum/59-imdisk/</mailingListUrl>
   </metadata>
   <files>
+    <file src="legal\**" target="legal" />
     <file src="tools\**" target="tools" />
   </files>
 </package>

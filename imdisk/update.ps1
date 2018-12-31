@@ -17,10 +17,7 @@ function global:au_GetLatest {
                            }
 }
 
-function global:au_BeforeUpdate() {
-    $Latest.ChecksumType32 = 'sha256'
-    $Latest.Checksum32 = Get-RemoteChecksum -Url $Latest.Url32 -Algorithm $Latest.ChecksumType32
-}
+function global:au_BeforeUpdate { Get-RemoteFiles -Purge -NoSuffix }
 
 function global:au_SearchReplace {
     @{
@@ -28,10 +25,7 @@ function global:au_SearchReplace {
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
-            "^(\s*url\s*=\s*)'.*'$"               = "`$1'$($Latest.Url32)'"
             "^(\s*silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.SilentArgs)'"
-            "^(\s*checksum\s*=\s*)'.*'$"          = "`$1'$($Latest.Checksum32)'"
-            "^(\s*checksumType\s*=\s*)'.*'$"      = "`$1'$($Latest.ChecksumType32)'"
             "^(\s*validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.ValidExitCodes))"
         }
         'tools\chocolateyUninstall.ps1' = @{
@@ -40,6 +34,10 @@ function global:au_SearchReplace {
             "^([$]fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
             "^([$]silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
             "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"
+        }
+        'legal\VERIFICATION.txt' = @{
+            "(?i)(\s+x32:).*"                     = "`${1} $($Latest.Url32)"
+            "(?i)(checksum32:).*"                 = "`${1} $($Latest.Checksum32)"
         }
     }
 }
