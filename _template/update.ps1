@@ -8,6 +8,7 @@ param($IncludeStream, [switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
+    $softwareName   = 'Title *' # part or all of the Display Name as you see it in Programs and Features. It should be enough to be unique.
     $fileType       = 'exe'
     # Uncomment matching EXE type (sorted by most to least common)
     #$silentArgs     = '/S'                                            # NSIS
@@ -23,7 +24,6 @@ function global:au_GetLatest {
     #$silentArgs     = "/qn /norestart /l*v ```"`$env:TEMP\`$env:chocolateyPackageName.`$env:chocolateyPackageVersion.MsiInstall.log```"" # ALLUSERS=1 DISABLEDESKTOPSHORTCUT=1 ADDDESKTOPICON=0 ADDSTARTMENU=0
     #$validExitCodes = '0, 3010, 1641' # https://msdn.microsoft.com/en-us/library/aa376931(v=vs.85).aspx
 
-    $uninstallSoftwareName   = 'Title *' # part or all of the Display Name as you see it in Programs and Features. It should be enough to be unique.
     $uninstallFileType       = 'exe'
     # Uncomment matching EXE type (sorted by most to least common)
     #$uninstallSilentArgs     = '/S'                                            # NSIS
@@ -48,9 +48,9 @@ function global:au_GetLatest {
                            #-IsUrl64 { param($Url, $TagName, $Version, $Matches) $Url -like '*x64*' } `
                            #-ForceHttps `
                            -Latest @{
+                               SoftwareName            = $softwareName
                                SilentArgs              = $silentArgs
                                ValidExitCodes          = $validExitCodes
-                               UninstallSoftwareName   = $uninstallSoftwareName
                                UninstallFileType       = $uninstallFileType
                                UninstallSilentArgs     = $uninstallSilentArgs
                                UninstallValidExitCodes = $uninstallValidExitCodes
@@ -62,9 +62,9 @@ function global:au_GetLatest {
                             #-IsUrl32 { param($Url, $TagName, $Version) $Url -like '*x86*' } `
                             #-IsUrl64 { param($Url, $TagName, $Version) $Url -like '*x64*' } `
                             -Latest @{
+                                SoftwareName            = $softwareName
                                 SilentArgs              = $silentArgs
                                 ValidExitCodes          = $validExitCodes
-                                UninstallSoftwareName   = $uninstallSoftwareName
                                 UninstallFileType       = $uninstallFileType
                                 UninstallSilentArgs     = $uninstallSilentArgs
                                 UninstallValidExitCodes = $uninstallValidExitCodes
@@ -77,9 +77,9 @@ function global:au_GetLatest {
                            #-IsUrl64 { param($Url, $Version) $Url -like '*x64*' } `
                            #-ForceHttps `
                            -Latest @{
+                               SoftwareName            = $softwareName
                                SilentArgs              = $silentArgs
                                ValidExitCodes          = $validExitCodes
-                               UninstallSoftwareName   = $uninstallSoftwareName
                                UninstallFileType       = $uninstallFileType
                                UninstallSilentArgs     = $uninstallSilentArgs
                                UninstallValidExitCodes = $uninstallValidExitCodes
@@ -90,6 +90,7 @@ function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1'   = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+            "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
             "^(\s*url\s*=\s*)'.*'$"               = "`$1'$($Latest.Url32)'"
             "^(\s*url64bit\s*=\s*)'.*'$"          = "`$1'$($Latest.Url64)'"
@@ -102,7 +103,7 @@ function global:au_SearchReplace {
         }
         'tools\chocolateyUninstall.ps1' = @{
             "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
-            "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
+            "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^([$]fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
             "^([$]silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
             "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"

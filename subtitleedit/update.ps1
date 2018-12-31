@@ -8,10 +8,10 @@ function global:au_GetLatest {
                                -FileType 'zip' `
                                -IsUrl32 { param($Url) $Url -like '*Setup*' } `
                                -Latest @{
+                                   SoftwareName            = 'Subtitle Edit *'
                                    FileType                = 'exe'
                                    SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
                                    ValidExitCodes          = '0'
-                                   UninstallSoftwareName   = 'Subtitle Edit *'
                                    UninstallFileType       = 'exe'
                                    UninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
                                    UninstallValidExitCodes = '0'
@@ -27,6 +27,7 @@ function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1'   = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+            "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
             "^(\s*url\s*=\s*)'.*'$"               = "`$1'$($Latest.Url32)'"
             "^(\s*file\s*=\s*).*$"                = "`$1`"`$toolsDir\$($Latest.File32)`""
@@ -37,7 +38,7 @@ function global:au_SearchReplace {
         }
         'tools\chocolateyUninstall.ps1' = @{
             "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
-            "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
+            "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^([$]fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
             "^([$]silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
             "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"

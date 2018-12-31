@@ -23,9 +23,9 @@ function global:au_GetLatest {
                            -IsUrl32 { param($Url) $Url -like '*x86*' } `
                            -IsUrl64 { param($Url) $Url -like '*x64*' } `
                            -Latest @{
+                               SoftwareName            = 'AVG Protection'
                                SilentArgs              = '/mode=offline /install=fmw,zen,bav /langid=$((Get-UICulture).LCID) /silent=true'
                                ValidExitCodes          = '0'
-                               UninstallSoftwareName   = 'AVG Protection'
                                UninstallFileType       = 'exe'
                                UninstallSilentArgs     = '/mode=offline /uninstall=fmw,zen,bav /silent=true'
                                UninstallValidExitCodes = '0'
@@ -36,6 +36,7 @@ function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1'   = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+            "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
             "^(\s*url\s*=\s*)'.*'$"               = "`$1'$($Latest.Url32)'"
             "^(\s*url64bit\s*=\s*)'.*'$"          = "`$1'$($Latest.Url64)'"
@@ -48,7 +49,7 @@ function global:au_SearchReplace {
         }
         'tools\chocolateyUninstall.ps1' = @{
             "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
-            "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
+            "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^([$]fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
             "^([$]silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
             "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"

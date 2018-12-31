@@ -3,6 +3,7 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'avgantivirusfree'
+    softwareName   = ''
     fileType       = 'exe'
     url            = 'https://files-download.avg.com/inst/mp/Antivirus_Free_x86_1819.exe'
     url64bit       = 'https://files-download.avg.com/inst/mp/Antivirus_Free_x64_1818.exe'

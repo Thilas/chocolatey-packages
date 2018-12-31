@@ -3,6 +3,7 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'kodi'
+    softwareName   = ''
     fileType       = 'exe'
     url            = 'http://mirrors.kodi.tv/releases/windows/win32/kodi-17.6-Krypton-x86.exe'
     url64bit       = 'http://mirrors.kodi.tv/releases/windows/win32/kodi-17.6-Krypton-x86.exe'

@@ -11,12 +11,12 @@ $version      = '1.30.1'
 if ($version -eq (Get-UninstallRegistryKey $softwareName).DisplayVersion) {
     Write-Host "Version $version is already installed."
     return
-  }
+}
   
 # *** Automatically filled ***
 $packageArgs = @{
-    softwareName   = $softwareName
     packageName    = 'vscodium'
+    softwareName   = $softwareName
     fileType       = 'exe'
     url            = 'https://github.com/VSCodium/vscodium/releases/download/1.30.1/VSCodiumSetup-x64-1.30.1.exe'
     url64bit       = 'https://github.com/VSCodium/vscodium/releases/download/1.30.1/VSCodiumSetup-x64-1.30.1.exe'

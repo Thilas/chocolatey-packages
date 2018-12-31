@@ -3,6 +3,7 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'serviio'
+    softwareName   = ''
     fileType       = 'exe'
     url            = 'http://download.serviio.org/releases/serviio-1.10-win-setup.exe'
     silentArgs     = '/S'

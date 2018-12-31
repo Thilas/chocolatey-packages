@@ -3,9 +3,9 @@
 $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 # *** Automatically filled ***
-$packageName  = 'sabnzbd'
 $packageArgs  = @{
-    packageName    = $packageName
+    packageName    = 'sabnzbd'
+    softwareName   = 'SABnzbd*'
     fileType       = 'exe'
     url            = 'https://github.com/sabnzbd/sabnzbd/releases/download/2.3.7Beta1/SABnzbd-2.3.7Beta1-win-setup.exe'
     silentArgs     = '/S'
@@ -13,13 +13,12 @@ $packageArgs  = @{
     checksumType   = 'sha256'
     validExitCodes = @(0)
 }
-$softwareName = 'SABnzbd*'
 # *** Automatically filled ***
 
 Install-ChocolateyPackage @packageArgs
 
 . "$toolsDir\Get-InstallPath.ps1"
-$installPath = Get-InstallPath $packageName $softwareName
+$installPath = Get-InstallPath $packageArgs.packageName $packageArgs.softwareName
 
 if ($installPath) {
     Push-Location $installPath

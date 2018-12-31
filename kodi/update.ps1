@@ -31,12 +31,12 @@ function global:au_GetLatest {
     }
 
     return @{
+        SoftwareName            = 'Kodi*'
         Version                 = $version
         Url32                   = $url32
         Url64                   = $url64
         SilentArgs              = '/S'
         ValidExitCodes          = '0'
-        UninstallSoftwareName   = 'Kodi*'
         UninstallFileType       = 'exe'
         UninstallSilentArgs     = '/S'
         UninstallValidExitCodes = '0'
@@ -47,6 +47,7 @@ function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1'   = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+            "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
             "^(\s*url\s*=\s*)'.*'$"               = "`$1'$($Latest.Url32)'"
             "^(\s*url64bit\s*=\s*)'.*'$"          = "`$1'$($Latest.Url64)'"
@@ -59,7 +60,7 @@ function global:au_SearchReplace {
         }
         'tools\chocolateyUninstall.ps1' = @{
             "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
-            "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.UninstallSoftwareName)'"
+            "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^([$]fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"
             "^([$]silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.UninstallSilentArgs)'"
             "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"

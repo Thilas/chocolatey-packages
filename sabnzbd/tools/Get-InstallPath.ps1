@@ -1,11 +1,11 @@
 ﻿function Get-InstallPath {
     [CmdletBinding()]
     param (
-        [string] $packageName,
-        [string] $softwareName
+        [string] $PackageName,
+        [string] $SoftwareName
     )
 
-    [array] $key = Get-UninstallRegistryKey -SoftwareName $softwareName
+    [array] $key = Get-UninstallRegistryKey -SoftwareName $SoftwareName
 
     if ($key.Count -eq 1) {
         $key | % {
@@ -16,11 +16,11 @@
             if ($file -and (Test-Path $file)) {
                 $installPath = $file
             } else {
-                Write-Warning "$packageName install not found: $file"
+                Write-Warning "$PackageName install not found: $file"
             }
         }
     } elseif ($key.Count -eq 0) {
-        Write-Warning "$packageName install not found."
+        Write-Warning "$PackageName install not found."
     } elseif ($key.Count -gt 1) {
         Write-Warning "$key.Count matches found!"
         Write-Warning "Please alert package maintainer the following keys were matched:"

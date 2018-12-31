@@ -3,6 +3,7 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'imdisk'
+    softwareName   = ''
     fileType       = 'exe'
     url            = 'http://www.ltr-data.se/files/imdiskinst_2.0.10.exe'
     silentArgs     = '-y'

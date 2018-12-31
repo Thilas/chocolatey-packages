@@ -9,6 +9,7 @@ $ErrorActionPreference = 'Stop'
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = ''
+    softwareName   = ''
     fileType       = ''
     url            = ''
     url64bit       = ''

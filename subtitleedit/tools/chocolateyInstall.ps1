@@ -17,6 +17,7 @@ Install-ChocolateyZipPackage @packageArgs
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'subtitleedit'
+    softwareName   = ''
     fileType       = 'exe'
     file           = "$toolsDir\SubtitleEdit-3.5.8-Setup.exe"
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
