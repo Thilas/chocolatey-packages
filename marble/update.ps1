@@ -10,6 +10,7 @@ function global:au_GetLatest {
                            -IsUrl32 { param($Url) $Url -like '*x86*' } `
                            -IsUrl64 { param($Url) $Url -like '*x64*' } `
                            -Latest @{
+                               SoftwareName            = 'Marble *'
                                SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
                                ValidExitCodes          = '0'
                            }
@@ -19,6 +20,7 @@ function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1'   = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+            "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
             "^(\s*url\s*=\s*)'.*'$"               = "`$1'$($Latest.Url32)'"
             "^(\s*url64bit\s*=\s*)'.*'$"          = "`$1'$($Latest.Url64)'"

@@ -3,6 +3,7 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'atom'
+    softwareName   = ''
     fileType       = 'exe'
     url            = 'https://github.com/atom/atom/releases/download/v1.34.0-beta1/AtomSetup.exe'
     url64bit       = 'https://github.com/atom/atom/releases/download/v1.34.0-beta1/AtomSetup-x64.exe'

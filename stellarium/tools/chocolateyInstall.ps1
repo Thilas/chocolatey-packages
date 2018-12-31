@@ -3,6 +3,7 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'stellarium'
+    softwareName   = ''
     fileType       = 'exe'
     url            = 'https://github.com/Stellarium/stellarium/releases/download/v0.18.3/stellarium-0.18.3-win32.exe'
     url64bit       = 'https://github.com/Stellarium/stellarium/releases/download/v0.18.3/stellarium-0.18.3-win64.exe'

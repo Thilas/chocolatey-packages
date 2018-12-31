@@ -3,6 +3,7 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'airserver'
+    softwareName   = ''
     fileType       = 'msi'
     url            = 'http://dl.airserver.com/pc32/AirServer-5.5.4-x86.msi'
     url64bit       = 'http://dl.airserver.com/pc32/AirServer-5.5.4-x64.msi'

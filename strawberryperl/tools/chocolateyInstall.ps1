@@ -3,6 +3,7 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'strawberryperl'
+    softwareName   = ''
     fileType       = 'msi'
     url            = 'http://strawberryperl.com/download/5.28.1.1/strawberry-perl-5.28.1.1-32bit.msi'
     url64bit       = 'http://strawberryperl.com/download/5.28.1.1/strawberry-perl-5.28.1.1-64bit.msi'

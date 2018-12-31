@@ -7,6 +7,7 @@ function global:au_GetLatest {
     return Get-GitHubLatest -Repository 'gurnec/HashCheck' `
                             -FileType 'exe' `
                             -Latest @{
+                                SoftwareName            = 'HashCheck Shell Extension'
                                 SilentArgs              = '/S'
                                 ValidExitCodes          = '0'
                                 UninstallValidExitCodes = '0'
@@ -19,6 +20,7 @@ function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1'   = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+            "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
             "^(\s*silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.SilentArgs)'"
             "^(\s*validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.ValidExitCodes))"

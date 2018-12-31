@@ -16,6 +16,7 @@ function global:au_GetLatest {
                            -IsUrl32 { param($Url) $Url -notlike '*64bit*' } `
                            -IsUrl64 { param($Url, $Version) $Url -like '*64bit*' -or $Version -lt '5.11' } `
                            -Latest @{
+                               SoftwareName            = 'Strawberry Perl *'
                                SilentArgs              = '/qn /norestart'
                                ValidExitCodes          = '0, 3010, 1641'
                            }
@@ -25,6 +26,7 @@ function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1' = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
+            "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
             "^(\s*url\s*=\s*)'.*'$"               = "`$1'$($Latest.Url32)'"
             "^(\s*url64bit\s*=\s*)'.*'$"          = "`$1'$($Latest.Url64)'"
