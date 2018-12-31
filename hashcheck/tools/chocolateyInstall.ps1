@@ -5,7 +5,7 @@ $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'hashcheck'
-    softwareName   = ''
+    softwareName   = 'HashCheck Shell Extension'
     fileType       = 'exe'
     silentArgs     = '/S'
     validExitCodes = @(0)
