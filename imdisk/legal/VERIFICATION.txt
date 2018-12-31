@@ -7,7 +7,7 @@ Package can be verified like this:
 
 1. Go to
 
-   x32: http://www.ltr-data.se/files/imdiskinst_2.0.10.exea
+   x32: http://www.ltr-data.se/files/imdiskinst_2.0.10.exe
 
    to download the installer.
 
@@ -15,7 +15,7 @@ Package can be verified like this:
    - Use powershell function 'Get-FileHash'
    - Use Chocolatey utility 'checksum.exe'
 
-   checksum32: 1e5291ad53e8b90f88882eeef791e8b5f162aef020e55a633cec4d1581acce4e
+   checksum32: 1E5291AD53E8B90F88882EEEF791E8B5F162AEF020E55A633CEC4D1581ACCE4E
 
 File 'LICENSE.txt' is obtained from:
    http://www.ltr-data.se/files/license.txt

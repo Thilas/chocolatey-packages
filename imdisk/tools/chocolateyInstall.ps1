@@ -5,7 +5,7 @@ $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'imdisk'
-    softwareName   = ''
+    softwareName   = 'ImDisk *'
     fileType       = 'exe'
     silentArgs     = '-y'
     validExitCodes = @(0)
