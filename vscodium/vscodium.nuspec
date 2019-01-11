@@ -49,6 +49,6 @@ Example: `choco install vscodium --params "/NoDesktopIcon /NoAddToPath"`
     </dependencies>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>

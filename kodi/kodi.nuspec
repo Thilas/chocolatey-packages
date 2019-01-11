@@ -29,6 +29,6 @@ It allows users to play and view most videos, music, podcasts, and other digital
     </dependencies>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>

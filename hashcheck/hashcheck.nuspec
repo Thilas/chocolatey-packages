@@ -25,6 +25,6 @@ Copyright © Christopher Gurnee.  All rights reserved.</copyright>
   </metadata>
   <files>
     <file src="legal\**" target="legal" />
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>

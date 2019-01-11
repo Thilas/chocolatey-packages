@@ -27,6 +27,6 @@
     <bugTrackerUrl>https://support.avg.com/support_contact_form</bugTrackerUrl>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>

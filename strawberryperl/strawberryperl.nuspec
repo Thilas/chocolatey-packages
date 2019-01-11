@@ -28,6 +28,6 @@ It includes perl binaries, compiler (gcc) + related tools, all the external libr
     <bugTrackerUrl>https://rt.cpan.org/Public/Dist/Display.html?Name=Perl-Dist-Strawberry</bugTrackerUrl>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>

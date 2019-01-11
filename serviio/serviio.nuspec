@@ -25,6 +25,6 @@ Serviio is based on Java technology and therefore runs on most platforms, includ
     <docsUrl>http://serviio.org/component/content/article/10-uncategorised/5-getting-started</docsUrl>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>

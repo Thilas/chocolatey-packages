@@ -23,6 +23,6 @@
     <bugTrackerUrl>https://github.com/Nevcairiel/LAVFilters/issues</bugTrackerUrl>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>

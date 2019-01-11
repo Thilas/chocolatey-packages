@@ -40,6 +40,6 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <bugTrackerUrl>https://github.com/sabnzbd/sabnzbd/issues</bugTrackerUrl>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>

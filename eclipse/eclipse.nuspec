@@ -50,6 +50,6 @@ For example: `--params "'/InstallationPath=C:\path\to\installation /Multi-User'"
     <bugTrackerUrl>https://bugs.eclipse.org/bugs/</bugTrackerUrl>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>

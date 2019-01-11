@@ -24,6 +24,6 @@
     <bugTrackerUrl>http://bugs.launchpad.net/stellarium</bugTrackerUrl>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>

@@ -25,6 +25,6 @@ The unique capabilities of Process Explorer make it useful for tracking down DLL
     <bugTrackerUrl>https://forum.sysinternals.com/process-explorer_forum2.html</bugTrackerUrl>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>

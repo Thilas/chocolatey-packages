@@ -41,6 +41,6 @@ Find, preview, and replace text as you type in a file or across all your project
     <bugTrackerUrl>https://github.com/atom/atom/issues</bugTrackerUrl>
   </metadata>
   <files>
-    <file src="tools\**" target="tools" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
   </files>
 </package>
