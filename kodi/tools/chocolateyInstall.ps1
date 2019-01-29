@@ -3,14 +3,14 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'kodi'
-    softwareName   = ''
+    softwareName   = 'Kodi*'
     fileType       = 'exe'
-    url            = 'http://mirrors.kodi.tv/releases/windows/win32/kodi-17.6-Krypton-x86.exe'
-    url64bit       = 'http://mirrors.kodi.tv/releases/windows/win32/kodi-17.6-Krypton-x86.exe'
+    url            = 'https://mirrors.kodi.tv/releases/windows/win32/kodi-18.0-Leia-x86.exe'
+    url64bit       = 'https://mirrors.kodi.tv/releases/windows/win64/kodi-18.0-Leia-x64.exe'
     silentArgs     = '/S'
-    checksum       = '6f4ae208ea5e8cd57df5c034b17a2f5e294b3f59b273987762cd8bed805afb0a'
+    checksum       = 'd0be2fc7180f542202aa60a8f5475fa225d02079fd38d8dd2738770dec05a38e'
     checksumType   = 'sha256'
-    checksum64     = '6f4ae208ea5e8cd57df5c034b17a2f5e294b3f59b273987762cd8bed805afb0a'
+    checksum64     = 'cd7148037253376da80f5924f49652ba5fdc7dadd4586faa30d62e31db45ffc9'
     checksumType64 = 'sha256'
     validExitCodes = @(0)
 }
