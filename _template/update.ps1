@@ -44,8 +44,24 @@ function global:au_GetLatest {
                            #-GetTagName { param($Release) '1.0.0' } `
                            #-SkipTagName `
                            -FileType $fileType `
-                           #-IsUrl32 { param($Url, $TagName, $Version, $Matches) $Url -like '*x86*' } `
-                           #-IsUrl64 { param($Url, $TagName, $Version, $Matches) $Url -like '*x64*' } `
+                           #-IsUrl32 { param($Url, $TagName, $Version) $Url -like '*x86*' } `
+                           #-IsUrl64 { param($Url, $TagName, $Version) $Url -like '*x64*' } `
+                           #-ForceHttps `
+                           -Latest @{
+                               SoftwareName            = $softwareName
+                               SilentArgs              = $silentArgs
+                               ValidExitCodes          = $validExitCodes
+                               UninstallFileType       = $uninstallFileType
+                               UninstallSilentArgs     = $uninstallSilentArgs
+                               UninstallValidExitCodes = $uninstallValidExitCodes
+                           }
+    return Get-LinksLatest -ReleasesUrl 'https://', '...' `
+                           #-GetVersion { param($Url) '1.0.0' } `
+                           #-StreamFieldCount 2 `
+                           -FileType $fileType `
+                           #-IsLink { param($Url) $Url -like '*' } `
+                           #-IsUrl32 { param($Url, $Version) $Url -like '*x86*' } `
+                           #-IsUrl64 { param($Url, $Version) $Url -like '*x64*' } `
                            #-ForceHttps `
                            -Latest @{
                                SoftwareName            = $softwareName
@@ -69,21 +85,6 @@ function global:au_GetLatest {
                                 UninstallSilentArgs     = $uninstallSilentArgs
                                 UninstallValidExitCodes = $uninstallValidExitCodes
                             }
-    return Get-LinksLatest -ReleasesUrl 'https://' `
-                           -StreamFieldCount 2 `
-                           -FileType $fileType `
-                           #-IsLink { param($Url) $Url -like '*' } `
-                           #-IsUrl32 { param($Url, $Version) $Url -like '*x86*' } `
-                           #-IsUrl64 { param($Url, $Version) $Url -like '*x64*' } `
-                           #-ForceHttps `
-                           -Latest @{
-                               SoftwareName            = $softwareName
-                               SilentArgs              = $silentArgs
-                               ValidExitCodes          = $validExitCodes
-                               UninstallFileType       = $uninstallFileType
-                               UninstallSilentArgs     = $uninstallSilentArgs
-                               UninstallValidExitCodes = $uninstallValidExitCodes
-                           }
 }
 
 #function global:au_BeforeUpdate { Get-RemoteFiles -Purge -NoSuffix }
