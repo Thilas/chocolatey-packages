@@ -58,6 +58,58 @@ function Get-BasicLatest {
     return $stream + $Latest
 }
 
+# Returns a single stream from a file using its ProductVersion or FileVersion.
+# The file can be optionally extracted from an archive.
+function Get-FileLatest {
+    [CmdletBinding()]
+    param(
+        [string] $Uri,
+        [string] $PathInArchive, # optional
+        [hashtable] $Latest = @{} # optional
+    )
+    $tempPath = New-TemporaryFile
+    Remove-Item $tempPath -Force
+    $tempFile = Split-Path $Uri -Leaf
+    $tempFile = "$tempPath\$tempFile"
+    try {
+        New-Item -Path $tempPath -ItemType Directory | Out-Null
+        $release = Invoke-WebRequest -Uri $Uri -OutFile $tempFile
+
+        if ($PathInArchive) {
+            $outPath = New-TemporaryFile
+            Remove-Item $outPath -Force
+            New-Item -Path $outPath -ItemType Directory | Out-Null
+            Expand-Archive -Path $tempFile -DestinationPath $outPath
+            Remove-Item $tempPath -Recurse -Force
+            $tempPath = $outPath
+            $tempFile = "$outPath\$PathInArchive"
+        }
+    
+        if (!(Test-Path $tempFile)) {
+            throw 'File not found.'
+        }
+        $item = Get-Item -Path $tempFile
+        $version = if ($item.VersionInfo.ProductVersion) {
+            $item.VersionInfo.ProductVersion
+        } else {
+            $item.VersionInfo.FileVersion
+        }
+        $version = Get-Version $version
+        Write-Verbose "Version: $version"
+    
+        $stream = @{
+            Version = $version
+            Url32   = $Uri
+        }
+    
+        return $stream + $Latest
+    } finally {
+        if (Test-Path $tempPath) {
+            Remove-Item $tempPath -Recurse -Force
+        }
+    }
+}
+
 # Returns one or multiple streams from one or multiple web pages using its/their links to get all available versions.
 function Get-LinksLatest {
     [CmdletBinding()]

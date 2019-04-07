@@ -4,11 +4,9 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-BasicLatest -ReleaseUrl 'https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer' `
-                           -TagNamePattern '>Process Explorer v(?<TagName>[^<]+)<' `
-                           -SkipTagName `
-                           -FileType 'zip' `
-                           -Latest @{ ValidExitCodes = '0' }
+    return Get-FileLatest -Uri 'https://download.sysinternals.com/files/ProcessExplorer.zip' `
+                          -PathInArchive 'procexp.exe' `
+                          -Latest @{ ValidExitCodes = '0' }
 }
 
 function global:au_SearchReplace {
