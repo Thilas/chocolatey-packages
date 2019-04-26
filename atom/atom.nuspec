@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>atom</id>
-    <version>1.37.0-beta0</version>
+    <version>1.37.0-beta1</version>
     <title>Atom</title>
     <authors>GitHub Inc.</authors>
     <owners>bradgearon,Thilas</owners>
