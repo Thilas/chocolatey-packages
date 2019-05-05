@@ -25,7 +25,7 @@ It allows users to play and view most videos, music, podcasts, and other digital
     <mailingListUrl>https://forum.kodi.tv/</mailingListUrl>
     <bugTrackerUrl>https://trac.kodi.tv/</bugTrackerUrl>
     <dependencies>
-      <dependency id="vcredist2015" version="14.0.24215.20170201" />
+      <dependency id="vcredist2017" version="14.16.27027.20190415" />
     </dependencies>
   </metadata>
   <files>
