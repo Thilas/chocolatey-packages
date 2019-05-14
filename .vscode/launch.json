@@ -8,8 +8,8 @@
             "type": "PowerShell",
             "request": "launch",
             "name": "PowerShell Launch Current File",
-            "script": "${file}",
-            "args": [],
+            "script": "${workspaceFolder}/.vscode/debug.ps1",
+            "args": ["-Path", "${file}"],
             "cwd": "${file}"
         }
     ]
