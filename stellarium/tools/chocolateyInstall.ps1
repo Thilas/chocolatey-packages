@@ -5,12 +5,12 @@ $packageArgs = @{
     packageName    = 'stellarium'
     softwareName   = 'Stellarium *'
     fileType       = 'exe'
-    url            = 'https://github.com/Stellarium/stellarium/releases/download/v0.19.0/stellarium-0.19.0.1-win32.exe'
-    url64bit       = 'https://github.com/Stellarium/stellarium/releases/download/v0.19.0/stellarium-0.19.0.1-win64.exe'
+    url            = 'https://github.com/Stellarium/stellarium/releases/download/v0.19.1/stellarium-0.19.1-win32.exe'
+    url64bit       = 'https://github.com/Stellarium/stellarium/releases/download/v0.19.1/stellarium-0.19.1-win64.exe'
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-    checksum       = '0a3a1d434c433f94a0b5102fcba760b1861dfb5a1cf944fe67942739f9bbed6a'
+    checksum       = 'a1283b671d692b266a95a78cd2ec1ae034d9402b1c65f5635831abf009a6f52b'
     checksumType   = 'sha256'
-    checksum64     = '88fd7a8d372d614e402860628a842d61c6424432bfd488bf848a439416eab422'
+    checksum64     = '8c31f21fad3838f13c6d602761d2b577afe7e301e2f7d15ab1823927db8bdf7e'
     checksumType64 = 'sha256'
     validExitCodes = @(0)
 }
