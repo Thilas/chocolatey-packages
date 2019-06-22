@@ -3,14 +3,14 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'airserver'
-    softwareName   = ''
+    softwareName   = 'AirServer *'
     fileType       = 'msi'
-    url            = 'http://dl.airserver.com/pc32/AirServer-5.5.4-x86.msi'
-    url64bit       = 'http://dl.airserver.com/pc32/AirServer-5.5.4-x64.msi'
+    url            = 'http://dl.airserver.com/pc32/AirServer-5.5.5-x86.msi'
+    url64bit       = 'http://dl.airserver.com/pc32/AirServer-5.5.5-x64.msi'
     silentArgs     = '/qn /norestart'
-    checksum       = 'de0799d889afa16c476f58036917b5115147ac1455f80c907d7bc0b178f367e7'
+    checksum       = '446e60d6a7944eda7aa2a978e79a503eadc692d4474cc1b16f81dbcef35ae2e9'
     checksumType   = 'sha256'
-    checksum64     = 'caf2cbacf465c631a01d5507607e9f483296c6f58e90577ce4ae7cc8eaf5f8e8'
+    checksum64     = 'b05a4e3ec92f5b6ca1ae49dc99750d6ed50101c2daf463968a5706469b345e68'
     checksumType64 = 'sha256'
     validExitCodes = @(0, 3010, 1641)
 }
