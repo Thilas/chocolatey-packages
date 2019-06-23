@@ -4,18 +4,15 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-BasicLatest -ReleaseUrl 'http://www.stellarium.org/' `
-                           -TagNamePattern '>latest version is (?<TagName>[^<]+)<' `
-                           -FileType 'exe*' `
-                           -IsUrl32 { param($Url) $Url -like '*win32*' } `
-                           -IsUrl64 { param($Url) $Url -like '*win64*' } `
-                           -ForceHttps `
-                           -Latest @{
-                               SoftwareName            = 'Stellarium *'
-                               FileType                = 'exe'
-                               SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-                               ValidExitCodes          = '0'
-                           }
+    return Get-GitHubLatest -Repository 'Stellarium/stellarium' `
+                            -FileType 'exe' `
+                            -IsUrl32 { param($Url) $Url -like '*win32*' } `
+                            -IsUrl64 { param($Url) $Url -like '*win64*' } `
+                            -Latest @{
+                                SoftwareName            = 'Stellarium *'
+                                SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+                                ValidExitCodes          = '0'
+                            }
 }
 
 function global:au_SearchReplace {
