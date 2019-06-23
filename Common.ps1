@@ -25,23 +25,23 @@ function Get-BasicLatest {
     Write-Verbose "TagName: $tagName"
     $version = Get-Version $tagName
     Write-Verbose "Version: $version"
+    $stream = @{ Version = $version }
 
     $links = $release.Links | ? { $_.href -like "*.$FileType" }
     if (!$SkipTagName) { $links = $links | ? { $_.href -like "*$tagName*" } }
 
-    $urls = $links
-    if ($IsUrl32) { $urls = $urls | ? { & $IsUrl32 -Url $_.href -TagName $tagName -Version $version } }
-    $urls = @($urls | % { Get-Url $ReleaseUrl $_.href -ForceHttps:$ForceHttps } | select -Unique)
-    if ($urls.Length -ne 1) {
-        if ($urls) { Write-Verbose 'Urls:' }
-        $urls | % { Write-Verbose "  - $_" }
-        throw "Url (x86) not found for version $version."
+    if ($IsUrl32 -or !$IsUrl64) {
+        $urls = $links
+        if ($IsUrl32) { $urls = $urls | ? { & $IsUrl32 -Url $_.href -TagName $tagName -Version $version } }
+        $urls = @($urls | % { Get-Url $ReleaseUrl $_.href -ForceHttps:$ForceHttps } | select -Unique)
+        if ($urls.Length -ne 1) {
+            if ($urls) { Write-Verbose 'Urls:' }
+            $urls | % { Write-Verbose "  - $_" }
+            throw "Url (x86) not found for version $version."
+        }
+        $stream += @{ Url32 = $urls[0] }
+        'Url32: {0}' -f $stream.Url32 | Write-Verbose
     }
-    $stream = @{
-        Version = $version
-        Url32   = $urls[0]
-    }
-    'Url32: {0}' -f $stream.Url32 | Write-Verbose
 
     if ($IsUrl64) {
         $urls = $links | ? { & $IsUrl64 -Url $_.href -TagName $tagName -Version $version }
@@ -153,20 +153,20 @@ function Get-LinksLatest {
         if (!$release) { throw "Version not found for stream $stream." }
         $version = Get-Version $release.Name
         Write-Verbose "  Version: $version"
+        $stream = @{ Version = $version }
 
-        $urls = $release.Group
-        if ($IsUrl32) { $urls = $urls | ? { & $IsUrl32 -Url $_.href -Version $version } }
-        $urls = @($urls | % { Get-Url $_.ReleasesUrl $_.href -ForceHttps:$ForceHttps } | select -Unique)
-        if ($urls.Length -ne 1) {
-            if ($urls) { Write-Verbose 'Urls:' }
-            $urls | % { Write-Verbose "  - $_" }
-            throw "Url (x86) not found for version $version."
+        if ($IsUrl32 -or !$IsUrl64) {
+            $urls = $release.Group
+            if ($IsUrl32) { $urls = $urls | ? { & $IsUrl32 -Url $_.href -Version $version } }
+            $urls = @($urls | % { Get-Url $_.ReleasesUrl $_.href -ForceHttps:$ForceHttps } | select -Unique)
+            if ($urls.Length -ne 1) {
+                if ($urls) { Write-Verbose 'Urls:' }
+                $urls | % { Write-Verbose "  - $_" }
+                throw "Url (x86) not found for version $version."
+            }
+            $stream += @{ Url32 = $urls[0] }
+            '  Url32: {0}' -f $stream.Url32 | Write-Verbose
         }
-        $stream = @{
-            Version = $version
-            Url32   = $urls[0]
-        }
-        '  Url32: {0}' -f $stream.Url32 | Write-Verbose
 
         if ($IsUrl64) {
             $urls = $release.Group | ? { & $IsUrl64 -Url $_.href -Version $version }
@@ -230,22 +230,22 @@ function Get-GitHubLatest {
         $release = $releases | sort Version -Descending | select -First 1
         $version = $release.Version
         Write-Verbose "  Version: $version"
+        $stream = @{ Version = $version }
 
         $assets = $release.assets | ? { $_.browser_download_url -like "*{0}*.$FileType" -f $release.tag_name }
 
-        $urls = $assets
-        if ($IsUrl32) { $urls = $urls | ? { & $IsUrl32 -Url $_.browser_download_url -TagName $release.tag_name -Version $version } }
-        $urls = @($urls | % browser_download_url | select -Unique)
-        if ($urls.Length -ne 1) {
-            if ($urls) { Write-Verbose 'Urls:' }
-            $urls | % { Write-Verbose "  - $_" }
-            throw "Url (x86) not found for version $version."
+        if ($IsUrl32 -or !$IsUrl64) {
+            $urls = $assets
+            if ($IsUrl32) { $urls = $urls | ? { & $IsUrl32 -Url $_.browser_download_url -TagName $release.tag_name -Version $version } }
+            $urls = @($urls | % browser_download_url | select -Unique)
+            if ($urls.Length -ne 1) {
+                if ($urls) { Write-Verbose 'Urls:' }
+                $urls | % { Write-Verbose "  - $_" }
+                throw "Url (x86) not found for version $version."
+            }
+            $stream += @{ Url32 = $urls[0] }
+            '  Url32: {0}' -f $stream.Url32 | Write-Verbose
         }
-        $stream = @{
-            Version = $version
-            Url32   = $urls[0]
-        }
-        '  Url32: {0}' -f $stream.Url32 | Write-Verbose
 
         if ($IsUrl64) {
             $urls = $assets | ? { & $IsUrl64 -Url $_.browser_download_url -TagName $release.tag_name -Version $version }

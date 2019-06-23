@@ -4,10 +4,9 @@ param($IncludeStream, [switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-Latest -ReleasesUrl 'https://www.eclipse.org/downloads/packages/' `
-                      -TagNamePattern 'Eclipse [\w-]+ \((?<TagName>[^)]+)\)' `
-                      -LinkPattern '/downloads/packages/(release/[^/]+/(?<Build>\d+)(?<Revision>a)?)?' `
-                      -VersionCount 3 `
+    return Get-Latest -ReleasesUrl 'https://wiki.eclipse.org/Simultaneous_Release' `
+                      -TagNamesPattern '<th\b[^>]*>\s*.*\b(?<Release>\d+-\d+)\b.*\s*</th\b[^>]*>\s*<td\b[^>]*>\s*.*\b(?<TagName>\d+\.\d+)\b.*\s*</td\b' `
+                      -LinkPattern '/downloads/packages/release/(?<Release>\d+-\d+)/r' `
                       -StreamFieldCount 2
 }
 
@@ -15,38 +14,49 @@ function Get-Latest {
     [CmdletBinding()]
     param(
         [string] $ReleasesUrl,
-        [string] $TagNamePattern, # must include a TagName capture
-        [string] $LinkPattern, # must include Build and Revision captures
-        [int] $VersionCount,
+        [string] $TagNamesPattern, # must include Release and TagName captures
+        [string] $LinkPattern, # must include a Release capture
         [int] $StreamFieldCount
     )
     $releases = Invoke-WebRequest -Uri $ReleasesUrl -UseBasicParsing
 
-    $links = $releases.Links | ? { $_.outerHTML -match $TagNamePattern -and $_.href -match $LinkPattern }
-    $links = $links | select -First $VersionCount
+    $tagNames = @{ }
+    $result = $releases.Content | Select-String -Pattern $TagNamesPattern -AllMatches
+    $result.Matches | % {
+        $tagNames.Add($_.Groups['Release'].Value, $_.Groups['TagName'].Value)
+    }
+
+    $links = $releases.Links | ? { $_.href -match $LinkPattern -and $tagNames.Keys -contains $Matches.Release }
 
     $result = [ordered] @{}
     $links | % {
-        $_.outerHTML -match $TagNamePattern
-        $tagName = $Matches.TagName
         $_.href -match $LinkPattern
-        if ($Matches.Build) { $tagName += '.{0}' -f $Matches.Build }
-        if ($Matches.Revision) { $tagName += '.1' }
+        $release = $Matches.Release
+        $tagName = $tagNames.$release
         $version = Get-Version $tagName
 
         $url = Get-Url $ReleasesUrl $_.href -ForceHttps
+        $isUrl32 = if ($version -lt '4.10') { {
+            param($Url)
+            $Url -like "*jee*win32*" -and $Url -notlike '*x86_64*'
+        } }
+        $isUrl64 = if ($version -lt '4.10') { {
+            param($Url)
+            $Url -like "*jee*win32*" -and $Url -notlike '*x86_64*'
+        } } else { {
+            param($Url)
+            $Url -like "*jee*win32*"
+        } }
 
         $latest = Get-BasicLatest -ReleaseUrl $url `
-                                  -GetTagName { $version } `
+                                  -GetTagName { $tagName } `
                                   -SkipTagName `
                                   -FileType 'zip' `
-                                  -IsUrl32 { param($Url, $Version) $Url -like "*jee*win32*" -and (
-                                      $Url -notlike '*x86_64*' -or ($Version -ge '4.10' -and $Url -like '*x86_64*')
-                                  )} `
-                                  -IsUrl64 { param($Url) $Url -like "*jee*win32*" -and $Url -like '*x86_64*' } `
+                                  -IsUrl32 $isUrl32 `
+                                  -IsUrl64 $isUrl64 `
                                   -ForceHttps
-        $latest.Url32 += '&r=1'
-        $latest.Url64 += '&r=1'
+        if ($latest.Url32) { $latest.Url32 += '&r=1' }
+        if ($latest.Url64) { $latest.Url64 += '&r=1' }
         $result.Add($version.ToString($StreamFieldCount), $latest)
     }
     return @{ Streams = $result }
