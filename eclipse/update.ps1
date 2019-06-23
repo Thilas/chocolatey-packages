@@ -61,6 +61,18 @@ function Get-Latest {
     }
     return @{ Streams = $result }
 }
+
+function global:au_BeforeUpdate {
+    if ($Latest.Url32) {
+        $Latest.ChecksumType32 = 'sha256'
+        $Latest.Checksum32 = Get-RemoteChecksum -Url $Latest.Url32 -Algorithm $Latest.ChecksumType32
+    }
+    if ($Latest.Url64) {
+        $Latest.ChecksumType64 = 'sha256'
+        $Latest.Checksum64 = Get-RemoteChecksum -Url $Latest.Url64 -Algorithm $Latest.ChecksumType64
+    }
+}
+
 function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1' = @{
@@ -75,4 +87,4 @@ function global:au_SearchReplace {
     }
 }
 
-Update-Package -ChecksumFor all -IncludeStream $IncludeStream -Force:$Force
+Update-Package -ChecksumFor none -IncludeStream $IncludeStream -Force:$Force
