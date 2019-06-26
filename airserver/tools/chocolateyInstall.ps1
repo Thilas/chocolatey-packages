@@ -5,12 +5,12 @@ $packageArgs = @{
     packageName    = 'airserver'
     softwareName   = 'AirServer *'
     fileType       = 'msi'
-    url            = 'http://dl.airserver.com/pc32/AirServer-5.5.5-x86.msi'
-    url64bit       = 'http://dl.airserver.com/pc32/AirServer-5.5.5-x64.msi'
+    url            = 'http://dl.airserver.com/pc32/AirServer-5.5.6-x86.msi'
+    url64bit       = 'http://dl.airserver.com/pc32/AirServer-5.5.6-x64.msi'
     silentArgs     = '/qn /norestart'
-    checksum       = '446e60d6a7944eda7aa2a978e79a503eadc692d4474cc1b16f81dbcef35ae2e9'
+    checksum       = '6412141f10d8d6fb4a3bef816f120675bc15669f81ca5896f9ca10c12986724a'
     checksumType   = 'sha256'
-    checksum64     = 'b05a4e3ec92f5b6ca1ae49dc99750d6ed50101c2daf463968a5706469b345e68'
+    checksum64     = '8e026ebf42a18295355c256e186b5268d750300cf30455624d02ccddfba103c7'
     checksumType64 = 'sha256'
     validExitCodes = @(0, 3010, 1641)
 }
