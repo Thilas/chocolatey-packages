@@ -8,9 +8,9 @@ $packageArgs = @{
     url            = 'https://mirrors.kodi.tv/releases/windows/win32/kodi-18.3-Leia-x86.exe'
     url64bit       = 'https://mirrors.kodi.tv/releases/windows/win64/kodi-18.3-Leia-x64.exe'
     silentArgs     = '/S'
-    checksum       = '59d2da6ebea8bdc604897cbf136cc1f095de65d0da5a47ee74646d7b1bed8e8c'
+    checksum       = '9b7e1a90d1ab2f2d69dc730cac8cdb3ca6f80736ae824ef74b6a210d666acbac'
     checksumType   = 'sha256'
-    checksum64     = '5762a56193a684c86bcb38ca1c1fa88ff39c11a932a4be25a9685b5259175edd'
+    checksum64     = '0252a0ccb6d2aaa3771062889c2d76120c84a011541fc6c853911c29286afb1f'
     checksumType64 = 'sha256'
     validExitCodes = @(0)
 }
