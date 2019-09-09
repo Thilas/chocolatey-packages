@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>ilspy</id>
-    <version>5.0-preview4</version>
+    <version>5.0-rc1</version>
     <title>ILSpy</title>
     <authors>SharpDevelop Team</authors>
     <owners>dtgm, Thilas</owners>
