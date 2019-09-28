@@ -21,7 +21,7 @@ Install-ChocolateyZipPackage @packageArgs
 
 $registryPath = 'HKCU:\SOFTWARE\Sysinternals\Process Explorer'
 if (!(Test-Path $registryPath)) {
-    New-Item $registryPath
+    New-Item $registryPath -Force | Out-Null
 }
 New-ItemProperty -Path $registryPath -Name 'EulaAccepted' -Value 1 -Force | Out-Null
 
