@@ -19,7 +19,11 @@ Install-ChocolateyZipPackage @packageArgs
     New-Item "$toolsDir\$_.exe.gui" -Type File -Force | Out-Null
 }
 
-New-Item 'HKCU:\SOFTWARE\Sysinternals\Process Monitor' -Force | New-ItemProperty -Name 'EulaAccepted' -Value 1 -Force | Out-Null
+$registryPath = 'HKCU:\SOFTWARE\Sysinternals\Process Monitor'
+if (!(Test-Path $registryPath)) {
+    New-Item $registryPath
+}
+New-ItemProperty -Path $registryPath -Name 'EulaAccepted' -Value 1 -Force | Out-Null
 
 $shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) 'Process Monitor.lnk'
 if (-not (Test-Path $shortcutPath)) {
