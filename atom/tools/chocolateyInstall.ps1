@@ -1,9 +1,19 @@
 ﻿$ErrorActionPreference = 'Stop'
 
 # *** Automatically filled ***
+$softwareName = 'Atom'
+$version      = ''
+# *** Automatically filled ***
+
+if ($version -eq (Get-UninstallRegistryKey $softwareName).DisplayVersion) {
+    Write-Host "Version $version is already installed."
+}
+return
+
+# *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'atom'
-    softwareName   = 'Atom'
+    softwareName   = $softwareName
     fileType       = 'exe'
     url            = 'https://github.com/atom/atom/releases/download/v1.41.0-beta1/AtomSetup.exe'
     url64bit       = 'https://github.com/atom/atom/releases/download/v1.41.0-beta1/AtomSetup-x64.exe'
