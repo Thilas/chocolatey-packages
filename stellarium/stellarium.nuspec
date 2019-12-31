@@ -19,7 +19,7 @@
     <tags>stellarium admin planetarium sky stars constellations</tags>
     <projectSourceUrl>http://bazaar.launchpad.net/~stellarium/stellarium/trunk/files</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/stellarium</packageSourceUrl>
-    <docsUrl>http://www.stellarium.org/wiki/</docsUrl>
+    <docsUrl>https://github./stellarium/wiki</docsUrl>
     <mailingListUrl>https://sourceforge.net/p/stellarium/mailman/</mailingListUrl>
     <bugTrackerUrl>http://bugs.launchpad.net/stellarium</bugTrackerUrl>
   </metadata>
