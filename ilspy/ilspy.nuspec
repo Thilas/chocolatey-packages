@@ -33,7 +33,7 @@
     <mailingListUrl>http://community.sharpdevelop.net/forums/69.aspx</mailingListUrl>
     <bugTrackerUrl>https://github.com/icsharpcode/ILSpy/issues</bugTrackerUrl>
     <dependencies>
-      <dependency id="dotnet4.6.1" version="4.6.01055.20170308" />
+      <dependency id="dotnet4.7.2" version="4.7.2.20180712" />
     </dependencies>
   </metadata>
   <files>
