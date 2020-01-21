@@ -8,7 +8,7 @@
     <authors>SharpDevelop Team</authors>
     <owners>dtgm, Thilas</owners>
     <licenseUrl>https://github.com/icsharpcode/ILSpy/blob/master/doc/license.txt</licenseUrl>
-    <projectUrl>http://www.ilspy.net/</projectUrl>
+    <projectUrl>https://github.com/icsharpcode/ILSpy</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@02e39ee2c2509f429162c3afb6919cbdb5999278/ilspy/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[ILSpy is the open-source .NET assembly browser and decompiler.
@@ -30,7 +30,6 @@
     <projectSourceUrl>https://github.com/icsharpcode/ILSpy</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/ilspy</packageSourceUrl>
     <docsUrl>https://github.com/icsharpcode/ILSpy/wiki</docsUrl>
-    <mailingListUrl>http://community.sharpdevelop.net/forums/69.aspx</mailingListUrl>
     <bugTrackerUrl>https://github.com/icsharpcode/ILSpy/issues</bugTrackerUrl>
     <dependencies>
       <dependency id="dotnet4.7.2" version="4.7.2.20180712" />
