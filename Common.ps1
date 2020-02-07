@@ -1,4 +1,4 @@
-﻿Import-Module au
+﻿Import-Module AU
 
 # Returns a single stream from a web page using a regex pattern to get its version.
 # A dedicated method can be used instead of the regex.
@@ -84,7 +84,7 @@ function Get-FileLatest {
             $tempPath = $outPath
             $tempFile = "$outPath\$PathInArchive"
         }
-    
+
         if (!(Test-Path $tempFile)) {
             throw 'File not found.'
         }
@@ -96,12 +96,12 @@ function Get-FileLatest {
         }
         $version = Get-Version $version
         Write-Verbose "Version: $version"
-    
+
         $stream = @{
             Version = $version
             Url32   = $Uri
         }
-    
+
         return $stream + $Latest
     } finally {
         if (Test-Path $tempPath) {
