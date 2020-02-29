@@ -12,7 +12,7 @@ function Get-MergeTasks([hashtable] $pp) {
     return $tasks -join ','
 }
 
-function Close-VSCode {
+function Close-VSCodium {
     Get-Process vscodium -ea 0 | ForEach-Object { $_.CloseMainWindow() | Out-Null }
     Start-Sleep 1
     Get-Process vscodium -ea 0 | Stop-Process  #in case gracefull shutdown did not succeed, try hard kill

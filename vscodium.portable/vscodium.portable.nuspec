@@ -2,9 +2,9 @@
 <!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
-    <id>vscodium</id>
+    <id>vscodium.portable</id>
     <version>1.42.0</version>
-    <title>VSCodium</title>
+    <title>VSCodium (Portable)</title>
     <authors>Microsoft, Peter Squicciarini</authors>
     <owners>Thilas</owners>
     <licenseUrl>https://github.com/VSCodium/vscodium/blob/master/LICENSE</licenseUrl>
@@ -22,34 +22,21 @@ Visual Studio Code is a lightweight but powerful source code editor which runs o
 * **Git commands built-in:** Working with Git and other SCM providers has never been easier. Review diffs, stage files, and make commits right from the editor. Push and pull from any hosted SCM service.
 * **Extensible and customizable:** Want even more features? Install extensions to add new languages, themes, debuggers, and to connect to additional services. Extensions run in separate processes, ensuring they won't slow down your editor. [Learn more about extensions.](https://code.visualstudio.com/docs/editor/extension-gallery)
 
-## Package parameters
-
-* `/NoDesktopIcon` - Don't add a desktop icon.
-* `/NoQuicklaunchIcon` - Don't add an icon to the QuickLaunch area.
-* `/NoAddContextMenuFiles` - Don't add an _Open with VSCodium_ entry to the context menu for files.
-* `/NoAddContextMenuFolders` - Dont't add an _Open with VSCodium_ entry to the context menu for folders.
-* `/AssociateWithFiles` - Register VSCodium as an editor for supported file types.
-* `/NoAddToPath` - Don't add VSCodium to the system PATH.
-
-Example: `choco install vscodium --params "/NoDesktopIcon /NoAddToPath"`
-
-## Notes
-
-* The package uses default install options except that it adds context menu entries and VSCodium isn't started after installation.
-* You can [disable auto-update](https://code.visualstudio.com/docs/supporting/faq#_how-do-i-opt-out-of-vs-code-autoupdates) if you prefer to update VS Code on your own schedule.
-
 ![screenshot](https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@657099dac6a46b93b79700820f37f1b15f937534/vscodium/screenshot.png)
 ]]></description>
-    <summary>VSCodium</summary>
+    <summary>VSCodium (Portable)</summary>
     <releaseNotes>[Updates](https://code.visualstudio.com/Updates)</releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini</copyright>
-    <tags>vscodium admin foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
+    <tags>vscodium foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
     <projectSourceUrl>https://github.com/VSCodium/vscodium</projectSourceUrl>
-    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/vscodium</packageSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/vscodium.portable</packageSourceUrl>
     <docsUrl>https://code.visualstudio.com/docs</docsUrl>
     <bugTrackerUrl>https://github.com/VSCodium/vscodium/issues</bugTrackerUrl>
     <dependencies>
-      <dependency id="vscodium.install" version="[1.42.0]" />
+      <dependency id="dotnet4.5.2" version="4.5.2.20140902" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
+  </files>
 </package>

@@ -1,17 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
-<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
-  <metadata>
-    <id>vscodium</id>
-    <version>1.42.0</version>
-    <title>VSCodium</title>
-    <authors>Microsoft, Peter Squicciarini</authors>
-    <owners>Thilas</owners>
-    <licenseUrl>https://github.com/VSCodium/vscodium/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/VSCodium/vscodium</projectUrl>
-    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@3613049f2b409f2656a40a09079b1a0851171dfd/vscodium/icon.png</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description><![CDATA[Free/Libre Open Source Software binaries of [Visual Studio Code](https://chocolatey.org/packages/vscode).
+# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@3613049f2b409f2656a40a09079b1a0851171dfd/vscodium/icon.png" width="48" height="48"/> [VSCodium (Install)](https://chocolatey.org/packages/vscodium.install)
+
+Free/Libre Open Source Software binaries of [Visual Studio Code](https://chocolatey.org/packages/vscode).
 
 Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a rich ecosystem of extensions for other languages (such as C++, C#, Java, Python, PHP, Go) and runtimes (such as .NET and Unity).
 
@@ -31,7 +20,7 @@ Visual Studio Code is a lightweight but powerful source code editor which runs o
 * `/AssociateWithFiles` - Register VSCodium as an editor for supported file types.
 * `/NoAddToPath` - Don't add VSCodium to the system PATH.
 
-Example: `choco install vscodium --params "/NoDesktopIcon /NoAddToPath"`
+Example: `choco install vscodium.install --params "/NoDesktopIcon /NoAddToPath"`
 
 ## Notes
 
@@ -39,17 +28,3 @@ Example: `choco install vscodium --params "/NoDesktopIcon /NoAddToPath"`
 * You can [disable auto-update](https://code.visualstudio.com/docs/supporting/faq#_how-do-i-opt-out-of-vs-code-autoupdates) if you prefer to update VS Code on your own schedule.
 
 ![screenshot](https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@657099dac6a46b93b79700820f37f1b15f937534/vscodium/screenshot.png)
-]]></description>
-    <summary>VSCodium</summary>
-    <releaseNotes>[Updates](https://code.visualstudio.com/Updates)</releaseNotes>
-    <copyright>Copyright © Microsoft Corporation, Peter Squicciarini</copyright>
-    <tags>vscodium admin foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
-    <projectSourceUrl>https://github.com/VSCodium/vscodium</projectSourceUrl>
-    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/vscodium</packageSourceUrl>
-    <docsUrl>https://code.visualstudio.com/docs</docsUrl>
-    <bugTrackerUrl>https://github.com/VSCodium/vscodium/issues</bugTrackerUrl>
-    <dependencies>
-      <dependency id="vscodium.install" version="[1.42.0]" />
-    </dependencies>
-  </metadata>
-</package>

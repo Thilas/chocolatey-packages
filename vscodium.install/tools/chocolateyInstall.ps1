@@ -12,10 +12,10 @@ if ($version -eq (Get-UninstallRegistryKey $softwareName).DisplayVersion) {
     Write-Host "Version $version is already installed."
     return
 }
-  
+
 # *** Automatically filled ***
 $packageArgs = @{
-    packageName    = 'vscodium'
+    packageName    = 'vscodium.install'
     softwareName   = $softwareName
     fileType       = 'exe'
     url            = 'https://github.com/VSCodium/vscodium/releases/download/1.42.0/VSCodiumSetup-ia32-1.42.0.exe'
@@ -35,6 +35,6 @@ $logPath = Get-PackageCacheLocation
 $logPath = Join-Path $logPath 'install.log'
 $packageArgs.silentArgs += ' /MERGETASKS="{0}" /LOG="{1}"' -f $mergeTasks, $logPath
 
-Close-VSCode
+Close-VSCodium
 
 Install-ChocolateyPackage @packageArgs
