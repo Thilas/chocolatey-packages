@@ -8,7 +8,7 @@ $softwareName = 'VSCodium'
 $version      = '1.42.1'
 # *** Automatically filled ***
 
-if ($version -eq (Get-UninstallRegistryKey $softwareName).DisplayVersion) {
+if (!$Env:ChocolateyForce -and $version -eq (Get-UninstallRegistryKey $softwareName).DisplayVersion) {
     Write-Host "Version $version is already installed."
     return
 }

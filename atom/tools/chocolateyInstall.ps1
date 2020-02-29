@@ -5,7 +5,7 @@ $softwareName = 'Atom'
 $version      = '1.45.0-beta0'
 # *** Automatically filled ***
 
-if ($version -eq (Get-UninstallRegistryKey $softwareName).DisplayVersion) {
+if (!$Env:ChocolateyForce -and $version -eq (Get-UninstallRegistryKey $softwareName).DisplayVersion) {
     Write-Host "Version $version is already installed."
     return
 }
