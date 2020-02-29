@@ -3,7 +3,7 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'marble'
-    softwareName   = ''
+    softwareName   = 'Marble *'
     fileType       = 'exe'
     url            = 'https://files.kde.org/marble/downloads/windows/Marble-setup_2.2.0_x86.exe'
     url64bit       = 'https://files.kde.org/marble/downloads/windows/Marble-setup_2.2.0-1_x64.exe'
