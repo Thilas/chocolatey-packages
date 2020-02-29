@@ -15,7 +15,6 @@ insert_final_newline = false
 
 [*.nuspec]
 indent_size = 2
-insert_final_newline = false
 
 [*.ps1]
 charset = utf-8-bom

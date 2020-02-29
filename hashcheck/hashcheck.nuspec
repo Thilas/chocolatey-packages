@@ -15,7 +15,7 @@
 ]]></description>
     <summary>The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer.</summary>
     <releaseNotes>[Releases](https://github.com/gurnec/HashCheck/releases)</releaseNotes>
-    <copyright>Copyright © Kai Liu. All rights reserved.  
+    <copyright>Copyright © Kai Liu. All rights reserved.
 Copyright © Christopher Gurnee.  All rights reserved.</copyright>
     <tags>hashcheck admin shell extension checksum md5 sha1 sha2 sha256 sha512 hash</tags>
     <projectSourceUrl>https://github.com/gurnec/HashCheck</projectSourceUrl>
