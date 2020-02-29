@@ -1,4 +1,6 @@
-﻿Import-Module AU
+﻿if (!(Get-Module AU)) {
+    Import-Module AU
+}
 
 # Returns a single stream from a web page using a regex pattern to get its version.
 # A dedicated method can be used instead of the regex.

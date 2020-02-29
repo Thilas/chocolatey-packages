@@ -94,7 +94,7 @@ Install-ChocolateyPackage @packageArgs # https://chocolatey.org/docs/helpers-ins
 ## - https://chocolatey.org/docs/helpers-install-chocolatey-file-association
 #Install-ChocolateyFileAssociation
 
-## Adding a shim when not automatically found - Cocolatey automatically shims exe files found in package directory.
+## Adding a shim when not automatically found - Chocolatey automatically shims exe files found in package directory.
 ## - https://chocolatey.org/docs/helpers-install-bin-file
 ## - https://chocolatey.org/docs/create-packages#how-do-i-exclude-executables-from-getting-shims
 #Install-BinFile
@@ -103,16 +103,4 @@ Install-ChocolateyPackage @packageArgs # https://chocolatey.org/docs/helpers-ins
 #$toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 # despite the name "Install-ChocolateyZipPackage" this also works with 7z archives
 #Install-ChocolateyZipPackage $packageName $url $toolsDir $url64
-## END PORTABLE EXAMPLE
-
-## [DEPRECATING] PORTABLE EXAMPLE
-#$binRoot = Get-BinRoot
-#$installDir = Join-Path $binRoot "$packageName"
-#Write-Host "Adding `'$installDir`' to the path and the current shell path"
-#Install-ChocolateyPath "$installDir"
-#$env:Path = "$($env:Path);$installDir"
-
-# if removing $url64, please remove from here
-# despite the name "Install-ChocolateyZipPackage" this also works with 7z archives
-#Install-ChocolateyZipPackage "$packageName" "$url" "$installDir" "$url64"
 ## END PORTABLE EXAMPLE
