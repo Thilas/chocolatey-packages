@@ -4,10 +4,11 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-GitHubLatest -Repository 'VSCodium/vscodium' `
-                            -FileType 'zip' `
-                            -IsUrl32 { param($Url) $Url -like '*VSCodium-win32-ia32-*' } `
-                            -IsUrl64 { param($Url) $Url -like '*VSCodium-win32-x64-*' }
+    Get-GitHubLatest `
+        -Repository 'VSCodium/vscodium' `
+        -FileType 'zip' `
+        -IsUrl32 { param($Url) $Url -like '*VSCodium-win32-ia32-*' } `
+        -IsUrl64 { param($Url) $Url -like '*VSCodium-win32-x64-*' }
 }
 
 function global:au_SearchReplace {

@@ -4,14 +4,15 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-BasicLatest -ReleaseUrl 'http://www.ltr-data.se/opencode.html' `
-                           -TagNamePattern 'Current version (?<TagName>.+) built' `
-                           -FileType 'exe' `
-                           -Latest @{
-                               SoftwareName            = 'ImDisk *'
-                               SilentArgs              = '-y'
-                               ValidExitCodes          = '0'
-                           }
+    Get-BasicLatest `
+        -ReleaseUrl 'http://www.ltr-data.se/opencode.html' `
+        -TagNamePattern 'Current version (?<TagName>.+) built' `
+        -FileType 'exe' `
+        -Latest @{
+            SoftwareName            = 'ImDisk *'
+            SilentArgs              = '-y'
+            ValidExitCodes          = '0'
+        }
 }
 
 function global:au_BeforeUpdate { Get-RemoteFiles -Purge -NoSuffix }

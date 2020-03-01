@@ -4,18 +4,19 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    $latest = Get-GitHubLatest -Repository 'SubtitleEdit/subtitleedit' `
-                               -FileType 'zip' `
-                               -IsUrl32 { param($Url) $Url -like '*Setup*' } `
-                               -Latest @{
-                                   SoftwareName            = 'Subtitle Edit *'
-                                   FileType                = 'exe'
-                                   SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-                                   ValidExitCodes          = '0'
-                                   UninstallFileType       = 'exe'
-                                   UninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-                                   UninstallValidExitCodes = '0'
-                               }
+    $latest = Get-GitHubLatest `
+        -Repository 'SubtitleEdit/subtitleedit' `
+        -FileType 'zip' `
+        -IsUrl32 { param($Url) $Url -like '*Setup*' } `
+        -Latest @{
+            SoftwareName            = 'Subtitle Edit *'
+            FileType                = 'exe'
+            SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+            ValidExitCodes          = '0'
+            UninstallFileType       = 'exe'
+            UninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+            UninstallValidExitCodes = '0'
+        }
     $file = [uri]::new($latest.Url32).Segments | select -Last 1
     Write-Verbose ("File: {0}" -f $file)
     $latest += @{ File32 = [System.IO.Path]::ChangeExtension($file, $latest.FileType) }

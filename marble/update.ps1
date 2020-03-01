@@ -4,16 +4,17 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-BasicLatest -ReleaseUrl 'https://marble.kde.org/install.php' `
-                           -TagNamePattern '>Marble (?<TagName>[^ ]+) \(Windows ' `
-                           -FileType 'exe' `
-                           -IsUrl32 { param($Url) $Url -like '*x86*' } `
-                           -IsUrl64 { param($Url) $Url -like '*x64*' } `
-                           -Latest @{
-                               SoftwareName            = 'Marble *'
-                               SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-                               ValidExitCodes          = '0'
-                           }
+    Get-BasicLatest `
+        -ReleaseUrl 'https://marble.kde.org/install.php' `
+        -TagNamePattern '>Marble (?<TagName>[^ ]+) \(Windows ' `
+        -FileType 'exe' `
+        -IsUrl32 { param($Url) $Url -like '*x86*' } `
+        -IsUrl64 { param($Url) $Url -like '*x64*' } `
+        -Latest @{
+            SoftwareName            = 'Marble *'
+            SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+            ValidExitCodes          = '0'
+        }
 }
 
 function global:au_SearchReplace {

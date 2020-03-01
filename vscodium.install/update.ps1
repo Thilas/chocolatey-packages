@@ -4,15 +4,16 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-GitHubLatest -Repository 'VSCodium/vscodium' `
-                            -FileType 'exe' `
-                            -IsUrl32 { param($Url) $Url -like '*VSCodiumSetup-ia32-*' } `
-                            -IsUrl64 { param($Url) $Url -like '*VSCodiumSetup-x64-*' } `
-                            -Latest @{
-                                SoftwareName            = 'VSCodium'
-                                SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-                                ValidExitCodes          = '0, 3010, 1641'
-                            }
+    Get-GitHubLatest `
+        -Repository 'VSCodium/vscodium' `
+        -FileType 'exe' `
+        -IsUrl32 { param($Url) $Url -like '*VSCodiumSetup-ia32-*' } `
+        -IsUrl64 { param($Url) $Url -like '*VSCodiumSetup-x64-*' } `
+        -Latest @{
+            SoftwareName            = 'VSCodium'
+            SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+            ValidExitCodes          = '0, 3010, 1641'
+        }
 }
 
 function global:au_SearchReplace {

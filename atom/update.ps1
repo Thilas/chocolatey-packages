@@ -4,16 +4,17 @@ param($IncludeStream, [switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-GitHubLatest -Repository 'atom/atom' `
-                            -StreamFieldCount 2 `
-                            -FileType 'exe' `
-                            -IsUrl32 { param($Url) $Url -notlike '*x64*' } `
-                            -IsUrl64 { param($Url) $Url -like '*x64*' } `
-                            -Latest @{
-                                SoftwareName            = 'Atom'
-                                SilentArgs              = '--silent'
-                                ValidExitCodes          = '0'
-                            }
+    Get-GitHubLatest `
+        -Repository 'atom/atom' `
+        -StreamFieldCount 2 `
+        -FileType 'exe' `
+        -IsUrl32 { param($Url) $Url -notlike '*x64*' } `
+        -IsUrl64 { param($Url) $Url -like '*x64*' } `
+        -Latest @{
+            SoftwareName            = 'Atom'
+            SilentArgs              = '--silent'
+            ValidExitCodes          = '0'
+        }
 }
 
 function global:au_SearchReplace {

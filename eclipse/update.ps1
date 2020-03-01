@@ -4,10 +4,11 @@ param($IncludeStream, [switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-Latest -ReleasesUrl 'https://wiki.eclipse.org/Simultaneous_Release' `
-                      -TagNamesPattern '<th\b[^>]*>\s*.*\b(?<Release>\d+-\d+)\b.*\s*</th\b[^>]*>\s*<td\b[^>]*>\s*.*\b(?<TagName>\d+\.\d+)\b.*\s*</td\b' `
-                      -LinkPattern '/downloads/packages/release/(?<Release>\d+-\d+)/r' `
-                      -StreamFieldCount 2
+    Get-Latest `
+        -ReleasesUrl 'https://wiki.eclipse.org/Simultaneous_Release' `
+        -TagNamesPattern '<th\b[^>]*>\s*.*\b(?<Release>\d+-\d+)\b.*\s*</th\b[^>]*>\s*<td\b[^>]*>\s*.*\b(?<TagName>\d+\.\d+)\b.*\s*</td\b' `
+        -LinkPattern '/downloads/packages/release/(?<Release>\d+-\d+)/r' `
+        -StreamFieldCount 2
 }
 
 function Get-Latest {
@@ -48,13 +49,14 @@ function Get-Latest {
             $Url -like "*jee*win32*"
         } }
 
-        $latest = Get-BasicLatest -ReleaseUrl $url `
-                                  -GetTagName { $tagName } `
-                                  -SkipTagName `
-                                  -FileType 'zip' `
-                                  -IsUrl32 $isUrl32 `
-                                  -IsUrl64 $isUrl64 `
-                                  -ForceHttps
+        $latest = Get-BasicLatest `
+            -ReleaseUrl $url `
+            -GetTagName { $tagName } `
+            -SkipTagName `
+            -FileType 'zip' `
+            -IsUrl32 $isUrl32 `
+            -IsUrl64 $isUrl64 `
+            -ForceHttps
         if ($latest.Url32) { $latest.Url32 += '&r=1' }
         if ($latest.Url64) { $latest.Url64 += '&r=1' }
         $result.Add($version.ToString($StreamFieldCount), $latest)

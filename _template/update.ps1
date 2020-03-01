@@ -39,52 +39,55 @@ function global:au_GetLatest {
     #$uninstallSilentArgs     = '/qn /norestart'
     #$uninstallValidExitCodes = '0, 3010, 1605, 1614, 1641' # https://msdn.microsoft.com/en-us/library/aa376931(v=vs.85).aspx
 
-    return Get-BasicLatest -ReleaseUrl 'https://' `
-                           -TagNamePattern 'Version (?<TagName>[^ ]+) ' `
-                           #-GetTagName { param($Release) '1.0.0' } `
-                           #-SkipTagName `
-                           -FileType $fileType `
-                           #-IsUrl32 { param($Url, $TagName, $Version) $Url -like '*x86*' } `
-                           #-IsUrl64 { param($Url, $TagName, $Version) $Url -like '*x64*' } `
-                           #-ForceHttps `
-                           -Latest @{
-                               SoftwareName            = $softwareName
-                               SilentArgs              = $silentArgs
-                               ValidExitCodes          = $validExitCodes
-                               UninstallFileType       = $uninstallFileType
-                               UninstallSilentArgs     = $uninstallSilentArgs
-                               UninstallValidExitCodes = $uninstallValidExitCodes
-                           }
-    return Get-LinksLatest -ReleasesUrl 'https://', '...' `
-                           #-GetVersion { param($Url) '1.0.0' } `
-                           #-StreamFieldCount 2 `
-                           -FileType $fileType `
-                           #-IsLink { param($Url) $Url -like '*' } `
-                           #-IsUrl32 { param($Url, $Version) $Url -like '*x86*' } `
-                           #-IsUrl64 { param($Url, $Version) $Url -like '*x64*' } `
-                           #-ForceHttps `
-                           -Latest @{
-                               SoftwareName            = $softwareName
-                               SilentArgs              = $silentArgs
-                               ValidExitCodes          = $validExitCodes
-                               UninstallFileType       = $uninstallFileType
-                               UninstallSilentArgs     = $uninstallSilentArgs
-                               UninstallValidExitCodes = $uninstallValidExitCodes
-                           }
-    return Get-GitHubLatest -Repository 'user/project' `
-                            #-GetTagName { param($TagName, $Release) '1.0.0' } `
-                            #-StreamFieldCount 2 `
-                            -FileType $fileType `
-                            #-IsUrl32 { param($Url, $TagName, $Version) $Url -like '*x86*' } `
-                            #-IsUrl64 { param($Url, $TagName, $Version) $Url -like '*x64*' } `
-                            -Latest @{
-                                SoftwareName            = $softwareName
-                                SilentArgs              = $silentArgs
-                                ValidExitCodes          = $validExitCodes
-                                UninstallFileType       = $uninstallFileType
-                                UninstallSilentArgs     = $uninstallSilentArgs
-                                UninstallValidExitCodes = $uninstallValidExitCodes
-                            }
+    Get-BasicLatest `
+        -ReleaseUrl 'https://' `
+        -TagNamePattern 'Version (?<TagName>[^ ]+) ' `
+        #-GetTagName { param($Release) '1.0.0' } `
+        #-SkipTagName `
+        -FileType $fileType `
+        #-IsUrl32 { param($Url, $TagName, $Version) $Url -like '*x86*' } `
+        #-IsUrl64 { param($Url, $TagName, $Version) $Url -like '*x64*' } `
+        #-ForceHttps `
+        -Latest @{
+            SoftwareName            = $softwareName
+            SilentArgs              = $silentArgs
+            ValidExitCodes          = $validExitCodes
+            UninstallFileType       = $uninstallFileType
+            UninstallSilentArgs     = $uninstallSilentArgs
+            UninstallValidExitCodes = $uninstallValidExitCodes
+        }
+    Get-LinksLatest `
+        -ReleasesUrl 'https://', '...' `
+        #-GetVersion { param($Url) '1.0.0' } `
+        #-StreamFieldCount 2 `
+        -FileType $fileType `
+        #-IsLink { param($Url) $Url -like '*' } `
+        #-IsUrl32 { param($Url, $Version) $Url -like '*x86*' } `
+        #-IsUrl64 { param($Url, $Version) $Url -like '*x64*' } `
+        #-ForceHttps `
+        -Latest @{
+            SoftwareName            = $softwareName
+            SilentArgs              = $silentArgs
+            ValidExitCodes          = $validExitCodes
+            UninstallFileType       = $uninstallFileType
+            UninstallSilentArgs     = $uninstallSilentArgs
+            UninstallValidExitCodes = $uninstallValidExitCodes
+        }
+    Get-GitHubLatest `
+        -Repository 'user/project' `
+        #-GetTagName { param($TagName, $Release) '1.0.0' } `
+        #-StreamFieldCount 2 `
+        -FileType $fileType `
+        #-IsUrl32 { param($Url, $TagName, $Version) $Url -like '*x86*' } `
+        #-IsUrl64 { param($Url, $TagName, $Version) $Url -like '*x64*' } `
+        -Latest @{
+            SoftwareName            = $softwareName
+            SilentArgs              = $silentArgs
+            ValidExitCodes          = $validExitCodes
+            UninstallFileType       = $uninstallFileType
+            UninstallSilentArgs     = $uninstallSilentArgs
+            UninstallValidExitCodes = $uninstallValidExitCodes
+        }
 }
 
 #function global:au_BeforeUpdate { Get-RemoteFiles -Purge -NoSuffix }

@@ -5,21 +5,22 @@ param($IncludeStream, [switch] $Force)
 
 function global:au_GetLatest {
     # 5.10 streams and below only have 32bit installers
-    return Get-LinksLatest -ReleasesUrl 'http://strawberryperl.com/releases.html' `
-                           -GetVersion { param($Url)
-                               if ($Url -match '-(?<Version>\d+(?:\.\d+){1,3})') { $Url = $Matches.Version }
-                               Get-Version $Url
-                           } `
-                           -StreamFieldCount 2 `
-                           -FileType 'msi' `
-                           -IsLink { $_.onclick } `
-                           -IsUrl32 { param($Url) $Url -notlike '*64bit*' } `
-                           -IsUrl64 { param($Url, $Version) $Url -like '*64bit*' -or $Version -lt '5.11' } `
-                           -Latest @{
-                               SoftwareName            = 'Strawberry Perl *'
-                               SilentArgs              = '/qn /norestart'
-                               ValidExitCodes          = '0, 3010, 1641'
-                           }
+    Get-LinksLatest `
+        -ReleasesUrl 'http://strawberryperl.com/releases.html' `
+        -GetVersion { param($Url)
+            if ($Url -match '-(?<Version>\d+(?:\.\d+){1,3})') { $Url = $Matches.Version }
+            Get-Version $Url
+        } `
+        -StreamFieldCount 2 `
+        -FileType 'msi' `
+        -IsLink { $_.onclick } `
+        -IsUrl32 { param($Url) $Url -notlike '*64bit*' } `
+        -IsUrl64 { param($Url, $Version) $Url -like '*64bit*' -or $Version -lt '5.11' } `
+        -Latest @{
+            SoftwareName            = 'Strawberry Perl *'
+            SilentArgs              = '/qn /norestart'
+            ValidExitCodes          = '0, 3010, 1641'
+        }
 }
 
 function global:au_SearchReplace {

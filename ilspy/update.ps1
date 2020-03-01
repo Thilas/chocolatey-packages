@@ -4,12 +4,13 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-GitHubLatest -Repository 'icsharpcode/ILSpy' `
-                            -GetTagName { param($TagName)
-                                $TagName -replace '-final$', ''
-                            } `
-                            -FileType 'zip' `
-                            -IsUrl32 { param($Url, $TagName, $Version) $Url -like '*binaries*' }
+    Get-GitHubLatest `
+        -Repository 'icsharpcode/ILSpy' `
+        -GetTagName { param($TagName)
+            $TagName -replace '-final$', ''
+        } `
+        -FileType 'zip' `
+        -IsUrl32 { param($Url, $TagName, $Version) $Url -like '*binaries*' }
 }
 
 function global:au_BeforeUpdate { Get-RemoteFiles -Purge -NoSuffix }

@@ -4,14 +4,15 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-GitHubLatest -Repository 'gurnec/HashCheck' `
-                            -FileType 'exe' `
-                            -Latest @{
-                                SoftwareName            = 'HashCheck Shell Extension'
-                                SilentArgs              = '/S'
-                                ValidExitCodes          = '0'
-                                UninstallValidExitCodes = '0'
-                            }
+    Get-GitHubLatest `
+        -Repository 'gurnec/HashCheck' `
+        -FileType 'exe' `
+        -Latest @{
+            SoftwareName            = 'HashCheck Shell Extension'
+            SilentArgs              = '/S'
+            ValidExitCodes          = '0'
+            UninstallValidExitCodes = '0'
+        }
 }
 
 function global:au_BeforeUpdate { Get-RemoteFiles -Purge -NoSuffix }

@@ -4,16 +4,17 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-GitHubLatest -Repository 'sabnzbd/sabnzbd' `
-                            -FileType 'exe' `
-                            -Latest @{
-                                SoftwareName            = 'SABnzbd*'
-                                SilentArgs              = '/S'
-                                ValidExitCodes          = '0'
-                                UninstallFileType       = 'exe'
-                                UninstallSilentArgs     = '/S'
-                                UninstallValidExitCodes = '0'
-                            }
+    Get-GitHubLatest `
+        -Repository 'sabnzbd/sabnzbd' `
+        -FileType 'exe' `
+        -Latest @{
+            SoftwareName            = 'SABnzbd*'
+            SilentArgs              = '/S'
+            ValidExitCodes          = '0'
+            UninstallFileType       = 'exe'
+            UninstallSilentArgs     = '/S'
+            UninstallValidExitCodes = '0'
+        }
 }
 
 function global:au_SearchReplace {

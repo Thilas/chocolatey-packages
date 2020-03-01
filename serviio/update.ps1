@@ -4,17 +4,18 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-BasicLatest -ReleaseUrl 'http://serviio.org/download' `
-                           -TagNamePattern 'The latest released version is (?<TagName>[^ ]+) ' `
-                           -FileType 'exe' `
-                           -Latest @{
-                               SoftwareName            = 'Serviio'
-                               SilentArgs              = '/S'
-                               ValidExitCodes          = '0'
-                               UninstallFileType       = 'exe'
-                               UninstallSilentArgs     = '/S'
-                               UninstallValidExitCodes = '0'
-                           }
+    Get-BasicLatest `
+        -ReleaseUrl 'http://serviio.org/download' `
+        -TagNamePattern 'The latest released version is (?<TagName>[^ ]+) ' `
+        -FileType 'exe' `
+        -Latest @{
+            SoftwareName            = 'Serviio'
+            SilentArgs              = '/S'
+            ValidExitCodes          = '0'
+            UninstallFileType       = 'exe'
+            UninstallSilentArgs     = '/S'
+            UninstallValidExitCodes = '0'
+        }
 }
 
 function global:au_SearchReplace {

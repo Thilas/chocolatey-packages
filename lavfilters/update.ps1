@@ -4,13 +4,14 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    return Get-GitHubLatest -Repository 'Nevcairiel/LAVFilters' `
-                            -FileType 'exe' `
-                            -Latest @{
-                                SoftwareName            = 'LAV Filters *'
-                                SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-                                ValidExitCodes          = '0'
-                            }
+    Get-GitHubLatest `
+        -Repository 'Nevcairiel/LAVFilters' `
+        -FileType 'exe' `
+        -Latest @{
+            SoftwareName            = 'LAV Filters *'
+            SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+            ValidExitCodes          = '0'
+        }
 }
 
 function global:au_SearchReplace {

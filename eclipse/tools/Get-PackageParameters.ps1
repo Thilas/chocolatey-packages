@@ -13,10 +13,10 @@
 function Get-PackageParameters {
     [CmdletBinding()]
     param(
-       [string] $Parameters = $Env:ChocolateyPackageParameters,
-       # Allows splatting with arguments that do not apply and future expansion. Do not use directly.
-       [parameter(ValueFromRemainingArguments = $true)]
-       [Object[]] $IgnoredArguments
+        [string] $Parameters = $Env:ChocolateyPackageParameters,
+        # Allows splatting with arguments that do not apply and future expansion. Do not use directly.
+        [parameter(ValueFromRemainingArguments = $true)]
+        [Object[]] $IgnoredArguments
     )
 
     $res = @{}
