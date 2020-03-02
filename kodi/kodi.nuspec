@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>kodi</id>
-    <version>18.5</version>
+    <version>18.6</version>
     <title>Kodi</title>
     <authors>XBMC Foundation</authors>
     <owners>dtgm,Thilas</owners>
