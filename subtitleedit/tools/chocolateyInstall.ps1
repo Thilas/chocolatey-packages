@@ -26,3 +26,6 @@ $packageArgs = @{
 # *** Automatically filled ***
 
 Install-ChocolateyInstallPackage @packageArgs
+
+$file = $packageArgs.file
+Remove-Item $file, "$file.ignore" -Force -ErrorAction SilentlyContinue
