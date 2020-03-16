@@ -2,7 +2,7 @@
 param([switch] $Force)
 
 $base = Split-Path $PSScriptRoot -Leaf
-. "$PSScriptRoot\..\$base.install\update.ps1"
+. "$PSScriptRoot\..\$base.install\update.ps1" -Force:$Force
 
 function global:au_SearchReplace {
     @{
