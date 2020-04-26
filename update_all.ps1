@@ -20,6 +20,10 @@ $Options = [ordered]@{
       'Internal Server Error'
       'Service Temporarily Unavailable'
       'The connection was closed unexpectedly.'
+      'package version already exists'
+      'already exists on a Simple OData Server'             # https://github.com/chocolatey/chocolatey.org/issues/613
+      'Conflict'
+      'A system shutdown has already been scheduled'        # https://gist.github.com/choco-bot/a14b1e5bfaf70839b338eb1ab7f8226f#wps-office-free
     )
     RepeatOn      = @(                                      #Error message parts on which to repeat package updater
       'Could not create SSL/TLS secure channel'             # https://github.com/chocolatey/chocolatey-coreteampackages/issues/718
@@ -42,7 +46,7 @@ $Options = [ordered]@{
         Params= @{                                          #Report parameters:
             Github_UserRepo = $Env:github_user_repo         #  Markdown: shows user info in upper right corner
             NoAppVeyor  = $false                            #  Markdown: do not show AppVeyor build shield
-            UserMessage = "[Ignored](#ignored) | [History](#update-history) | [Force Test](https://gist.github.com/$Env:gist_id_test) | [Releases](https://github.com/$Env:github_user_repo/tags) | **USING AU NEXT VERSION**"       #  Markdown, Text: Custom user message to show
+            UserMessage = "[Ignored](#ignored) | [History](#update-history) | [Force Test](https://gist.github.com/$Env:gist_id_test) | [Releases](https://github.com/$Env:github_user_repo/tags) | **TESTING AU NEXT VERSION**"       #  Markdown, Text: Custom user message to show
             NoIcons     = $false                            #  Markdown: don't show icon
             IconSize    = 32                                #  Markdown: icon size
             Title       = ''                                #  Markdown, Text: TItle of the report, by default 'Update-AUPackages'
@@ -50,7 +54,7 @@ $Options = [ordered]@{
     }
 
     History = @{
-        Lines = 120                                         #Number of lines to show
+        Lines = 90                                          #Number of lines to show
         Github_UserRepo = $Env:github_user_repo             #User repo to be link to commits
         Path = "$PSScriptRoot\Update-History.md"            #Path where to save history
     }
