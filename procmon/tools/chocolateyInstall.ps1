@@ -15,7 +15,7 @@ $packageArgs = @{
 
 Install-ChocolateyZipPackage @packageArgs
 
-@('procmon') | % {
+@('procmon') | ForEach-Object {
     New-Item "$toolsDir\$_.exe.gui" -Type File -Force | Out-Null
 }
 

@@ -14,7 +14,7 @@ $packageArgs = @{
 
 $packageArgs.file = Get-Item ("$toolsDir\*.{0}" -f $packageArgs.fileType)
 
-$env:IMDISK_SILENT_SETUP = 1
+$Env:IMDISK_SILENT_SETUP = 1
 
 Install-ChocolateyInstallPackage @packageArgs
 Remove-Item $packageArgs.file -ErrorAction SilentlyContinue

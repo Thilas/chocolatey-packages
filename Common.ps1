@@ -1,4 +1,6 @@
-﻿if (!(Get-Module AU)) {
+﻿$ErrorActionPreference = 'Stop'
+
+if (!(Get-Module AU)) {
     Import-Module AU
 }
 
@@ -6,192 +8,232 @@
 # A dedicated method can be used instead of the regex.
 function Get-BasicLatest {
     [CmdletBinding()]
+    [OutputType([hashtable])]
     param(
-        [string] $ReleaseUrl,
-        [string] $TagNamePattern, # optional, must include a TagName capture
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [uri] $ReleaseUri,
         [scriptblock] $GetTagName, # optional callback, param($Release)
-        [switch] $SkipTagName,
+        [string] $TagNamePattern, # optional, must include a TagName capture
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
         [string] $FileType,
-        [scriptblock] $IsUrl32, # optional callback, param($Url, $TagName, $Version)
-        [scriptblock] $IsUrl64, # optional callback, param($Url, $TagName, $Version)
+        [switch] $SkipTagName,
+        [scriptblock] $IsUri32, # optional callback, param($Uri, $TagName, $Version)
+        [scriptblock] $IsUri64, # optional callback, param($Uri, $TagName, $Version)
         [switch] $ForceHttps,
-        [hashtable] $Latest = @{} # optional
+        [hashtable] $Latest = @{ } # optional
     )
-    $release = Invoke-WebRequest -Uri $ReleaseUrl -UseBasicParsing
+    $release = Invoke-WebRequest -Uri $ReleaseUri -UseBasicParsing
+    $release.Links | ForEach-Object {
+        $_ | Add-Member 'BaseUri' $ReleaseUri
+    }
     if ($GetTagName) {
         $tagName = & $GetTagName -Release $release
     } else {
-        if ($release.Content -notmatch $TagNamePattern) { throw 'Tag name not found.' }
+        if ($release.Content -notmatch $TagNamePattern) {
+            throw 'Tag name not found.'
+        }
         $tagName = $Matches.TagName
+        if (!$tagName) {
+            throw 'Tag name not defined.'
+        }
     }
     Write-Verbose "TagName: $tagName"
     $version = Get-Version $tagName
     Write-Verbose "Version: $version"
     $stream = @{ Version = $version }
 
-    $links = $release.Links | ? { $_.href -like "*.$FileType" }
-    if (!$SkipTagName) { $links = $links | ? { $_.href -like "*$tagName*" } }
+    $pattern = "{0}$" -f [regex]::Escape(".$FileType")
+    if (!$SkipTagName) {
+        $pattern = "{0}.*$pattern" -f [regex]::Escape($tagName)
+    }
+    $links = $release.Links | Where-Object "href" -Match $pattern
 
-    if ($IsUrl32 -or !$IsUrl64) {
-        $urls = $links
-        if ($IsUrl32) { $urls = $urls | ? { & $IsUrl32 -Url $_.href -TagName $tagName -Version $version } }
-        $urls = @($urls | % { Get-Url $ReleaseUrl $_.href -ForceHttps:$ForceHttps } | select -Unique)
-        if ($urls.Length -ne 1) {
-            if ($urls) { Write-Verbose 'Urls:' }
-            $urls | % { Write-Verbose "  - $_" }
-            throw "Url (x86) not found for version $version."
-        }
-        $stream += @{ Url32 = $urls[0] }
+    if ($IsUri32 -or !$IsUri64) {
+        $uri = $links `
+        | Get-Uri -ForceHttps:$ForceHttps `
+        | Where-Object { !$IsUri32 -or (& $IsUri32 -Uri $_ -TagName $tagName -Version $version) } `
+        | Assert-Uri -Type x86 -Version $version
+        $stream += @{ Url32 = $uri }
         'Url32: {0}' -f $stream.Url32 | Write-Verbose
     }
 
-    if ($IsUrl64) {
-        $urls = $links | ? { & $IsUrl64 -Url $_.href -TagName $tagName -Version $version }
-        $urls = @($urls | % { Get-Url $ReleaseUrl $_.href -ForceHttps:$ForceHttps } | select -Unique)
-        if ($urls.Length -ne 1) {
-            if ($urls) { Write-Verbose 'Urls:' }
-            $urls | % { Write-Verbose "  - $_" }
-            throw "Url (x64) not found for version $version."
-        }
-        $stream += @{ Url64 = $urls[0] }
+    if ($IsUri64) {
+        $uri = $links `
+        | Get-Uri -ForceHttps:$ForceHttps `
+        | Where-Object { & $IsUri64 -Uri $_ -TagName $tagName -Version $version } `
+        | Assert-Uri -Type x64 -Version $version
+        $stream += @{ Url64 = $uri }
         'Url64: {0}' -f $stream.Url64 | Write-Verbose
     }
 
     return $stream + $Latest
 }
 
-# Returns a single stream from a file using its ProductVersion or FileVersion.
-# The file can be optionally extracted from an archive.
+# Returns a single stream from one or multiple files. Archives are supported.
 function Get-FileLatest {
     [CmdletBinding()]
+    [OutputType([hashtable])]
     param(
-        [string] $Uri,
-        [string] $PathInArchive, # optional
-        [hashtable] $Latest = @{} # optional
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [uri] $FileUri,
+        [uri] $FileUri64,
+        [switch] $Download,
+        [string] $CompressedFile, # optional
+        [scriptblock] $GetVersion, # optional callback, param($Response, $File)
+        [hashtable] $Latest = @{ } # optional
     )
-    $tempPath = New-TemporaryFile
-    Remove-Item $tempPath -Force
-    $tempFile = Split-Path $Uri -Leaf
-    $tempFile = "$tempPath\$tempFile"
-    try {
-        New-Item -Path $tempPath -ItemType Directory | Out-Null
-        $release = Invoke-WebRequest -Uri $Uri -OutFile $tempFile
+    $stream = @{ }
+    if ($Download) {
+        Remove-Item ($tempDirectory = New-TemporaryFile)
+    }
 
-        if ($PathInArchive) {
-            $outPath = New-TemporaryFile
-            Remove-Item $outPath -Force
-            New-Item -Path $outPath -ItemType Directory | Out-Null
-            Expand-Archive -Path $tempFile -DestinationPath $outPath
-            Remove-Item $tempPath -Recurse -Force
-            $tempPath = $outPath
-            $tempFile = "$outPath\$PathInArchive"
-        }
+    $FileUri, $FileUri64 `
+    | Where-Object { $_ } `
+    | ForEach-Object {
+        try {
+            $parameters = if ($Download) {
+                New-Item $tempDirectory -ItemType Directory | Out-Null
+                @{
+                    Method   = 'Get'
+                    OutFile  = Join-Path $tempDirectory $_.Segments[-1]
+                    PassThru = $true
+                }
+            } else {
+                @{ Method = 'Head' }
+            }
+            $response = Invoke-WebRequest -Uri $_ -UseBasicParsing @parameters
 
-        if (!(Test-Path $tempFile)) {
-            throw 'File not found.'
-        }
-        $item = Get-Item -Path $tempFile
-        $version = if ($item.VersionInfo.ProductVersion) {
-            $item.VersionInfo.ProductVersion
-        } else {
-            $item.VersionInfo.FileVersion
-        }
-        $version = Get-Version $version
-        Write-Verbose "Version: $version"
+            $file = if ($Download) {
+                if ($CompressedFile) {
+                    $outPath = Join-Path $tempDirectory ([System.IO.Path]::GetFileNameWithoutExtension($_.Segments[-1]))
+                    Expand-Archive -Path $parameters.OutFile -DestinationPath $outPath
+                    $parameters.OutFile = Join-Path $outPath $CompressedFile
+                    if (!(Test-Path $parameters.OutFile)) {
+                        throw 'Compressed file not found.'
+                    }
+                }
+                Get-Item $parameters.OutFile
+            }
 
-        $stream = @{
-            Version = $version
-            Url32   = $Uri
-        }
+            $version = if ($GetVersion) {
+                & $GetVersion -Response $response -File $file
+            } else {
+                Get-Version $response.BaseResponse.ResponseUri
+            }
+            if ($_ -ne $FileUri -and $version -ne $stream.Version) {
+                throw ("Multiple versions found: {0} vs {1}." -f $version -ne $stream.Version)
+            }
+            Write-Verbose "Version: $version"
 
-        return $stream + $Latest
-    } finally {
-        if (Test-Path $tempPath) {
-            Remove-Item $tempPath -Recurse -Force
+            $stream += if ($_ -eq $FileUri) {
+                @{
+                    Version = $version
+                    Url32   = $response.BaseResponse.ResponseUri
+                }
+            } else {
+                @{ Url64 = $response.BaseResponse.ResponseUri }
+            }
+        } finally {
+            if ($Download) { Remove-Item $tempDirectory -Recurse -Force }
         }
     }
+
+    return $stream + $Latest
 }
 
 # Returns one or multiple streams from one or multiple web pages using its/their links to get all available versions.
 function Get-LinksLatest {
     [CmdletBinding()]
+    [OutputType([hashtable])]
     param(
-        [string[]] $ReleasesUrl,
-        [scriptblock] $GetVersion, # optional callback, param($Url)
-        [int] $StreamFieldCount = 0, # optional, 0 means single stream
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [uri[]] $ReleasesUri,
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
         [string] $FileType,
-        [scriptblock] $IsLink, # optional callback, param($Url)
-        [scriptblock] $IsUrl32, # optional callback, param($Url, $Version)
-        [scriptblock] $IsUrl64, # optional callback, param($Url, $Version)
+        [scriptblock] $IsLink, # optional callback, param($Link)
+        [scriptblock] $GetVersion, # optional callback, param($Link)
+        [int] $StreamFieldCount = 0, # optional, 0 means single stream
+        [scriptblock] $IsUri32, # optional callback, param($Uri, $Version)
+        [scriptblock] $IsUri64, # optional callback, param($Uri, $Version)
         [switch] $ForceHttps,
-        [hashtable] $Latest = @{} # optional
+        [hashtable] $Latest = @{ } # optional
     )
-    $links = @()
-    foreach ($url in $ReleasesUrl) {
-        $releases = Invoke-WebRequest -Uri $url -UseBasicParsing
-        $releases.Links | % {
-            $_ | Add-Member 'ReleasesUrl' $url
+    $links = $ReleasesUri | ForEach-Object {
+        $releaseUri = $_
+        $release = Invoke-WebRequest -Uri $releaseUri -UseBasicParsing
+        $release.Links | ForEach-Object {
+            $_ | Add-Member 'BaseUri' $releaseUri
         }
-        $links += $releases.Links
+        $release.Links
     }
 
-    $links = $links | ? { $_.href -like "*.$FileType" }
-    if ($IsLink) { $links = $links | ? { & $IsLink -Url $_.href } }
-    if (!$GetVersion) { $GetVersion = { param($Url) Get-Version $Url } }
-    $links | % {
-        $version = & $GetVersion -Url $_.href
+    $pattern = "{0}$" -f [regex]::Escape(".$FileType")
+    $links = $links | Where-Object "href" -Match $pattern
+    if ($IsLink) {
+        $links = $links | Where-Object { & $IsLink -Link $_ }
+    }
+    if (!$GetVersion) {
+        $GetVersion = { param($Link) Get-Version $Link.href }
+    }
+    $links | ForEach-Object {
+        $version = & $GetVersion -Link $_
         $_ | Add-Member 'Version' $version
     }
-    $streams = $links | ? Version | group { $_.Version.ToString($StreamFieldCount) }
+    $streams = $links `
+    | Where-Object "Version" `
+    | Group-Object { $_.Version.ToString($StreamFieldCount) }
     if ($StreamFieldCount -ge 2) {
-        $streams = $streams | sort { [version] $_.Name } -Descending
+        $streams = $streams | Sort-Object { [version] $_.Name } -Descending
     } elseif ($StreamFieldCount -eq 1) {
-        $streams = $streams | sort { [int] $_.Name } -Descending
+        $streams = $streams | Sort-Object { [int] $_.Name } -Descending
     }
 
     function Get-Stream($stream, $links) {
         Write-Verbose "Stream: $stream"
-        $release = $links | group Version | sort { Get-Version $_.Name } -Descending | select -First 1
-        if (!$release) { throw "Version not found for stream $stream." }
+        $release = $links `
+        | Group-Object "Version" `
+        | Sort-Object { Get-Version $_.Name } -Descending `
+        | Select-Object -First 1
+        if (!$release) {
+            throw "Version not found for stream $stream."
+        }
         $version = Get-Version $release.Name
         Write-Verbose "  Version: $version"
         $stream = @{ Version = $version }
 
-        if ($IsUrl32 -or !$IsUrl64) {
-            $urls = $release.Group
-            if ($IsUrl32) { $urls = $urls | ? { & $IsUrl32 -Url $_.href -Version $version } }
-            $urls = @($urls | % { Get-Url $_.ReleasesUrl $_.href -ForceHttps:$ForceHttps } | select -Unique)
-            if ($urls.Length -ne 1) {
-                if ($urls) { Write-Verbose 'Urls:' }
-                $urls | % { Write-Verbose "  - $_" }
-                throw "Url (x86) not found for version $version."
-            }
-            $stream += @{ Url32 = $urls[0] }
+        if ($IsUri32 -or !$IsUri64) {
+            $uri = $release.Group `
+            | Get-Uri -ForceHttps:$ForceHttps `
+            | Where-Object { !$IsUri32 -or (& $IsUri32 -Uri $_ -Version $version) } `
+            | Assert-Uri -Type x86 -Version $version
+            $stream += @{ Url32 = $uri }
             '  Url32: {0}' -f $stream.Url32 | Write-Verbose
         }
 
-        if ($IsUrl64) {
-            $urls = $release.Group | ? { & $IsUrl64 -Url $_.href -Version $version }
-            $urls = @($urls | % { Get-Url $_.ReleasesUrl $_.href -ForceHttps:$ForceHttps } | select -Unique)
-            if ($urls.Length -ne 1) {
-                if ($urls) { Write-Verbose 'Urls:' }
-                $urls | % { Write-Verbose "  - $_" }
-                throw "Url (x64) not found for version $version."
-            }
-            $stream += @{ Url64 = $urls[0] }
+        if ($IsUri64) {
+            $uri = $release.Group `
+            | Get-Uri -ForceHttps:$ForceHttps `
+            | Where-Object { & $IsUri64 -Uri $_ -Version $version } `
+            | Assert-Uri -Type x64 -Version $version
+            $stream += @{ Url64 = $uri }
             '  Url64: {0}' -f $stream.Url64 | Write-Verbose
         }
 
         return $stream
     }
 
-    $result = [ordered] @{}
-    $streams | % {
+    $result = [ordered] @{ }
+    $streams | ForEach-Object {
         $stream = Get-Stream $_.Name $_.Group
         $result.Add($_.Name, $stream)
     }
     if ($StreamFieldCount -eq 0) {
-        return ($result.Values | select -First 1) + $Latest
+        return $result[0] + $Latest
     } else {
         return @{ Streams = $result } + $Latest
     }
@@ -200,19 +242,23 @@ function Get-LinksLatest {
 # Returns one or multiple streams from a GitHub repository.
 function Get-GitHubLatest {
     [CmdletBinding()]
+    [OutputType([hashtable])]
     param(
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
         [string] $Repository,
         [scriptblock] $GetTagName, # optional callback, param($TagName, $Release)
         [int] $StreamFieldCount = 0, # optional, 0 means single stream
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
         [string] $FileType,
-        [scriptblock] $IsUrl32, # optional callback, param($Url, $TagName, $Version)
-        [scriptblock] $IsUrl64, # optional callback, param($Url, $TagName, $Version)
-        [hashtable] $Latest = @{} # optional
+        [scriptblock] $IsUri32, # optional callback, param($Uri, $TagName, $Version)
+        [scriptblock] $IsUri64, # optional callback, param($Uri, $TagName, $Version)
+        [hashtable] $Latest = @{ } # optional
     )
-    $releasesUrl = "https://api.github.com/repos/$Repository/releases?per_page=10"
-    $releases = (Invoke-WebRequest -Uri $releasesUrl -UseBasicParsing).Content | ConvertFrom-Json
+    $releases = Invoke-RestMethod -Uri "https://api.github.com/repos/$Repository/releases?per_page=10" -UseBasicParsing
 
-    $releases | % {
+    $releases | ForEach-Object {
         $tagName = $_.tag_name
         if ($GetTagName) {
             $tagName = & $GetTagName -TagName $tagName -Release $_
@@ -220,64 +266,124 @@ function Get-GitHubLatest {
         $version = Get-Version $tagName
         $_ | Add-Member 'Version' $version
     }
-    $streams = $releases | ? Version | group { $_.Version.ToString($StreamFieldCount) }
+    $streams = $releases `
+    | Where-Object "Version" `
+    | Group-Object { $_.Version.ToString($StreamFieldCount) }
     if ($StreamFieldCount -ge 2) {
-        $streams = $streams | sort { [version] $_.Name } -Descending
+        $streams = $streams | Sort-Object { [version] $_.Name } -Descending
     } elseif ($StreamFieldCount -eq 1) {
-        $streams = $streams | sort { [int] $_.Name } -Descending
+        $streams = $streams | Sort-Object { [int] $_.Name } -Descending
     }
 
     function Get-Stream($stream, $releases) {
         Write-Verbose "Stream: $stream"
-        $release = $releases | sort Version -Descending | select -First 1
+        $release = $releases `
+        | Sort-Object "Version" -Descending `
+        | Select-Object -First 1
+        $tagName = $release.tag_name
         $version = $release.Version
         Write-Verbose "  Version: $version"
         $stream = @{ Version = $version }
 
-        $assets = $release.assets | ? { $_.browser_download_url -like "*{0}*.$FileType" -f $release.tag_name }
+        $pattern = "{0}.*{1}$" -f [regex]::Escape($tagName), [regex]::Escape(".$FileType")
+        $assets = $release.assets | Where-Object "browser_download_url" -Match $pattern
 
-        if ($IsUrl32 -or !$IsUrl64) {
-            $urls = $assets
-            if ($IsUrl32) { $urls = $urls | ? { & $IsUrl32 -Url $_.browser_download_url -TagName $release.tag_name -Version $version } }
-            $urls = @($urls | % browser_download_url | select -Unique)
-            if ($urls.Length -ne 1) {
-                if ($urls) { Write-Verbose 'Urls:' }
-                $urls | % { Write-Verbose "  - $_" }
-                throw "Url (x86) not found for version $version."
-            }
-            $stream += @{ Url32 = $urls[0] }
+        if ($IsUri32 -or !$IsUri64) {
+            $uri = $assets `
+            | ForEach-Object "browser_download_url" `
+            | Where-Object { !$IsUri32 -or (& $IsUri32 -Uri $_ -TagName $tagName -Version $version) } `
+            | Assert-Uri -Type x86 -Version $version
+            $stream += @{ Url32 = $uri }
             '  Url32: {0}' -f $stream.Url32 | Write-Verbose
         }
 
-        if ($IsUrl64) {
-            $urls = $assets | ? { & $IsUrl64 -Url $_.browser_download_url -TagName $release.tag_name -Version $version }
-            $urls = @($urls | % browser_download_url | select -Unique)
-            if ($urls.Length -ne 1) {
-                if ($urls) { Write-Verbose 'Urls:' }
-                $urls | % { Write-Verbose "  - $_" }
-                throw "Url (x64) not found for version $version."
-            }
-            $stream += @{ Url64 = $urls[0] }
+        if ($IsUri64) {
+            $uri = $assets `
+            | ForEach-Object "browser_download_url" `
+            | Where-Object { & $IsUri64 -Uri $_ -TagName $tagName -Version $version } `
+            | Assert-Uri -Type x64 -Version $version
+            $stream += @{ Url64 = $uri }
             '  Url64: {0}' -f $stream.Url64 | Write-Verbose
         }
 
         return $stream
     }
 
-    $result = [ordered] @{}
-    $streams | % {
+    $result = [ordered] @{ }
+    $streams | ForEach-Object {
         $stream = Get-Stream $_.Name $_.Group
         $result.Add($_.Name, $stream)
     }
     if ($StreamFieldCount -eq 0) {
-        return ($result.Values | select -First 1) + $Latest
+        return $result[0] + $Latest
     } else {
         return @{ Streams = $result } + $Latest
     }
 }
 
-function Get-Url([uri] $BaseUrl, [string] $RelativeUrl, [switch] $ForceHttps) {
-    $url = [uri]::new($BaseUrl, $RelativeUrl).ToString()
-    if ($ForceHttps -and $Url.StartsWith('http://')) { $url = $url.Insert(4, 's') }
-    return $url
+function Assert-Uri {
+    [CmdletBinding(DefaultParameterSetName="Default")]
+    [OutputType([uri])]
+    param(
+        [Parameter(ValueFromPipeline=$true)]
+        [uri] $Uri,
+        [Parameter(Mandatory=$true, ParameterSetName="Default")]
+        [ValidateNotNullOrEmpty()]
+        [string] $Name,
+        [Parameter(Mandatory=$true, ParameterSetName="TypeAndVersion")]
+        [ValidateSet("x86", "x64")]
+        [string] $Type,
+        [Parameter(Mandatory=$true, ParameterSetName="TypeAndVersion")]
+        [ValidateNotNullOrEmpty()]
+        [object] $Version
+    )
+    begin {
+        $uris = [System.Collections.Generic.HashSet[uri]]::new()
+    }
+    process {
+        if ($Uri) {
+            $uris.Add($Uri) | Out-Null
+        }
+    }
+    end {
+        if ($uris.Count -eq 0) {
+            if ($Name) {
+                throw "$Name not found."
+            } else {
+                throw "Url ($Type) not found for version $Version."
+            }
+        }
+        if ($uris.Count -gt 1) {
+            Write-Warning 'Urls:'
+            $uris | ForEach-Object { Write-Warning "  - $_" }
+            if ($Name) {
+                throw "$Name has multiple values."
+            } else {
+                throw "Url ($Type) has multiple values for version $Version."
+            }
+        }
+        return $uris | Select-Object
+    }
+}
+
+function Get-Uri {
+    [CmdletBinding()]
+    [OutputType([uri])]
+    param(
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [uri] $BaseUri,
+        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [Alias("href")]
+        [string] $RelativeUrl,
+        [switch] $ForceHttps
+    )
+    process {
+        $uri = [uri]::new($BaseUri, $RelativeUrl)
+        if ($ForceHttps -and $uri.Scheme -eq [uri]::UriSchemeHttp) {
+            $builder = [System.UriBuilder]::new($uri)
+            $builder.Scheme = [uri]::UriSchemeHttps
+            $uri = $builder.Uri
+        }
+        return $uri
+    }
 }

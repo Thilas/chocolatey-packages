@@ -5,8 +5,10 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     Get-FileLatest `
-        -Uri 'https://download.sysinternals.com/files/ProcessExplorer.zip' `
-        -PathInArchive 'procexp.exe' `
+        -FileUri 'https://download.sysinternals.com/files/ProcessExplorer.zip' `
+        -Download `
+        -CompressedFile 'procexp.exe' `
+        -GetVersion { param($File) Get-Version $File.VersionInfo.ProductVersion } `
         -Latest @{ ValidExitCodes = '0' }
 }
 

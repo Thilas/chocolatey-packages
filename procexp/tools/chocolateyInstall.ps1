@@ -15,7 +15,7 @@ $packageArgs = @{
 
 Install-ChocolateyZipPackage @packageArgs
 
-@('procexp', 'procexp64') | % {
+@('procexp', 'procexp64') | ForEach-Object {
     New-Item "$toolsDir\$_.exe.gui" -Type File -Force | Out-Null
 }
 

@@ -8,15 +8,15 @@ function global:au_GetLatest {
         -Repository 'Nevcairiel/LAVFilters' `
         -FileType 'exe' `
         -Latest @{
-            SoftwareName            = 'LAV Filters *'
-            SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-            ValidExitCodes          = '0'
+            SoftwareName   = 'LAV Filters *'
+            SilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+            ValidExitCodes = '0'
         }
 }
 
 function global:au_SearchReplace {
     @{
-        'tools\chocolateyInstall.ps1'   = @{
+        'tools\chocolateyInstall.ps1' = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"

@@ -1,4 +1,4 @@
-. ./helpers.ps1
+. "$PSScriptRoot\helpers.ps1"
 
 # Get-MergeTasks tests
 

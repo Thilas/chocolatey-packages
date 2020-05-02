@@ -56,8 +56,8 @@ function Uninstall-ChocolateyShortcut {
 
     try {
         if ($UnpinFromTaskbar) {
-            if (Test-Path $shortcutFilePath) {$pinverb = (New-Object -com "shell.application").namespace($(split-path -parent $shortcutFilePath)).Parsename($(split-path -leaf $shortcutFilePath)).verbs() | ? {$_.Name -eq 'Unpin from tas&kbar'}}
-            if ($pinverb) {$pinverb.doit()}
+            if (Test-Path $shortcutFilePath) { $pinverb = (New-Object -ComObject "Shell.Application").NameSpace($(Split-Path -Parent $shortcutFilePath)).ParseName($(Split-Path -Leaf $shortcutFilePath)).Verbs() | Where-Object { $_.Name -eq 'Unpin from tas&kbar' } }
+            if ($pinverb) { $pinverb.DoIt() }
         }
 
         Write-Debug "Removing Shortcut..."

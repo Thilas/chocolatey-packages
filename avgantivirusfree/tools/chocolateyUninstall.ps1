@@ -19,7 +19,7 @@ if ($key.Count -eq 1) {
         $path = Invoke-Expression "Split-CommandLine $path"
         if (Test-Path $path) { return $path }
     }
-    $key | % {
+    $key | ForEach-Object {
         $file = Get-File $_.UninstallString
         if ($file) {
             Uninstall-ChocolateyPackage -PackageName $packageName `
@@ -37,5 +37,5 @@ if ($key.Count -eq 1) {
     Write-Warning "$($key.Count) matches found for $packageName!"
     Write-Warning "To prevent accidental data loss, no programs will be uninstalled."
     Write-Warning "Please contact package maintainer the following keys were matched:"
-    $key | % { Write-Warning "- $($_.DisplayName)" }
+    $key | ForEach-Object { Write-Warning "- $($_.DisplayName)" }
 }

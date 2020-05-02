@@ -5,7 +5,7 @@ param($IncludeStream, [switch] $Force)
 
 function global:au_GetLatest {
     Get-Latest `
-        -ReleasesUrl 'https://wiki.eclipse.org/Simultaneous_Release' `
+        -ReleasesUri 'https://wiki.eclipse.org/Simultaneous_Release' `
         -TagNamesPattern '<th\b[^>]*>\s*.*\b(?<Release>\d+-\d+)\b.*\s*</th\b[^>]*>\s*<td\b[^>]*>\s*.*\b(?<TagName>\d+\.\d+)\b.*\s*</td\b' `
         -LinkPattern '/downloads/packages/release/(?<Release>\d+-\d+)/r' `
         -StreamFieldCount 2
@@ -14,51 +14,48 @@ function global:au_GetLatest {
 function Get-Latest {
     [CmdletBinding()]
     param(
-        [string] $ReleasesUrl,
+        [uri] $ReleasesUri,
         [string] $TagNamesPattern, # must include Release and TagName captures
         [string] $LinkPattern, # must include a Release capture
         [int] $StreamFieldCount
     )
-    $releases = Invoke-WebRequest -Uri $ReleasesUrl -UseBasicParsing
+    $releases = Invoke-WebRequest -Uri $ReleasesUri -UseBasicParsing
 
     $tagNames = @{ }
     $result = $releases.Content | Select-String -Pattern $TagNamesPattern -AllMatches
-    $result.Matches | % {
+    $result.Matches | ForEach-Object {
         $tagNames.Add($_.Groups['Release'].Value, $_.Groups['TagName'].Value)
     }
 
-    $links = $releases.Links | ? { $_.href -match $LinkPattern -and $tagNames.Keys -contains $Matches.Release }
-
-    $result = [ordered] @{}
-    $links | % {
+    $result = [ordered] @{ }
+    $releases.Links `
+    | Where-Object { $_.href -match $LinkPattern -and $tagNames.Keys -contains $Matches.Release } `
+    | ForEach-Object {
         $_.href -match $LinkPattern
         $release = $Matches.Release
         $tagName = $tagNames.$release
         $version = Get-Version $tagName
 
-        $url = Get-Url $ReleasesUrl $_.href -ForceHttps
-        $isUrl32 = if ($version -lt '4.10') { {
-            param($Url)
-            $Url -like "*jee*win32*" -and $Url -notlike '*x86_64*'
-        } }
-        $isUrl64 = if ($version -lt '4.10') { {
-            param($Url)
-            $Url -like "*jee*win32*" -and $Url -notlike '*x86_64*'
-        } } else { {
-            param($Url)
-            $Url -like "*jee*win32*"
-        } }
+        $uri = $_ | Get-Uri -BaseUri $ReleasesUri -ForceHttps
+        $isUri32 = if ($version -lt '4.10') {
+            { param($Uri) $Uri -match "\bjee\b.*\bwin32\b" -and $Uri -notmatch '\bx86_64\b' }
+        }
+        $isUri64 = if ($version -lt '4.10') {
+            { param($Uri) $Uri -match "\bjee\b.*\bwin32\b" -and $Uri -notmatch '\bx86_64\b' }
+        } else {
+            { param($Uri) $Uri -match "\bjee\b.*\bwin32\b" }
+        }
 
         $latest = Get-BasicLatest `
-            -ReleaseUrl $url `
+            -ReleaseUri $uri `
             -GetTagName { $tagName } `
-            -SkipTagName `
             -FileType 'zip' `
-            -IsUrl32 $isUrl32 `
-            -IsUrl64 $isUrl64 `
+            -SkipTagName `
+            -IsUri32 $isUri32 `
+            -IsUri64 $isUri64 `
             -ForceHttps
-        if ($latest.Url32) { $latest.Url32 += '&r=1' }
-        if ($latest.Url64) { $latest.Url64 += '&r=1' }
+        if ($latest.Url32) { $latest.Url32 = '{0}&r=1' -f $latest.Url32 }
+        if ($latest.Url64) { $latest.Url64 = '{0}&r=1' -f $latest.Url64 }
         $result.Add($version.ToString($StreamFieldCount), $latest)
     }
     return @{ Streams = $result }

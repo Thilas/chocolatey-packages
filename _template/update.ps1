@@ -21,7 +21,7 @@ function global:au_GetLatest {
     #$silentArgs     = '-s -u'                                         # Ghost
     $validExitCodes = '0'
     #$fileType       = 'msi/msu'
-    #$silentArgs     = "/qn /norestart /l*v ```"`$env:TEMP\`$env:chocolateyPackageName.`$env:chocolateyPackageVersion.MsiInstall.log```"" # ALLUSERS=1 DISABLEDESKTOPSHORTCUT=1 ADDDESKTOPICON=0 ADDSTARTMENU=0
+    #$silentArgs     = "/qn /norestart /l*v ```"`$Env:TEMP\`$Env:chocolateyPackageName.`$Env:chocolateyPackageVersion.MsiInstall.log```"" # ALLUSERS=1 DISABLEDESKTOPSHORTCUT=1 ADDDESKTOPICON=0 ADDSTARTMENU=0
     #$validExitCodes = '0, 3010, 1641' # https://msdn.microsoft.com/en-us/library/aa376931(v=vs.85).aspx
 
     $uninstallFileType       = 'exe'
@@ -40,13 +40,13 @@ function global:au_GetLatest {
     #$uninstallValidExitCodes = '0, 3010, 1605, 1614, 1641' # https://msdn.microsoft.com/en-us/library/aa376931(v=vs.85).aspx
 
     Get-BasicLatest `
-        -ReleaseUrl 'https://' `
-        -TagNamePattern 'Version (?<TagName>[^ ]+) ' `
+        -ReleaseUri 'https://' `
         #-GetTagName { param($Release) '1.0.0' } `
-        #-SkipTagName `
+        -TagNamePattern 'Version (?<TagName>[^ ]+) ' `
         -FileType $fileType `
-        #-IsUrl32 { param($Url, $TagName, $Version) $Url -like '*x86*' } `
-        #-IsUrl64 { param($Url, $TagName, $Version) $Url -like '*x64*' } `
+        #-SkipTagName `
+        #-IsUri32 { param($Uri, $TagName, $Version) $Uri -match '\bx86\b' } `
+        #-IsUri64 { param($Uri, $TagName, $Version) $Uri -match '\bx64\b' } `
         #-ForceHttps `
         -Latest @{
             SoftwareName            = $softwareName
@@ -56,14 +56,28 @@ function global:au_GetLatest {
             UninstallSilentArgs     = $uninstallSilentArgs
             UninstallValidExitCodes = $uninstallValidExitCodes
         }
+    Get-FileLatest `
+        -FileUri 'https://' `
+        #-FileUri64 'https://' `
+        #-Download `
+        #-CompressedFile 'path\to\file' `
+        #-GetVersion { param($Response, $File) Get-Version $File.VersionInfo.ProductVersion } `
+        -Latest @{
+            SoftwareName            = $softwareName
+            SilentArgs              = $silentArgs
+            ValidExitCodes          = $validExitCodes
+            UninstallFileType       = $uninstallFileType
+            UninstallSilentArgs     = $uninstallSilentArgs
+            UninstallValidExitCodes = $uninstallValidExitCodes
+        }
     Get-LinksLatest `
-        -ReleasesUrl 'https://', '...' `
-        #-GetVersion { param($Url) '1.0.0' } `
-        #-StreamFieldCount 2 `
+        -ReleasesUri 'https://', '...' `
         -FileType $fileType `
-        #-IsLink { param($Url) $Url -like '*' } `
-        #-IsUrl32 { param($Url, $Version) $Url -like '*x86*' } `
-        #-IsUrl64 { param($Url, $Version) $Url -like '*x64*' } `
+        #-IsLink { param($Link) $Link.href } `
+        #-GetVersion { param($Link) '1.0.0' } `
+        #-StreamFieldCount 2 `
+        #-IsUri32 { param($Uri, $Version) $Uri -match '\bx86\b' } `
+        #-IsUri64 { param($Uri, $Version) $Uri -match '\bx64\b' } `
         #-ForceHttps `
         -Latest @{
             SoftwareName            = $softwareName
@@ -78,8 +92,8 @@ function global:au_GetLatest {
         #-GetTagName { param($TagName, $Release) '1.0.0' } `
         #-StreamFieldCount 2 `
         -FileType $fileType `
-        #-IsUrl32 { param($Url, $TagName, $Version) $Url -like '*x86*' } `
-        #-IsUrl64 { param($Url, $TagName, $Version) $Url -like '*x64*' } `
+        #-IsUri32 { param($Uri, $TagName, $Version) $Uri -match '\bx86\b' } `
+        #-IsUri64 { param($Uri, $TagName, $Version) $Uri -match '\bx64\b' } `
         -Latest @{
             SoftwareName            = $softwareName
             SilentArgs              = $silentArgs
@@ -94,7 +108,7 @@ function global:au_GetLatest {
 
 function global:au_SearchReplace {
     @{
-        'tools\chocolateyInstall.ps1'   = @{
+        'tools\chocolateyInstall.ps1' = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
@@ -115,10 +129,10 @@ function global:au_SearchReplace {
             "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"
         }
         #'legal\VERIFICATION.txt' = @{
-        #    "(?i)(\s+x32:).*"                     = "`${1} $($Latest.Url32)"
-        #    "(?i)(\s+x64:).*"                     = "`${1} $($Latest.Url64)"
-        #    "(?i)(checksum32:).*"                 = "`${1} $($Latest.Checksum32)"
-        #    "(?i)(checksum64:).*"                 = "`${1} $($Latest.Checksum64)"
+        #    "(?i)(\s+x32:).*"                     = "`$1 $($Latest.Url32)"
+        #    "(?i)(\s+x64:).*"                     = "`$1 $($Latest.Url64)"
+        #    "(?i)(checksum32:).*"                 = "`$1 $($Latest.Checksum32)"
+        #    "(?i)(checksum64:).*"                 = "`$1 $($Latest.Checksum64)"
         #}
     }
 }

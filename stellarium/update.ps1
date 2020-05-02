@@ -7,18 +7,18 @@ function global:au_GetLatest {
     Get-GitHubLatest `
         -Repository 'Stellarium/stellarium' `
         -FileType 'exe' `
-        -IsUrl32 { param($Url) $Url -like '*win32*' } `
-        -IsUrl64 { param($Url) $Url -like '*win64*' } `
+        -IsUri32 { param($Uri) $Uri -match '\bwin32\b' } `
+        -IsUri64 { param($Uri) $Uri -match '\bwin64\b' } `
         -Latest @{
-            SoftwareName            = 'Stellarium *'
-            SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-            ValidExitCodes          = '0'
+            SoftwareName   = 'Stellarium *'
+            SilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+            ValidExitCodes = '0'
         }
 }
 
 function global:au_SearchReplace {
     @{
-        'tools\chocolateyInstall.ps1'   = @{
+        'tools\chocolateyInstall.ps1' = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"

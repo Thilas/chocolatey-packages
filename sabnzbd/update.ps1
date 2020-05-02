@@ -23,7 +23,7 @@ function global:au_SearchReplace {
             "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
         }
-        'tools\chocolateyInstall.ps1'      = @{
+        'tools\chocolateyInstall.ps1' = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
@@ -33,7 +33,7 @@ function global:au_SearchReplace {
             "^(\s*checksumType\s*=\s*)'.*'$"      = "`$1'$($Latest.ChecksumType32)'"
             "^(\s*validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.ValidExitCodes))"
         }
-        'tools\chocolateyUninstall.ps1'    = @{
+        'tools\chocolateyUninstall.ps1' = @{
             "^([$]packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^([$]fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.UninstallFileType)'"

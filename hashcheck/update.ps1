@@ -19,7 +19,7 @@ function global:au_BeforeUpdate { Get-RemoteFiles -Purge -NoSuffix }
 
 function global:au_SearchReplace {
     @{
-        'tools\chocolateyInstall.ps1'   = @{
+        'tools\chocolateyInstall.ps1' = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
@@ -31,8 +31,8 @@ function global:au_SearchReplace {
             "^([$]validExitCodes\s*=\s*)@\(.*\)$" = "`$1@($($Latest.UninstallValidExitCodes))"
         }
         'legal\VERIFICATION.txt' = @{
-            "(?i)(\s+x32:).*"                     = "`${1} $($Latest.Url32)"
-            "(?i)(checksum32:).*"                 = "`${1} $($Latest.Checksum32)"
+            "(?i)(\s+x32:).*"                     = "`$1 $($Latest.Url32)"
+            "(?i)(checksum32:).*"                 = "`$1 $($Latest.Checksum32)"
         }
     }
 }

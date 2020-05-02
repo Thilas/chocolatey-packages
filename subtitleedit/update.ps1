@@ -7,7 +7,7 @@ function global:au_GetLatest {
     $latest = Get-GitHubLatest `
         -Repository 'SubtitleEdit/subtitleedit' `
         -FileType 'zip' `
-        -IsUrl32 { param($Url) $Url -like '*Setup*' } `
+        -IsUri32 { param($Uri) $Uri -match '\bSetup\b' } `
         -Latest @{
             SoftwareName            = 'Subtitle Edit *'
             FileType                = 'exe'
@@ -17,16 +17,14 @@ function global:au_GetLatest {
             UninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
             UninstallValidExitCodes = '0'
         }
-    $file = [uri]::new($latest.Url32).Segments | select -Last 1
-    Write-Verbose ("File: {0}" -f $file)
-    $latest += @{ File32 = [System.IO.Path]::ChangeExtension($file, $latest.FileType) }
-    Write-Verbose ("File32: {0}" -f $latest.File32)
+    $latest += @{ File32 = [System.IO.Path]::ChangeExtension($latest.Url32.Segments[-1], $latest.FileType) }
+    "File32: {0}" -f $latest.File32 | Write-Verbose
     return $latest
 }
 
 function global:au_SearchReplace {
     @{
-        'tools\chocolateyInstall.ps1'   = @{
+        'tools\chocolateyInstall.ps1' = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"

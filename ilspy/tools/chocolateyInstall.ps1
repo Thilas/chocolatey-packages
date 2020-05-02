@@ -5,8 +5,8 @@ $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 # *** Automatically filled ***
 $fileType    = 'zip'
 $packageArgs = @{
-    packageName    = 'ilspy'
-    destination    = $toolsDir
+    packageName = 'ilspy'
+    destination = $toolsDir
 }
 # *** Automatically filled ***
 

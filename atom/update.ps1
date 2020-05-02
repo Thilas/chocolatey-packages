@@ -8,18 +8,18 @@ function global:au_GetLatest {
         -Repository 'atom/atom' `
         -StreamFieldCount 2 `
         -FileType 'exe' `
-        -IsUrl32 { param($Url) $Url -notlike '*x64*' } `
-        -IsUrl64 { param($Url) $Url -like '*x64*' } `
+        -IsUri32 { param($Uri) $Uri -notmatch '\bx64\b' } `
+        -IsUri64 { param($Uri) $Uri -match '\bx64\b' } `
         -Latest @{
-            SoftwareName            = 'Atom'
-            SilentArgs              = '--silent'
-            ValidExitCodes          = '0'
+            SoftwareName   = 'Atom'
+            SilentArgs     = '--silent'
+            ValidExitCodes = '0'
         }
 }
 
 function global:au_SearchReplace {
     @{
-        'tools\chocolateyInstall.ps1'   = @{
+        'tools\chocolateyInstall.ps1' = @{
             "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^([$]version\s*=\s*)'.*'$"           = "`$1'$($Latest.Version)'"
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"

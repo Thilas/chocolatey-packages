@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     Get-BasicLatest `
-        -ReleaseUrl 'http://serviio.org/download' `
+        -ReleaseUri 'http://serviio.org/download' `
         -TagNamePattern 'The latest released version is (?<TagName>[^ ]+) ' `
         -FileType 'exe' `
         -Latest @{
@@ -20,7 +20,7 @@ function global:au_GetLatest {
 
 function global:au_SearchReplace {
     @{
-        'tools\chocolateyInstall.ps1'   = @{
+        'tools\chocolateyInstall.ps1' = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"

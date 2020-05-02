@@ -5,8 +5,10 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     Get-FileLatest `
-        -Uri 'https://download.sysinternals.com/files/ProcessMonitor.zip' `
-        -PathInArchive 'Procmon.exe' `
+        -FileUri 'https://download.sysinternals.com/files/ProcessMonitor.zip' `
+        -Download `
+        -CompressedFile 'Procmon.exe' `
+        -GetVersion { param($File) Get-Version $File.VersionInfo.ProductVersion } `
         -Latest @{ ValidExitCodes = '0' }
 }
 

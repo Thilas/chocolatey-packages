@@ -3,8 +3,8 @@
 $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 # *** Automatically filled ***
-$packageName    = 'sabnzbd'
-$softwareName   = 'SABnzbd*'
+$packageName  = 'sabnzbd'
+$softwareName = 'SABnzbd*'
 # *** Automatically filled ***
 
 Write-Host 'Stopping services if they''re running...'

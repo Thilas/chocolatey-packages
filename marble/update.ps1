@@ -5,21 +5,21 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     Get-BasicLatest `
-        -ReleaseUrl 'https://marble.kde.org/install.php' `
+        -ReleaseUri 'https://marble.kde.org/install.php' `
         -TagNamePattern '>Marble (?<TagName>[^ ]+) \(Windows ' `
         -FileType 'exe' `
-        -IsUrl32 { param($Url) $Url -like '*x86*' } `
-        -IsUrl64 { param($Url) $Url -like '*x64*' } `
+        -IsUri32 { param($Uri) $Uri -match '_x86\b' } `
+        -IsUri64 { param($Uri) $Uri -match '_x64\b' } `
         -Latest @{
-            SoftwareName            = 'Marble *'
-            SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-            ValidExitCodes          = '0'
+            SoftwareName   = 'Marble *'
+            SilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+            ValidExitCodes = '0'
         }
 }
 
 function global:au_SearchReplace {
     @{
-        'tools\chocolateyInstall.ps1'   = @{
+        'tools\chocolateyInstall.ps1' = @{
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
             "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"

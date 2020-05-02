@@ -7,18 +7,18 @@ function global:au_GetLatest {
     Get-GitHubLatest `
         -Repository 'VSCodium/vscodium' `
         -FileType 'exe' `
-        -IsUrl32 { param($Url) $Url -like '*VSCodiumSetup-ia32-*' } `
-        -IsUrl64 { param($Url) $Url -like '*VSCodiumSetup-x64-*' } `
+        -IsUri32 { param($Uri) $Uri -match '\bVSCodiumSetup-ia32\b' } `
+        -IsUri64 { param($Uri) $Uri -match '\bVSCodiumSetup-x64\b' } `
         -Latest @{
-            SoftwareName            = 'VSCodium'
-            SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-            ValidExitCodes          = '0, 3010, 1641'
+            SoftwareName   = 'VSCodium'
+            SilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+            ValidExitCodes = '0, 3010, 1641'
         }
 }
 
 function global:au_SearchReplace {
     @{
-        'tools\chocolateyInstall.ps1'   = @{
+        'tools\chocolateyInstall.ps1' = @{
             "^([$]softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^([$]version\s*=\s*)'.*'$"           = "`$1'$($Latest.Version)'"
             "^(\s*packageName\s*=\s*)'.*'$"       = "`$1'$($Latest.PackageName)'"
