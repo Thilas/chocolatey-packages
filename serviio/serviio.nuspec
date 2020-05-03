@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>serviio</id>
-    <version>2.0</version>
+    <version>2.1</version>
     <title>Serviio</title>
     <authors>Petr Nejedly</authors>
     <owners>Thilas</owners>
