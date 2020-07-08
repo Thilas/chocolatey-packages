@@ -5,12 +5,12 @@ $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'airserver'
-    url            = 'https://dl.airserver.com/pc32/AirServer-5.5.11-x86-msi.zip'
-    url64bit       = 'https://dl.airserver.com/pc32/AirServer-5.5.11-x64-msi.zip'
+    url            = 'http://dl.airserver.com/pc32/AirServer-5.6.0-x86.msi'
+    url64bit       = 'http://dl.airserver.com/pc32/AirServer-5.6.0-x64.msi'
     unzipLocation  = $toolsDir
-    checksum       = '7696ccc3df46d284a0a6783f3595f4b1775ac1c161f78deaa742d551badbed0e'
+    checksum       = 'f46cffde2ceea25961e95ad6f6a4c5c6a2a2de5da954b64ad5fec7272cd40c60'
     checksumType   = 'sha256'
-    checksum64     = '9b66dac58ab70d8982298cc759fc2552024ee45cfaa23de8888c35f66f58304a'
+    checksum64     = 'b02d693ac1e3cbc9247ab212331c347b5c5c96f1f9c0a6fbae57c45d0b46c0f4'
     checksumType64 = 'sha256'
 }
 # *** Automatically filled ***
@@ -22,8 +22,8 @@ $packageArgs = @{
     packageName    = 'airserver'
     softwareName   = 'AirServer *'
     fileType       = 'msi'
-    file           = "$toolsDir\AirServer-5.5.11-x86.msi"
-    file64         = "$toolsDir\AirServer-5.5.11-x64.msi"
+    file           = "$toolsDir\AirServer-5.6.0-x86.msi"
+    file64         = "$toolsDir\AirServer-5.6.0-x64.msi"
     silentArgs     = '/qn /norestart'
     validExitCodes = @(0, 3010, 1641)
 }
