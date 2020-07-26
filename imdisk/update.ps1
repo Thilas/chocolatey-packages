@@ -4,8 +4,18 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
+    $url = 'http://www.ltr-data.se/opencode.html'
+    try {
+        Invoke-WebRequest -Uri $url -UseBasicParsing -Method Head | Out-Null
+    } catch {
+        if ($_.Exception.Response.StatusCode -eq 503) {
+            Write-Warning 'Site is unavailable'
+            return @{ Version = '2.0.10.20181231' } # Fallback version when the site is unavailable
+        }
+        throw
+    }
     Get-BasicLatest `
-        -ReleaseUri 'http://www.ltr-data.se/opencode.html' `
+        -ReleaseUri $url `
         -TagNamePattern 'Current version (?<TagName>.+) built' `
         -FileType 'exe' `
         -Latest @{
