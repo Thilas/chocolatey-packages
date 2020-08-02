@@ -5,12 +5,12 @@ $packageArgs = @{
     packageName    = 'strawberryperl'
     softwareName   = 'Strawberry Perl *'
     fileType       = 'msi'
-    url            = 'http://strawberryperl.com/download/5.30.2.1/strawberry-perl-5.30.2.1-32bit.msi'
-    url64bit       = 'http://strawberryperl.com/download/5.30.2.1/strawberry-perl-5.30.2.1-64bit.msi'
+    url            = 'http://strawberryperl.com/download/5.30.3.1/strawberry-perl-5.30.3.1-32bit.msi'
+    url64bit       = 'http://strawberryperl.com/download/5.30.3.1/strawberry-perl-5.30.3.1-64bit.msi'
     silentArgs     = '/qn /norestart'
-    checksum       = '2365e89623b496ca530443a362e765f3e8de9daa744b07924b17ae7aa0b06002'
+    checksum       = '64f51b7ea411796fd4ce5193450058dc5d1bc143cf1f882de559630b0acce62e'
     checksumType   = 'sha256'
-    checksum64     = '2476f4e2128210c40f7621e9379f5a46a53f015fa7b1bc26b1806acda13c4244'
+    checksum64     = '7e853ae54e2ab600385b81ddb7259f1e47aa876bdd3aee75f248754da7995ecb'
     checksumType64 = 'sha256'
     validExitCodes = @(0, 3010, 1641)
 }
