@@ -83,6 +83,7 @@ function Get-FileLatest {
         [switch] $Download,
         [string] $CompressedFile, # optional
         [scriptblock] $GetVersion, # optional callback, param($Response, $File)
+        [switch] $ForceHttps,
         [hashtable] $Latest = @{ } # optional
     )
     $stream = @{ }
@@ -128,13 +129,14 @@ function Get-FileLatest {
             }
             Write-Verbose "Version: $version"
 
+            $uri = Get-Uri -BaseUri $response.BaseResponse.ResponseUri -ForceHttps:$ForceHttps
             $stream += if ($_ -eq $FileUri) {
                 @{
                     Version = $version
-                    Url32   = $response.BaseResponse.ResponseUri
+                    Url32   = $uri
                 }
             } else {
-                @{ Url64 = $response.BaseResponse.ResponseUri }
+                @{ Url64 = $uri }
             }
         } finally {
             if ($Download) { Remove-Item $tempDirectory -Recurse -Force }
@@ -382,6 +384,9 @@ function Get-Uri {
         if ($ForceHttps -and $uri.Scheme -eq [uri]::UriSchemeHttp) {
             $builder = [System.UriBuilder]::new($uri)
             $builder.Scheme = [uri]::UriSchemeHttps
+            if ($builder.Port -eq 80) {
+                $builder.Port = 443
+            }
             $uri = $builder.Uri
         }
         return $uri

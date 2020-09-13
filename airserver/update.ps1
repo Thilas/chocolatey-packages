@@ -4,24 +4,17 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    $latest = Get-FileLatest `
+    Get-FileLatest `
         -FileUri   'https://www.airserver.com/download/windows/classic/x86' `
         -FileUri64 'https://www.airserver.com/download/windows/classic/x64' `
         -GetVersion { param($Response) Get-Version $Response.BaseResponse.ResponseUri -Delimiter '-' } `
+        -ForceHttps `
         -Latest @{
             SoftwareName   = 'AirServer *'
             FileType       = 'msi'
             SilentArgs     = '/qn /norestart'
             ValidExitCodes = '0, 3010, 1641'
         }
-    $pattern = "-({0})\.zip$" -f [regex]::Escape($latest.FileType)
-    $latest += @{
-        File32 = $latest.Url32.Segments[-1] -replace $pattern, '.$1'
-        File64 = $latest.Url64.Segments[-1] -replace $pattern, '.$1'
-    }
-    "File32: {0}" -f $latest.File32 | Write-Verbose
-    "File64: {0}" -f $latest.File64 | Write-Verbose
-    return $latest
 }
 
 function global:au_SearchReplace {
@@ -32,8 +25,6 @@ function global:au_SearchReplace {
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
             "^(\s*url\s*=\s*)'.*'$"               = "`$1'$($Latest.Url32)'"
             "^(\s*url64bit\s*=\s*)'.*'$"          = "`$1'$($Latest.Url64)'"
-            "^(\s*file\s*=\s*).*$"                = "`$1`"`$toolsDir\$($Latest.File32)`""
-            "^(\s*file64\s*=\s*).*$"              = "`$1`"`$toolsDir\$($Latest.File64)`""
             "^(\s*silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.SilentArgs)'"
             "^(\s*checksum\s*=\s*)'.*'$"          = "`$1'$($Latest.Checksum32)'"
             "^(\s*checksumType\s*=\s*)'.*'$"      = "`$1'$($Latest.ChecksumType32)'"
