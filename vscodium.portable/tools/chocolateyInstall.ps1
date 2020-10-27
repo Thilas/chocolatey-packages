@@ -1,8 +1,19 @@
 ﻿$ErrorActionPreference = 'Stop'
 
-$forceX86 = if ($Env:ChocolateyForceX86) { Get-ProcessorBits 64 } else { $false }
-$programFilesPath = if ($forceX86) { ${Env:ProgramFiles(x86)} } else { $Env:ProgramFiles }
-$installationPath = Join-Path $programFilesPath 'VSCodium'
+$oldPath = $false
+$installationPath = Join-Path (Get-ToolsLocation) 'VSCodium'
+
+$logPath = Join-Path $Env:ChocolateyPackageFolder 'vscodium.txt'
+if (Test-Path $logPath) {
+    $oldInstallationPath = Get-Content $logPath
+    if ($oldInstallationPath -ne $installationPath) {
+        if (Test-Path $oldInstallationPath) {
+            $oldPath = $true
+            $installationPath = $oldInstallationPath
+            Write-Verbose "Old Installation Path detected"
+        }
+    }
+}
 Write-Verbose "Installation Path: $installationPath"
 
 # *** Automatically filled ***
@@ -20,10 +31,15 @@ $packageArgs = @{
 
 Install-ChocolateyZipPackage @packageArgs
 
+if (!$oldPath) {
+    # Enable Portable mode (for new installation path only)
+    $dataPath = Join-Path $installationPath 'data'
+    New-Item -ItemType Directory -Path $dataPath -Force -ErrorAction SilentlyContinue
+}
+
 $binPath = Join-Path $installationPath 'bin\codium.cmd'
 Install-BinFile -Name 'codium' -Path $binPath
 
-$logPath = Join-Path $Env:ChocolateyPackageFolder 'vscodium.txt'
 Set-Content $logPath $installationPath -Encoding UTF8 -Force
 
 $shortcutName = 'VSCodium.lnk'
