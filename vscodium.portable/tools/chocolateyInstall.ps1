@@ -19,12 +19,12 @@ Write-Verbose "Installation Path: $installationPath"
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'vscodium.portable'
-    url            = 'https://github.com/VSCodium/vscodium/releases/download/1.50.1/VSCodium-win32-ia32-1.50.1.zip'
-    url64bit       = 'https://github.com/VSCodium/vscodium/releases/download/1.50.1/VSCodium-win32-x64-1.50.1.zip'
+    url            = 'https://github.com/VSCodium/vscodium/releases/download/1.51.0/VSCodium-win32-ia32-1.51.0.zip'
+    url64bit       = 'https://github.com/VSCodium/vscodium/releases/download/1.51.0/VSCodium-win32-x64-1.51.0.zip'
     unzipLocation  = $installationPath
-    checksum       = '40c16b4d1075c8821f48286f0e598bd7ffd31f16088520b07c17acc280124b5e'
+    checksum       = '165f92ed29c1551efa99f80b68e9afaad888a70fb6a4579624749439b8eb0997'
     checksumType   = 'sha256'
-    checksum64     = '61b3f369ee2bc41cfff2fafdc0933934ef93dafe3673c66610b4063a017a32ed'
+    checksum64     = '78f8e65c94cc909bb593abbfa2d5b67c309b8d601c134dc53c0fd59ee2b2c84b'
     checksumType64 = 'sha256'
 }
 # *** Automatically filled ***
