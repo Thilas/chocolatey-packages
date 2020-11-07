@@ -5,3 +5,9 @@
 **Strawberry Perl** is a perl environment for MS Windows containing all you need to run and develop perl applications. It is designed to be as close as possible to perl environment on UNIX systems.
 
 It includes perl binaries, compiler (gcc) + related tools, all the external libraries (crypto, math, graphics, xml ...), all the bundled database clients and all you expect from Strawberry Perl.
+
+## Installation Directory
+
+By default, Strawberry Perl is installed in `C:\Strawberry\`. This can be changed using the following arguments:
+
+`choco install strawberryperl --install-arguments="INSTALLDIR=""C:\tools\Strawberry"""`.
