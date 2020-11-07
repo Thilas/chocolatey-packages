@@ -2,11 +2,11 @@
 <!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
-    <id>atom</id>
+    <id>atom.install</id>
     <version>1.53.0-beta0</version>
-    <title>Atom</title>
+    <title>Atom (Install)</title>
     <authors>GitHub Inc.</authors>
-    <owners>bradgearon,Thilas</owners>
+    <owners>Thilas</owners>
     <licenseUrl>https://github.com/atom/atom/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://atom.io/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@058df13746c9cfa791d72eedd05f888d48a1bc1a/atom/icon.png</iconUrl>
@@ -36,7 +36,7 @@ Find, preview, and replace text as you type in a file or across all your project
     <copyright>Copyright © GitHub Inc.</copyright>
     <tags>atom admin text editor notepad github package autocompletion</tags>
     <projectSourceUrl>https://github.com/atom/atom</projectSourceUrl>
-    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/atom</packageSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/atom.install</packageSourceUrl>
     <docsUrl>https://atom.io/docs</docsUrl>
     <bugTrackerUrl>https://github.com/atom/atom/issues</bugTrackerUrl>
   </metadata>

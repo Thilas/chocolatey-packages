@@ -36,4 +36,6 @@ function global:au_SearchReplace {
     }
 }
 
-Update-Package -ChecksumFor all -IncludeStream $IncludeStream -Force:$Force
+if ($MyInvocation.InvocationName -ne '.') {
+    Update-Package -ChecksumFor all -IncludeStream $IncludeStream -Force:$Force
+}

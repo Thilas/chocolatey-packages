@@ -12,7 +12,7 @@ if (!$Env:ChocolateyForce -and $version -eq (Get-UninstallRegistryKey $softwareN
 
 # *** Automatically filled ***
 $packageArgs = @{
-    packageName    = 'atom'
+    packageName    = 'atom.install'
     softwareName   = $softwareName
     fileType       = 'exe'
     url            = 'https://github.com/atom/atom/releases/download/v1.53.0-beta0/AtomSetup.exe'
