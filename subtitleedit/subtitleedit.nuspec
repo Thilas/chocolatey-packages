@@ -21,6 +21,9 @@
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/subtitleedit</packageSourceUrl>
     <mailingListUrl>https://gitter.im/SubtitleEdit/subtitleedit</mailingListUrl>
     <bugTrackerUrl>https://github.com/SubtitleEdit/subtitleedit/issues</bugTrackerUrl>
+    <dependencies>
+      <dependency id="chocolatey-core.extension" version="1.3.3" />
+    </dependencies>
   </metadata>
   <files>
     <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
