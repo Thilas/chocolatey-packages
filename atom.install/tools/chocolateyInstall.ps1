@@ -2,7 +2,7 @@
 
 # *** Automatically filled ***
 $softwareName = 'Atom'
-$version      = '1.52.0.20201107'
+$version      = '1.54.0-beta0'
 # *** Automatically filled ***
 
 if (!$Env:ChocolateyForce -and $version -eq (Get-UninstallRegistryKey $softwareName).DisplayVersion) {
@@ -15,12 +15,12 @@ $packageArgs = @{
     packageName    = 'atom.install'
     softwareName   = $softwareName
     fileType       = 'exe'
-    url            = 'https://github.com/atom/atom/releases/download/v1.52.0/AtomSetup.exe'
-    url64bit       = 'https://github.com/atom/atom/releases/download/v1.52.0/AtomSetup-x64.exe'
+    url            = 'https://github.com/atom/atom/releases/download/v1.54.0-beta0/AtomSetup.exe'
+    url64bit       = 'https://github.com/atom/atom/releases/download/v1.54.0-beta0/AtomSetup-x64.exe'
     silentArgs     = '--silent'
-    checksum       = 'df947bddc9499285bdc6f784b8f27f72d59b967fa5357d5a6d86ab5a8f8629db'
+    checksum       = '05de9e6bf83d9e56abf20debd42bbbdd6ce6b5c7abe50c87cf56123450c7f6b8'
     checksumType   = 'sha256'
-    checksum64     = 'bc54deccf0822ab1f2212c8c0780c0adc1110d8373ddcf8bdb070eed3afcb078'
+    checksum64     = '6b7b75e2f07fa2534cc848509294b4064de4a0d6f82bc0372df4a6f604775b34'
     checksumType64 = 'sha256'
     validExitCodes = @(0)
 }
