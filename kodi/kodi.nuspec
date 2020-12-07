@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>kodi</id>
-    <version>19.0-beta1</version>
+    <version>19.0-beta2</version>
     <title>Kodi</title>
     <authors>XBMC Foundation</authors>
     <owners>dtgm,Thilas</owners>
