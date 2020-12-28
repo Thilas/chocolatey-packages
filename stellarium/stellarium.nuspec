@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>stellarium</id>
-    <version>0.20.3</version>
+    <version>0.20.4</version>
     <title>Stellarium</title>
     <authors>Stellarium Developers</authors>
     <owners>Thilas,dtgm</owners>
