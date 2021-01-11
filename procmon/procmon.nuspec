@@ -7,18 +7,18 @@
     <title>Process Monitor</title>
     <authors>Mark Russinovich</authors>
     <owners>d.hilgarth,Thilas</owners>
-    <licenseUrl>https://technet.microsoft.com/en-us/sysinternals/bb469936</licenseUrl>
-    <projectUrl>https://technet.microsoft.com/en-us/sysinternals/processmonitor</projectUrl>
+    <licenseUrl>https://docs.microsoft.com/en-us/sysinternals/license-terms</licenseUrl>
+    <projectUrl>https://docs.microsoft.com/en-us/sysinternals/downloads/procmon</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@40e52e777320be942096265f280a011e991ba5c7/procmon/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[Process Monitor is an advanced monitoring tool for Windows that shows real-time file system, Registry and process/thread activity. It combines the features of two legacy Sysinternals utilities, Filemon and Regmon, and adds an extensive list of enhancements including rich and non-destructive filtering, comprehensive event properties such session IDs and user names, reliable process information, full thread stacks with integrated symbol support for each operation, simultaneous logging to a file, and much more. Its uniquely powerful features will make Process Monitor a core utility in your system troubleshooting and malware hunting toolkit.
 ]]></description>
     <summary>Process Monitor is an advanced monitoring tool for Windows</summary>
-    <releaseNotes>[Blog](https://blogs.technet.microsoft.com/sysinternals/)</releaseNotes>
+    <releaseNotes>[Blog](https://docs.microsoft.com/en-us/sysinternals/)</releaseNotes>
     <copyright>Copyright © Mark Russinovich</copyright>
     <tags>procmon tools sysinternals monitoring filesystem registry processes filemon regmon</tags>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/procmon</packageSourceUrl>
-    <bugTrackerUrl>https://forum.sysinternals.com/process-explorer_forum2.html</bugTrackerUrl>
+    <bugTrackerUrl>https://docs.microsoft.com/en-us/answers/topics/windows-sysinternals-procmon.html</bugTrackerUrl>
   </metadata>
   <files>
     <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
