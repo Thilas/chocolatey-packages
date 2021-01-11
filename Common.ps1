@@ -10,12 +10,12 @@ function Get-BasicLatest {
     [CmdletBinding()]
     [OutputType([hashtable])]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory)]
         [ValidateNotNull()]
         [uri] $ReleaseUri,
         [scriptblock] $GetTagName, # optional callback, param($Release)
         [string] $TagNamePattern, # optional, must include a TagName capture
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [string] $FileType,
         [switch] $SkipTagName,
@@ -76,7 +76,7 @@ function Get-FileLatest {
     [CmdletBinding()]
     [OutputType([hashtable])]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory)]
         [ValidateNotNull()]
         [uri] $FileUri,
         [uri] $FileUri64,
@@ -119,17 +119,18 @@ function Get-FileLatest {
                 Get-Item $parameters.OutFile
             }
 
+            $responseUri = $response | Get-ResponseUri
             $version = if ($GetVersion) {
                 & $GetVersion -Response $response -File $file
             } else {
-                Get-Version $response.BaseResponse.ResponseUri
+                Get-Version $responseUri
             }
             if ($_ -ne $FileUri -and $version -ne $stream.Version) {
                 throw ("Multiple versions found: {0} vs {1}." -f $version -ne $stream.Version)
             }
             Write-Verbose "Version: $version"
 
-            $uri = Get-Uri -BaseUri $response.BaseResponse.ResponseUri -ForceHttps:$ForceHttps
+            $uri = Get-Uri -BaseUri $responseUri -ForceHttps:$ForceHttps
             $stream += if ($_ -eq $FileUri) {
                 @{
                     Version = $version
@@ -151,10 +152,10 @@ function Get-LinksLatest {
     [CmdletBinding()]
     [OutputType([hashtable])]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory)]
         [ValidateNotNull()]
         [uri[]] $ReleasesUri,
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [string] $FileType,
         [scriptblock] $IsLink, # optional callback, param($Link)
@@ -246,12 +247,12 @@ function Get-GitHubLatest {
     [CmdletBinding()]
     [OutputType([hashtable])]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [string] $Repository,
         [scriptblock] $GetTagName, # optional callback, param($TagName, $Release)
         [int] $StreamFieldCount = 0, # optional, 0 means single stream
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [string] $FileType,
         [scriptblock] $IsUri32, # optional callback, param($Uri, $TagName, $Version)
@@ -327,15 +328,15 @@ function Assert-Uri {
     [CmdletBinding(DefaultParameterSetName="Default")]
     [OutputType([uri])]
     param(
-        [Parameter(ValueFromPipeline=$true)]
+        [Parameter(ValueFromPipeline)]
         [uri] $Uri,
-        [Parameter(Mandatory=$true, ParameterSetName="Default")]
+        [Parameter(Mandatory, ParameterSetName="Default")]
         [ValidateNotNullOrEmpty()]
         [string] $Name,
-        [Parameter(Mandatory=$true, ParameterSetName="TypeAndVersion")]
+        [Parameter(Mandatory, ParameterSetName="TypeAndVersion")]
         [ValidateSet("x86", "x64")]
         [string] $Type,
-        [Parameter(Mandatory=$true, ParameterSetName="TypeAndVersion")]
+        [Parameter(Mandatory, ParameterSetName="TypeAndVersion")]
         [ValidateNotNullOrEmpty()]
         [object] $Version
     )
@@ -368,27 +369,43 @@ function Assert-Uri {
     }
 }
 
-function Get-Uri {
+filter Get-Uri {
     [CmdletBinding()]
     [OutputType([uri])]
     param(
-        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [Parameter(ValueFromPipelineByPropertyName)]
         [uri] $BaseUri,
-        [Parameter(ValueFromPipelineByPropertyName=$true)]
+        [Parameter(ValueFromPipelineByPropertyName)]
         [Alias("href")]
         [string] $RelativeUrl,
         [switch] $ForceHttps
     )
-    process {
-        $uri = [uri]::new($BaseUri, $RelativeUrl)
-        if ($ForceHttps -and $uri.Scheme -eq [uri]::UriSchemeHttp) {
-            $builder = [System.UriBuilder]::new($uri)
-            $builder.Scheme = [uri]::UriSchemeHttps
-            if ($builder.Port -eq 80) {
-                $builder.Port = 443
-            }
-            $uri = $builder.Uri
+    $uri = [uri]::new($BaseUri, $RelativeUrl)
+    if ($ForceHttps -and $uri.Scheme -eq [uri]::UriSchemeHttp) {
+        $builder = [System.UriBuilder]::new($uri)
+        $builder.Scheme = [uri]::UriSchemeHttps
+        if ($builder.Port -eq 80) {
+            $builder.Port = 443
         }
-        return $uri
+        $uri = $builder.Uri
+    }
+    return $uri
+}
+
+filter Get-ResponseUri {
+    [CmdletBinding()]
+    [OutputType([uri])]
+    param(
+        [Parameter(ValueFromPipeline)]
+        [object] $Response
+    )
+    if ($null -ne $Response.BaseResponse.ResponseUri) {
+        # This is for Powershell 5
+        return $Response.BaseResponse.ResponseUri
+    } elseif ($null -ne $Response.BaseResponse.RequestMessage.RequestUri) {
+        # This is for Powershell core
+        return $Response.BaseResponse.RequestMessage.RequestUri
+    } else {
+        throw 'Response uri not found.'
     }
 }

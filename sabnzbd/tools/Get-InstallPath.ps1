@@ -1,6 +1,6 @@
 ﻿function Get-InstallPath {
     [CmdletBinding()]
-    param (
+    param(
         [string] $PackageName,
         [string] $SoftwareName
     )
