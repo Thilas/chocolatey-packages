@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>procexp</id>
-    <version>16.32.0.20200919</version>
+    <version>16.32.0.20210111</version>
     <title>Process Explorer</title>
     <authors>Mark Russinovich</authors>
     <owners>d.hilgarth,Thilas</owners>
