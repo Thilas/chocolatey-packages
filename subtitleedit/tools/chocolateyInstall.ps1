@@ -19,7 +19,7 @@ $packageArgs = @{
     packageName    = 'subtitleedit'
     softwareName   = 'Subtitle Edit *'
     fileType       = 'exe'
-    file           = "$toolsDir\SubtitleEdit-3.6.0-Setup.exe"
+    file           = "$packageCacheLocation\SubtitleEdit-3.6.0-Setup.exe"
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
     validExitCodes = @(0)
 }

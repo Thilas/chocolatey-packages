@@ -29,7 +29,7 @@ function global:au_SearchReplace {
             "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
             "^(\s*url\s*=\s*)'.*'$"               = "`$1'$($Latest.Url32)'"
-            "^(\s*file\s*=\s*).*$"                = "`$1`"`$toolsDir\$($Latest.File32)`""
+            "^(\s*file\s*=\s*).*$"                = "`$1`"`$packageCacheLocation\$($Latest.File32)`""
             "^(\s*silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.SilentArgs)'"
             "^(\s*checksum\s*=\s*)'.*'$"          = "`$1'$($Latest.Checksum32)'"
             "^(\s*checksumType\s*=\s*)'.*'$"      = "`$1'$($Latest.ChecksumType32)'"
