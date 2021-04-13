@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>atom.portable</id>
-    <version>1.56.0-beta0</version>
+    <version>1.57.0-beta0</version>
     <title>Atom (Portable)</title>
     <authors>GitHub Inc.</authors>
     <owners>Thilas</owners>
