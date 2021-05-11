@@ -6,12 +6,12 @@ Write-Verbose "Installation Path: $installationPath"
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'atom.portable'
-    url            = 'https://github.com/atom/atom/releases/download/v1.57.0-beta0/atom-windows.zip'
-    url64bit       = 'https://github.com/atom/atom/releases/download/v1.57.0-beta0/atom-x64-windows.zip'
+    url            = 'https://github.com/atom/atom/releases/download/v1.58.0-beta0/atom-windows.zip'
+    url64bit       = 'https://github.com/atom/atom/releases/download/v1.58.0-beta0/atom-x64-windows.zip'
     unzipLocation  = $installationPath
-    checksum       = 'b13b67a3d2b9deb41a052ca085e4dd839879dda9a52e9f66bb5ae85f7c0d9ead'
+    checksum       = 'e7f26a7de556ef22e4709fcdbada7f0ff46a22a78e706679ad4252f7e1087ce9'
     checksumType   = 'sha256'
-    checksum64     = '1e9197b578c66bd51ce2f5f58f97f2437c65831c4bff14f98e4d53f3cbb31a48'
+    checksum64     = '9fabd93a48c41943ec293570a4ea249da2c83aa2856b3692ea70591d457e304b'
     checksumType64 = 'sha256'
 }
 # *** Automatically filled ***
