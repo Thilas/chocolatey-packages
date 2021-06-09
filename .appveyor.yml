@@ -21,7 +21,7 @@ environment:
   # Github token to commit pushed packages to repository
   github_user_repo: Thilas/chocolatey-packages
   github_api_key:
-    secure: dpG5JHB6dKXeBfSieVuTlxNYamHqrUaK1BfCF+OketgPgcWxw5hQwe4o6vFx01t9
+    secure: B/P0gMkr/K6axa6kdotSbM3go/xONiLDDxGprSFaQNdy4OSRl76m4c6ZuA98+VKD
 
   # Mail credentials - for error notifications
   mail_user: tdemoulins@gmail.com
