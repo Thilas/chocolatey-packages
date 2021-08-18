@@ -7,7 +7,7 @@ $packageArgs = @{
     packageName    = 'procmon'
     url            = 'https://download.sysinternals.com/files/ProcessMonitor.zip'
     unzipLocation  = $toolsDir
-    checksum       = 'f80caba14461c5c251896956f8384ba72fd6ecbfe795193533d373a73e47975a'
+    checksum       = '49e0b44fe727a889d68814519c49bbd44fa23206dd15cc30f13fb36b33b27ba1'
     checksumType   = 'sha256'
     validExitCodes = @(0)
 }
