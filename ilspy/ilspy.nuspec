@@ -32,7 +32,7 @@
     <docsUrl>https://github.com/icsharpcode/ILSpy/wiki</docsUrl>
     <bugTrackerUrl>https://github.com/icsharpcode/ILSpy/issues</bugTrackerUrl>
     <dependencies>
-      <dependency id="dotnet4.7.2" version="4.7.2.20180712" />
+      <dependency id="netfx-4.7.2" version="4.7.2.0" />
     </dependencies>
   </metadata>
   <files>
