@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     Get-BasicLatest `
-        -ReleaseUri 'http://serviio.org/download' `
+        -ReleaseUri 'https://serviio.org/download' `
         -TagNamePattern 'The latest released version is (?<TagName>[^ ]+) ' `
         -FileType 'exe' `
         -Latest @{

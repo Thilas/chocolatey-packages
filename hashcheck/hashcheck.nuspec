@@ -8,7 +8,7 @@
     <authors>Kai Liu and Christopher Gurnee</authors>
     <owners>Thilas</owners>
     <licenseUrl>https://github.com/gurnec/HashCheck/blob/master/license.txt</licenseUrl>
-    <projectUrl>http://code.kliu.org/hashcheck/</projectUrl>
+    <projectUrl>https://code.kliu.org/hashcheck/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@90d6238c8db69f85cbfb32e3bcd7021c2303aba3/hashcheck/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer. In addition to integrating file checksumming functionality into Windows, HashCheck can also create and verify SFV files (and other forms of checksum files, such as .md5 files). It is fast and efficient, with a very light disk and memory footprint, and it is open-source.
@@ -20,7 +20,7 @@ Copyright © Christopher Gurnee.  All rights reserved.</copyright>
     <tags>hashcheck admin shell extension checksum md5 sha1 sha2 sha256 sha512 hash</tags>
     <projectSourceUrl>https://github.com/gurnec/HashCheck</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/hashcheck</packageSourceUrl>
-    <docsUrl>http://code.kliu.org/hashcheck/faq.html</docsUrl>
+    <docsUrl>https://code.kliu.org/hashcheck/faq.html</docsUrl>
     <bugTrackerUrl>https://github.com/gurnec/HashCheck/issues</bugTrackerUrl>
   </metadata>
   <files>

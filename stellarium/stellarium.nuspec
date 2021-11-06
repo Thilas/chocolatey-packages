@@ -7,8 +7,8 @@
     <title>Stellarium</title>
     <authors>Stellarium Developers</authors>
     <owners>Thilas,dtgm</owners>
-    <licenseUrl>http://bazaar.launchpad.net/~stellarium/stellarium/trunk/view/head:/COPYING</licenseUrl>
-    <projectUrl>http://www.stellarium.org/</projectUrl>
+    <licenseUrl>https://bazaar.launchpad.net/~stellarium/stellarium/trunk/view/head:/COPYING</licenseUrl>
+    <projectUrl>https://www.stellarium.org/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@8ef5d8c85c2a0dbef6eefad0a8a31de8d953c339/stellarium/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope. It is being used in planetarium projectors. Just set your coordinates and go.
@@ -17,11 +17,11 @@
     <releaseNotes>[News](https://sourceforge.net/p/stellarium/news/)</releaseNotes>
     <copyright>Copyright © Stellarium Developers</copyright>
     <tags>stellarium admin planetarium sky stars constellations</tags>
-    <projectSourceUrl>http://bazaar.launchpad.net/~stellarium/stellarium/trunk/files</projectSourceUrl>
+    <projectSourceUrl>https://bazaar.launchpad.net/~stellarium/stellarium/trunk/files</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/stellarium</packageSourceUrl>
     <docsUrl>https://github.com/Stellarium/stellarium/wiki</docsUrl>
     <mailingListUrl>https://sourceforge.net/p/stellarium/mailman/</mailingListUrl>
-    <bugTrackerUrl>http://bugs.launchpad.net/stellarium</bugTrackerUrl>
+    <bugTrackerUrl>https://bugs.launchpad.net/stellarium</bugTrackerUrl>
   </metadata>
   <files>
     <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />

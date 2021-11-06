@@ -4,7 +4,7 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    $url = 'http://www.ltr-data.se/opencode.html'
+    $url = 'https://www.ltr-data.se/opencode.html'
     try {
         Invoke-WebRequest -Uri $url -UseBasicParsing -Method Head | Out-Null
     } catch {

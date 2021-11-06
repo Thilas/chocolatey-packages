@@ -32,7 +32,7 @@ Features:
     <copyright>Copyright © App Dynamic ehf. All Rights Reserved</copyright>
     <tags>airserver admin trial airplay googlecast miracast screen mirroring appletv chromecast</tags>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/airserver</packageSourceUrl>
-    <docsUrl>http://support.airserver.com/</docsUrl>
+    <docsUrl>https://support.airserver.com/</docsUrl>
     <!--<dependencies>
       <dependency id="kb2999226" />
     </dependencies>-->

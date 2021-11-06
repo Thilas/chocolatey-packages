@@ -8,13 +8,13 @@
     <authors>Nikolaj Lynge Olsson</authors>
     <owners>Thilas,Waterdrop</owners>
     <licenseUrl>https://github.com/SubtitleEdit/subtitleedit/blob/master/LICENSE.txt</licenseUrl>
-    <projectUrl>http://www.nikse.dk/SubtitleEdit/</projectUrl>
+    <projectUrl>https://www.nikse.dk/SubtitleEdit/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@90d6238c8db69f85cbfb32e3bcd7021c2303aba3/subtitleedit/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[With SE you can easily adjust a subtitle if it is out of sync with the video in several different ways. You can also use SE for making new subtitles from scratch (do use the time-line/waveform/spectrogram) or translating subtitles.
 ]]></description>
     <summary>Subtitle Edit is a free (open source) editor for video subtitles - a subtitle editor :)</summary>
-    <releaseNotes>[Blog](http://www.nikse.dk/)</releaseNotes>
+    <releaseNotes>[Blog](https://www.nikse.dk/)</releaseNotes>
     <copyright>Copyright © Nikse</copyright>
     <tags>subtitleedit admin subtitle editor video OCR sync merge split convert</tags>
     <projectSourceUrl>https://github.com/SubtitleEdit/subtitleedit</projectSourceUrl>

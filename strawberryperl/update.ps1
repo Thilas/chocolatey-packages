@@ -6,7 +6,7 @@ param($IncludeStream, [switch] $Force)
 function global:au_GetLatest {
     # 5.10 streams and below only have 32bit installers
     Get-LinksLatest `
-        -ReleasesUri 'http://strawberryperl.com/releases.html' `
+        -ReleasesUri 'https://strawberryperl.com/releases.html' `
         -FileType 'msi' `
         -IsLink { param($Link) $Link.onclick } `
         -GetVersion { param($Link)

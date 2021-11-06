@@ -19,7 +19,7 @@
     <tags>lavfilters admin ffmpeg DirectShow filter codec video audio subtitles</tags>
     <projectSourceUrl>https://github.com/Nevcairiel/LAVFilters</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/lavfilters</packageSourceUrl>
-    <mailingListUrl>http://forum.doom9.org/showthread.php?t=156191</mailingListUrl>
+    <mailingListUrl>https://forum.doom9.org/showthread.php?t=156191</mailingListUrl>
     <bugTrackerUrl>https://github.com/Nevcairiel/LAVFilters/issues</bugTrackerUrl>
   </metadata>
   <files>

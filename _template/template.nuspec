@@ -28,8 +28,8 @@ This is a nuspec. It mostly adheres to https://docs.nuget.org/create/Nuspec-Refe
     <title>Title</title>
     <authors>Authors</authors>
     <owners>Thilas</owners>
-    <licenseUrl>http://license-url</licenseUrl>
-    <projectUrl>http://project-url</projectUrl>
+    <licenseUrl>https://license-url</licenseUrl>
+    <projectUrl>https://project-url</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@commit/id/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Description using MarkDown</description>
@@ -45,11 +45,11 @@ This is a nuspec. It mostly adheres to https://docs.nuget.org/create/Nuspec-Refe
       cli             for all command line tools
       games           for all games
     -->
-    <projectSourceUrl>http://project-source-url</projectSourceUrl>
+    <projectSourceUrl>https://project-source-url</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/id</packageSourceUrl>
-    <docsUrl>http://docs-url</docsUrl>
-    <mailingListUrl>http://mailing-list-url</mailingListUrl>
-    <bugTrackerUrl>http://bug-tracker-url</bugTrackerUrl>
+    <docsUrl>https://docs-url</docsUrl>
+    <mailingListUrl>https://mailing-list-url</mailingListUrl>
+    <bugTrackerUrl>https://bug-tracker-url</bugTrackerUrl>
     <!-- Specifying dependencies and version ranges? https://docs.nuget.org/create/versioning#specifying-version-ranges-in-.nuspec-files -->
     <dependencies>
       <dependency id="" version="__MINIMUM_VERSION__" />

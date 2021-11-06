@@ -7,8 +7,8 @@
     <title>Serviio</title>
     <authors>Petr Nejedly</authors>
     <owners>Thilas</owners>
-    <licenseUrl>http://serviio.org/licence</licenseUrl>
-    <projectUrl>http://serviio.org/</projectUrl>
+    <licenseUrl>https://serviio.org/licence</licenseUrl>
+    <projectUrl>https://serviio.org/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@7e36bae0ecdd1f4fe555c7f5b9d1a16925904b3a/serviio/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[There is also a paid for Pro edition which further enhances the possibilities of sharing content in your connected household.
@@ -18,11 +18,11 @@ Serviio works with many devices from your connected home (TV, Playstation 3, XBo
 Serviio is based on Java technology and therefore runs on most platforms, including Windows, Mac and Linux (incl. embedded systems, e.g. NAS).
 ]]></description>
     <summary>Serviio is a free media server. It allows you to stream your media files (music, video or images) to renderer devices (e.g. a TV set, Bluray player, games console or mobile phone) on your connected home network.</summary>
-    <releaseNotes>[Release Notes](http://serviio.org/news/9-release-notes/)</releaseNotes>
+    <releaseNotes>[Release Notes](https://serviio.org/news/9-release-notes/)</releaseNotes>
     <copyright>Copyright © Petr Nejedly. All rights reserved.</copyright>
     <tags>serviio admin dlna mediaserver media video music streaming</tags>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/serviio</packageSourceUrl>
-    <docsUrl>http://serviio.org/component/content/article/10-uncategorised/5-getting-started</docsUrl>
+    <docsUrl>https://serviio.org/component/content/article/10-uncategorised/5-getting-started</docsUrl>
   </metadata>
   <files>
     <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />

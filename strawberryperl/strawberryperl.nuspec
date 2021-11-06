@@ -8,7 +8,7 @@
     <authors>KMX, Curtis Jewell and Adam Kennedy</authors>
     <owners>alanstevens,Thilas</owners>
     <licenseUrl>https://github.com/StrawberryPerl/Perl-Dist-Strawberry/blob/master/LICENSE</licenseUrl>
-    <projectUrl>http://strawberryperl.com/</projectUrl>
+    <projectUrl>https://strawberryperl.com/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@58d4825d117dae7fcf9100ba5d4fa0e4563ff7f7/strawberryperl/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[**Perl** is a programming language suitable for writing simple scripts as well as complex applications - see https://www.perl.org
@@ -24,13 +24,13 @@ By default, Strawberry Perl is installed in `C:\Strawberry\`. This can be change
 `choco install strawberryperl --install-arguments="INSTALLDIR=""C:\tools\Strawberry"""`.
 ]]></description>
     <summary>Strawberry Perl is a binary distribution of Perl for the Windows operating system.</summary>
-    <releaseNotes>[Releases](http://strawberryperl.com/releases.html)</releaseNotes>
+    <releaseNotes>[Releases](https://strawberryperl.com/releases.html)</releaseNotes>
     <copyright>Copyright © KMX</copyright>
     <tags>strawberryperl admin perl script gcc cpan</tags>
     <projectSourceUrl>https://github.com/StrawberryPerl/Perl-Dist-Strawberry</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/strawberryperl</packageSourceUrl>
-    <docsUrl>http://strawberryperl.com/support.html</docsUrl>
-    <mailingListUrl>http://www.mail-archive.com/win32-vanilla@perl.org/maillist.html</mailingListUrl>
+    <docsUrl>https://strawberryperl.com/support.html</docsUrl>
+    <mailingListUrl>https://www.mail-archive.com/win32-vanilla@perl.org/maillist.html</mailingListUrl>
     <bugTrackerUrl>https://rt.cpan.org/Public/Dist/Display.html?Name=Perl-Dist-Strawberry</bugTrackerUrl>
   </metadata>
   <files>
