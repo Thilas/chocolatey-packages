@@ -54,11 +54,34 @@ function Get-Latest {
             -IsUri32 $isUri32 `
             -IsUri64 $isUri64 `
             -ForceHttps
-        if ($latest.Url32) { $latest.Url32 = '{0}&r=1' -f $latest.Url32 }
-        if ($latest.Url64) { $latest.Url64 = '{0}&r=1' -f $latest.Url64 }
+        # Fix download urls and test if available, otherwise let's skip the release for now
+        if (!(Resolve-Url $latest Url32)) { return }
+        if (!(Resolve-Url $latest Url64)) { return }
         $result.Add($version.ToString($StreamFieldCount), $latest)
     }
     return @{ Streams = $result }
+}
+
+function Resolve-Url {
+    [CmdletBinding()]
+    [OutputType([bool])]
+    param(
+        [Parameter(Mandatory)]
+        [ValidateNotNull()]
+        [hashtable] $Latest,
+        [Parameter(Mandatory)]
+        [ValidateSet("Url32", "Url64")]
+        [string] $Property
+    )
+    if ($Latest.$Property) {
+        $Latest.$Property = '{0}&r=1' -f $Latest.$Property
+        try {
+            Invoke-WebRequest -Uri $Latest.$Property -UseBasicParsing -Method Head
+        } catch {
+            return $false
+        }
+    }
+    return $true
 }
 
 function global:au_BeforeUpdate {
