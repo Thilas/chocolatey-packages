@@ -18,6 +18,16 @@ function global:au_GetLatest {
         -ReleaseUri $url `
         -TagNamePattern 'Current version (?<TagName>.+) built' `
         -FileType 'exe' `
+        -SkipTagName `
+        -IsUri32 { param($Uri, $TagName, $Uris)
+            $pattern = "_{0}\b" -f [regex]::Escape($TagName)
+            if ($Uris | Where-Object { $_ -match $pattern}) {
+                # Normal case: version is part of the url
+                return $Uri -match $pattern
+            }
+            # Abnormal case: no url contains the version
+            return $Uri -match "/imdiskinst.exe$"
+        } `
         -Latest @{
             SoftwareName   = 'ImDisk *'
             SilentArgs     = '-y'

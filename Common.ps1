@@ -48,21 +48,21 @@ function Get-BasicLatest {
     if (!$SkipTagName) {
         $pattern = "{0}.*$pattern" -f [regex]::Escape($tagName)
     }
-    $links = $release.Links | Where-Object "href" -Match $pattern
+    $uris = $release.Links `
+    | Where-Object "href" -Match $pattern `
+    | Get-Uri -ForceHttps:$ForceHttps
 
     if ($IsUri32 -or !$IsUri64) {
-        $uri = $links `
-        | Get-Uri -ForceHttps:$ForceHttps `
-        | Where-Object { !$IsUri32 -or (& $IsUri32 -Uri $_ -TagName $tagName -Version $version) } `
+        $uri = $uris `
+        | Where-Object { !$IsUri32 -or (& $IsUri32 -Uri $_ -TagName $tagName -Version $version -Uris $uris) } `
         | Assert-Uri -Type x86 -Version $version
         $stream += @{ Url32 = $uri }
         'Url32: {0}' -f $stream.Url32 | Write-Verbose
     }
 
     if ($IsUri64) {
-        $uri = $links `
-        | Get-Uri -ForceHttps:$ForceHttps `
-        | Where-Object { & $IsUri64 -Uri $_ -TagName $tagName -Version $version } `
+        $uri = $uris `
+        | Where-Object { & $IsUri64 -Uri $_ -TagName $tagName -Version $version -Uris $uris } `
         | Assert-Uri -Type x64 -Version $version
         $stream += @{ Url64 = $uri }
         'Url64: {0}' -f $stream.Url64 | Write-Verbose
