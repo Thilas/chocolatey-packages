@@ -10,13 +10,14 @@ function global:au_GetLatest {
     } catch {
         if ($_.Exception.Response.StatusCode -eq 503) {
             Write-Warning 'Site is unavailable'
-            return @{ Version = '2.0.10.20181231' } # Fallback version when the site is unavailable
+            $nuspec = [xml] (Get-Content "*.nuspec")
+            return @{ Version = $nuspec.package.metadata.version } # Fallback to latest version when the site is unavailable
         }
         throw
     }
     Get-BasicLatest `
         -ReleaseUri $url `
-        -TagNamePattern 'Current version (?<TagName>.+) built' `
+        -TagNamePattern 'Current version (?<TagName>.+) (built|packaged)' `
         -FileType 'exe' `
         -SkipTagName `
         -IsUri32 { param($Uri, $TagName, $Uris)
