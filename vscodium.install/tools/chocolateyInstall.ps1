@@ -5,7 +5,7 @@ $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 # *** Automatically filled ***
 $softwareName = 'VSCodium'
-$version      = '1.62.3'
+$version      = '1.63.0'
 # *** Automatically filled ***
 
 if (!$Env:ChocolateyForce -and $version -eq (Get-UninstallRegistryKey $softwareName).DisplayVersion) {
@@ -18,12 +18,12 @@ $packageArgs = @{
     packageName    = 'vscodium.install'
     softwareName   = $softwareName
     fileType       = 'exe'
-    url            = 'https://github.com/VSCodium/vscodium/releases/download/1.62.3/VSCodiumSetup-ia32-1.62.3.exe'
-    url64bit       = 'https://github.com/VSCodium/vscodium/releases/download/1.62.3/VSCodiumSetup-x64-1.62.3.exe'
+    url            = 'https://github.com/VSCodium/vscodium/releases/download/1.63.0/VSCodiumSetup-ia32-1.63.0.exe'
+    url64bit       = 'https://github.com/VSCodium/vscodium/releases/download/1.63.0/VSCodiumSetup-x64-1.63.0.exe'
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-    checksum       = '628c2e56e17f8d874ec2232c5e9d46e96b19e3de93a5d3cfcf288e2679af77bc'
+    checksum       = '7796e8af818d1caf163de853cc162d792c93b67cead9e216d369ec394c479fea'
     checksumType   = 'sha256'
-    checksum64     = '5af05568797dc2edec20d06f49354b72133b5a2971179ee968d98ad409cea90d'
+    checksum64     = '6b45daac1cbf38d011fdfb6e28348cf66c61a4264548783f05b7359340124eb1'
     checksumType64 = 'sha256'
     validExitCodes = @(0, 3010, 1641)
 }
