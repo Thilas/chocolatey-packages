@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     Get-GitHubLatest `
-        -Repository 'gurnec/HashCheck' `
+        -Repository 'idrassi/HashCheck' `
         -FileType 'exe' `
         -Latest @{
             SoftwareName            = 'HashCheck Shell Extension'

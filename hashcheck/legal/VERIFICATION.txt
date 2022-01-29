@@ -2,12 +2,12 @@ VERIFICATION
 
 Verification is intended to assist the Chocolatey moderators and community
 in verifying that this package's contents are trustworthy.
- 
+
 Package can be verified like this:
 
 1. Go to
 
-   x32: https://github.com/gurnec/HashCheck/releases/download/v2.4.0/HashCheckSetup-v2.4.0.exe
+   x32: https://github.com/idrassi/HashCheck/releases/download/v2.5.0/HashCheckSetup-v2.5.0.1.exe
 
    to download the installer.
 
@@ -15,7 +15,7 @@ Package can be verified like this:
    - Use powershell function 'Get-FileHash'
    - Use Chocolatey utility 'checksum.exe'
 
-   checksum32: 2D6067F00BBB93526D146D2228A46DC4851F0FA866E69250279C6B2F00B8F1B7
+   checksum32: 08B24442831FB903500460132BA9CAE2F415EE640FD0FDABB1E9082EA680BC52
 
 File 'LICENSE.txt' is obtained from:
-   https://github.com/gurnec/HashCheck/blob/master/license.txt
+   https://github.com/idrassi/HashCheck/blob/master/license.txt
