@@ -5,7 +5,7 @@
     <id>strawberryperl</id>
     <version>5.32.1.1</version>
     <title>Strawberry Perl</title>
-    <authors>KMX, Curtis Jewell and Adam Kennedy</authors>
+    <authors>KMX,Curtis Jewell,Adam Kennedy</authors>
     <owners>alanstevens,Thilas</owners>
     <licenseUrl>https://github.com/StrawberryPerl/Perl-Dist-Strawberry/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://strawberryperl.com/</projectUrl>

@@ -26,7 +26,7 @@ This is a nuspec. It mostly adheres to https://docs.nuget.org/create/Nuspec-Refe
     <!-- Note that unstable versions like 0.0.1 can be considered a released version, but it's possible that one can release a 0.0.1-beta before you release a 0.0.1 version. If the version number is final, that is considered a released version and not a prerelease. -->
     <version>0.0.0</version>
     <title>Title</title>
-    <authors>Authors</authors>
+    <authors>Author1,Author2</authors>
     <owners>Thilas</owners>
     <licenseUrl>https://license-url</licenseUrl>
     <projectUrl>https://project-url</projectUrl>

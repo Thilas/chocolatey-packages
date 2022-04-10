@@ -5,7 +5,7 @@
     <id>hashcheck</id>
     <version>2.5.0</version>
     <title>HashCheck Shell Extension</title>
-    <authors>Kai Liu, Christopher Gurnee, David B. Trout, Tim Schlueter and Mounir IDRASSI</authors>
+    <authors>Kai Liu,Christopher Gurnee,David B. Trout,Tim Schlueter,Mounir IDRASSI</authors>
     <owners>Thilas</owners>
     <licenseUrl>https://github.com/idrassi/HashCheck/blob/master/license.txt</licenseUrl>
     <projectUrl>https://code.kliu.org/hashcheck/</projectUrl>

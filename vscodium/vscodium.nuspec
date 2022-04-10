@@ -5,7 +5,7 @@
     <id>vscodium</id>
     <version>1.66.1</version>
     <title>VSCodium</title>
-    <authors>Microsoft, Peter Squicciarini</authors>
+    <authors>Microsoft,Peter Squicciarini</authors>
     <owners>Thilas</owners>
     <licenseUrl>https://github.com/VSCodium/vscodium/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/VSCodium/vscodium</projectUrl>
