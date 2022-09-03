@@ -16,7 +16,7 @@ A great mplayer2 front-end.</description>
     <summary>A fork of SMPlayer, targeted at mplayer2 users. Note, this is just a temporary solution until mplayer2 gets a new IPC mechanism!</summary>
     <copyright>Copyright © 2012 Martin Herkt</copyright>
     <tags>video media player smplayer mplayer2 multimedia</tags>
-    <projectSourceUrl>https://github.com/rossy/SMPlayer2</projectSourceUrl>
+    <!-- <projectSourceUrl>https://github.com/rossy/SMPlayer2</projectSourceUrl> -->
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/smplayer2</packageSourceUrl>
     <dependencies>
       <dependency id="mpv" />

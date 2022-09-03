@@ -27,7 +27,7 @@
     <releaseNotes>[Releases](https://github.com/icsharpcode/ILSpy/releases)</releaseNotes>
     <copyright>Copyright © SharpDevelop Team</copyright>
     <tags>ilspy foss dotnet assembly decompiler</tags>
-    <projectSourceUrl>https://github.com/icsharpcode/ILSpy</projectSourceUrl>
+    <!-- <projectSourceUrl>https://github.com/icsharpcode/ILSpy</projectSourceUrl> -->
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/ilspy</packageSourceUrl>
     <docsUrl>https://github.com/icsharpcode/ILSpy/wiki</docsUrl>
     <bugTrackerUrl>https://github.com/icsharpcode/ILSpy/issues</bugTrackerUrl>

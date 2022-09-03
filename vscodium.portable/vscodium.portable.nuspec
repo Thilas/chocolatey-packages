@@ -28,7 +28,7 @@ Visual Studio Code is a lightweight but powerful source code editor which runs o
     <releaseNotes>[Updates](https://code.visualstudio.com/Updates)</releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini</copyright>
     <tags>vscodium foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
-    <projectSourceUrl>https://github.com/VSCodium/vscodium</projectSourceUrl>
+    <!-- <projectSourceUrl>https://github.com/VSCodium/vscodium</projectSourceUrl> -->
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/vscodium.portable</packageSourceUrl>
     <docsUrl>https://code.visualstudio.com/docs</docsUrl>
     <bugTrackerUrl>https://github.com/VSCodium/vscodium/issues</bugTrackerUrl>

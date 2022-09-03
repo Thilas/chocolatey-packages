@@ -44,7 +44,7 @@ Example: `choco install vscodium.install --params "/NoDesktopIcon /NoAddToPath"`
     <releaseNotes>[Updates](https://code.visualstudio.com/Updates)</releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini</copyright>
     <tags>vscodium admin foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
-    <projectSourceUrl>https://github.com/VSCodium/vscodium</projectSourceUrl>
+    <!-- <projectSourceUrl>https://github.com/VSCodium/vscodium</projectSourceUrl> -->
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/vscodium.install</packageSourceUrl>
     <docsUrl>https://code.visualstudio.com/docs</docsUrl>
     <bugTrackerUrl>https://github.com/VSCodium/vscodium/issues</bugTrackerUrl>

@@ -17,7 +17,7 @@
     <releaseNotes>[Releases](https://github.com/Nevcairiel/LAVFilters/releases)</releaseNotes>
     <copyright>Copyright © Hendrik Leppkes</copyright>
     <tags>lavfilters admin ffmpeg DirectShow filter codec video audio subtitles</tags>
-    <projectSourceUrl>https://github.com/Nevcairiel/LAVFilters</projectSourceUrl>
+    <!-- <projectSourceUrl>https://github.com/Nevcairiel/LAVFilters</projectSourceUrl> -->
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/lavfilters</packageSourceUrl>
     <mailingListUrl>https://forum.doom9.org/showthread.php?t=156191</mailingListUrl>
     <bugTrackerUrl>https://github.com/Nevcairiel/LAVFilters/issues</bugTrackerUrl>
