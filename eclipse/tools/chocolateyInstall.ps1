@@ -34,7 +34,7 @@ $packageArgs = @{
 
 Install-ChocolateyZipPackage @packageArgs
 
-$logPath = Join-Path $Env:ChocolateyPackageFolder "eclipse.$packageVersion.txt"
+$logPath = Join-Path $toolsDir "eclipse.$packageVersion.txt"
 Set-Content $logPath $installationPath -Encoding UTF8 -Force
 
 $shortcutName = "Eclipse $packageVersion.lnk"

@@ -1,9 +1,11 @@
 ﻿$ErrorActionPreference = 'Stop'
 
+$toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
+
 $oldPath = $false
 $installationPath = Join-Path (Get-ToolsLocation) 'VSCodium'
 
-$logPath = Join-Path $Env:ChocolateyPackageFolder 'vscodium.txt'
+$logPath = Join-Path $toolsDir 'vscodium.txt'
 if (Test-Path $logPath) {
     $oldInstallationPath = Get-Content $logPath
     if ($oldInstallationPath -ne $installationPath) {

@@ -1,5 +1,7 @@
 ﻿$ErrorActionPreference = 'Stop'
 
+$toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
+
 $packageCacheLocation = Get-PackageCacheLocation
 
 # *** Automatically filled ***
@@ -27,5 +29,5 @@ $packageArgs = @{
 
 Install-ChocolateyInstallPackage @packageArgs
 
-$logPath = Join-Path $Env:ChocolateyPackageFolder '*.zip.txt'
+$logPath = Join-Path $toolsDir '*.zip.txt'
 Remove-Item $logPath, $packageArgs.file -Force -ErrorAction SilentlyContinue

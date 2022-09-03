@@ -1,5 +1,7 @@
 ﻿$ErrorActionPreference = 'Stop'
 
+$toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
+
 $installationPath = Join-Path (Get-ToolsLocation) 'Atom'
 Write-Verbose "Installation Path: $installationPath"
 
@@ -25,7 +27,7 @@ New-Item -ItemType Directory -Path $dataPath -Force -ErrorAction SilentlyContinu
 $binPath = Join-Path $installationPath '*\atom*.exe' | Get-Item
 Install-BinFile -Name 'atom' -Path $binPath.FullName
 
-$logPath = Join-Path $Env:ChocolateyPackageFolder 'atom.txt'
+$logPath = Join-Path $toolsDir 'atom.txt'
 Set-Content $logPath $installationPath -Encoding UTF8 -Force
 
 $shortcutName = 'Atom.lnk'

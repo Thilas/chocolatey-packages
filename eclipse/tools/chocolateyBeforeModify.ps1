@@ -15,7 +15,7 @@ if (Test-Path $shortcutPath) {
     Uninstall-ChocolateyShortcut $shortcutPath
 }
 
-$logPath = Join-Path $Env:ChocolateyPackageFolder "eclipse.$packageVersion.txt"
+$logPath = Join-Path $toolsDir "eclipse.$packageVersion.txt"
 Write-Verbose "Reading Installation Path from $logPath"
 $installationPath = Get-Content $logPath
 Write-Verbose "Previous Installation Path: $installationPath"
@@ -27,5 +27,5 @@ if (Test-Path $installationPath -ErrorAction SilentlyContinue) {
     Write-Warning "Installation Path missing or not found: $installationPath"
 }
 
-$logPath = Join-Path $Env:ChocolateyPackageFolder '*.zip.txt'
+$logPath = Join-Path $toolsDir '*.zip.txt'
 Remove-Item -Path $logPath -ErrorAction SilentlyContinue
