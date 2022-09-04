@@ -1,9 +1,9 @@
 ﻿#Name can be 'random N' to randomly force the Nth group of packages.
 
-param( [string[]] $Name, [string] $Root = "$PSScriptRoot", [switch] $ThrowOnErrors )
+param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot, [switch] $ThrowOnErrors)
 
 if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
-$global:au_root = Resolve-Path $Root
+$global:au_Root = Resolve-Path $Root                        #Path to the AU packages
 
 if (($Name.Length -gt 0) -and ($Name[0] -match '^random (.+)')) {
     [array] $lsau = lsau
@@ -20,30 +20,33 @@ if (($Name.Length -gt 0) -and ($Name[0] -match '^random (.+)')) {
 }
 
 $options = [ordered]@{
-    Force   = $true
-    Push    = $false
-    Threads = 10 
-
-    IgnoreOn = @(                                      #Error message parts to set the package ignore status
-        'Could not create SSL/TLS secure channel'
-        'Could not establish trust relationship'
-        'The operation has timed out'
-        'Internal Server Error'
-        'Service Temporarily Unavailable'
-        'Choco pack failed with exit code 1'
+    Force         = $true                                   #Force all packages
+    Threads       = 10                                      #Number of background jobs to use
+    Push          = $false                                  #Push to chocolatey
+    IgnoreOn      = @(                                      #Error message parts to set the package ignore status
+      'Could not create SSL/TLS secure channel'
+      'Could not establish trust relationship'
+      'The operation has timed out'
+      'Internal Server Error'
+      'Service Temporarily Unavailable'
+      'The connection was closed unexpectedly.'
+      'package version already exists'
+      'already exists on a Simple OData Server'             # https://github.com/chocolatey/chocolatey.org/issues/613
+      'Conflict'
+      'A system shutdown has already been scheduled'        # https://gist.github.com/choco-bot/a14b1e5bfaf70839b338eb1ab7f8226f#wps-office-free
     )
-
-    RepeatOn = @(                                      #Error message parts on which to repeat package updater
-        'Could not create SSL/TLS secure channel'             # https://github.com/chocolatey/chocolatey-coreteampackages/issues/718
-        'Could not establish trust relationship'              # -||-
-        'Unable to connect'
-        'The remote name could not be resolved'
-        'Choco pack failed with exit code 1'                  # https://github.com/chocolatey/chocolatey-coreteampackages/issues/721
-        'The operation has timed out'
-        'Internal Server Error'
-        'An exception occurred during a WebClient request'
-        'Job returned no object, Vector smash ?'
-        'remote session failed with an unexpected state'
+    RepeatOn      = @(                                      #Error message parts on which to repeat package updater
+      'Could not create SSL/TLS secure channel'             # https://github.com/chocolatey/chocolatey-coreteampackages/issues/718
+      'Could not establish trust relationship'              # -||-
+      'Unable to connect'
+      'The remote name could not be resolved'
+      'Choco pack failed with exit code 1'                  # https://github.com/chocolatey/chocolatey-coreteampackages/issues/721
+      'The operation has timed out'
+      'Internal Server Error'
+      'An exception occurred during a WebClient request'
+      'remote session failed with an unexpected state'
+      'The connection was closed unexpectedly.'
+      'Job returned no object, Vector smash ?'
     )
     RepeatSleep   = 60                                      #How much to sleep between repeats in seconds, by default 0
     RepeatCount   = 2                                       #How many times to repeat on errors, by default 1
@@ -65,15 +68,27 @@ $options = [ordered]@{
         Path   = "$PSScriptRoot\Update-Force-Test-${n}.md"  #List of files to add to the gist
         Description = "Update Force Test Report #powershell #chocolatey"
     }
+
+    ForcedPackages = $ForcedPackages -split ' '
+    BeforeEach = {
+        param($PackageName, $Options)
+
+        $pattern = "^${PackageName}(?:\\(?<stream>[^:]+))?(?:\:(?<version>.+))?$"
+        $p = $Options.ForcedPackages | ? { $_ -match $pattern }
+        if (!$p) { return }
+
+        $global:au_Force         = $true
+        $global:au_IncludeStream = $Matches['stream']
+        $global:au_Version       = $Matches['version']
+    }
 }
 
 # gist wont work without this: https://gitter.im/chocolatey/choco?at=5a93bb0e6fba1a703a9f9532
 [System.Net.ServicePointManager]::SecurityProtocol = 3072 -bor 768 -bor [System.Net.SecurityProtocolType]::Tls -bor [System.Net.SecurityProtocolType]::Ssl3
 
-$global:info = updateall -Name $Name -Options $Options
+if ($ForcedPackages) { Write-Host "FORCED PACKAGES: $ForcedPackages" }
+$global:info = updateall -Name $Name -Options $options
 
-$au_errors = $global:info | ? { $_.Error } | select -ExpandProperty Error
-
-if ($ThrowOnErrors -and $au_errors.Count -gt 0) {
-    throw 'Errors during update'
+if ($ThrowOnErrors -and $global:info.error_count.total) {
+    throw 'Errors during test'
 }

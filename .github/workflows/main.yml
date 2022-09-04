@@ -104,7 +104,7 @@ jobs:
       - name: Test packages
         if: github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test packages'
         run: |
-          "./test_all.ps1 `"random $Env:au_test_groups`""
+          "./test_all.ps1 -Name `"random $Env:au_test_groups`" -ForcedPackages $Env:ForcedPackages -ThrowOnErrors"
         env:
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
@@ -112,7 +112,7 @@ jobs:
       - name: Update packages
         if: github.event_name != 'pull_request' && github.event.schedule != '0 4 * * *' && inputs.type != 'Test packages'
         run: |
-          "./update_all.ps1 -ForcedPackages $Env:ForcedPackages"
+          "./update_all.ps1 -ForcedPackages $Env:ForcedPackages -ThrowOnErrors"
         env:
           au_push: true
           github_user_repo: ${{ github.repository }}
@@ -122,8 +122,11 @@ jobs:
           api_key: ${{ secrets.CHOCOLATEY_KEY }}
 
       - name: Publish job summary
-        if: always() && hashFiles('Update-AUPackages.md')
-        run: Get-Content 'Update-AUPackages.md' | Out-File $Env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+        if: always() && hashFiles('Update-AUPackages.md', 'Update-Force-Test-*.md')
+        run: |
+          Get-ChildItem 'Update-AUPackages.md', 'Update-Force-Test-*.md'
+          | Get-Content
+          | Out-File $Env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
 
       - name: Upload Info artifact
         uses: actions/upload-artifact@v3.1.0
