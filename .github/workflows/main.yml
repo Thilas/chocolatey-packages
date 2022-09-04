@@ -57,9 +57,7 @@ jobs:
         run: |
           Get-CimInstance Win32_OperatingSystem -Property Caption, OSArchitecture, Version | Format-List Caption, OSArchitecture, Version
           $PSVersionTable
-          ''
           git --version
-          ''
           "chocolatey version $(choco --version)"
 
       - name: Install AU
@@ -98,7 +96,7 @@ jobs:
             "All packages will be processed"
           }
         env:
-          EventName: github.event_name
+          EventName: ${{ github.event_name }}
           PullRequestTitle: ${{ github.event.pull_request.title }}
           CommitMessage: ${{ github.event.head_commit.message }}
           ManualPackages: ${{ inputs.packages }}
