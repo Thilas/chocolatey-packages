@@ -2,6 +2,7 @@ name: CI
 
 on:
   pull_request:
+    types: [opened, edited, reopened, synchronize]
     branches: [ master ] # Automatic test on PR's scope (if any) or all packages
   push:
     branches: [ master ] # Automatic update of all packages
