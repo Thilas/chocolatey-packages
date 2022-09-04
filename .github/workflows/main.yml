@@ -69,14 +69,14 @@ jobs:
             # Handle both comma and space-separated values
             $scope = $Matches.Scope -replace ',',' ' -replace '\s+',' '
             $packages, $invalidPackages = ($scope -split ' ').Where({ Test-Path $_ }, 'Split')
-            if ($invalidPackages) {
-              throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
-            }
             "Scope:"
             $packages | ForEach-Object {
               "- $_"
             }
             "PackageScope=$packages" | Out-File $Env:GITHUB_ENV -Encoding utf8 -Append
+            if ($invalidPackages) {
+              throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
+            }
           } else {
             "No specific scope, all packages will be processed"
           }
@@ -90,14 +90,14 @@ jobs:
             # Handle both comma and space-separated values
             $scope = $Env:ManualScope -replace ',',' ' -replace '\s+',' '
             $packages, $invalidPackages = ($scope -split ' ').Where({ Test-Path $_ }, 'Split')
-            if ($invalidPackages) {
-              throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
-            }
             "Scope:"
             $packages | ForEach-Object {
               "- $_"
             }
             "PackageScope=$packages" | Out-File $Env:GITHUB_ENV -Encoding utf8 -Append
+            if ($invalidPackages) {
+              throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
+            }
           } else {
             "No specific scope, all packages will be processed"
           }
