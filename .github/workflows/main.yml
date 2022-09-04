@@ -2,12 +2,12 @@ name: CI
 
 on:
   pull_request:
-    branches: [ master ] # Automatic test
+    branches: [ master ] # Automatic test on PR's scope (if any) or all packages
   push:
-    branches: [ master ] # Automatic update
+    branches: [ master ] # Automatic update of all packages
   schedule:
-    - cron: 0 4 * * *    # Daily test
-    - cron: 5 */6 * * *  # Scheduled update
+    - cron: 0 4 * * *    # Daily test of all packages
+    - cron: 5 */6 * * *  # Scheduled update of all packages
   workflow_dispatch:     # Manual run
     inputs:
       type:
@@ -18,7 +18,7 @@ on:
           - Test packages
           - Update packages
       packages:
-        description: Packages (optional comma-separated values)
+        description: Packages (optional, comma-separated values)
         type: string
 
 env:
@@ -60,55 +60,67 @@ jobs:
           git --version
           "chocolatey version $(choco --version)"
 
+      - name: Determine PR scope
+        if: github.event_name == 'pull_request'
+        run: |
+          # PR title is expected to follow Conventional Commits
+          # If so, packages will be specified in the commit scope
+          if ($Env:PullRequestTitle -match '^\w+\((?<Scope>[^()\r\n]+)\)!?:') {
+            # Handle both comma and space-separated values
+            $scope = $Matches.Scope -replace ',',' ' -replace '\s+',' '
+            $packages, $invalidPackages = ($scope -split ' ').Where({ Test-Path $_ }, 'Split')
+            if ($invalidPackages) {
+              throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
+            }
+            "Scope:"
+            $packages | ForEach-Object {
+              "- $_"
+            }
+            "PackageScope=$packages" | Out-File $Env:GITHUB_ENV -Encoding utf8 -Append
+          } else {
+            "No specific scope, all packages will be processed"
+          }
+        env:
+          PullRequestTitle: ${{ github.event.pull_request.title }}
+
+      - name: Determine manual scope
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          if ($Env:ManualScope) {
+            # Handle both comma and space-separated values
+            $scope = $Env:ManualScope -replace ',',' ' -replace '\s+',' '
+            $packages, $invalidPackages = ($scope -split ' ').Where({ Test-Path $_ }, 'Split')
+            if ($invalidPackages) {
+              throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
+            }
+            "Scope:"
+            $packages | ForEach-Object {
+              "- $_"
+            }
+            "PackageScope=$packages" | Out-File $Env:GITHUB_ENV -Encoding utf8 -Append
+          } else {
+            "No specific scope, all packages will be processed"
+          }
+        env:
+          ManualScope: ${{ inputs.packages }}
+
       - name: Install AU
         run: |
           git clone -q https://github.com/majkinetor/au.git $Env:TEMP/au
           . "$Env:TEMP/au/scripts/Install-AU.ps1" $Env:au_version
 
-      - name: Install chocolatey-core.extension
-        run: cinst chocolatey-core.extension #required for several packages
-
-      - name: Determine scope
-        if: github.event_name != 'schedule'
-        run: |
-          $scope = switch ($Env:EventName) {
-            'pull_request'      { $Env:PullRequestTitle }
-            'push'              { $Env:CommitMessage }
-            'workflow_dispatch' { $Env:ManualPackages }
-            default             { throw "Unexpected event: $Env:EventName" }
-          }
-          if ($Env:EventName -in 'pull_request', 'push') {
-            # PR title/commit message is expected to follow Conventional Commits
-            # If so, packages will be specified as comma-separated values in the scope
-            $scope = if ($scope -match '^\w+\((?<Scope>[^()\r\n]+)\)!?:') {
-              $Matches.Scope
-            }
-          }
-          # Accept space-separated values as well
-          $scope = $scope -replace ',',' ' -replace '\s+',' '
-          if ($scope) {
-            "Scope:"
-            $scope -split ' ' | ForEach-Object {
-              "- $_"
-            }
-            "PackageScope=$scope" | Out-File $Env:GITHUB_ENV -Encoding utf8 -Append
-          } else {
-            "No specific scope, all packages will be processed"
-          }
-        env:
-          EventName: ${{ github.event_name }}
-          PullRequestTitle: ${{ github.event.pull_request.title }}
-          CommitMessage: ${{ github.event.head_commit.message }}
-          ManualPackages: ${{ inputs.packages }}
+      - name: Install chocolatey-core.extension # required for several packages
+        run: cinst chocolatey-core.extension
 
       - name: Test packages
         if: github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test packages'
         run: |
-          if ($Env:PackageScope) {
-            ./test_all.ps1 -Name ($Env:PackageScope -split ' ') -ThrowOnErrors
+          $packages = if ($Env:PackageScope) {
+            $Env:PackageScope -split ' '
           } else {
-            ./test_all.ps1 -Name "random $Env:au_test_groups" -ThrowOnErrors
+            "random $Env:au_test_groups"
           }
+          ./test_all.ps1 -Name $packages -ThrowOnErrors
         env:
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
@@ -117,7 +129,7 @@ jobs:
         if: github.event_name != 'pull_request' && github.event.schedule != '0 4 * * *' && inputs.type != 'Test packages'
         run: ./update_all.ps1 -ForcedPackages $Env:PackageScope -ThrowOnErrors
         env:
-          au_push: true
+          # au_push: true
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
           mail_user: ${{ secrets.MAIL_USER }}
