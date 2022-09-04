@@ -103,16 +103,14 @@ jobs:
 
       - name: Test packages
         if: github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test packages'
-        run: |
-          "./test_all.ps1 -Name `"random $Env:au_test_groups`" -ForcedPackages $Env:ForcedPackages -ThrowOnErrors"
+        run: ./test_all.ps1 -Name "random $Env:au_test_groups" -ForcedPackages $Env:ForcedPackages -ThrowOnErrors
         env:
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update packages
         if: github.event_name != 'pull_request' && github.event.schedule != '0 4 * * *' && inputs.type != 'Test packages'
-        run: |
-          "./update_all.ps1 -ForcedPackages $Env:ForcedPackages -ThrowOnErrors"
+        run: ./update_all.ps1 -ForcedPackages $Env:ForcedPackages -ThrowOnErrors
         env:
           au_push: true
           github_user_repo: ${{ github.repository }}
