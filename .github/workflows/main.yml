@@ -68,10 +68,10 @@ jobs:
       - name: Install chocolatey-core.extension
         run: cinst chocolatey-core.extension #required for several packages
 
-      - name: Determine packages
+      - name: Determine scope
         if: github.event_name != 'schedule'
         run: |
-          $packages = switch ($Env:EventName) {
+          $scope = switch ($Env:EventName) {
             'pull_request'      { $Env:PullRequestTitle }
             'push'              { $Env:CommitMessage }
             'workflow_dispatch' { $Env:ManualPackages }
@@ -80,20 +80,20 @@ jobs:
           if ($Env:EventName -in 'pull_request', 'push') {
             # PR title/commit message is expected to follow Conventional Commits
             # If so, packages will be specified as comma-separated values in the scope
-            $packages = if ($packages -match '^\w+\((?<Scope>[^()\r\n]+)\)!?:') {
+            $scope = if ($scope -match '^\w+\((?<Scope>[^()\r\n]+)\)!?:') {
               $Matches.Scope
             }
           }
           # Accept space-separated values as well
-          $packages = $packages -replace ',',' ' -replace '\s+',' '
-          if ($packages) {
-            "Packages:"
-            $packages -split ' ' | ForEach-Object {
+          $scope = $scope -replace ',',' ' -replace '\s+',' '
+          if ($scope) {
+            "Scope:"
+            $scope -split ' ' | ForEach-Object {
               "- $_"
             }
-            "ForcedPackages=$packages" | Out-File $Env:GITHUB_ENV -Encoding utf8 -Append
+            "PackageScope=$scope" | Out-File $Env:GITHUB_ENV -Encoding utf8 -Append
           } else {
-            "All packages will be processed"
+            "No specific scope, all packages will be processed"
           }
         env:
           EventName: ${{ github.event_name }}
@@ -103,14 +103,19 @@ jobs:
 
       - name: Test packages
         if: github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test packages'
-        run: ./test_all.ps1 -Name "random $Env:au_test_groups" -ForcedPackages $Env:ForcedPackages -ThrowOnErrors
+        run: |
+          if ($Env:PackageScope) {
+            ./test_all.ps1 -Name ($Env:PackageScope -split ' ') -ThrowOnErrors
+          } else {
+            ./test_all.ps1 -Name "random $Env:au_test_groups" -ThrowOnErrors
+          }
         env:
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update packages
         if: github.event_name != 'pull_request' && github.event.schedule != '0 4 * * *' && inputs.type != 'Test packages'
-        run: ./update_all.ps1 -ForcedPackages $Env:ForcedPackages -ThrowOnErrors
+        run: ./update_all.ps1 -ForcedPackages $Env:PackageScope -ThrowOnErrors
         env:
           au_push: true
           github_user_repo: ${{ github.repository }}
@@ -122,7 +127,7 @@ jobs:
       - name: Publish job summary
         if: always() && hashFiles('Update-AUPackages.md', 'Update-Force-Test-*.md')
         run: |
-          Get-ChildItem 'Update-AUPackages.md', 'Update-Force-Test-*.md'
+          Get-ChildItem 'Update-AUPackages.md', 'Update-Force-Test-*.md' -ErrorAction SilentlyContinue
           | Get-Content
           | Out-File $Env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
 

@@ -1,6 +1,6 @@
 ﻿#Name can be 'random N' to randomly force the Nth group of packages.
 
-param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot, [switch] $ThrowOnErrors)
+param([string[]] $Name, [string] $Root = $PSScriptRoot, [switch] $ThrowOnErrors)
 
 if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
 $global:au_Root = Resolve-Path $Root                        #Path to the AU packages
@@ -68,25 +68,11 @@ $options = [ordered]@{
         Path   = "$PSScriptRoot\Update-Force-Test-${n}.md"  #List of files to add to the gist
         Description = "Update Force Test Report #powershell #chocolatey"
     }
-
-    ForcedPackages = $ForcedPackages -split ' '
-    BeforeEach = {
-        param($PackageName, $Options)
-
-        $pattern = "^${PackageName}(?:\\(?<stream>[^:]+))?(?:\:(?<version>.+))?$"
-        $p = $Options.ForcedPackages | ? { $_ -match $pattern }
-        if (!$p) { return }
-
-        $global:au_Force         = $true
-        $global:au_IncludeStream = $Matches['stream']
-        $global:au_Version       = $Matches['version']
-    }
 }
 
 # Set TLS1.2
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
 
-if ($ForcedPackages) { Write-Host "FORCED PACKAGES: $ForcedPackages" }
 $global:info = updateall -Name $Name -Options $options
 
 if ($ThrowOnErrors -and $global:info.error_count.total) {
