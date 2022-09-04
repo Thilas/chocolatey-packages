@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     Get-FileLatest `
-        -FileUri 'https://download.sysinternals.com/files/ProcessMonitora.zip' `
+        -FileUri 'https://download.sysinternals.com/files/ProcessMonitor.zip' `
         -Download `
         -CompressedFile 'Procmon.exe' `
         -GetVersion { param($File) Get-Version $File.VersionInfo.ProductVersion } `

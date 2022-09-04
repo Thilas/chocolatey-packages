@@ -21,6 +21,9 @@ on:
       packages:
         description: Packages (optional, comma-separated values)
         type: string
+      force:
+        description: Force update (requires some packages)
+        type: boolean
 
 env:
   # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
@@ -128,8 +131,18 @@ jobs:
 
       - name: Update packages
         if: github.event_name != 'pull_request' && github.event.schedule != '0 4 * * *' && inputs.type != 'Test packages'
-        run: ./update_all.ps1 -ForcedPackages $Env:PackageScope -ThrowOnErrors
+        run: |
+          $arguments = if ($Env:force_update -eq 'true') {
+            if (!$Env:PackageScope) {
+              throw "Packages are expected if you want to force an update."
+            }
+            @{ ForcedPackages = $Env:PackageScope }
+          } elseif ($Env:PackageScope) {
+            @{ Name = $Env:PackageScope -split ' ' }
+          }
+          ./update_all.ps1 @arguments -ThrowOnErrors
         env:
+          force_update: ${{ inputs.force }}
           # au_push: true
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
