@@ -114,6 +114,7 @@ $options = [ordered]@{
 
 if ($ForcedPackages) { Write-Host "FORCED PACKAGES: $ForcedPackages" }
 $global:info = updateall -Name $Name -Options $options
+$global:info
 
 if ($ThrowOnErrors -and $global:info.error_count.total) {
     throw 'Errors during update'

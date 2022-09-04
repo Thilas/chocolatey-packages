@@ -74,6 +74,7 @@ $options = [ordered]@{
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
 
 $global:info = updateall -Name $Name -Options $options
+$global:info
 
 if ($ThrowOnErrors -and $global:info.error_count.total) {
     throw 'Errors during test'
