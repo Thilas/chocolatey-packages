@@ -83,8 +83,8 @@ $options = [ordered]@{
     }
 }
 
-# gist wont work without this: https://gitter.im/chocolatey/choco?at=5a93bb0e6fba1a703a9f9532
-[System.Net.ServicePointManager]::SecurityProtocol = 3072 -bor 768 -bor [System.Net.SecurityProtocolType]::Tls -bor [System.Net.SecurityProtocolType]::Ssl3
+# Set TLS1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
 
 if ($ForcedPackages) { Write-Host "FORCED PACKAGES: $ForcedPackages" }
 $global:info = updateall -Name $Name -Options $options
