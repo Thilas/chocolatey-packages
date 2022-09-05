@@ -1,10 +1,11 @@
 ﻿# AU Packages Template: https://github.com/majkinetor/au-packages-template
 
-param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot)
+param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot, [switch] $ThrowOnErrors)
 
 if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
+$global:au_Root = Resolve-Path $Root                        #Path to the AU packages
 
-$Options = [ordered]@{
+$options = [ordered]@{
     WhatIf        = $au_WhatIf                              #Whatif all packages
     Force         = $false                                  #Force all packages
     Timeout       = 100                                     #Connection timeout in seconds
@@ -37,8 +38,8 @@ $Options = [ordered]@{
       'remote session failed with an unexpected state'
       'The connection was closed unexpectedly.'
     )
-    #RepeatSleep   = 250                                    #How much to sleep between repeats in seconds, by default 0
-    #RepeatCount   = 2                                      #How many times to repeat on errors, by default 1
+    # RepeatSleep   = 60                                      #How much to sleep between repeats in seconds, by default 0
+    # RepeatCount   = 2                                       #How many times to repeat on errors, by default 1
 
     Report = @{
         Type = 'markdown'                                   #Report type: markdown or text
@@ -62,7 +63,7 @@ $Options = [ordered]@{
     Gist = @{
         Id     = $Env:gist_id                               #Your gist id; leave empty for new private or anonymous gist
         ApiKey = $Env:github_api_key                        #Your github api key - if empty anoymous gist is created
-        Path   = "$PSScriptRoot\Update-AUPackages.md", "$PSScriptRoot\Update-History.md"       #List of files to add to the gist
+        Path   = "$PSScriptRoot\Update-AUPackages.md", "$PSScriptRoot\Update-History.md" #List of files to add to the gist
     }
 
     Git = @{
@@ -96,7 +97,7 @@ $Options = [ordered]@{
 
     ForcedPackages = $ForcedPackages -split ' '
     BeforeEach = {
-        param($PackageName, $Options )
+        param($PackageName, $Options)
 
         $pattern = "^${PackageName}(?:\\(?<stream>[^:]+))?(?:\:(?<version>.+))?$"
         $p = $Options.ForcedPackages | ? { $_ -match $pattern }
@@ -108,12 +109,13 @@ $Options = [ordered]@{
     }
 }
 
-# gist wont work without this: https://gitter.im/chocolatey/choco?at=5a93bb0e6fba1a703a9f9532
-[System.Net.ServicePointManager]::SecurityProtocol = 3072 -bor 768 -bor [System.Net.SecurityProtocolType]::Tls -bor [System.Net.SecurityProtocolType]::Ssl3
+# Set TLS1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
 
 if ($ForcedPackages) { Write-Host "FORCED PACKAGES: $ForcedPackages" }
-$global:au_Root = $Root                                    #Path to the AU packages
-$global:info = updateall -Name $Name -Options $Options
+$global:info = updateall -Name $Name -Options $options
+$global:info
 
-#Uncomment to fail the build on AppVeyor on any package error
-#if ($global:info.error_count.total) { throw 'Errors during update' }
+if ($ThrowOnErrors -and $global:info.error_count.total) {
+    throw 'Errors during update'
+}
