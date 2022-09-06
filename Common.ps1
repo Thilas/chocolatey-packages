@@ -121,7 +121,7 @@ function Get-FileLatest {
 
             $responseUri = $response | Get-ResponseUri
             $version = if ($GetVersion) {
-                & $GetVersion -Response $response -File $file
+                & $GetVersion -ResponseUri $responseUri -File $file
             } else {
                 Get-Version $responseUri
             }
