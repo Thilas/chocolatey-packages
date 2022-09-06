@@ -46,6 +46,7 @@ env:
 
 jobs:
   build:
+    name: ${{ (github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test packages') && 'Test packages' || 'Update packages' }}
     runs-on: windows-latest
 
     steps:
@@ -133,13 +134,15 @@ jobs:
       - name: Update packages
         if: github.event_name != 'pull_request' && github.event.schedule != '0 4 * * *' && inputs.type != 'Test packages'
         run: |
-          $arguments = if ($Env:force_update -eq 'true') {
+          $arguments = @{ }
+          if ($Env:PackageScope) {
+            $arguments.Name = $Env:PackageScope -split ' '
+          }
+          if ($Env:force_update -eq 'true') {
             if (!$Env:PackageScope) {
               throw "Packages are expected if you want to force an update."
             }
-            @{ ForcedPackages = $Env:PackageScope }
-          } elseif ($Env:PackageScope) {
-            @{ Name = $Env:PackageScope -split ' ' }
+            $arguments.ForcedPackages = $Env:PackageScope
           }
           ./update_all.ps1 @arguments -ThrowOnErrors
         env:
