@@ -61,7 +61,7 @@ function global:au_GetLatest {
         #-FileUri64 'https://' `
         #-Download `
         #-CompressedFile 'path\to\file' `
-        #-GetVersion { param($Response, $File) Get-Version $File.VersionInfo.ProductVersion } `
+        #-GetVersion { param($ResponseUri, $File) Get-Version $File.VersionInfo.ProductVersion } `
         -Latest @{
             SoftwareName            = $softwareName
             SilentArgs              = $silentArgs

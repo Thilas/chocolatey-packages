@@ -7,7 +7,7 @@ function global:au_GetLatest {
     Get-FileLatest `
         -FileUri   'https://www.airserver.com/download/windows/classic/x86' `
         -FileUri64 'https://www.airserver.com/download/windows/classic/x64' `
-        -GetVersion { param($Response) Get-Version $Response.BaseResponse.ResponseUri -Delimiter '-' } `
+        -GetVersion { param($ResponseUri) Get-Version $ResponseUri -Delimiter '-' } `
         -ForceHttps `
         -Latest @{
             SoftwareName   = 'AirServer *'
