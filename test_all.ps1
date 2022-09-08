@@ -1,6 +1,10 @@
 ﻿#Name can be 'random N' to randomly force the Nth group of packages.
 
-param([string[]] $Name, [string] $Root = $PSScriptRoot, [switch] $ThrowOnErrors)
+param(
+    [string[]] $Name,
+    [string] $Root = $PSScriptRoot,
+    [switch] $ThrowOnErrors
+)
 
 if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
 $global:au_Root = Resolve-Path $Root                        #Path to the AU packages
@@ -74,8 +78,7 @@ $options = [ordered]@{
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
 
 $global:info = updateall -Name $Name -Options $options
-$global:info
 
-if ($ThrowOnErrors -and $global:info.error_count.total) {
+if ($ThrowOnErrors -and ($global:info | ? Error)) {
     throw 'Errors during test'
 }

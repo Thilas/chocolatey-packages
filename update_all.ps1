@@ -1,13 +1,20 @@
 ﻿# AU Packages Template: https://github.com/majkinetor/au-packages-template
 
-param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot, [switch] $ThrowOnErrors)
+param(
+    [string[]] $Name,
+    [switch] $Force,
+    [string] $ForcedPackages,
+    [string] $Root = $PSScriptRoot,
+    [switch] $ThrowOnErrors,
+    [switch] $GitHubAction
+)
 
 if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
 $global:au_Root = Resolve-Path $Root                        #Path to the AU packages
 
 $options = [ordered]@{
     WhatIf        = $au_WhatIf                              #Whatif all packages
-    Force         = $false                                  #Force all packages
+    Force         = $Force                                  #Force all packages
     Timeout       = 100                                     #Connection timeout in seconds
     UpdateTimeout = 1200                                    #Update timeout in seconds
     Threads       = 10                                      #Number of background jobs to use
@@ -46,7 +53,7 @@ $options = [ordered]@{
         Path = "$PSScriptRoot\Update-AUPackages.md"         #Path where to save the report
         Params= @{                                          #Report parameters:
             Github_UserRepo = $Env:github_user_repo         #  Markdown: shows user info in upper right corner
-            NoAppVeyor  = $false                            #  Markdown: do not show AppVeyor build shield
+            NoAppVeyor  = !$GitHubAction                    #  Markdown: do not show AppVeyor build shield
             UserMessage = "[Ignored](#ignored) | [History](#update-history) | [Force Test](https://gist.github.com/$Env:gist_id_test) | [Releases](https://github.com/$Env:github_user_repo/tags) | **TESTING AU NEXT VERSION**"       #  Markdown, Text: Custom user message to show
             NoIcons     = $false                            #  Markdown: don't show icon
             IconSize    = 32                                #  Markdown: icon size
@@ -60,11 +67,11 @@ $options = [ordered]@{
         Path = "$PSScriptRoot\Update-History.md"            #Path where to save history
     }
 
-    Gist = @{
+    Gist = if ($Env:au_NoGist -ne 'true') { @{
         Id     = $Env:gist_id                               #Your gist id; leave empty for new private or anonymous gist
         ApiKey = $Env:github_api_key                        #Your github api key - if empty anoymous gist is created
         Path   = "$PSScriptRoot\Update-AUPackages.md", "$PSScriptRoot\Update-History.md" #List of files to add to the gist
-    }
+    } } else {}
 
     Git = @{
         User     = ''                                       #Git username, leave empty if github api key is used
@@ -114,8 +121,7 @@ $options = [ordered]@{
 
 if ($ForcedPackages) { Write-Host "FORCED PACKAGES: $ForcedPackages" }
 $global:info = updateall -Name $Name -Options $options
-$global:info
 
-if ($ThrowOnErrors -and $global:info.error_count.total) {
+if ($ThrowOnErrors -and ($global:info | ? Error)) {
     throw 'Errors during update'
 }

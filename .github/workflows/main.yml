@@ -22,7 +22,7 @@ on:
         description: Packages (optional, comma-separated values)
         type: string
       force:
-        description: Force update (requires some packages)
+        description: Force update (requires packages)
         type: boolean
 
 env:
@@ -79,7 +79,7 @@ jobs:
             $packages | ForEach-Object {
               "- $_"
             }
-            "PackageScope=$packages" | Out-File $Env:GITHUB_ENV -Encoding utf8 -Append
+            "PackageScope=$packages" >> $Env:GITHUB_ENV
             if ($invalidPackages) {
               throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
             }
@@ -100,7 +100,7 @@ jobs:
             $packages | ForEach-Object {
               "- $_"
             }
-            "PackageScope=$packages" | Out-File $Env:GITHUB_ENV -Encoding utf8 -Append
+            "PackageScope=$packages" >> $Env:GITHUB_ENV
             if ($invalidPackages) {
               throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
             }
@@ -128,6 +128,7 @@ jobs:
           }
           ./test_all.ps1 -Name $packages -ThrowOnErrors
         env:
+          au_NoGist: ${{ github.event_name != 'schedule' }}
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
 
@@ -140,29 +141,31 @@ jobs:
           }
           if ($Env:force_update -eq 'true') {
             if (!$Env:PackageScope) {
-              throw "Packages are expected if you want to force an update."
+              throw "Packages are required if you want to force an update."
             }
-            $arguments.ForcedPackages = $Env:PackageScope
+            $arguments.Force = $true
           }
-          ./update_all.ps1 @arguments -ThrowOnErrors
+          ./update_all.ps1 @arguments -ThrowOnErrors -GitHubAction
         env:
-          force_update: ${{ inputs.force }}
           # au_push: true
+          au_NoGist: ${{ github.event_name != 'schedule' }}
+          force_update: ${{ inputs.force }}
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
           mail_pass: ${{ secrets.MAIL_PASS }}
           api_key: ${{ secrets.CHOCOLATEY_KEY }}
 
-      - name: Publish job summary
-        if: always() && hashFiles('Update-AUPackages.md', 'Update-Force-Test-*.md')
-        run: |
-          Get-ChildItem 'Update-AUPackages.md', 'Update-Force-Test-*.md' -ErrorAction SilentlyContinue
-          | Get-Content
-          | Out-File $Env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+      - name: Publish report
+        if: hashFiles('Update-AUPackages.md', 'Update-Force-Test-*.md')
+        run: Get-Content 'Update-AUPackages.md', 'Update-Force-Test-*.md' -ErrorAction SilentlyContinue >> $Env:GITHUB_STEP_SUMMARY
+
+      - name: Publish history
+        if: hashFiles('Update-History.md')
+        run: Get-Content 'Update-History.md' >> $Env:GITHUB_STEP_SUMMARY
 
       - name: Upload Info artifact
         uses: actions/upload-artifact@v3.1.0
-        if: always() && hashFiles('update_info.xml')
+        if: hashFiles('update_info.xml')
         with:
           name: Info
           path: update_info.xml
