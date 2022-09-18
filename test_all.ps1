@@ -8,7 +8,7 @@
 if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" }
 $global:au_Root = Resolve-Path $Root
 
-if ($Name.Length -eq 1 -and $Name[0] -match '^random (.+)') {
+$report_path = if ($Name.Length -eq 1 -and $Name[0] -match '^random (.+)') {
     [array] $packages = Get-AuPackages
 
     $group = [int] $Matches[1]
@@ -20,9 +20,12 @@ if ($Name.Length -eq 1 -and $Name[0] -match '^random (.+)') {
 
     Write-Host ($Name -join ' ')
     Write-Host ('-'*80)
+
+    "$PSScriptRoot\Update-Force-Test-$n.md"
+} else {
+    "$PSScriptRoot\Update-Force-Test.md"
 }
 
-$report_path = if ($null -eq $n) { "$PSScriptRoot\Update-Force-Test.md" } else { "$PSScriptRoot\Update-Force-Test-$n.md" }
 $buildUrl = if ($GitHubAction) {
     "https://github.com/Thilas/chocolatey-packages/actions/workflows/main.yml"
 } else {
