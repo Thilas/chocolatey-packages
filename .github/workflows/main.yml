@@ -128,9 +128,10 @@ jobs:
           }
           ./test_all.ps1 -Name $packages -ThrowOnErrors
         env:
-          au_NoGist: ${{ github.event_name != 'schedule' }}
+          # au_nogist: ${{ github.event_name != 'schedule' }}
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
+          gist_token: ${{ secrets.GIST_TOKEN }}
 
       - name: Update packages
         if: github.event_name != 'pull_request' && github.event.schedule != '0 4 * * *' && inputs.type != 'Test packages'
@@ -147,11 +148,12 @@ jobs:
           }
           ./update_all.ps1 @arguments -ThrowOnErrors -GitHubAction
         env:
-          # au_push: true
-          au_NoGist: ${{ github.event_name != 'schedule' }}
+          au_push: true
+          au_nogist: ${{ github.event_name != 'schedule' }}
           force_update: ${{ inputs.force }}
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
+          gist_token: ${{ secrets.GIST_TOKEN }}
           mail_pass: ${{ secrets.MAIL_PASS }}
           api_key: ${{ secrets.CHOCOLATEY_KEY }}
 
