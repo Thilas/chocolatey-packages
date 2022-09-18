@@ -124,7 +124,7 @@ jobs:
           }
           ./test_all.ps1 -Name $packages -ThrowOnErrors
         env:
-          # au_nogist: ${{ github.event_name != 'schedule' }}
+          au_nogist: ${{ github.event_name != 'schedule' }}
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}

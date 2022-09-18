@@ -13,6 +13,7 @@ $global:au_Root = Resolve-Path $Root
 
 $report_path  = "$PSScriptRoot\Update-AUPackages.md"
 $history_path = "$PSScriptRoot\Update-History.md"
+
 $gist_token = if ($Env:gist_token) { $Env:gist_token } else { $Env:github_api_key }
 
 $options = [ordered] @{
