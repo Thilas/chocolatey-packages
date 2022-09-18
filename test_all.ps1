@@ -1,7 +1,8 @@
 ﻿param(
     [string[]] $Name, # Name can be 'random N' to randomly force the Nth group of packages
     [string] $Root = $PSScriptRoot, # Path to the AU packages
-    [switch] $ThrowOnErrors
+    [switch] $ThrowOnErrors,
+    [switch] $GitHubAction
 )
 
 if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" }
@@ -21,6 +22,7 @@ if ($Name.Length -eq 1 -and $Name[0] -match '^random (.+)') {
     Write-Host ('-'*80)
 }
 
+$report_path = if ($null -eq $n) { "$PSScriptRoot\Update-Force-Test.md" } else { "$PSScriptRoot\Update-Force-Test-$n.md" }
 $buildUrl = if ($GitHubAction) {
     "https://github.com/Thilas/chocolatey-packages/actions/workflows/main.yml"
 } else {
@@ -63,7 +65,7 @@ $options = [ordered] @{
 
     Report = @{
         Type = 'markdown'                                   # Report type: markdown or text
-        Path = "$PSScriptRoot\Update-Force-Test-${n}.md"    # Path where to save the report
+        Path = $report_path                                 # Path where to save the report
         Params = @{                                         # Report parameters:
             Github_UserRepo = $Env:github_user_repo         #   Markdown: shows user info in upper right corner
             NoAppVeyor  = $true                             #   Markdown: do not show AppVeyor build shield
@@ -82,7 +84,7 @@ $options = [ordered] @{
     Gist = if ($Env:au_noGist -ne 'true') { @{
         Id     = $Env:gist_id_test                          # Your gist id; leave empty for new private or anonymous gist
         ApiKey = $gist_token                                # Your github api key - if empty anoymous gist is created
-        Path   = "$PSScriptRoot\Update-Force-Test-${n}.md"  # List of files to add to the gist
+        Path   = $report_path                               # List of files to add to the gist
         Description = "Update Force Test Report #powershell #chocolatey"
     } } else {}
 }

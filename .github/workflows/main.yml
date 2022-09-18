@@ -76,9 +76,7 @@ jobs:
             $scope = $Matches.Scope -replace ',',' ' -replace '\s+',' '
             $packages, $invalidPackages = ($scope -split ' ').Where({ Test-Path $_ }, 'Split')
             "Scope:"
-            $packages | ForEach-Object {
-              "- $_"
-            }
+            $packages | ForEach-Object { "- $_" }
             "PackageScope=$packages" >> $Env:GITHUB_ENV
             if ($invalidPackages) {
               throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
@@ -97,9 +95,7 @@ jobs:
             $scope = $Env:ManualScope -replace ',',' ' -replace '\s+',' '
             $packages, $invalidPackages = ($scope -split ' ').Where({ Test-Path $_ }, 'Split')
             "Scope:"
-            $packages | ForEach-Object {
-              "- $_"
-            }
+            $packages | ForEach-Object { "- $_" }
             "PackageScope=$packages" >> $Env:GITHUB_ENV
             if ($invalidPackages) {
               throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
@@ -158,8 +154,8 @@ jobs:
           api_key: ${{ secrets.CHOCOLATEY_KEY }}
 
       - name: Publish report
-        if: always() && hashFiles('Update-AUPackages.md', 'Update-Force-Test-*.md')
-        run: Get-Content 'Update-AUPackages.md', 'Update-Force-Test-*.md' -ErrorAction SilentlyContinue >> $Env:GITHUB_STEP_SUMMARY
+        if: always() && hashFiles('Update-AUPackages.md', 'Update-Force-Test*.md')
+        run: Get-Content 'Update-AUPackages.md', 'Update-Force-Test*.md' -ErrorAction SilentlyContinue >> $Env:GITHUB_STEP_SUMMARY
 
       - name: Publish history
         if: always() && hashFiles('Update-History.md')

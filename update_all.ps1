@@ -11,6 +11,8 @@ param(
 if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" }
 $global:au_Root = Resolve-Path $Root
 
+$report_path  = "$PSScriptRoot\Update-AUPackages.md"
+$history_path = "$PSScriptRoot\Update-History.md"
 $gist_token = if ($Env:gist_token) { $Env:gist_token } else { $Env:github_api_key }
 
 $options = [ordered] @{
@@ -52,7 +54,7 @@ $options = [ordered] @{
 
     Report = @{
         Type = 'markdown'                                   # Report type: markdown or text
-        Path = "$PSScriptRoot\Update-AUPackages.md"         # Path where to save the report
+        Path = $report_path                                 # Path where to save the report
         Params = @{                                         # Report parameters:
             Github_UserRepo = $Env:github_user_repo         #   Markdown: shows user info in upper right corner
             NoAppVeyor  = !$GitHubAction                    #   Markdown: do not show AppVeyor build shield
@@ -72,16 +74,13 @@ $options = [ordered] @{
     History = @{
         Lines           = 90                                # Number of lines to show
         Github_UserRepo = $Env:github_user_repo             # User repo to be link to commits
-        Path            = "$PSScriptRoot\Update-History.md" # Path where to save history
+        Path            = $history_path                     # Path where to save history
     }
 
     Gist = if ($Env:au_noGist -ne 'true') { @{
         Id     = $Env:gist_id                               # Your gist id; leave empty for new private or anonymous gist
         ApiKey = $gist_token                                # Your github api key - if empty anoymous gist is created
-        Path   = @(                                         # List of files to add to the gist
-            "$PSScriptRoot\Update-AUPackages.md"
-            "$PSScriptRoot\Update-History.md"
-        )
+        Path   = $report_path, $history_path                # List of files to add to the gist
     } } else {}
 
     Git = @{
