@@ -11,9 +11,6 @@ on:
       packages:
         description: Packages (optional, comma-separated values)
         type: string
-      force:
-        description: Force update (requires packages)
-        type: boolean
 
 env:
   # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
