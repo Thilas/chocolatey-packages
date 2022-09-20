@@ -1,23 +1,12 @@
-name: ${{ (github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test packages') && 'Test' || 'Update' }}
+name: Update
 
 on:
-  pull_request:
-    types: [opened, edited, reopened, synchronize]
-    branches: [ master ] # Automatic test on PR's scope (if any) or all packages
   push:
     branches: [ master ] # Automatic update of all packages
   schedule:
-    - cron: 0 4 * * *    # Daily test of all packages
     - cron: 5 */6 * * *  # Scheduled update of all packages
   workflow_dispatch:     # Manual run
     inputs:
-      type:
-        description: Type of action
-        required: true
-        type: choice
-        options:
-          - Test packages
-          - Update packages
       packages:
         description: Packages (optional, comma-separated values)
         type: string
@@ -28,14 +17,12 @@ on:
 env:
   # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
   au_version: master
-  # Force test: use 1 to test all, or N to split testing into N groups
-  au_test_groups: 1
 
   # Mail settings - for error notifications
-  mail_user: tdemoulins@gmail.com
-  mail_server: smtp.gmail.com
-  mail_port: 587
-  mail_enablessl: true
+  # mail_user: tdemoulins@gmail.com
+  # mail_server: smtp.gmail.com
+  # mail_port: 587
+  # mail_enablessl: true
 
   # ID of the gist used to save run results - create a gist under the github_user (secret or not) and grab the id - https://gist.github.com/name/id
   # Optional, leave empty to create anonymous gist
@@ -46,7 +33,7 @@ env:
 
 jobs:
   build:
-    name: ${{ (github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test packages') && 'Test packages' || 'Update packages' }}
+    name: Update packages
     runs-on: windows-latest
 
     steps:
@@ -65,27 +52,6 @@ jobs:
           $PSVersionTable
           git --version
           "chocolatey version $(choco --version)"
-
-      - name: Determine PR scope
-        if: github.event_name == 'pull_request'
-        run: |
-          # PR title is expected to follow Conventional Commits
-          # If so, packages will be specified in the commit scope
-          if ($Env:PullRequestTitle -match '^\w+\((?<Scope>[^()\r\n]+)\)!?:') {
-            # Handle both comma and space-separated values
-            $scope = $Matches.Scope -replace ',',' ' -replace '\s+',' '
-            $packages, $invalidPackages = ($scope -split ' ').Where({ Test-Path $_ }, 'Split')
-            "Scope:"
-            $packages | ForEach-Object { "- $_" }
-            "PackageScope=$packages" >> $Env:GITHUB_ENV
-            if ($invalidPackages) {
-              throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
-            }
-          } else {
-            "No specific scope, all packages will be processed"
-          }
-        env:
-          PullRequestTitle: ${{ github.event.pull_request.title }}
 
       - name: Determine manual scope
         if: github.event_name == 'workflow_dispatch'
@@ -114,23 +80,7 @@ jobs:
       - name: Install chocolatey-core.extension # required for several packages
         run: cinst chocolatey-core.extension
 
-      - name: Test packages
-        if: github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test packages'
-        run: |
-          $packages = if ($Env:PackageScope) {
-            $Env:PackageScope -split ' '
-          } else {
-            "random $Env:au_test_groups"
-          }
-          ./test_all.ps1 -Name $packages -ThrowOnErrors -GitHubAction
-        env:
-          au_nogist: ${{ github.event_name != 'schedule' }}
-          github_user_repo: ${{ github.repository }}
-          github_api_key: ${{ secrets.GITHUB_TOKEN }}
-          gist_token: ${{ secrets.GIST_TOKEN }}
-
       - name: Update packages
-        if: github.event_name != 'pull_request' && github.event.schedule != '0 4 * * *' && inputs.type != 'Test packages'
         run: |
           $arguments = @{ }
           if ($Env:PackageScope) {
