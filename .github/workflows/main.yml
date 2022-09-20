@@ -1,4 +1,4 @@
-name: CI
+name: ${{ (github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test packages') && 'Test' || 'Update' }}
 
 on:
   pull_request:
@@ -122,7 +122,7 @@ jobs:
           } else {
             "random $Env:au_test_groups"
           }
-          ./test_all.ps1 -Name $packages -ThrowOnErrors
+          ./test_all.ps1 -Name $packages -ThrowOnErrors -GitHubAction
         env:
           au_nogist: ${{ github.event_name != 'schedule' }}
           github_user_repo: ${{ github.repository }}
