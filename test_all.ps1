@@ -63,6 +63,7 @@ $options = [ordered] @{
         'remote session failed with an unexpected state'
         'The connection was closed unexpectedly'
         "Can't validate URL"
+        'Oops, something went wrong'
         'Job returned no object, Vector smash ?'
     )
     RepeatSleep = 60                                        # How much to sleep between repeats in seconds, by default 0
