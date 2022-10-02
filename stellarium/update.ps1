@@ -8,7 +8,7 @@ function global:au_GetLatest {
         -Repository 'Stellarium/stellarium' `
         -FileType 'exe' `
         -IsUri32 { param($Uri) $Uri -match '\bwin32\b' } `
-        -IsUri64 { param($Uri) $Uri -match '\bwin64\b' } `
+        -IsUri64 { param($Uri, $Version) $Uri -match "\b$($Version.Version.Major)\b.*\bwin64\b" } `
         -Latest @{
             SoftwareName   = 'Stellarium *'
             SilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
