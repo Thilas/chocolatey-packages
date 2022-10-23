@@ -5,9 +5,9 @@ $packageArgs = @{
     packageName    = 'serviio'
     softwareName   = 'Serviio'
     fileType       = 'exe'
-    url            = 'https://download.serviio.org/releases/serviio-2.2.1-win-setup.exe'
+    url            = 'https://download.serviio.org/releases/serviio-2.3-win-setup.exe'
     silentArgs     = '/S'
-    checksum       = '1ded8d36e953db9ee9496edba444318649f9071dbe434c6cb386b09dce747621'
+    checksum       = '901bea15f950b6da1b3f188eb7d6a9307d7693c952d1581da14a2f923f802a6d'
     checksumType   = 'sha256'
     validExitCodes = @(0)
 }
