@@ -67,6 +67,7 @@ $options = [ordered] @{
         'Oops, something went wrong'
         'Job returned no object, Vector smash ?'
         "The term 'Write-FunctionCallLogMessage' is not recognized as a name of a cmdlet, function, script file, or executable program"
+        'A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond'
     )
     RepeatSleep = 60                                        # How much to sleep between repeats in seconds, by default 0
     RepeatCount = 2                                         # How many times to repeat on errors, by default 1
