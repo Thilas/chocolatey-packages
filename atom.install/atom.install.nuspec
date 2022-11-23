@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>atom.install</id>
-    <version>1.63.0</version>
+    <version>1.63.1</version>
     <title>Atom (Install)</title>
     <authors>GitHub Inc.</authors>
     <owners>Thilas</owners>
