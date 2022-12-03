@@ -21,9 +21,14 @@ Install-ChocolateyPackage @packageArgs
 $installPath = Get-InstallPath $packageArgs.packageName $packageArgs.softwareName
 
 if ($installPath) {
-    $iniPath = Join-Path $Env:LOCALAPPDATA 'sabnzbd\sabnzbd.ini'
-    & "$installPath\SABnzbd-console.exe" -f $iniPath install
-    Set-Service 'SABnzbd' -StartupType Automatic
-    Write-Host 'Starting service...'
-    Start-Service 'SABnzbd'
+    Write-Host "Installing service from $installPath..."
+    Push-Location $installPath
+    try {
+        $iniPath = Join-Path $Env:LOCALAPPDATA 'sabnzbd\sabnzbd.ini'
+        .\SABnzbd-console.exe -f `"$iniPath`" install
+        Set-Service 'SABnzbd' -StartupType Automatic
+        .\SABnzbd-console.exe start
+    } finally {
+        Pop-Location
+    }
 }

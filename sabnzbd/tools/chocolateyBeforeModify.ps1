@@ -11,12 +11,16 @@ $softwareName = 'SABnzbd*'
 $installPath = Get-InstallPath $packageName $softwareName
 
 if ($installPath) {
-    Write-Host "Stopping services..."
-    Stop-Service '*' -Include 'SABnzbd', 'SABhelper' -Force
-
-    Write-Host 'Uninstalling services...'
-    'SABnzbd-console.exe', 'SABnzbd-service.exe', 'SABnzbd-helper.exe' `
-    | ForEach-Object { Join-Path $installPath $_ } `
-    | Where-Object { Test-Path $_ } `
-    | ForEach-Object { & $_ remove }
+    Write-Host "Uninstalling service from $installPath..."
+    Push-Location $installPath
+    try {
+        'SABnzbd-console.exe', 'SABnzbd-service.exe', 'SABnzbd-helper.exe' `
+        | Where-Object { Test-Path $_ } `
+        | ForEach-Object {
+            & ".\$_" stop
+            & ".\$_" remove
+        }
+    } finally {
+        Pop-Location
+    }
 }
