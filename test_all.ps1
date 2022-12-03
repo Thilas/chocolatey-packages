@@ -1,8 +1,7 @@
 ﻿param(
     [string[]] $Name, # Name can be 'random N' to randomly force the Nth group of packages
     [string] $Root = $PSScriptRoot, # Path to the AU packages
-    [switch] $ThrowOnErrors,
-    [switch] $GitHubAction
+    [switch] $ThrowOnErrors
 )
 
 if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" }
@@ -24,11 +23,7 @@ if ($Name.Length -eq 1 -and $Name[0] -match '^random (.+)') {
 
 $report_path = if ($null -eq $n) { "$PSScriptRoot\Update-Force-Test.md" } else { "$PSScriptRoot\Update-Force-Test-$n.md" }
 
-$buildUrl = if ($GitHubAction) {
-    "https://github.com/Thilas/chocolatey-packages/actions/workflows/main.yml"
-} else {
-    "https://ci.appveyor.com/project/Thilas/chocolatey-packages-ure9y"
-}
+$buildUrl   = "https://github.com/Thilas/chocolatey-packages/actions/workflows/main.yml"
 $gist_token = if ($Env:gist_token) { $Env:gist_token } else { $Env:github_api_key }
 
 $options = [ordered] @{

@@ -92,7 +92,7 @@ jobs:
             }
             $arguments.Force = $true
           }
-          ./update_all.ps1 @arguments -ThrowOnErrors -GitHubAction
+          ./update_all.ps1 @arguments -ThrowOnErrors
         env:
           au_push: true
           au_nogist: ${{ github.event_name != 'schedule' }}
