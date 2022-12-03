@@ -102,6 +102,7 @@ jobs:
           gist_token: ${{ secrets.GIST_TOKEN }}
           mail_pass: ${{ secrets.MAIL_PASS }}
           api_key: ${{ secrets.CHOCOLATEY_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish report
         if: always() && hashFiles('Update-AUPackages.md', 'Update-Force-Test*.md')

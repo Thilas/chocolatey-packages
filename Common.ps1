@@ -260,7 +260,12 @@ function Get-GitHubLatest {
         [scriptblock] $IsUri64, # optional callback, param($Uri, $TagName, $Version)
         [hashtable] $Latest = @{ } # optional
     )
-    $releases = Invoke-RestMethod -Uri "https://api.github.com/repos/$Repository/releases?per_page=10" -UseBasicParsing
+    # If available, send an authenticated request to get a higher rate limit
+    # https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting
+    $headers = if ($Env:GITHUB_TOKEN) { @{
+        Authorization = "Bearer $Env:GITHUB_TOKEN"
+    } }
+    $releases = Invoke-RestMethod -Uri "https://api.github.com/repos/$Repository/releases?per_page=10" -UseBasicParsing -Headers $headers -ResponseHeadersVariable resph
     if ($NoPrerelease) {
         $releases = $releases | Where-Object -Not 'prerelease'
     }
