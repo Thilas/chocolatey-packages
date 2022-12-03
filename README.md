@@ -1,14 +1,14 @@
 Thilas Packages
 ===============
 
-[![Build status](https://ci.appveyor.com/api/projects/status/github/Thilas/chocolatey-packages?svg=true)](https://ci.appveyor.com/project/Thilas/chocolatey-packages)
+[![Update](https://github.com/Thilas/chocolatey-packages/actions/workflows/main.yml/badge.svg)](https://github.com/Thilas/chocolatey-packages/actions/workflows/main.yml)
 [![](http://transparent-favicon.info/favicon.ico)](#)[![](http://transparent-favicon.info/favicon.ico)](#)
 [Update status](https://gist.github.com/Thilas/c09573f2f23bc2aa904d90ff63de2cfe)
 [![](http://transparent-favicon.info/favicon.ico)](#)
 [chocolatey/Thilas](https://chocolatey.org/profiles/Thilas)
 
-This repository contains [chocolatey automatic packages](https://chocolatey.org/docs/automatic-packages).  
-The repository is setup so that you can manage your packages entirely from the GitHub web interface (using AppVeyor to update and push packages) and/or using the local repository copy.
+This repository contains [chocolatey automatic packages](https://chocolatey.org/docs/automatic-packages).
+The repository is setup so that you can manage your packages entirely from the GitHub web interface (using GitHub Actions to update and push packages) and/or using the local repository copy.
 
 ## Reminders
 
@@ -21,8 +21,6 @@ To run locally you will need:
 
 - Powershell 5+: `cinst powershell`.
 - [Chocolatey Automatic Package Updater Module](https://github.com/majkinetor/au): `Install-Module au` or `cinst au`.
-
-In order to setup AppVeyor update runner please take a look at the AU wiki [AppVeyor section](https://github.com/majkinetor/au/wiki/AppVeyor).
 
 ## Create a package
 
@@ -37,11 +35,11 @@ In a package directory run: `Test-Package`. This function can be used to start t
 ### Single package
 
 Run from within the directory of the package to update that package:
-   
+
     cd <package_dir>
     ./update.ps1
 
-If this script is missing, the package is not automatic.  
+If this script is missing, the package is not automatic.
 Set `$au_Force = $true` prior to script call to update the package even if no new version is found.
 
 ### Multiple packages
@@ -82,19 +80,11 @@ You can force the update of all or subset of packages to see how they behave whe
 
 ## Pushing To Community Repository Via Commit Message
 
-You can force package update and push using git commit message. AppVeyor build is set up to pass arguments from the commit message to the `./update_all.ps1` script.
-
-If commit message includes `[AU <forced_packages>]` message on the first line, the `forced_packages` string will be sent to the updater.
-
-Examples:
-- `[AU pkg1 pkg2]`  
-Force update ONLY packages `pkg1` and `pkg2`.
-- `[AU pkg1:ver1 pkg2 non_existent]`  
-Force `pkg1` and use explicit version `ver1`, force `pkg2` and ignore `non_existent`.
+You can force package update and push using GitHub Actions. Just manually run the Update workflow and define package(s) to include.
 
 To see how versions behave when package update is forced see the [force documentation](https://github.com/majkinetor/au/blob/master/README.md#force-update).
 
-You can also push manual packages with command `[PUSH pkg1 ... pkgN]`. This works for any package anywhere in the file hierarchy and will not invoke AU updater at all. 
+You can also push manual packages with command `[PUSH pkg1 ... pkgN]`. This works for any package anywhere in the file hierarchy and will not invoke AU updater at all.
 
 If there are no changes in the repository use `--allow-empty` git parameter:
 

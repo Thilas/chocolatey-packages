@@ -4,8 +4,7 @@ param(
     [switch] $Force,
     [string] $ForcedPackages,
     [string] $Root = $PSScriptRoot, # Path to the AU packages
-    [switch] $ThrowOnErrors,
-    [switch] $GitHubAction
+    [switch] $ThrowOnErrors
 )
 
 if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" }
@@ -64,7 +63,7 @@ $options = [ordered] @{
         Path = $report_path                                 # Path where to save the report
         Params = @{                                         # Report parameters:
             Github_UserRepo = $Env:github_user_repo         #   Markdown: shows user info in upper right corner
-            NoAppVeyor  = !$GitHubAction                    #   Markdown: do not show AppVeyor build shield
+            NoAppVeyor  = $true                             #   Markdown: do not show AppVeyor build shield
             Title       = ''                                #   Markdown, Text: Title of the report, by default 'Update-AUPackages'
             UserMessage = @(                                #   Markdown, Text: Custom user message to show
                 "[Ignored](#ignored)"
