@@ -22,13 +22,17 @@ $installPath = Get-InstallPath $packageArgs.packageName $packageArgs.softwareNam
 
 if ($installPath) {
     Write-Host "Installing service from $installPath..."
-    Push-Location $installPath
-    try {
-        $iniPath = Join-Path $Env:LOCALAPPDATA 'sabnzbd\sabnzbd.ini'
-        .\SABnzbd-console.exe -f `"$iniPath`" install
-        Set-Service 'SABnzbd' -StartupType Automatic
-        .\SABnzbd-console.exe start
-    } finally {
-        Pop-Location
-    }
+
+    # Copy some missing files from pywin32_system32 to avoid a scary warning while installing service
+    Join-Path $installPath 'pywin32_system32' `
+    | Get-ChildItem -File `
+    | Where-Object Name -Match '^(python|pywintypes)\d+\.dll$' `
+    | Where-Object { !(Join-Path $installPath $_.Name | Test-Path) } `
+    | Copy-Item -Destination $installPath
+
+    $exePath = Join-Path $installPath 'SABnzbd-console.exe'
+    $iniPath = Join-Path $Env:LOCALAPPDATA 'sabnzbd\sabnzbd.ini'
+    Start-ChocolateyProcessAsAdmin -WorkingDirectory $installPath -ExeToRun $exePath -Statements "-f `"$iniPath`" install" | Out-Null
+    Set-Service 'SABnzbd' -StartupType Automatic
+    Start-ChocolateyProcessAsAdmin -WorkingDirectory $installPath -ExeToRun $exePath -Statements 'start' | Out-Null
 }

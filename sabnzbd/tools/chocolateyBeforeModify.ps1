@@ -12,15 +12,11 @@ $installPath = Get-InstallPath $packageName $softwareName
 
 if ($installPath) {
     Write-Host "Uninstalling service from $installPath..."
-    Push-Location $installPath
-    try {
-        'SABnzbd-console.exe', 'SABnzbd-service.exe', 'SABnzbd-helper.exe' `
-        | Where-Object { Test-Path $_ } `
-        | ForEach-Object {
-            & ".\$_" stop
-            & ".\$_" remove
-        }
-    } finally {
-        Pop-Location
+    'SABnzbd-console.exe', 'SABnzbd-service.exe', 'SABnzbd-helper.exe' `
+    | ForEach-Object { Join-Path $installPath $_ } `
+    | Where-Object { Test-Path $_ } `
+    | ForEach-Object {
+        Start-ChocolateyProcessAsAdmin -WorkingDirectory $installPath -ExeToRun $_ -Statements 'stop' | Out-Null
+        Start-ChocolateyProcessAsAdmin -WorkingDirectory $installPath -ExeToRun $_ -Statements 'remove' | Out-Null
     }
 }
