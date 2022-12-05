@@ -112,16 +112,33 @@ jobs:
         if: always() && hashFiles('Update-History.md')
         run: Get-Content 'Update-History.md' >> $Env:GITHUB_STEP_SUMMARY
 
-      - name: Upload Info artifact
-        uses: actions/upload-artifact@v3.1.1
-        if: always() && hashFiles('update_info.xml')
-        with:
-          name: Info
-          path: update_info.xml
-
-      - name: Upload Packages artifacts
+      - name: Upload Packages artifact
         uses: actions/upload-artifact@v3.1.1
         if: always() && hashFiles('**/*.nupkg')
         with:
           name: Packages
           path: '**/*.nupkg'
+
+  test:
+    name: Deploy packages
+    runs-on: windows-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Download Packages artifact
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: Packages
+
+      - name: Test packages
+        run: |
+          Get-ChildItem *.nupkg -Recurse | ForEach-Object {
+            "::group::{0}" -f $_.BaseName | Write-Output
+            Write-Output "::group::Install"
+            choco install -y --debug $_.FullName
+            Write-Output "::endgroup::"
+            Write-Output "::group::Uninstall"
+            choco uninstall -y --debug $_.Directory.Name
+            Write-Output "::endgroup::"
+            Write-Output "::endgroup::"
+          }
