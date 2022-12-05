@@ -123,6 +123,7 @@ jobs:
     name: Deploy packages
     runs-on: windows-latest
     if: github.event_name == 'pull_request'
+    needs: build
 
     steps:
       - name: Download Packages artifact
@@ -132,13 +133,18 @@ jobs:
 
       - name: Test packages
         run: |
+          $guid = New-Guid
           Get-ChildItem *.nupkg -Recurse | ForEach-Object {
             "::group::{0}" -f $_.BaseName | Write-Output
             Write-Output "::group::Install"
+            Write-Output "::stop-commands::$guid"
             choco install -y --debug $_.FullName
+            Write-Output "::$guid::"
             Write-Output "::endgroup::"
             Write-Output "::group::Uninstall"
+            Write-Output "::stop-commands::$guid"
             choco uninstall -y --debug $_.Directory.Name
+            Write-Output "::$guid::"
             Write-Output "::endgroup::"
             Write-Output "::endgroup::"
           }
