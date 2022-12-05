@@ -140,18 +140,18 @@ jobs:
             $version = $_.BaseName.Substring($package.Length + 1)
 
             Write-Output "::group::Install $package v$version"
-            Write-Output "::stop-commands::$guid"
+            # Write-Output "::stop-commands::$guid"
             choco install -y --force --debug `"$_.FullName`"
-            Write-Output "::$guid::"
+            # Write-Output "::$guid::"
             Write-Output "::endgroup::"
             if ($LASTEXITCODE) {
               throw "Unable to install $package v$version"
             }
 
             Write-Output "::group::Uninstall $package v$version"
-            Write-Output "::stop-commands::$guid"
+            # Write-Output "::stop-commands::$guid"
             choco uninstall -y --debug `"$package`"
-            Write-Output "::$guid::"
+            # Write-Output "::$guid::"
             Write-Output "::endgroup::"
             if ($LASTEXITCODE) {
               throw "Unable to uninstall $package v$version"
