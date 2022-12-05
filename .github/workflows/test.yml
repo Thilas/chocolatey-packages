@@ -140,6 +140,7 @@ jobs:
             Write-Output "::group::Install $package v$version"
             Write-Output "::stop-commands::$guid"
             choco install -y --debug `"$_.FullName`"
+            cmd /c exit /b 1
             Write-Output "::$guid::"
             Write-Output "::endgroup::"
             Write-Output "::group::Uninstall $package v$version"
