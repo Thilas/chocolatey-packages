@@ -141,7 +141,7 @@ jobs:
 
             Write-Output "::group::Install $package v$version"
             # Write-Output "::stop-commands::$guid"
-            choco install -y --force --debug `"$_.FullName`"
+            choco install -y --force --debug `"$_`"
             # Write-Output "::$guid::"
             Write-Output "::endgroup::"
             if ($LASTEXITCODE) {
