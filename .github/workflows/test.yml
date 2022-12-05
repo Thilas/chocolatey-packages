@@ -135,16 +135,16 @@ jobs:
         run: |
           $guid = New-Guid
           Get-ChildItem *.nupkg -Recurse | ForEach-Object {
-            "::group::{0}" -f $_.BaseName | Write-Output
-            Write-Output "::group::Install"
+            $package = $_.Directory.Name
+            $version = $_.FullName.Substring($package.Length + 1)
+            Write-Output "::group::Install $package v$version"
             Write-Output "::stop-commands::$guid"
-            choco install -y --debug $_.FullName
+            choco install -y --debug `"$_.FullName`"
             Write-Output "::$guid::"
             Write-Output "::endgroup::"
-            Write-Output "::group::Uninstall"
+            Write-Output "::group::Uninstall $package v$version"
             Write-Output "::stop-commands::$guid"
-            choco uninstall -y --debug $_.Directory.Name
+            choco uninstall -y --debug `"$package`"
             Write-Output "::$guid::"
-            Write-Output "::endgroup::"
             Write-Output "::endgroup::"
           }
