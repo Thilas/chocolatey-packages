@@ -97,8 +97,10 @@ jobs:
           } else {
             "random $Env:au_test_groups"
           }
-          $updates = ./test_all.ps1 -Name $packages -ThrowOnErrors -PassThru -UpdatesOnly
-          $output = $updates | ForEach-Object { $_ | ConvertTo-Json -Compress } | ConvertTo-Json -Compress
+          $updates = ./test_all.ps1 -Name $packages -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
+            $_ | ConvertTo-Json -Compress
+          }
+          $output = ConvertTo-Json $updates -Compress
           Write-Output "::set-output name=updates::$output"
         env:
           au_nogist: ${{ github.event_name != 'schedule' }}
