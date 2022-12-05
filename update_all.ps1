@@ -4,10 +4,11 @@ param(
     [switch] $Force,
     [string] $ForcedPackages,
     [string] $Root = $PSScriptRoot, # Path to the AU packages
-    [switch] $ThrowOnErrors
+    [switch] $ThrowOnErrors,
+    [switch] $PassThru
 )
 
-if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" }
+if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" | Out-Null }
 $global:au_Root = Resolve-Path $Root
 
 $report_path  = "$PSScriptRoot\Update-AUPackages.md"
@@ -134,8 +135,12 @@ $options = [ordered] @{
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
 
 if ($ForcedPackages) { Write-Host "FORCED PACKAGES: $ForcedPackages" }
-$global:info = Update-AuPackages -Name $Name -Options $options
+$info = Update-AuPackages -Name $Name -Options $options
 
-if ($ThrowOnErrors -and ($global:info | Where-Object Error)) {
+if ($ThrowOnErrors -and ($info | Where-Object Error)) {
     Write-Error 'Errors during update'
+}
+
+if ($PassThru) {
+    return $info
 }

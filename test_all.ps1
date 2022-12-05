@@ -1,10 +1,11 @@
 ﻿param(
     [string[]] $Name, # Name can be 'random N' to randomly force the Nth group of packages
     [string] $Root = $PSScriptRoot, # Path to the AU packages
-    [switch] $ThrowOnErrors
+    [switch] $ThrowOnErrors,
+    [switch] $PassThru
 )
 
-if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" }
+if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" | Out-Null }
 $global:au_Root = Resolve-Path $Root
 
 if ($Name.Length -eq 1 -and $Name[0] -match '^random (.+)') {
@@ -96,8 +97,12 @@ $options = [ordered] @{
 # Enable TLS1.2
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
 
-$global:info = Update-AuPackages -Name $Name -Options $options
+$info = Update-AuPackages -Name $Name -Options $options
 
-if ($ThrowOnErrors -and ($global:info | Where-Object Error)) {
+if ($ThrowOnErrors -and ($info | Where-Object Error)) {
     Write-Error 'Errors during test'
+}
+
+if ($PassThru) {
+    return $info
 }

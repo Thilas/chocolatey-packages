@@ -90,13 +90,19 @@ jobs:
         run: cinst chocolatey-core.extension
 
       - name: Test packages
+        id: packages
         run: |
           $packages = if ($Env:PackageScope) {
             $Env:PackageScope -split ' '
           } else {
             "random $Env:au_test_groups"
           }
-          ./test_all.ps1 -Name $packages -ThrowOnErrors
+          $info = ./test_all.ps1 -Name $packages -ThrowOnErrors -PassThru
+          $updates = $info | Where-Object Updated | ForEach-Object { [ordered] @{
+            name    = $_.Name
+            version = $_.RemoteVersion
+          } } | ConvertTo-Json -Compress
+          Write-Output "::set-output name=updates::$updates"
         env:
           au_nogist: ${{ github.event_name != 'schedule' }}
           github_user_repo: ${{ github.repository }}
@@ -119,11 +125,23 @@ jobs:
           name: Packages
           path: '**/*.nupkg'
 
+    outputs:
+      updates: ${{ steps.packages.outputs.updates }}
+
   test:
-    name: Deploy packages
-    runs-on: windows-latest
     if: github.event_name == 'pull_request'
     needs: build
+
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJson(needs.build.outputs.updates) }}
+        runs-on:
+          - windows-2019
+          - windows-2022
+
+    name: Deploy ${{ matrix.package.name }} v${{ matrix.package.version }} on ${{ matrix.runs-on }}
+    runs-on: ${{ matrix.runs-on }}
 
     steps:
       - name: Download Packages artifact
@@ -131,17 +149,20 @@ jobs:
         with:
           name: Packages
 
-      - name: Test packages
+      - name: Test package
         run: |
-          # Test packages
+          # Test package
           $guid = New-Guid
-          Get-ChildItem *.nupkg -Recurse | ForEach-Object {
-            $package = $_.Directory.Name
-            $version = $_.BaseName.Substring($package.Length + 1)
+          # Get-ChildItem *.nupkg -Recurse | ForEach-Object {
+            # $package = $_.Directory.Name
+            # $version = $_.BaseName.Substring($package.Length + 1)
+            $package = $Env:PackageName
+            $version = $Env:PackageVersion
 
             Write-Output "::group::Install $package v$version"
             # Write-Output "::stop-commands::$guid"
-            choco install -y --force --debug `"$_`"
+            # choco install -y --force --debug `"$_`"
+            choco install -y --force --debug `"$Env:NupkgPath`"
             # Write-Output "::$guid::"
             Write-Output "::endgroup::"
             if ($LASTEXITCODE) {
@@ -156,4 +177,8 @@ jobs:
             if ($LASTEXITCODE) {
               throw "Unable to uninstall $package v$version"
             }
-          }
+          # }
+        env:
+          PackageName: ${{ matrix.package.name }}
+          PackageVersion: ${{ matrix.package.version }}
+          NupkgPath: ${{ matrix.package.name }}/${{ matrix.package.name }}.${{ matrix.package.version }}.nupkg
