@@ -133,19 +133,27 @@ jobs:
 
       - name: Test packages
         run: |
+          # Test packages
           $guid = New-Guid
           Get-ChildItem *.nupkg -Recurse | ForEach-Object {
             $package = $_.Directory.Name
-            $version = $_.FullName.Substring($package.Length + 1)
+            $version = $_.BaseName.Substring($package.Length + 1)
+
             Write-Output "::group::Install $package v$version"
             Write-Output "::stop-commands::$guid"
-            choco install -y --debug `"$_.FullName`"
-            cmd /c exit /b 1
+            choco install -y --force --debug `"$_.FullName`"
             Write-Output "::$guid::"
             Write-Output "::endgroup::"
+            if ($LASTEXITCODE) {
+              throw "Unable to install $package v$version"
+            }
+
             Write-Output "::group::Uninstall $package v$version"
             Write-Output "::stop-commands::$guid"
             choco uninstall -y --debug `"$package`"
             Write-Output "::$guid::"
             Write-Output "::endgroup::"
+            if ($LASTEXITCODE) {
+              throw "Unable to uninstall $package v$version"
+            }
           }
