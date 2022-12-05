@@ -2,7 +2,8 @@
     [string[]] $Name, # Name can be 'random N' to randomly force the Nth group of packages
     [string] $Root = $PSScriptRoot, # Path to the AU packages
     [switch] $ThrowOnErrors,
-    [switch] $PassThru
+    [switch] $PassThru,
+    [switch] $UpdatesOnly
 )
 
 if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" | Out-Null }
@@ -104,5 +105,22 @@ if ($ThrowOnErrors -and ($info | Where-Object Error)) {
 }
 
 if ($PassThru) {
-    return $info
+    if ($UpdatesOnly) {
+        $updates = $info | Where-Object Updated | ForEach-Object {
+            if ($_.Streams) {
+                $_.Streams.Values | Where-Object Updated | ForEach-Object { [pscustomobject] @{
+                    name    = $_.Name
+                    version = $_.RemoteVersion
+                } }
+            } else {
+                $_ | ForEach-Object { [pscustomobject] @{
+                    name    = $_.Name
+                    version = $_.RemoteVersion
+                } }
+            }
+        }
+        return $updates
+    } else {
+        return $info
+    }
 }

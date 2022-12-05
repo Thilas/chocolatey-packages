@@ -97,12 +97,9 @@ jobs:
           } else {
             "random $Env:au_test_groups"
           }
-          $info = ./test_all.ps1 -Name $packages -ThrowOnErrors -PassThru
-          $updates = $info | Where-Object Updated | ForEach-Object { [ordered] @{
-            name    = $_.Name
-            version = $_.RemoteVersion
-          } } | ConvertTo-Json -Compress
-          Write-Output "::set-output name=updates::$updates"
+          $updates = ./test_all.ps1 -Name $packages -ThrowOnErrors -PassThru -UpdatesOnly
+          $output = $updates | ForEach-Object { $_ | ConvertTo-Json -Compress } | ConvertTo-Json -Compress
+          Write-Output "::set-output name=updates::$output"
         env:
           au_nogist: ${{ github.event_name != 'schedule' }}
           github_user_repo: ${{ github.repository }}
@@ -140,7 +137,7 @@ jobs:
           - windows-2019
           - windows-2022
 
-    name: Deploy ${{ matrix.package.name }} v${{ matrix.package.version }} on ${{ matrix.runs-on }}
+    name: Deploy ${{ fromJson(matrix.package).name }} v${{ fromJson(matrix.package).version }} on ${{ matrix.runs-on }}
     runs-on: ${{ matrix.runs-on }}
 
     steps:
@@ -179,6 +176,6 @@ jobs:
             }
           # }
         env:
-          PackageName: ${{ matrix.package.name }}
-          PackageVersion: ${{ matrix.package.version }}
-          NupkgPath: ${{ matrix.package.name }}/${{ matrix.package.name }}.${{ matrix.package.version }}.nupkg
+          PackageName: ${{ fromJson(matrix.package).name }}
+          PackageVersion: ${{ fromJson(matrix.package).version }}
+          NupkgPath: ${{ fromJson(matrix.package).name }}/${{ fromJson(matrix.package).name }}.${{ fromJson(matrix.package).version }}.nupkg
