@@ -5,7 +5,7 @@ param([switch] $Force)
 
 function global:au_GetLatest {
     # HTTPS doesn't work as of today
-    $url = 'http://www.ltr-data.se/opencodea.html'
+    $url = 'http://www.ltr-data.se/opencode.html'
     try {
         Invoke-WebRequest -Uri $url -UseBasicParsing -Method Head | Out-Null
     } catch {

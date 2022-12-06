@@ -153,7 +153,10 @@ jobs:
         with:
           name: Packages
 
-      - name: Clean environment
+      - name: Show context
+        run: choco list --local
+
+      - name: Clean context
         run: choco uninstall -y --debug `"$Env:PackageName`"
 
       - name: Install package
