@@ -14,7 +14,7 @@ on:
 
 jobs:
   build:
-    name: Force update packages
+    name: Test package updates
     runs-on: windows-latest
 
     env:
@@ -89,8 +89,8 @@ jobs:
       - name: Install chocolatey-core.extension # required for several packages
         run: cinst chocolatey-core.extension
 
-      - name: Test packages
-        id: packages
+      - name: Test package updates
+        id: updates
         run: |
           $packages = if ($Env:PackageScope) {
             $Env:PackageScope -split ' '
@@ -102,7 +102,7 @@ jobs:
           }
           $output = ConvertTo-Json $updates -Compress
           Write-Output "Updates = $output"
-          "updates=$output" >> $Env:GITHUB_OUTPUT
+          "result=$output" >> $Env:GITHUB_OUTPUT
         env:
           au_nogist: ${{ github.event_name != 'schedule' }}
           github_user_repo: ${{ github.repository }}
@@ -126,7 +126,7 @@ jobs:
           path: '**/*.nupkg'
 
     outputs:
-      updates: ${{ steps.packages.outputs.updates }}
+      updates: ${{ steps.updates.outputs.result }}
 
   test:
     if: github.event_name == 'pull_request'
@@ -144,8 +144,8 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      package_name: ${{ fromJSON(matrix.package).name }}
-      package_version: ${{ fromJSON(matrix.package).version }}
+      PackageName: ${{ fromJSON(matrix.package).name }}
+      PackageVersion: ${{ fromJSON(matrix.package).version }}
 
     steps:
       - name: Download Packages artifact
@@ -153,36 +153,10 @@ jobs:
         with:
           name: Packages
 
-      - name: Test package
-        run: |
-          # Test package
-          $guid = New-Guid
-          # Get-ChildItem *.nupkg -Recurse | ForEach-Object {
-            # $package = $_.Directory.Name
-            # $version = $_.BaseName.Substring($package.Length + 1)
-            $package = $Env:PackageName
-            $version = $Env:PackageVersion
-
-            Write-Output "::group::Install $package v$version"
-            # Write-Output "::stop-commands::$guid"
-            # choco install -y --force --debug `"$_`"
-            choco install -y --force --debug `"$Env:NupkgPath`"
-            # Write-Output "::$guid::"
-            Write-Output "::endgroup::"
-            if ($LASTEXITCODE) {
-              throw "Unable to install $package v$version"
-            }
-
-            Write-Output "::group::Uninstall $package v$version"
-            # Write-Output "::stop-commands::$guid"
-            choco uninstall -y --debug `"$package`"
-            # Write-Output "::$guid::"
-            Write-Output "::endgroup::"
-            if ($LASTEXITCODE) {
-              throw "Unable to uninstall $package v$version"
-            }
-          # }
+      - name: Install package
+        run: choco install -y --force --debug `"$Env:NupkgPath`"
         env:
-          PackageName: ${{ env.package_name }}
-          PackageVersion: ${{ env.package_version }}
-          NupkgPath: ${{ env.package_name }}/${{ env.package_name }}.${{ env.package_version }}.nupkg
+          NupkgPath: ${{ env.PackageName }}/${{ env.PackageName }}.${{ env.PackageVersion }}.nupkg
+
+      - name: Uninstall package
+        run: choco uninstall -y --debug `"$Env:PackageName`"
