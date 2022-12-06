@@ -140,7 +140,7 @@ jobs:
           - windows-2019
           - windows-2022
 
-    name: Deploy ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
+    name: Test ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
     env:
@@ -154,9 +154,8 @@ jobs:
           name: Packages
 
       - name: Install package
-        run: choco install -y --force --debug `"$Env:NupkgPath`"
-        env:
-          NupkgPath: ${{ env.PackageName }}/${{ env.PackageName }}.${{ env.PackageVersion }}.nupkg
+        run: choco install -y --debug `"$Env:PackageName`" --version `"$Env:PackageVersion`" --force --source .
+        working-directory: ${{ env.PackageName }}
 
       - name: Uninstall package
         run: choco uninstall -y --debug `"$Env:PackageName`"
