@@ -14,27 +14,27 @@ on:
         description: Force update (requires packages)
         type: boolean
 
-env:
-  # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
-  au_version: master
-
-  # Mail settings - for error notifications
-  # mail_user: tdemoulins@gmail.com
-  # mail_server: smtp.gmail.com
-  # mail_port: 587
-  # mail_enablessl: true
-
-  # ID of the gist used to save run results - create a gist under the github_user (secret or not) and grab the id - https://gist.github.com/name/id
-  # Optional, leave empty to create anonymous gist
-  gist_id: c09573f2f23bc2aa904d90ff63de2cfe
-
-  # Force test: gist id for test results
-  gist_id_test: 83dd81cb41ebc10ef87ee50b168aca3f
-
 jobs:
   build:
     name: Update packages
     runs-on: windows-latest
+
+    env:
+      # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
+      au_version: master
+
+      # Mail settings - for error notifications
+      # mail_user: tdemoulins@gmail.com
+      # mail_server: smtp.gmail.com
+      # mail_port: 587
+      # mail_enablessl: true
+
+      # ID of the gist used to save run results - create a gist under the github_user (secret or not) and grab the id - https://gist.github.com/name/id
+      # Optional, leave empty to create anonymous gist
+      gist_id: c09573f2f23bc2aa904d90ff63de2cfe
+
+      # Force test: gist id for test results
+      gist_id_test: 83dd81cb41ebc10ef87ee50b168aca3f
 
     steps:
       - name: Set up git
