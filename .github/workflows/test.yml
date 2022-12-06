@@ -140,7 +140,7 @@ jobs:
           - windows-2019
           - windows-2022
 
-    name: Deploy ${{ env.package_name }} v${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
+    name: Deploy ${{ fromJSON(matrix.package).name }} v${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
     env:
