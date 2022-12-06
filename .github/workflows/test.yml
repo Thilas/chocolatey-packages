@@ -102,7 +102,7 @@ jobs:
           }
           $output = ConvertTo-Json $updates -Compress
           $output
-          "name=updates::$output" >> $GITHUB_OUTPUT
+          "updates=$output" >> $GITHUB_OUTPUT
         env:
           au_nogist: ${{ github.event_name != 'schedule' }}
           github_user_repo: ${{ github.repository }}
