@@ -135,12 +135,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # package: ${{ fromJson(needs.build.outputs.updates) }}
+        # package: ${{ fromJSON(needs.build.outputs.updates) }}
         os:
           - windows-2019
           - windows-2022
 
-    # name: Deploy ${{ fromJson(matrix.package).name }} v${{ fromJson(matrix.package).version }} on ${{ matrix.os }}
+    # name: Deploy ${{ fromJSON(matrix.package).name }} v${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
     name: Deploy on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
@@ -182,7 +182,7 @@ jobs:
             }
           # }
         env:
-          Updates: ${{ needs.build.outputs.updates }}
-          # PackageName: ${{ fromJson(matrix.package).name }}
-          # PackageVersion: ${{ fromJson(matrix.package).version }}
-          # NupkgPath: ${{ fromJson(matrix.package).name }}/${{ fromJson(matrix.package).name }}.${{ fromJson(matrix.package).version }}.nupkg
+          Updates: -${{ toJSON(needs.build.outputs.updates) }}-
+          # PackageName: ${{ fromJSON(matrix.package).name }}
+          # PackageVersion: ${{ fromJSON(matrix.package).version }}
+          # NupkgPath: ${{ fromJSON(matrix.package).name }}/${{ fromJSON(matrix.package).name }}.${{ fromJSON(matrix.package).version }}.nupkg
