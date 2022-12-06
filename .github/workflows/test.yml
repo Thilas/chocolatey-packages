@@ -100,7 +100,8 @@ jobs:
           [array] $updates = ./test_all.ps1 -Name $packages -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
             $_ | ConvertTo-Json -Compress
           }
-          $output = ConvertTo-Json @($updates) -Compress
+          $output = ConvertTo-Json $updates -Compress
+          $output
           "name=updates::$output" >> $GITHUB_OUTPUT
         env:
           au_nogist: ${{ github.event_name != 'schedule' }}
