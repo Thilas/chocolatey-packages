@@ -101,7 +101,7 @@ jobs:
             $_ | ConvertTo-Json -Compress
           }
           $output = ConvertTo-Json $updates -Compress
-          Write-Output "Updates = `"$output`""
+          Write-Output "Updates = $output"
           "updates=$output" >> $Env:GITHUB_OUTPUT
         env:
           au_nogist: ${{ github.event_name != 'schedule' }}
@@ -135,25 +135,26 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # package: ${{ fromJSON(needs.build.outputs.updates) }}
+        package: ${{ fromJSON(needs.build.outputs.updates) }}
         os:
           - windows-2019
           - windows-2022
 
-    # name: Deploy ${{ fromJSON(matrix.package).name }} v${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
-    name: Deploy on ${{ matrix.os }}
+    name: Deploy ${{ env.package_name }} v${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
+    env:
+      package_name: ${{ fromJSON(matrix.package).name }}
+      package_version: ${{ fromJSON(matrix.version).name }}
+
     steps:
-      # - name: Download Packages artifact
-      #   uses: actions/download-artifact@v3.0.1
-      #   with:
-      #     name: Packages
+      - name: Download Packages artifact
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: Packages
 
       - name: Test package
         run: |
-          Write-Output "Updates = `"$Env:Updates`""
-          return
           # Test package
           $guid = New-Guid
           # Get-ChildItem *.nupkg -Recurse | ForEach-Object {
@@ -182,7 +183,6 @@ jobs:
             }
           # }
         env:
-          Updates: -${{ toJSON(needs.build.outputs.updates) }}-
-          # PackageName: ${{ fromJSON(matrix.package).name }}
-          # PackageVersion: ${{ fromJSON(matrix.package).version }}
-          # NupkgPath: ${{ fromJSON(matrix.package).name }}/${{ fromJSON(matrix.package).name }}.${{ fromJSON(matrix.package).version }}.nupkg
+          PackageName: ${{ env.package_name }}
+          PackageVersion: ${{ env.package_version }}
+          NupkgPath: ${{ env.package_name }}/${{ env.package_name }}.${{ env.package_version }}.nupkg
