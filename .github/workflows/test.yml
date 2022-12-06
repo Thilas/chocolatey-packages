@@ -153,15 +153,20 @@ jobs:
         with:
           name: Packages
 
-      - name: Show context
-        run: choco list --local
-
       - name: Clean context
-        run: choco uninstall -y --debug `"$Env:PackageName`"
+        run: |
+          choco list --local
+          if (choco list -r --local `"$Env:PackageName`") {
+            choco uninstall -y `"$Env:PackageName`"
+          }
 
       - name: Install package
-        run: choco install -y --debug `"$Env:PackageName`" --version `"$Env:PackageVersion`" --force --source .
+        run: |
+          choco install -y `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source . --force --verbose
+          if ($LASTEXITCODE -in 0, 1641, 3010) { exit 0 }
         working-directory: ${{ env.PackageName }}
 
       - name: Uninstall package
-        run: choco uninstall -y --debug `"$Env:PackageName`"
+        run: |
+          choco uninstall -y `"$Env:PackageName`" --verbose
+          if ($LASTEXITCODE -in 0, 1605, 1614, 1641, 3010) { exit 0 }
