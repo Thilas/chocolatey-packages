@@ -100,8 +100,8 @@ jobs:
           [array] $updates = ./test_all.ps1 -Name $packages -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
             $_ | ConvertTo-Json -Compress
           }
-          $output = ConvertTo-Json $updates -Compress
-          $output
+          $output = ConvertTo-Json $jsonUpdates -Compress
+          Write-Output "Updates = `"$output`""
           "updates=$output" >> $GITHUB_OUTPUT
         env:
           au_nogist: ${{ github.event_name != 'schedule' }}
@@ -135,22 +135,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: ${{ fromJson(needs.build.outputs.updates) }}
-        runs-on:
+        # package: ${{ fromJson(needs.build.outputs.updates) }}
+        os:
           - windows-2019
           - windows-2022
 
-    name: Deploy ${{ fromJson(matrix.package).name }} v${{ fromJson(matrix.package).version }} on ${{ matrix.runs-on }}
-    runs-on: ${{ matrix.runs-on }}
+    # name: Deploy ${{ fromJson(matrix.package).name }} v${{ fromJson(matrix.package).version }} on ${{ matrix.os }}
+    name: Deploy on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Download Packages artifact
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: Packages
+      # - name: Download Packages artifact
+      #   uses: actions/download-artifact@v3.0.1
+      #   with:
+      #     name: Packages
 
       - name: Test package
         run: |
+          Write-Output "Updates = `"$Env:Updates`""
+          return
           # Test package
           $guid = New-Guid
           # Get-ChildItem *.nupkg -Recurse | ForEach-Object {
@@ -179,6 +182,7 @@ jobs:
             }
           # }
         env:
-          PackageName: ${{ fromJson(matrix.package).name }}
-          PackageVersion: ${{ fromJson(matrix.package).version }}
-          NupkgPath: ${{ fromJson(matrix.package).name }}/${{ fromJson(matrix.package).name }}.${{ fromJson(matrix.package).version }}.nupkg
+          Updates: ${{ needs.build.outputs.updates }}
+          # PackageName: ${{ fromJson(matrix.package).name }}
+          # PackageVersion: ${{ fromJson(matrix.package).version }}
+          # NupkgPath: ${{ fromJson(matrix.package).name }}/${{ fromJson(matrix.package).name }}.${{ fromJson(matrix.package).version }}.nupkg
