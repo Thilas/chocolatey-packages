@@ -81,7 +81,11 @@ jobs:
           ManualScope: ${{ inputs.packages }}
 
       - name: Upgrade chocolatey
-        run: choco upgrade chocolatey --no-progress
+        run: |
+          choco feature
+          choco feature enable -n=allowGlobalConfirmation -n=logWithoutColor
+          choco feature disable -n=showDownloadProgress
+          choco upgrade chocolatey
 
       - name: Install AU
         run: |
@@ -151,13 +155,16 @@ jobs:
 
     steps:
       - name: Upgrade chocolatey
-        run: choco upgrade chocolatey --no-progress
+        run: |
+          choco feature
+          choco feature enable -n=allowGlobalConfirmation -n=logWithoutColor
+          choco feature disable -n=showDownloadProgress
+          choco upgrade chocolatey
 
       - name: Clean context
         run: |
-          choco list --local
           if (choco list -r --local `"$Env:PackageName`") {
-            choco uninstall -y `"$Env:PackageName`"
+            choco uninstall `"$Env:PackageName`"
           }
 
       - name: Download Packages artifact
@@ -167,26 +174,26 @@ jobs:
 
       - name: Install package
         run: |
-          choco install -y `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source . --force --debug --no-progress
+          choco install `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source . --force --debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
         working-directory: ${{ env.PackageName }}
 
-      - name: Build Install artifact
+      - name: Determine package information path
         run: |
           $path = Join-Path $Env:ChocolateyInstall ".chocolatey/$Env:PackageName.$Env:PackageVersion"
           $path = $path -replace '\\', '/'
           "InstallArtifact=$path" >> $Env:GITHUB_ENV
 
-      - name: Upload Install artifact
+      - name: Upload Information artifact
         uses: actions/upload-artifact@v3.1.1
         if: hashFiles(format('{0}/.files', env.InstallArtifact), format('{0}/.registry', env.InstallArtifact))
         with:
-          name: Install ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
+          name: Information ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
           path: |
             ${{ env.InstallArtifact }}/.files
             ${{ env.InstallArtifact }}/.registry
 
       - name: Uninstall package
         run: |
-          choco uninstall -y `"$Env:PackageName`" --debug
+          choco uninstall `"$Env:PackageName`" --debug
           if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
