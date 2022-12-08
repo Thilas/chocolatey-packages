@@ -82,8 +82,7 @@ jobs:
 
       - name: Upgrade chocolatey
         run: |
-          choco feature
-          choco feature enable -n=allowGlobalConfirmation -n=logWithoutColor
+          choco feature enable -n=allowGlobalConfirmation
           choco feature disable -n=showDownloadProgress
           choco upgrade chocolatey
 
@@ -156,8 +155,7 @@ jobs:
     steps:
       - name: Upgrade chocolatey
         run: |
-          choco feature
-          choco feature enable -n=allowGlobalConfirmation -n=logWithoutColor
+          choco feature enable -n=allowGlobalConfirmation
           choco feature disable -n=showDownloadProgress
           choco upgrade chocolatey
 
@@ -180,8 +178,11 @@ jobs:
 
       - name: Determine package information path
         run: |
+          Get-ChildItem "$Env:ChocolateyInstall\.chocolatey"
           $path = Join-Path $Env:ChocolateyInstall ".chocolatey/$Env:PackageName.$Env:PackageVersion"
           $path = $path -replace '\\', '/'
+          "Path:"
+          Get-ChildItem $path
           "InstallArtifact=$path" >> $Env:GITHUB_ENV
 
       - name: Upload Information artifact
