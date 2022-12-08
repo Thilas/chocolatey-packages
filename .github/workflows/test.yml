@@ -36,13 +36,9 @@ jobs:
 
       - name: Show context
         run: |
-          "11111: $Env:tttttt"
-          "22222: $Env:ChocolateyInstall"
           Get-CimInstance Win32_OperatingSystem -Property Caption, OSArchitecture, Version | Format-List Caption, OSArchitecture, Version
           $PSVersionTable
           git --version
-        env:
-          tttttt: ${{ env.ChocolateyInstall }}
 
       - name: Determine PR scope
         if: github.event_name == 'pull_request'
@@ -85,7 +81,7 @@ jobs:
           ManualScope: ${{ inputs.packages }}
 
       - name: Upgrade chocolatey
-        run: choco upgrade chocolatey
+        run: choco upgrade chocolatey --no-progress
 
       - name: Install AU
         run: |
@@ -144,7 +140,7 @@ jobs:
         package: ${{ fromJSON(needs.build.outputs.updates) }}
         os:
           - windows-2019
-          - windows-2022
+          # - windows-2022
 
     name: Test ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -155,7 +151,7 @@ jobs:
 
     steps:
       - name: Upgrade chocolatey
-        run: choco upgrade chocolatey
+        run: choco upgrade chocolatey --no-progress
 
       - name: Clean context
         run: |
@@ -171,16 +167,24 @@ jobs:
 
       - name: Install package
         run: |
-          choco install -y `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source . --force --debug
+          choco install -y `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source . --force --debug --no-progress
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
         working-directory: ${{ env.PackageName }}
 
-      # - name: Upload XXX artifact
-      #   uses: actions/upload-artifact@v3.1.1
-      #   if: always() && hashFiles('**/*.nupkg')
-      #   with:
-      #     name: Packages
-      #     path:
+      - name: Build Install artifact
+        run: |
+          $path = Join-Path $Env:ChocolateyInstall ".chocolatey/$Env:PackageName.$Env:PackageVersion"
+          $path = $path -replace '\\', '/'
+          "InstallArtifact=$path" >> $Env:GITHUB_ENV
+
+      - name: Upload Install artifact
+        uses: actions/upload-artifact@v3.1.1
+        if: hashFiles(format('{0}/.files', env.InstallArtifact), format('{0}/.registry', env.InstallArtifact))
+        with:
+          name: Install ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
+          path: |
+            ${{ env.InstallArtifact }}/.files
+            ${{ env.InstallArtifact }}/.registry
 
       - name: Uninstall package
         run: |
