@@ -36,10 +36,13 @@ jobs:
 
       - name: Show context
         run: |
+          "11111: $Env:tttttt"
+          "22222: $Env:ChocolateyInstall"
           Get-CimInstance Win32_OperatingSystem -Property Caption, OSArchitecture, Version | Format-List Caption, OSArchitecture, Version
           $PSVersionTable
           git --version
-          "chocolatey version $(choco --version)"
+        env:
+          tttttt: ${{ env.ChocolateyInstall }}
 
       - name: Determine PR scope
         if: github.event_name == 'pull_request'
@@ -80,6 +83,9 @@ jobs:
           }
         env:
           ManualScope: ${{ inputs.packages }}
+
+      - name: Upgrade chocolatey
+        run: choco upgrade chocolatey
 
       - name: Install AU
         run: |
@@ -148,10 +154,8 @@ jobs:
       PackageVersion: ${{ fromJSON(matrix.package).version }}
 
     steps:
-      - name: Download Packages artifact
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: Packages
+      - name: Upgrade chocolatey
+        run: choco upgrade chocolatey
 
       - name: Clean context
         run: |
@@ -160,13 +164,25 @@ jobs:
             choco uninstall -y `"$Env:PackageName`"
           }
 
+      - name: Download Packages artifact
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: Packages
+
       - name: Install package
         run: |
-          choco install -y `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source . --force --verbose
-          if ($LASTEXITCODE -in 0, 1641, 3010) { exit 0 }
+          choco install -y `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source . --force --debug
+          if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
         working-directory: ${{ env.PackageName }}
+
+      # - name: Upload XXX artifact
+      #   uses: actions/upload-artifact@v3.1.1
+      #   if: always() && hashFiles('**/*.nupkg')
+      #   with:
+      #     name: Packages
+      #     path:
 
       - name: Uninstall package
         run: |
-          choco uninstall -y `"$Env:PackageName`" --verbose
-          if ($LASTEXITCODE -in 0, 1605, 1614, 1641, 3010) { exit 0 }
+          choco uninstall -y `"$Env:PackageName`" --debug
+          if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
