@@ -88,7 +88,6 @@ jobs:
         run: cinst chocolatey-core.extension
 
       - name: Test package updates
-        id: updates
         run: |
           $packages = if ($Env:PackageScope) {
             $Env:PackageScope -split ' '
@@ -98,9 +97,9 @@ jobs:
           [array] $updates = ./test_all.ps1 -Name $packages -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
             $_ | ConvertTo-Json -Compress
           }
-          $output = ConvertTo-Json $updates -Compress
-          Write-Output "Updates = $output"
-          "result=$output" >> $Env:GITHUB_OUTPUT
+          $updates = ConvertTo-Json $updates -Compress
+          "Updates = $updates"
+          "Updates=$updates" >> $Env:GITHUB_ENV
         env:
           au_nogist: ${{ github.event_name != 'schedule' }}
           github_user_repo: ${{ github.repository }}
@@ -124,7 +123,7 @@ jobs:
           path: '**/*.nupkg'
 
     outputs:
-      updates: ${{ steps.updates.outputs.result }}
+      updates: ${{ env.Updates }}
 
   test:
     if: github.event_name == 'pull_request'
@@ -172,36 +171,14 @@ jobs:
         run: |
           $path = Join-Path $Env:ChocolateyInstall ".chocolatey/$Env:PackageName.$Env:PackageVersion"
           $path = $path -replace '\\', '/'
-          "Path:"
           Get-ChildItem $path
-          "FilesInformationPath=$path/.files" >> $Env:GITHUB_ENV
-          "RegistryInformationPath=$path/.registry" >> $Env:GITHUB_ENV
-
-      - name: Debug
-        run: |
-          Get-ChildItem $Env:ttt111 -ErrorAction SilentlyContinue
-          Get-ChildItem $Env:ttt222 -ErrorAction SilentlyContinue
-        env:
-          ttt111: ${{ env.FilesInformationPath }}
-          ttt222: ${{ env.RegistryInformationPath }}
+          "InformationPath=$path" >> $Env:GITHUB_ENV
 
       - name: Upload Information artifact
         uses: actions/upload-artifact@v3.1.1
-        # if: hashFiles(env.FilesInformationPath, env.RegistryInformationPath)
         with:
           name: Information ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
-          path: |
-            ${{ env.FilesInformationPath }}
-            ${{ env.RegistryInformationPath }}
-
-      - name: Upload Information2 artifact
-        uses: actions/upload-artifact@v3.1.1
-        if: hashFiles(env.FilesInformationPath, env.RegistryInformationPath)
-        with:
-          name: Information2 ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
-          path: |
-            ${{ env.FilesInformationPath }}
-            ${{ env.RegistryInformationPath }}
+          path: ${{ env.InformationPath }}
 
       - name: Uninstall package
         run: |
