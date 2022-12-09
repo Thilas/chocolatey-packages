@@ -170,29 +170,38 @@ jobs:
 
       - name: Determine package information path
         run: |
-          Get-ChildItem "$Env:ChocolateyInstall\.chocolatey"
           $path = Join-Path $Env:ChocolateyInstall ".chocolatey/$Env:PackageName.$Env:PackageVersion"
           $path = $path -replace '\\', '/'
           "Path:"
           Get-ChildItem $path
-          "InstallArtifact=$path" >> $Env:GITHUB_ENV
+          "FilesInformationPath=$path/.files" >> $Env:GITHUB_ENV
+          "RegistryInformationPath=$path/.registry" >> $Env:GITHUB_ENV
 
       - name: Debug
         run: |
-          Get-ChildItem $Env:ttt111
-          Get-ChildItem $Env:ttt222
+          Get-ChildItem $Env:ttt111 -ErrorAction SilentlyContinue
+          Get-ChildItem $Env:ttt222 -ErrorAction SilentlyContinue
         env:
-          ttt111: ${{ env.InstallArtifact }}/.files
-          ttt222: ${{ env.InstallArtifact }}/.registry
+          ttt111: ${{ env.FilesInformationPath }}
+          ttt222: ${{ env.RegistryInformationPath }}
 
       - name: Upload Information artifact
         uses: actions/upload-artifact@v3.1.1
-        if: hashFiles(format('{0}/.files', env.InstallArtifact), format('{0}/.registry', env.InstallArtifact))
+        # if: hashFiles(env.FilesInformationPath, env.RegistryInformationPath)
         with:
           name: Information ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
           path: |
-            ${{ env.InstallArtifact }}/.files
-            ${{ env.InstallArtifact }}/.registry
+            ${{ env.FilesInformationPath }}
+            ${{ env.RegistryInformationPath }}
+
+      - name: Upload Information2 artifact
+        uses: actions/upload-artifact@v3.1.1
+        if: hashFiles(env.FilesInformationPath, env.RegistryInformationPath)
+        with:
+          name: Information2 ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
+          path: |
+            ${{ env.FilesInformationPath }}
+            ${{ env.RegistryInformationPath }}
 
       - name: Uninstall package
         run: |
