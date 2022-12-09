@@ -34,12 +34,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Show context
-        run: |
-          Get-CimInstance Win32_OperatingSystem -Property Caption, OSArchitecture, Version | Format-List Caption, OSArchitecture, Version
-          $PSVersionTable
-          git --version
-
       - name: Determine PR scope
         if: github.event_name == 'pull_request'
         run: |
@@ -80,11 +74,10 @@ jobs:
         env:
           ManualScope: ${{ inputs.packages }}
 
-      - name: Upgrade chocolatey
+      - name: Configure chocolatey
         run: |
           choco feature enable -n=allowGlobalConfirmation
           choco feature disable -n=showDownloadProgress
-          choco upgrade chocolatey
 
       - name: Install AU
         run: |
@@ -153,13 +146,12 @@ jobs:
       PackageVersion: ${{ fromJSON(matrix.package).version }}
 
     steps:
-      - name: Upgrade chocolatey
+      - name: Configure chocolatey
         run: |
           choco feature enable -n=allowGlobalConfirmation
           choco feature disable -n=showDownloadProgress
-          choco upgrade chocolatey
 
-      - name: Clean context
+      - name: Remove package if installed
         run: |
           if (choco list -r --local `"$Env:PackageName`") {
             choco uninstall `"$Env:PackageName`"
@@ -184,6 +176,14 @@ jobs:
           "Path:"
           Get-ChildItem $path
           "InstallArtifact=$path" >> $Env:GITHUB_ENV
+
+      - name: Debug
+        run: |
+          Get-ChildItem $Env:ttt111
+          Get-ChildItem $Env:ttt222
+        env:
+          ttt111: ${{ env.InstallArtifact }}/.files
+          ttt222: ${{ env.InstallArtifact }}/.registry
 
       - name: Upload Information artifact
         uses: actions/upload-artifact@v3.1.1
