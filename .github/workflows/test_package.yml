@@ -10,10 +10,13 @@ on:
       os:
         required: true
         type: string
+      fake:
+        required: false
+        type: string
 
 jobs:
   test:
-    name: Test ${{ inputs.package_name }} ${{ inputs.package_version }} on ${{ inputs.os }}
+    name: Test ${{ inputs.package_name }} ${{ inputs.package_version }} on ${{ inputs.os }},  -${{ inputs.fake }}-
     runs-on: ${{ inputs.os }}
 
     env:
