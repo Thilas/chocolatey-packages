@@ -3,6 +3,9 @@ name: Update
 on:
   push:
     branches: [ master ] # Automatic update of all packages
+  pull_request: # TEMP
+    types: [opened, edited, reopened, synchronize]
+    branches: [ master ] # Automatic test on PR's scope (if any) or all packages
   schedule:
     - cron: 5 */6 * * *  # Scheduled update of all packages
   workflow_dispatch:     # Manual run
@@ -23,12 +26,6 @@ jobs:
       # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
       au_version: master
 
-      # Mail settings - for error notifications
-      # mail_user: tdemoulins@gmail.com
-      # mail_server: smtp.gmail.com
-      # mail_port: 587
-      # mail_enablessl: true
-
       # ID of the gist used to save run results - create a gist under the github_user (secret or not) and grab the id - https://gist.github.com/name/id
       # Optional, leave empty to create anonymous gist
       gist_id: c09573f2f23bc2aa904d90ff63de2cfe
@@ -46,12 +43,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Show context
+      - name: Determine PR scope # TEMP
+        if: github.event_name == 'pull_request'
         run: |
-          Get-CimInstance Win32_OperatingSystem -Property Caption, OSArchitecture, Version | Format-List Caption, OSArchitecture, Version
-          $PSVersionTable
-          git --version
-          "chocolatey version $(choco --version)"
+          # PR title is expected to follow Conventional Commits
+          # If so, packages will be specified in the commit scope
+          if ($Env:PullRequestTitle -match '^\w+\((?<Scope>[^()\r\n]+)\)!?:') {
+            # Handle both comma and space-separated values
+            $scope = $Matches.Scope -replace ',',' ' -replace '\s+',' '
+            $packages, $invalidPackages = ($scope -split ' ').Where({ Test-Path $_ }, 'Split')
+            "Scope:"
+            $packages | ForEach-Object { "- $_" }
+            "PackageScope=$packages" >> $Env:GITHUB_ENV
+            if ($invalidPackages) {
+              throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
+            }
+          } else {
+            "No specific scope, all packages will be processed"
+          }
+        env:
+          PullRequestTitle: ${{ github.event.pull_request.title }}
 
       - name: Determine manual scope
         if: github.event_name == 'workflow_dispatch'
@@ -72,6 +83,11 @@ jobs:
         env:
           ManualScope: ${{ inputs.packages }}
 
+      - name: Configure chocolatey
+        run: |
+          choco feature enable -n=allowGlobalConfirmation
+          choco feature disable -n=showDownloadProgress
+
       - name: Install AU
         run: |
           git clone -q https://github.com/majkinetor/au.git $Env:TEMP/au
@@ -81,6 +97,7 @@ jobs:
         run: cinst chocolatey-core.extension
 
       - name: Update packages
+        id: updates
         run: |
           $arguments = @{ }
           if ($Env:PackageScope) {
@@ -92,15 +109,21 @@ jobs:
             }
             $arguments.Force = $true
           }
-          ./update_all.ps1 @arguments -ThrowOnErrors
+          [array] $packages = ./update_all.ps1 @arguments -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
+            $_ | ConvertTo-Json -Compress
+          }
+          $packages = ConvertTo-Json $packages -Compress
+          "Packages = $packages"
+          "packages=$packages" >> $Env:GITHUB_OUTPUT
         env:
-          au_push: true
+          # au_push: true
+          au_push: ${{ github.event_name != 'pull_request' }} # TEMP
           au_nogist: ${{ github.event_name != 'schedule' }}
-          force_update: ${{ inputs.force }}
+          # force_update: ${{ inputs.force }}
+          force_update: ${{ inputs.force || github.event_name == 'pull_request' }} # TEMP
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
-          mail_pass: ${{ secrets.MAIL_PASS }}
           api_key: ${{ secrets.CHOCOLATEY_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -125,3 +148,23 @@ jobs:
         with:
           name: Packages
           path: '**/*.nupkg'
+
+    outputs:
+      updates: ${{ steps.packages.outputs.updates }}
+
+  test:
+    needs: build
+
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.build.outputs.updates) }}
+        os:
+          - windows-2019
+          # - windows-2022
+
+    uses: ./.github/workflows/test_package.yml
+    with:
+      package_name: ${{ fromJSON(matrix.package).name }}
+      package_version: ${{ fromJSON(matrix.package).version }}
+      os: ${{ matrix.os }}

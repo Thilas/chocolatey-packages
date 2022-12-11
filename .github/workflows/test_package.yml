@@ -1,0 +1,63 @@
+on:
+  workflow_call:
+    inputs:
+      package_name:
+        required: true
+        type: string
+      package_version:
+        required: true
+        type: string
+      os:
+        required: true
+        type: string
+
+jobs:
+  test:
+    name: Test ${{ inputs.package_name }} ${{ inputs.package_version }} on ${{ inputs.os }}
+    runs-on: ${{ inputs.os }}
+
+    env:
+      PackageName: ${{ inputs.package_name }}
+      PackageVersion: ${{ inputs.package_version }}
+
+    steps:
+      - name: Configure chocolatey
+        run: |
+          choco feature enable -n=allowGlobalConfirmation
+          choco feature disable -n=showDownloadProgress
+
+      - name: Remove package if installed
+        run: |
+          if (choco list -r --local `"$Env:PackageName`") {
+            choco uninstall `"$Env:PackageName`"
+          }
+
+      - name: Download Packages artifact
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: Packages
+
+      - name: Install package
+        run: |
+          choco install `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source . --force --debug
+          if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
+        working-directory: ${{ env.PackageName }}
+
+      - name: Determine package information path
+        id: information
+        run: |
+          $path = Join-Path $Env:ChocolateyInstall ".chocolatey/$Env:PackageName.$Env:PackageVersion"
+          $path = $path -replace '\\', '/'
+          Get-ChildItem $path
+          "path=$path" >> $Env:GITHUB_OUTPUT
+
+      - name: Upload Information artifact
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: Information ${{ inputs.package_name }} ${{ inputs.package_version }} on ${{ inputs.os }}
+          path: ${{ steps.information.outputs.path }}
+
+      - name: Uninstall package
+        run: |
+          choco uninstall `"$Env:PackageName`" --debug
+          if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }

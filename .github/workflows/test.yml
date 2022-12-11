@@ -88,18 +88,20 @@ jobs:
         run: cinst chocolatey-core.extension
 
       - name: Test package updates
+        id: updates
         run: |
-          $packages = if ($Env:PackageScope) {
-            $Env:PackageScope -split ' '
+          $arguments = @{ }
+          if ($Env:PackageScope) {
+            $arguments.Name = $Env:PackageScope -split ' '
           } else {
-            "random $Env:au_test_groups"
+            $arguments.Name = "random $Env:au_test_groups"
           }
-          [array] $updates = ./test_all.ps1 -Name $packages -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
+          [array] $packages = ./test_all.ps1 @arguments -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
             $_ | ConvertTo-Json -Compress
           }
-          $updates = ConvertTo-Json $updates -Compress
-          "Updates = $updates"
-          "Updates=$updates" >> $Env:GITHUB_ENV
+          $packages = ConvertTo-Json $packages -Compress
+          "Packages = $packages"
+          "packages=$packages" >> $Env:GITHUB_OUTPUT
         env:
           au_nogist: ${{ github.event_name != 'schedule' }}
           github_user_repo: ${{ github.repository }}
@@ -111,10 +113,6 @@ jobs:
         if: always() && hashFiles('Update-AUPackages.md', 'Update-Force-Test*.md')
         run: Get-Content 'Update-AUPackages.md', 'Update-Force-Test*.md' -ErrorAction SilentlyContinue >> $Env:GITHUB_STEP_SUMMARY
 
-      - name: Publish history
-        if: always() && hashFiles('Update-History.md')
-        run: Get-Content 'Update-History.md' >> $Env:GITHUB_STEP_SUMMARY
-
       - name: Upload Packages artifact
         uses: actions/upload-artifact@v3.1.1
         if: always() && hashFiles('**/*.nupkg')
@@ -123,10 +121,9 @@ jobs:
           path: '**/*.nupkg'
 
     outputs:
-      updates: ${{ env.Updates }}
+      updates: ${{ steps.packages.outputs.updates }}
 
   test:
-    if: github.event_name == 'pull_request'
     needs: build
 
     strategy:
@@ -137,50 +134,8 @@ jobs:
           - windows-2019
           # - windows-2022
 
-    name: Test ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-
-    env:
-      PackageName: ${{ fromJSON(matrix.package).name }}
-      PackageVersion: ${{ fromJSON(matrix.package).version }}
-
-    steps:
-      - name: Configure chocolatey
-        run: |
-          choco feature enable -n=allowGlobalConfirmation
-          choco feature disable -n=showDownloadProgress
-
-      - name: Remove package if installed
-        run: |
-          if (choco list -r --local `"$Env:PackageName`") {
-            choco uninstall `"$Env:PackageName`"
-          }
-
-      - name: Download Packages artifact
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: Packages
-
-      - name: Install package
-        run: |
-          choco install `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source . --force --debug
-          if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
-        working-directory: ${{ env.PackageName }}
-
-      - name: Determine package information path
-        run: |
-          $path = Join-Path $Env:ChocolateyInstall ".chocolatey/$Env:PackageName.$Env:PackageVersion"
-          $path = $path -replace '\\', '/'
-          Get-ChildItem $path
-          "InformationPath=$path" >> $Env:GITHUB_ENV
-
-      - name: Upload Information artifact
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: Information ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
-          path: ${{ env.InformationPath }}
-
-      - name: Uninstall package
-        run: |
-          choco uninstall `"$Env:PackageName`" --debug
-          if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
+    uses: ./.github/workflows/test_package.yml
+    with:
+      package_name: ${{ fromJSON(matrix.package).name }}
+      package_version: ${{ fromJSON(matrix.package).version }}
+      os: ${{ matrix.os }}
