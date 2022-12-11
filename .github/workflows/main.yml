@@ -120,7 +120,7 @@ jobs:
           au_push: false # TEMP
           au_nogist: ${{ github.event_name != 'schedule' }}
           # force_update: ${{ inputs.force }}
-          force_update:true # TEMP
+          force_update: true # TEMP
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}

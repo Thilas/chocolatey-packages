@@ -139,3 +139,4 @@ jobs:
       package_name: ${{ fromJSON(matrix.package).name }}
       package_version: ${{ fromJSON(matrix.package).version }}
       os: ${{ matrix.os }}
+      fake: azer
