@@ -20,8 +20,6 @@ jobs:
     env:
       # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
       au_version: master
-      # Force test: use 1 to test all, or N to split testing into N groups
-      au_test_groups: 1
 
       # ID of the gist used to save run results - create a gist under the github_user (secret or not) and grab the id - https://gist.github.com/name/id
       # Optional, leave empty to create anonymous gist
@@ -94,7 +92,8 @@ jobs:
           if ($Env:PackageScope) {
             $arguments.Name = $Env:PackageScope -split ' '
           } else {
-            $arguments.Name = "random $Env:au_test_groups"
+            # Force test: use 1 to test all, or N to split testing into N groups
+            $arguments.Name = "random 1"
           }
           [array] $packages = ./test_all.ps1 @arguments -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
             $_ | ConvertTo-Json -Compress
@@ -134,6 +133,7 @@ jobs:
           - windows-2019
           # - windows-2022
 
+    name: Test packages
     uses: ./.github/workflows/test_package.yml
     with:
       package_name: ${{ fromJSON(matrix.package).name }}

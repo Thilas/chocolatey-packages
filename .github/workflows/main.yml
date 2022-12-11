@@ -117,10 +117,10 @@ jobs:
           "packages=$packages" >> $Env:GITHUB_OUTPUT
         env:
           # au_push: true
-          au_push: ${{ github.event_name != 'pull_request' }} # TEMP
+          au_push: false # TEMP
           au_nogist: ${{ github.event_name != 'schedule' }}
           # force_update: ${{ inputs.force }}
-          force_update: ${{ inputs.force || github.event_name == 'pull_request' }} # TEMP
+          force_update:true # TEMP
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
@@ -163,6 +163,7 @@ jobs:
           - windows-2019
           # - windows-2022
 
+    name: Test packages
     uses: ./.github/workflows/test_package.yml
     with:
       package_name: ${{ fromJSON(matrix.package).name }}
