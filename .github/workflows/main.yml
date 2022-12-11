@@ -3,9 +3,9 @@ name: Update
 on:
   push:
     branches: [ master ] # Automatic update of all packages
-  pull_request: # TEMP
-    types: [opened, edited, reopened, synchronize]
-    branches: [ master ] # Automatic test on PR's scope (if any) or all packages
+  # pull_request: # TEMP
+  #   types: [opened, edited, reopened, synchronize]
+  #   branches: [ master ] # Automatic test on PR's scope (if any) or all packages
   schedule:
     - cron: 5 */6 * * *  # Scheduled update of all packages
   workflow_dispatch:     # Manual run
