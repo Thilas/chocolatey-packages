@@ -1,24 +1,26 @@
 on:
   workflow_call:
     inputs:
-      package_name:
-        required: true
-        type: string
-      package_version:
-        required: true
-        type: string
-      os:
+      updates:
         required: true
         type: string
 
 jobs:
   test:
-    name: Test ${{ inputs.package_name }} ${{ inputs.package_version }} on ${{ inputs.os }}
-    runs-on: ${{ inputs.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(inputs.updates) }}
+        os:
+          - windows-2019
+          # - windows-2022
+
+    name: ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
     env:
-      PackageName: ${{ inputs.package_name }}
-      PackageVersion: ${{ inputs.package_version }}
+      PackageName: ${{ fromJSON(matrix.package).name }}
+      PackageVersion: ${{ fromJSON(matrix.package).version }}
 
     steps:
       - name: Configure chocolatey
@@ -54,7 +56,7 @@ jobs:
       - name: Upload Information artifact
         uses: actions/upload-artifact@v3.1.1
         with:
-          name: Information ${{ inputs.package_name }} ${{ inputs.package_version }} on ${{ inputs.os }}
+          name: Information ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
           path: ${{ steps.information.outputs.path }}
 
       - name: Uninstall package
