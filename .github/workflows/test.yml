@@ -72,18 +72,13 @@ jobs:
         env:
           ManualScope: ${{ inputs.packages }}
 
-      - name: Configure chocolatey
-        run: |
-          choco feature enable -n=allowGlobalConfirmation
-          choco feature disable -n=showDownloadProgress
-
       - name: Install AU
         run: |
           git clone -q https://github.com/majkinetor/au.git $Env:TEMP/au
           . "$Env:TEMP/au/scripts/Install-AU.ps1" $Env:au_version
 
       - name: Install chocolatey-core.extension # required for several packages
-        run: cinst chocolatey-core.extension
+        run: choco install -y chocolatey-core.extension
 
       - name: Test package updates
         id: updates

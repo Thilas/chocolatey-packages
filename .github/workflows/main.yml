@@ -3,9 +3,6 @@ name: Update
 on:
   push:
     branches: [ master ] # Automatic update of all packages
-  # pull_request: # TEMP
-  #   types: [opened, edited, reopened, synchronize]
-  #   branches: [ master ] # Automatic test on PR's scope (if any) or all packages
   schedule:
     - cron: 5 */6 * * *  # Scheduled update of all packages
   workflow_dispatch:     # Manual run
@@ -43,27 +40,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Determine PR scope # TEMP
-        if: github.event_name == 'pull_request'
-        run: |
-          # PR title is expected to follow Conventional Commits
-          # If so, packages will be specified in the commit scope
-          if ($Env:PullRequestTitle -match '^\w+\((?<Scope>[^()\r\n]+)\)!?:') {
-            # Handle both comma and space-separated values
-            $scope = $Matches.Scope -replace ',',' ' -replace '\s+',' '
-            $packages, $invalidPackages = ($scope -split ' ').Where({ Test-Path $_ }, 'Split')
-            "Scope:"
-            $packages | ForEach-Object { "- $_" }
-            "PackageScope=$packages" >> $Env:GITHUB_ENV
-            if ($invalidPackages) {
-              throw "Some packages do not exist or are invalid: `"$($invalidPackages -join '","')`""
-            }
-          } else {
-            "No specific scope, all packages will be processed"
-          }
-        env:
-          PullRequestTitle: ${{ github.event.pull_request.title }}
-
       - name: Determine manual scope
         if: github.event_name == 'workflow_dispatch'
         run: |
@@ -83,18 +59,13 @@ jobs:
         env:
           ManualScope: ${{ inputs.packages }}
 
-      - name: Configure chocolatey
-        run: |
-          choco feature enable -n=allowGlobalConfirmation
-          choco feature disable -n=showDownloadProgress
-
       - name: Install AU
         run: |
           git clone -q https://github.com/majkinetor/au.git $Env:TEMP/au
           . "$Env:TEMP/au/scripts/Install-AU.ps1" $Env:au_version
 
       - name: Install chocolatey-core.extension # required for several packages
-        run: cinst chocolatey-core.extension
+        run: choco install -y chocolatey-core.extension
 
       - name: Update packages
         id: updates
@@ -116,11 +87,9 @@ jobs:
           "Packages = $packages"
           "packages=$packages" >> $Env:GITHUB_OUTPUT
         env:
-          # au_push: true
-          au_push: false # TEMP
+          au_push: true
           au_nogist: ${{ github.event_name != 'schedule' }}
-          # force_update: ${{ inputs.force }}
-          force_update: true # TEMP
+          force_update: ${{ inputs.force }}
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
@@ -153,19 +122,9 @@ jobs:
       updates: ${{ steps.updates.outputs.packages }}
 
   test:
+    name: Test packages
     needs: build
 
-    strategy:
-      fail-fast: false
-      matrix:
-        package: ${{ fromJSON(needs.build.outputs.updates) }}
-        os:
-          - windows-2019
-          # - windows-2022
-
-    name: Test packages
-    uses: ./.github/workflows/test_package.yml
+    uses: ./.github/workflows/test_packages.yml
     with:
-      package_name: ${{ fromJSON(matrix.package).name }}
-      package_version: ${{ fromJSON(matrix.package).version }}
-      os: ${{ matrix.os }}
+      updates: ${{ needs.build.outputs.updates }}
