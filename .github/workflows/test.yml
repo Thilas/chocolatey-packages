@@ -121,7 +121,7 @@ jobs:
           path: '**/*.nupkg'
 
     outputs:
-      updates: ${{ steps.packages.outputs.updates }}
+      updates: ${{ steps.updates.outputs.packages }}
 
   test:
     needs: build
