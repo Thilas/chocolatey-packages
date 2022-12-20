@@ -48,6 +48,7 @@ $options = [ordered] @{
         'A system shutdown has already been scheduled'      #   https://gist.github.com/choco-bot/a14b1e5bfaf70839b338eb1ab7f8226f#wps-office-free
         'Choco pack failed with exit code 1'
         "The term 'Write-FunctionCallLogMessage' is not recognized as a name of a cmdlet, function, script file, or executable program"
+        "The term 'Install-ChocolateyPackage' is not recognized as a name of a cmdlet, function, script file, or executable program"
     )
     RepeatOn = @(                                           # Error message parts on which to repeat package updater
         'Could not create SSL/TLS secure channel'           #   https://github.com/chocolatey/chocolatey-coreteampackages/issues/718
@@ -64,9 +65,10 @@ $options = [ordered] @{
         'Oops, something went wrong'
         'Job returned no object, Vector smash ?'
         "The term 'Write-FunctionCallLogMessage' is not recognized as a name of a cmdlet, function, script file, or executable program"
+        "The term 'Install-ChocolateyPackage' is not recognized as a name of a cmdlet, function, script file, or executable program"
         'A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond'
     )
-    RepeatSleep = 60                                        # How much to sleep between repeats in seconds, by default 0
+    RepeatSleep = 30                                        # How much to sleep between repeats in seconds, by default 0
     RepeatCount = 2                                         # How many times to repeat on errors, by default 1
 
     Report = @{
