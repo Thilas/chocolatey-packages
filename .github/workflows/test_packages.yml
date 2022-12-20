@@ -17,6 +17,7 @@ jobs:
 
     name: ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
 
     env:
       PackageName: ${{ fromJSON(matrix.package).name }}
@@ -36,9 +37,9 @@ jobs:
 
       - name: Install package
         run: |
-          choco install -y `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source . --force --debug
+          dir
+          choco install -y `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source `"Packages;https://community.chocolatey.org/api/v2/`" --force --debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
-        working-directory: ${{ env.PackageName }}
 
       - name: Determine package information path
         id: information
