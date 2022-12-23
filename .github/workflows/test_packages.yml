@@ -39,7 +39,7 @@ jobs:
         run: |
           choco install -y `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source `"'.;https://community.chocolatey.org/api/v2/'`" --force --debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
-        timeout-minutes: 10
+        timeout-minutes: 2
 
       - name: Determine package information path
         id: information
@@ -59,16 +59,16 @@ jobs:
         run: |
           choco uninstall -y `"$Env:PackageName`" --debug
           if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
-        timeout-minutes: 10
+        timeout-minutes: 2
 
       - name: Take screenshot
-        if: cancelled()
+        if: ${{ cancelled() }}
         run: |
           choco install nircmd
           nircmd savescreenshotfull desktop.png
 
       - name: Upload screenshot into Information artifact
-        if: cancelled()
+        if: ${{ cancelled() }}
         uses: actions/upload-artifact@v3.1.1
         with:
           name: Information ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
