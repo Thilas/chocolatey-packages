@@ -35,6 +35,7 @@ jobs:
           Get-ChildItem "$Env:SystemRoot\System32", "$Env:SystemRoot\SysWOW64" -Filter "wlanapi.dll"
           Get-WindowsFeature Wireless-Networking
           Install-WindowsFeature Wireless-Networking
+          Get-ChildItem "$Env:SystemRoot\System32", "$Env:SystemRoot\SysWOW64" -Filter "wlanapi.dll"
 
       - name: Checkout
         uses: actions/checkout@v3
