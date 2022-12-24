@@ -30,6 +30,12 @@ jobs:
       gist_id_test: 83dd81cb41ebc10ef87ee50b168aca3f
 
     steps:
+      - name: Test
+        run: |
+          Get-ChildItem "$Env:SystemRoot\System32", "$Env:SystemRoot\SysWOW64" -Filter "wlanapi.dll"
+          Get-WindowsFeature Wireless-Networking
+          Install-WindowsFeature Wireless-Networking
+
       - name: Checkout
         uses: actions/checkout@v3
 
