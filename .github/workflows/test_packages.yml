@@ -36,6 +36,7 @@ jobs:
           name: Packages
 
       - name: Install package
+        id: install
         run: |
           choco install -y `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source `"'.;https://community.chocolatey.org/api/v2/'`" --force --debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
@@ -56,19 +57,26 @@ jobs:
           path: ${{ steps.information.outputs.path }}
 
       - name: Uninstall package
+        id: uninstall
         run: |
           choco uninstall -y `"$Env:PackageName`" --debug
           if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
         timeout-minutes: 2
 
+      - name: Debug
+        if: always()
+        run: $Env:steps
+        env:
+          steps: ${{ toJSON(steps) }}
+
       - name: Take screenshot
-        if: ${{ cancelled() }}
+        if: failure() || cancelled()
         run: |
           choco install nircmd
           nircmd savescreenshotfull desktop.png
 
       - name: Upload screenshot into Information artifact
-        if: ${{ cancelled() }}
+        if: failure() || cancelled()
         uses: actions/upload-artifact@v3.1.1
         with:
           name: Information ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
