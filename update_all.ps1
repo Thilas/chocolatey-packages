@@ -4,10 +4,12 @@ param(
     [switch] $Force,
     [string] $ForcedPackages,
     [string] $Root = $PSScriptRoot, # Path to the AU packages
-    [switch] $ThrowOnErrors
+    [switch] $ThrowOnErrors,
+    [switch] $PassThru,
+    [switch] $UpdatesOnly
 )
 
-if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" }
+if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" | Out-Null }
 $global:au_Root = Resolve-Path $Root
 
 $report_path  = "$PSScriptRoot\Update-AUPackages.md"
@@ -38,6 +40,7 @@ $options = [ordered] @{
         'Conflict'
         'A system shutdown has already been scheduled'      #   https://gist.github.com/choco-bot/a14b1e5bfaf70839b338eb1ab7f8226f#wps-office-free
         "The term 'Write-FunctionCallLogMessage' is not recognized as a name of a cmdlet, function, script file, or executable program"
+        "The term 'Install-ChocolateyPackage' is not recognized as a name of a cmdlet, function, script file, or executable program"
     )
     RepeatOn = @(                                           # Error message parts on which to repeat package updater
         'Could not create SSL/TLS secure channel'           #   https://github.com/chocolatey/chocolatey-coreteampackages/issues/718
@@ -53,9 +56,10 @@ $options = [ordered] @{
         'Oops, something went wrong'
         'The connection was closed unexpectedly'
         "The term 'Write-FunctionCallLogMessage' is not recognized as a name of a cmdlet, function, script file, or executable program"
+        "The term 'Install-ChocolateyPackage' is not recognized as a name of a cmdlet, function, script file, or executable program"
         'A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond'
     )
-    RepeatSleep = 60                                        # How much to sleep between repeats in seconds, by default 0
+    RepeatSleep = 30                                        # How much to sleep between repeats in seconds, by default 0
     RepeatCount = 2                                         # How many times to repeat on errors, by default 1
 
     Report = @{
@@ -134,8 +138,29 @@ $options = [ordered] @{
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
 
 if ($ForcedPackages) { Write-Host "FORCED PACKAGES: $ForcedPackages" }
-$global:info = Update-AuPackages -Name $Name -Options $options
+$info = Update-AuPackages -Name $Name -Options $options
 
-if ($ThrowOnErrors -and ($global:info | Where-Object Error)) {
+if ($ThrowOnErrors -and ($info | Where-Object Error)) {
     Write-Error 'Errors during update'
+}
+
+if ($PassThru) {
+    if ($UpdatesOnly) {
+        $updates = $info | Where-Object Updated | ForEach-Object {
+            if ($_.Streams) {
+                $_.Streams.Values | Where-Object Updated | ForEach-Object { [pscustomobject] @{
+                    name    = $_.Name
+                    version = $_.RemoteVersion
+                } }
+            } else {
+                $_ | ForEach-Object { [pscustomobject] @{
+                    name    = $_.Name
+                    version = $_.RemoteVersion
+                } }
+            }
+        }
+        return $updates
+    } else {
+        return $info
+    }
 }

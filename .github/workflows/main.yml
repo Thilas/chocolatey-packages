@@ -14,27 +14,22 @@ on:
         description: Force update (requires packages)
         type: boolean
 
-env:
-  # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
-  au_version: master
-
-  # Mail settings - for error notifications
-  # mail_user: tdemoulins@gmail.com
-  # mail_server: smtp.gmail.com
-  # mail_port: 587
-  # mail_enablessl: true
-
-  # ID of the gist used to save run results - create a gist under the github_user (secret or not) and grab the id - https://gist.github.com/name/id
-  # Optional, leave empty to create anonymous gist
-  gist_id: c09573f2f23bc2aa904d90ff63de2cfe
-
-  # Force test: gist id for test results
-  gist_id_test: 83dd81cb41ebc10ef87ee50b168aca3f
-
 jobs:
   build:
     name: Update packages
     runs-on: windows-latest
+    timeout-minutes: 20
+
+    env:
+      # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
+      au_version: master
+
+      # ID of the gist used to save run results - create a gist under the github_user (secret or not) and grab the id - https://gist.github.com/name/id
+      # Optional, leave empty to create anonymous gist
+      gist_id: c09573f2f23bc2aa904d90ff63de2cfe
+
+      # Force test: gist id for test results
+      gist_id_test: 83dd81cb41ebc10ef87ee50b168aca3f
 
     steps:
       - name: Set up git
@@ -45,13 +40,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Show context
-        run: |
-          Get-CimInstance Win32_OperatingSystem -Property Caption, OSArchitecture, Version | Format-List Caption, OSArchitecture, Version
-          $PSVersionTable
-          git --version
-          "chocolatey version $(choco --version)"
 
       - name: Determine manual scope
         if: github.event_name == 'workflow_dispatch'
@@ -78,9 +66,10 @@ jobs:
           . "$Env:TEMP/au/scripts/Install-AU.ps1" $Env:au_version
 
       - name: Install chocolatey-core.extension # required for several packages
-        run: cinst chocolatey-core.extension
+        run: choco install -y chocolatey-core.extension
 
       - name: Update packages
+        id: updates
         run: |
           $arguments = @{ }
           if ($Env:PackageScope) {
@@ -92,7 +81,12 @@ jobs:
             }
             $arguments.Force = $true
           }
-          ./update_all.ps1 @arguments -ThrowOnErrors
+          [array] $packages = ./update_all.ps1 @arguments -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
+            $_ | ConvertTo-Json -Compress
+          }
+          $packages = ConvertTo-Json $packages -Compress
+          "Packages = $packages"
+          "packages=$packages" >> $Env:GITHUB_OUTPUT
         env:
           au_push: true
           au_nogist: ${{ github.event_name != 'schedule' }}
@@ -100,7 +94,6 @@ jobs:
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
-          mail_pass: ${{ secrets.MAIL_PASS }}
           api_key: ${{ secrets.CHOCOLATEY_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -113,8 +106,32 @@ jobs:
         run: Get-Content 'Update-History.md' >> $Env:GITHUB_STEP_SUMMARY
 
       - name: Upload Info artifact
-        uses: actions/upload-artifact@v3.1.1
         if: always() && hashFiles('update_info.xml')
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: Info
           path: update_info.xml
+
+      - name: Prepare Packages artifact
+        if: always() && hashFiles('**/*.nupkg')
+        run: |
+          New-Item Packages -ItemType Directory
+          Get-ChildItem *.nupkg -Recurse | Move-Item -Destination Packages
+
+      - name: Upload Packages artifact
+        if: always() && hashFiles('Packages/*.nupkg')
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: Packages
+          path: Packages/*.nupkg
+
+    outputs:
+      updates: ${{ steps.updates.outputs.packages }}
+
+  test:
+    name: Test packages
+    needs: build
+
+    uses: ./.github/workflows/test_packages.yml
+    with:
+      updates: ${{ needs.build.outputs.updates }}
