@@ -19,8 +19,11 @@ function global:au_GetLatest {
             } else {
                 $Link.href
             }
-            Get-Version $value
+            $version = Get-Version $value
+            if ($version -lt '18.0') { return }
+            $version
         } `
+        -StreamFieldCount 1 `
         -IsUri32 { param($Uri) $Uri -match '\bx86\b' } `
         -IsUri64 { param($Uri) $Uri -match '\bx64\b' } `
         -Latest @{
