@@ -94,7 +94,7 @@ jobs:
           [array] $packages = ./test_all.ps1 @arguments -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
             $_ | ConvertTo-Json -Compress
           }
-          $packages = ConvertTo-Json $packages -Compress
+          $packages = if ($packages) { ConvertTo-Json $packages -Compress } else { '[]' }
           "Packages = $packages"
           "packages=$packages" >> $Env:GITHUB_OUTPUT
         env:
