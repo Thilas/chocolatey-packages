@@ -129,7 +129,8 @@ jobs:
       updates: ${{ steps.updates.outputs.packages }}
 
   test:
-    name: Test packages
+    name: Test
+    if: needs.build.outputs.updates != 'null'
     needs: build
 
     uses: ./.github/workflows/test_packages.yml
