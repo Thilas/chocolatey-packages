@@ -107,7 +107,7 @@ jobs:
 
       - name: Upload Info artifact
         if: always() && hashFiles('update_info.xml')
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: Info
           path: update_info.xml
@@ -120,7 +120,7 @@ jobs:
 
       - name: Upload Packages artifact
         if: always() && hashFiles('Packages/*.nupkg')
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: Packages
           path: Packages/*.nupkg
