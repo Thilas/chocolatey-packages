@@ -7,9 +7,9 @@ $packageCacheLocation = Get-PackageCacheLocation
 # *** Automatically filled ***
 $packageArgs = @{
     packageName   = 'subtitleedit'
-    url           = 'https://github.com/SubtitleEdit/subtitleedit/releases/download/3.6.10/SubtitleEdit-3.6.10-Setup.zip'
+    url           = 'https://github.com/SubtitleEdit/subtitleedit/releases/download/3.6.11/SubtitleEdit-3.6.11-Setup.zip'
     unzipLocation = $packageCacheLocation
-    checksum      = 'abee5e50da0ece4b7edd88bc6fc5d8e63a72b2028fc48e860bb424919338b649'
+    checksum      = '6acbb885b3bffb6fad159a0280d0c7335e93c07d61a29c0e74a7934d2b0acc71'
     checksumType  = 'sha256'
 }
 # *** Automatically filled ***
@@ -21,7 +21,7 @@ $packageArgs = @{
     packageName    = 'subtitleedit'
     softwareName   = 'Subtitle Edit *'
     fileType       = 'exe'
-    file           = "$packageCacheLocation\SubtitleEdit-3.6.10-Setup.exe"
+    file           = "$packageCacheLocation\SubtitleEdit-3.6.11-Setup.exe"
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
     validExitCodes = @(0)
 }
