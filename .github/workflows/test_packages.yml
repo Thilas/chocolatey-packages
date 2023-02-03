@@ -50,7 +50,7 @@ jobs:
           "path=$path" >> $Env:GITHUB_OUTPUT
 
       - name: Upload Information artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: Information ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
           path: ${{ steps.information.outputs.path }}
@@ -71,7 +71,7 @@ jobs:
 
       - name: Upload failure screenshot into Information artifact
         if: failure()
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: Information ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
           path: desktop.png
