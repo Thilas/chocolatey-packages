@@ -4,12 +4,12 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    $latest = Get-GitHubLatest `
+    Get-GitHubLatest `
         -Repository 'SubtitleEdit/subtitleedit' `
         -FileType 'zip' `
         -IsUri32 { param($Uri) $Uri -match '\bSetup\b' } `
         -Latest @{
-            SoftwareName            = 'Subtitle Edit *'
+            SoftwareName            = 'Subtitle Edit*'
             FileType                = 'exe'
             SilentArgs              = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
             ValidExitCodes          = '0'
@@ -17,9 +17,6 @@ function global:au_GetLatest {
             UninstallSilentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
             UninstallValidExitCodes = '0'
         }
-    $latest += @{ File32 = [System.IO.Path]::ChangeExtension($latest.Url32.Segments[-1], $latest.FileType) }
-    "File32: {0}" -f $latest.File32 | Write-Verbose
-    return $latest
 }
 
 function global:au_SearchReplace {
@@ -29,7 +26,6 @@ function global:au_SearchReplace {
             "^(\s*softwareName\s*=\s*)'.*'$"      = "`$1'$($Latest.SoftwareName)'"
             "^(\s*fileType\s*=\s*)'.*'$"          = "`$1'$($Latest.FileType)'"
             "^(\s*url\s*=\s*)'.*'$"               = "`$1'$($Latest.Url32)'"
-            "^(\s*file\s*=\s*).*$"                = "`$1`"`$packageCacheLocation\$($Latest.File32)`""
             "^(\s*silentArgs\s*=\s*)'.*'$"        = "`$1'$($Latest.SilentArgs)'"
             "^(\s*checksum\s*=\s*)'.*'$"          = "`$1'$($Latest.Checksum32)'"
             "^(\s*checksumType\s*=\s*)'.*'$"      = "`$1'$($Latest.ChecksumType32)'"

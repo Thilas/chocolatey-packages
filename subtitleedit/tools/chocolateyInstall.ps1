@@ -21,13 +21,21 @@ $packageArgs = @{
     packageName    = 'subtitleedit'
     softwareName   = 'Subtitle Edit *'
     fileType       = 'exe'
-    file           = "$packageCacheLocation\SubtitleEdit-3.6.11-Setup.exe"
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
     validExitCodes = @(0)
 }
 # *** Automatically filled ***
 
-Install-ChocolateyInstallPackage @packageArgs
+$file = "$packageCacheLocation\*.{0}" -f $packageArgs.fileType | Get-Item | ForEach-Object FullName
+if (!$file) {
+    throw "Invalid zip file: installer is missing."
+}
+if ($file -is [array]) {
+    throw "Invalid zip file: multiple installers found."
+}
+
+Install-ChocolateyInstallPackage @packageArgs -File $file
 
 $logPath = Join-Path $toolsDir '*.zip.txt'
-Remove-Item $logPath, $packageArgs.file -Force -ErrorAction SilentlyContinue
+Remove-Item $logPath -Force -ErrorAction SilentlyContinue
+Remove-Item $packageCacheLocation -Recurse -Force -ErrorAction SilentlyContinue
