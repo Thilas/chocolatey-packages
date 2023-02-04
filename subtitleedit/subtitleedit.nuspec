@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>subtitleedit</id>
-    <version>3.6.11</version>
+    <version>3.6.11.20230204</version>
     <title>Subtitle Edit</title>
     <authors>Nikolaj Lynge Olsson</authors>
     <owners>Thilas,Waterdrop</owners>
