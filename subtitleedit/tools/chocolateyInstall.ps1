@@ -22,7 +22,7 @@ $packageArgs = @{
     packageName    = 'subtitleedit'
     softwareName   = 'Subtitle Edit*'
     fileType       = 'exe'
-    silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /MERGETASKS="{0}"'
+    silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
     validExitCodes = @(0)
 }
 # *** Automatically filled ***
