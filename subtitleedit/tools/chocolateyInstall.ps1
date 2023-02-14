@@ -3,6 +3,7 @@
 $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 $packageCacheLocation = Get-PackageCacheLocation
+. $toolsDir\helpers.ps1
 
 # *** Automatically filled ***
 $packageArgs = @{
@@ -33,6 +34,10 @@ if (!$file) {
 if ($file -is [array]) {
     throw "Invalid zip file: multiple installers found."
 }
+
+$pp = Get-PackageParameters
+$mergeTasks = Get-MergeTasks $pp
+$packageArgs.silentArgs += ' /MERGETASKS="{0}"' -f $mergeTasks
 
 Install-ChocolateyInstallPackage @packageArgs -File $file
 
