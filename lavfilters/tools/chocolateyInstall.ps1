@@ -5,9 +5,9 @@ $packageArgs = @{
     packageName    = 'lavfilters'
     softwareName   = 'LAV Filters *'
     fileType       = 'exe'
-    url            = 'https://github.com/Nevcairiel/LAVFilters/releases/download/0.77.1/LAVFilters-0.77.1-Installer.exe'
+    url            = 'https://github.com/Nevcairiel/LAVFilters/releases/download/0.77.2/LAVFilters-0.77.2-Installer.exe'
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-    checksum       = 'b3ecb80d03a1f3a6bc0f629648f1ec9a73d14f145abc9a8f45ca62834a14f82c'
+    checksum       = '3bf333bae56f9856fb7db96ce2410df1da3958ac6a9fd5ac965d33c7af6f27d7'
     checksumType   = 'sha256'
     validExitCodes = @(0)
 }
