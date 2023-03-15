@@ -23,11 +23,11 @@ $multiUser = $packageParameters.ContainsKey('Multi-User')
 $packageArgs = @{
     packageName    = 'eclipse'
     url            = ''
-    url64bit       = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2022-09/R/eclipse-jee-2022-09-R-win32-x86_64.zip&r=1'
+    url64bit       = 'https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2023-03/R/eclipse-jee-2023-03-R-win32-x86_64.zip&r=1'
     unzipLocation  = $installationPath
     checksum       = ''
     checksumType   = ''
-    checksum64     = 'f5010076a2e498a11997ab9cff3d6ea2805478ea5e2af86adade87bcb0f31ccc'
+    checksum64     = 'e27d3779acabaafe15b9a18f303017c036fa0da4eb79ea2ea3fd9cbb0bdbbd9d'
     checksumType64 = 'sha256'
 }
 # *** Automatically filled ***
