@@ -7,9 +7,9 @@ $packageArgs = @{
     packageName    = 'sabnzbd'
     softwareName   = 'SABnzbd*'
     fileType       = 'exe'
-    url            = 'https://github.com/sabnzbd/sabnzbd/releases/download/4.0.0/SABnzbd-4.0.0-win-setup.exe'
+    url            = 'https://github.com/sabnzbd/sabnzbd/releases/download/4.0.1/SABnzbd-4.0.1-win-setup.exe'
     silentArgs     = '/S'
-    checksum       = '1a474d6396e8db609616dd0dcca0763c48c78e401447f3356f71f12538d5e47e'
+    checksum       = '1dddba75396c9a4d0bd6a0d122784604edfa63267adcbf82fcdfe7a14ef5b1d5'
     checksumType   = 'sha256'
     validExitCodes = @(0)
 }
