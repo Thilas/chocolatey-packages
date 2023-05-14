@@ -3,7 +3,7 @@ name: procexp / test
 on:
   pull_request:
     types: [opened, edited, reopened, synchronize]
-    branches: [master] # Automatic test
+    branches: [master]  # Automatic test
     paths:
       - .github/workflows/procexp-test.yml
       - procexp/**
@@ -11,11 +11,12 @@ on:
       - test_all.ps1
       - update_vars.ps1
   schedule:
-    - cron: 0 4 * * *  # Daily test
-  workflow_dispatch:   # Manual run
+    - cron: 0 4 * * *   # Daily test
+  workflow_dispatch:    # Manual run
 
 jobs:
   test:
-    uses: ./.github/workflows/.test.yml
+    uses: ./.github/workflows/.common.yml
     with:
       packages: procexp
+      test: true
