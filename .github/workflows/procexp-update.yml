@@ -32,4 +32,4 @@ jobs:
     uses: ./.github/workflows/.common.yml
     with:
       packages: procexp
-      force: ${{ inputs.force }}
+      force: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}
