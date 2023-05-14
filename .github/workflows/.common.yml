@@ -78,11 +78,11 @@ jobs:
         run: Get-Content 'Update-AUPackages.md', 'Update-Force-Test*.md' -ErrorAction SilentlyContinue >> $Env:GITHUB_STEP_SUMMARY
 
       - name: Publish history
-        if: !inputs.test && always() && hashFiles('Update-History.md')
+        if: always() && !inputs.test && hashFiles('Update-History.md')
         run: Get-Content 'Update-History.md' >> $Env:GITHUB_STEP_SUMMARY
 
       - name: Upload Info artifact
-        if: !inputs.test && always() && hashFiles('update_info.xml')
+        if: always() && !inputs.test && hashFiles('update_info.xml')
         uses: actions/upload-artifact@v3.1.2
         with:
           name: Info
@@ -153,7 +153,7 @@ jobs:
       - name: Upload Information artifact
         uses: actions/upload-artifact@v3.1.2
         with:
-          name: Information ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
+          name: Information ${{ env.PackageName }} ${{ env.PackageVersion }} on ${{ matrix.os }}
           path: ${{ steps.information.outputs.path }}
 
       - name: Uninstall package
@@ -174,5 +174,5 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v3.1.2
         with:
-          name: Information ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
+          name: Information ${{ env.PackageName }} ${{ env.PackageVersion }} on ${{ matrix.os }}
           path: desktop.png
