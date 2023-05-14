@@ -1,6 +1,15 @@
 name: procexp / update
 
 on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+    branches: [master]  # Automatic test
+    paths:
+      - .github/workflows/procexp-test.yml
+      - procexp/**
+      - Common.ps1
+      - test_all.ps1
+      - update_vars.ps1
   push:
     branches: [master]  # Automatic update
     paths:
