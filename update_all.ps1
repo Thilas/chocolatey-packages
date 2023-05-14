@@ -38,6 +38,7 @@ $options = [ordered] @{
         'A system shutdown has already been scheduled'      #   https://gist.github.com/choco-bot/a14b1e5bfaf70839b338eb1ab7f8226f#wps-office-free
         "The term 'Write-FunctionCallLogMessage' is not recognized as a name of a cmdlet, function, script file, or executable program"
         "The term 'Install-ChocolateyPackage' is not recognized as a name of a cmdlet, function, script file, or executable program"
+        "The property 'MaxIdleTime' cannot be found on this object. Verify that the property exists and can be set"
     )
     RepeatOn = @(                                           # Error message parts on which to repeat package updater
         'Could not create SSL/TLS secure channel'           #   https://github.com/chocolatey/chocolatey-coreteampackages/issues/718
@@ -54,6 +55,7 @@ $options = [ordered] @{
         'The connection was closed unexpectedly'
         "The term 'Write-FunctionCallLogMessage' is not recognized as a name of a cmdlet, function, script file, or executable program"
         "The term 'Install-ChocolateyPackage' is not recognized as a name of a cmdlet, function, script file, or executable program"
+        "The property 'MaxIdleTime' cannot be found on this object. Verify that the property exists and can be set"
         'A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond'
         'The SSL connection could not be established'
     )
