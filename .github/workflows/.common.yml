@@ -23,12 +23,12 @@ jobs:
       au_version: master
 
     steps:
-      # - name: Set up git
-      #   if: !inputs.test
-      #   run: |
-      #     git config --global user.name "GitHub Actions Bot"
-      #     git config --global user.email "<>"
-      #     git config --global core.safecrlf false
+      - name: Set up git
+        if: ${{ !inputs.test }}
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "<>"
+          git config --global core.safecrlf false
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -104,7 +104,7 @@ jobs:
     outputs:
       updates: ${{ steps.updates.outputs.packages }}
 
-  test:
+  packages:
     if: needs.update.outputs.updates != 'null'
     needs: update
 
