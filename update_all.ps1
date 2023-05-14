@@ -68,6 +68,7 @@ $options = [ordered] @{
             Title       = ''                                #   Markdown, Text: Title of the report, by default 'Update-AUPackages'
             UserMessage = @(                                #   Markdown, Text: Custom user message to show
                 "[Ignored](#ignored)"
+                "[Build](https://github.com/$Env:github_user_repo/actions)"
                 "[Releases](https://github.com/$Env:github_user_repo/tags)"
                 "**TESTING AU NEXT VERSION**"
             ) -join " | "

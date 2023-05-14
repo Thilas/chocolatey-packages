@@ -23,9 +23,11 @@ if ($Name.Length -eq 1 -and $Name[0] -match '^random (.+)') {
     Write-Host ('-'*80)
 }
 
-$report_path = if ($null -eq $n) { "$PSScriptRoot\Update-Force-Test.md" } else { "$PSScriptRoot\Update-Force-Test-$n.md" }
-
-$buildUrl = "https://github.com/Thilas/chocolatey-packages/actions/workflows/main.yml"
+$report_path = if ($null -eq $n) {
+    "$PSScriptRoot\Update-Force-Test.md"
+} else {
+    "$PSScriptRoot\Update-Force-Test-$n.md"
+}
 
 $options = [ordered] @{
     Force         = $true                                   # Force all packages
@@ -76,10 +78,11 @@ $options = [ordered] @{
         Params = @{                                         # Report parameters:
             Github_UserRepo = $Env:github_user_repo         #   Markdown: shows user info in upper right corner
             NoAppVeyor  = $true                             #   Markdown: do not show AppVeyor build shield
-            Title       = "Update Force Test - Group ${n}"  #   Markdown, Text: Title of the report, by default 'Update-AUPackages'
+            Title       = 'Update Force Test'               #   Markdown, Text: Title of the report, by default 'Update-AUPackages'
             UserMessage = @(                                #   Markdown, Text: Custom user message to show
                 "[Ignored](#ignored)"
-                "[Build]($buildUrl)"
+                "[Build](https://github.com/$Env:github_user_repo/actions)"
+                "[Releases](https://github.com/$Env:github_user_repo/tags)"
                 "**USING AU NEXT VERSION**"
             ) -join " | "
             NoIcons     = $false                            #   Markdown: don't show icon
