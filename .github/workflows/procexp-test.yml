@@ -15,7 +15,8 @@ on:
   workflow_dispatch:    # Manual run
 
 jobs:
-  test:
+  job:
+    name: Test
     uses: ./.github/workflows/.common.yml
     with:
       packages: procexp

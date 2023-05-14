@@ -18,7 +18,8 @@ on:
         type: boolean
 
 jobs:
-  test:
+  job:
+    name: Update
     uses: ./.github/workflows/.common.yml
     with:
       packages: procexp
