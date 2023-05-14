@@ -14,7 +14,7 @@ on:
 
 jobs:
   update:
-    name: Update packages
+    name: Update ${{ inputs.packages }}
     runs-on: windows-latest
     timeout-minutes: 20
 
