@@ -1,4 +1,4 @@
-name: procexp / update
+name: procexp / Update
 
 on:
   pull_request:
@@ -28,7 +28,7 @@ on:
 
 jobs:
   job:
-    name: Update
+    name: CI
     uses: ./.github/workflows/.common.yml
     with:
       packages: procexp

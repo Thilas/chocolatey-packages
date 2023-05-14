@@ -1,4 +1,4 @@
-name: procexp / test
+name: procexp / Test
 
 on:
   pull_request:
@@ -16,7 +16,7 @@ on:
 
 jobs:
   job:
-    name: Test
+    name: CI
     uses: ./.github/workflows/.common.yml
     with:
       packages: procexp
