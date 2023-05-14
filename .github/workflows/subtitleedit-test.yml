@@ -1,0 +1,23 @@
+name: subtitleedit / Test
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+    branches: [master]  # Automatic test
+    paths:
+      - .github/workflows/subtitleedit-test.yml
+      - subtitleedit/**
+      - Common.ps1
+      - test_all.ps1
+      - update_vars.ps1
+  schedule:
+    - cron: 0 4 * * *   # Daily test
+  workflow_dispatch:    # Manual run
+
+jobs:
+  job:
+    name: CI
+    uses: ./.github/workflows/.common.yml
+    with:
+      packages: subtitleedit
+      test: true
