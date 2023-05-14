@@ -67,7 +67,6 @@ jobs:
           packages: ${{ inputs.packages }}
           test: ${{ inputs.test }}
           force: ${{ inputs.force }}
-          au_nogist: true
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
           CHOCOLATEY_KEY: ${{ secrets.CHOCOLATEY_KEY }}
@@ -76,10 +75,6 @@ jobs:
       - name: Publish report
         if: always() && hashFiles('Update-AUPackages.md', 'Update-Force-Test*.md')
         run: Get-Content 'Update-AUPackages.md', 'Update-Force-Test*.md' -ErrorAction SilentlyContinue >> $Env:GITHUB_STEP_SUMMARY
-
-      - name: Publish history
-        if: always() && hashFiles('Update-History.md')
-        run: Get-Content 'Update-History.md' >> $Env:GITHUB_STEP_SUMMARY
 
       - name: Upload Info artifact
         if: always() && hashFiles('update_info.xml')
