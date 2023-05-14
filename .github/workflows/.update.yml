@@ -133,6 +133,6 @@ jobs:
     if: needs.build.outputs.updates != 'null'
     needs: build
 
-    uses: ./.github/workflows/test_packages.yml
+    uses: ./.github/workflows/.test-packages.yml
     with:
       updates: ${{ needs.build.outputs.updates }}

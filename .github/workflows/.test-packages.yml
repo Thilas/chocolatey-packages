@@ -1,5 +1,3 @@
-name: Test packages
-
 on:
   workflow_call:
     inputs:

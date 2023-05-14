@@ -1,13 +1,10 @@
-name: Test procexp
-
 on:
-  pull_request:
-    types: [opened, edited, reopened, synchronize]
-    branches: [master] # Automatic test
-    paths: [procexp/**, .github/workflows/procexp.yml, Common.ps1, test_all.ps1, update_vars.ps1]
-  schedule:
-    - cron: 0 4 * * *  # Daily test
-  workflow_dispatch:   # Manual run
+  workflow_call:
+    inputs:
+      packages:
+        description: Comma-separated list of package ids
+        required: true
+        type: string
 
 jobs:
   build:
@@ -18,11 +15,6 @@ jobs:
     env:
       # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
       au_version: master
-
-      # No need for a gist when using GitHub Actions
-      au_nogist: true
-
-      package: procexp
 
     steps:
       - name: Checkout
@@ -40,7 +32,7 @@ jobs:
         id: updates
         run: |
           $arguments = @{
-            Name = $Env:package
+            Name = $Env:package_scope -replace ' ','' -split ','
           }
           [array] $packages = ./test_all.ps1 @arguments -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
             $_ | ConvertTo-Json -Compress
@@ -49,6 +41,8 @@ jobs:
           "Packages = $packages"
           "packages=$packages" >> $Env:GITHUB_OUTPUT
         env:
+          package_scope: ${{ inputs.packages }}
+          au_nogist: true
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -77,6 +71,6 @@ jobs:
     name: Test packages
     needs: build
 
-    uses: ./.github/workflows/test_packages.yml
+    uses: ./.github/workflows/.test-packages.yml
     with:
       updates: ${{ needs.build.outputs.updates }}
