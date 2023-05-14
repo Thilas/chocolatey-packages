@@ -73,7 +73,7 @@ $options = [ordered] @{
         'The SSL connection could not be established'
     )
     RepeatSleep = 30                                        # How much to sleep between repeats in seconds, by default 0
-    RepeatCount = 2                                         # How many times to repeat on errors, by default 1
+    RepeatCount = 5                                         # How many times to repeat on errors, by default 1
 
     Report = @{
         Type = 'markdown'                                   # Report type: markdown or text
