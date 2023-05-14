@@ -3,8 +3,6 @@ Thilas Packages
 
 [![Update](https://github.com/Thilas/chocolatey-packages/actions/workflows/main.yml/badge.svg)](https://github.com/Thilas/chocolatey-packages/actions/workflows/main.yml)
 [![](http://transparent-favicon.info/favicon.ico)](#)[![](http://transparent-favicon.info/favicon.ico)](#)
-[Update status](https://gist.github.com/Thilas/c09573f2f23bc2aa904d90ff63de2cfe)
-[![](http://transparent-favicon.info/favicon.ico)](#)
 [chocolatey/Thilas](https://chocolatey.org/profiles/Thilas)
 
 This repository contains [chocolatey automatic packages](https://chocolatey.org/docs/automatic-packages).

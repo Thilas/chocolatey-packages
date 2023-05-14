@@ -23,10 +23,11 @@ if ($Name.Length -eq 1 -and $Name[0] -match '^random (.+)') {
     Write-Host ('-'*80)
 }
 
-$report_path = if ($null -eq $n) { "$PSScriptRoot\Update-Force-Test.md" } else { "$PSScriptRoot\Update-Force-Test-$n.md" }
-
-$buildUrl   = "https://github.com/Thilas/chocolatey-packages/actions/workflows/main.yml"
-$gist_token = if ($Env:gist_token) { $Env:gist_token } else { $Env:github_api_key }
+$report_path = if ($null -eq $n) {
+    "$PSScriptRoot\Update-Force-Test.md"
+} else {
+    "$PSScriptRoot\Update-Force-Test-$n.md"
+}
 
 $options = [ordered] @{
     Force         = $true                                   # Force all packages
@@ -77,24 +78,17 @@ $options = [ordered] @{
         Params = @{                                         # Report parameters:
             Github_UserRepo = $Env:github_user_repo         #   Markdown: shows user info in upper right corner
             NoAppVeyor  = $true                             #   Markdown: do not show AppVeyor build shield
-            Title       = "Update Force Test - Group ${n}"  #   Markdown, Text: Title of the report, by default 'Update-AUPackages'
+            Title       = 'Update Force Test'               #   Markdown, Text: Title of the report, by default 'Update-AUPackages'
             UserMessage = @(                                #   Markdown, Text: Custom user message to show
                 "[Ignored](#ignored)"
-                "[Update report](https://gist.github.com/$Env:gist_id)"
-                "[Build]($buildUrl)"
+                "[Build](https://github.com/$Env:github_user_repo/actions)"
+                "[Releases](https://github.com/$Env:github_user_repo/tags)"
                 "**USING AU NEXT VERSION**"
             ) -join " | "
             NoIcons     = $false                            #   Markdown: don't show icon
             IconSize    = 32                                #   Markdown: icon size
         }
     }
-
-    Gist = if ($Env:au_noGist -ne 'true') { @{
-        Id     = $Env:gist_id_test                          # Your gist id; leave empty for new private or anonymous gist
-        ApiKey = $gist_token                                # Your github api key - if empty anoymous gist is created
-        Path   = $report_path                               # List of files to add to the gist
-        Description = "Update Force Test Report #powershell #chocolatey"
-    } } else {}
 }
 
 # Enable TLS1.2

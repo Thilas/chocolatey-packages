@@ -12,11 +12,8 @@ param(
 if (Test-Path "$PSScriptRoot/update_vars.ps1") { . "$PSScriptRoot/update_vars.ps1" | Out-Null }
 $global:au_Root = Resolve-Path $Root
 
-$report_path  = "$PSScriptRoot\Update-AUPackages.md"
-$history_path = "$PSScriptRoot\Update-History.md"
-$update_info  = "$PSScriptRoot\update_info.xml"
-
-$gist_token = if ($Env:gist_token) { $Env:gist_token } else { $Env:github_api_key }
+$report_path = "$PSScriptRoot\Update-AUPackages.md"
+$update_info = "$PSScriptRoot\update_info.xml"
 
 $options = [ordered] @{
     WhatIf        = $au_WhatIf                              # Whatif all packages
@@ -71,8 +68,7 @@ $options = [ordered] @{
             Title       = ''                                #   Markdown, Text: Title of the report, by default 'Update-AUPackages'
             UserMessage = @(                                #   Markdown, Text: Custom user message to show
                 "[Ignored](#ignored)"
-                "[History](#update-history)"
-                "[Force Test](https://gist.github.com/$Env:gist_id_test)"
+                "[Build](https://github.com/$Env:github_user_repo/actions)"
                 "[Releases](https://github.com/$Env:github_user_repo/tags)"
                 "**TESTING AU NEXT VERSION**"
             ) -join " | "
@@ -80,18 +76,6 @@ $options = [ordered] @{
             IconSize    = 32                                #   Markdown: icon size
         }
     }
-
-    History = @{
-        Lines           = 90                                # Number of lines to show
-        Github_UserRepo = $Env:github_user_repo             # User repo to be link to commits
-        Path            = $history_path                     # Path where to save history
-    }
-
-    Gist = if ($Env:au_noGist -ne 'true') { @{
-        Id     = $Env:gist_id                               # Your gist id; leave empty for new private or anonymous gist
-        ApiKey = $gist_token                                # Your github api key - if empty anoymous gist is created
-        Path   = $report_path, $history_path                # List of files to add to the gist
-    } } else {}
 
     Git = @{
         User     = ''                                       # Git username, leave empty if github api key is used
@@ -107,18 +91,6 @@ $options = [ordered] @{
         Exclude = 'password', 'apikey', 'apitoken'          # Option keys which contain those words will be removed
         Path    = $update_info                              # Path where to save the run info
     }
-
-    Mail = if ($Env:mail_user -and $Env:mail_pass) { @{
-        To          = $Env:mail_user
-        Server      = $Env:mail_server
-        UserName    = $Env:mail_user
-        Password    = $Env:mail_pass
-        Port        = $Env:mail_port
-        EnableSsl   = $Env:mail_enablessl -eq 'true'
-        Attachment  = $update_info
-        UserMessage = "Update status: https://gist.github.com/$Env:gist_id"
-        SendAlways  = $false                                # Send notifications every time
-    } } else {}
 
     ForcedPackages = $ForcedPackages -split ' '
     BeforeEach = {
