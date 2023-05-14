@@ -3,10 +3,10 @@ name: Test procexp
 on:
   pull_request:
     types: [opened, edited, reopened, synchronize]
-    branches: [master] # Automatic test on PR's scope (if any) or all packages
+    branches: [master] # Automatic test
     paths: [procexp/**, .github/workflows/procexp.yml, Common.ps1, test_all.ps1, update_vars.ps1]
   schedule:
-    - cron: 0 4 * * *  # Daily test of all packages
+    - cron: 0 4 * * *  # Daily test
   workflow_dispatch:   # Manual run
 
 jobs:
@@ -77,6 +77,6 @@ jobs:
     name: Test packages
     needs: build
 
-    uses: ./.github/workflows/test_packages.yml
+    uses: ./.github/test_packages.yml
     with:
       updates: ${{ needs.build.outputs.updates }}
