@@ -68,6 +68,7 @@ $options = [ordered] @{
         "The term 'Write-FunctionCallLogMessage' is not recognized as a name of a cmdlet, function, script file, or executable program"
         "The term 'Install-ChocolateyPackage' is not recognized as a name of a cmdlet, function, script file, or executable program"
         'A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond'
+        'The SSL connection could not be established'
     )
     RepeatSleep = 30                                        # How much to sleep between repeats in seconds, by default 0
     RepeatCount = 2                                         # How many times to repeat on errors, by default 1
