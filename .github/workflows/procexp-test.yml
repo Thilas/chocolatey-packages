@@ -16,7 +16,7 @@ on:
 
 jobs:
   job:
-    name: CI
+    name: ${{ github.workflow }}
     uses: ./.github/workflows/.common.yml
     with:
       packages: procexp
