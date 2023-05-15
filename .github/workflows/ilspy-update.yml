@@ -24,3 +24,4 @@ jobs:
     with:
       packages: ilspy
       force: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}
+    secrets: inherit
