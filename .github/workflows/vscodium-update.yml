@@ -4,6 +4,7 @@ on:
   push:
     branches: [master]  # Automatic update
     paths:
+      - .github/workflows/.common.yml
       - .github/workflows/vscodium-update.yml
       - vscodium/**
       - vscodium.install/**
@@ -26,3 +27,4 @@ jobs:
     with:
       packages: vscodium, vscodium.install, vscodium.portable
       force: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}
+    secrets: inherit

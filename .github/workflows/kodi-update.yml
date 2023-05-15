@@ -4,6 +4,7 @@ on:
   push:
     branches: [master]  # Automatic update
     paths:
+      - .github/workflows/.common.yml
       - .github/workflows/kodi-update.yml
       - kodi/**
       - Common.ps1
@@ -24,3 +25,4 @@ jobs:
     with:
       packages: kodi
       force: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}
+    secrets: inherit

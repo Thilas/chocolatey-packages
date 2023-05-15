@@ -53,8 +53,6 @@ jobs:
           $update = if ($Env:test -eq 'true') {
             './test_all.ps1'
           } else {
-            $Env:au_push = 'true'
-            $Env:api_key = $Env:CHOCOLATEY_KEY
             './update_all.ps1'
           }
           [array] $packages = & $update @arguments -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
@@ -69,7 +67,8 @@ jobs:
           force: ${{ inputs.force }}
           github_user_repo: ${{ github.repository }}
           github_api_key: ${{ secrets.GITHUB_TOKEN }}
-          CHOCOLATEY_KEY: ${{ secrets.CHOCOLATEY_KEY }}
+          au_push: ${{ !inputs.test }}
+          api_key: ${{ secrets.CHOCOLATEY_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish report

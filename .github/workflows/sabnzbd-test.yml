@@ -5,6 +5,7 @@ on:
     types: [opened, edited, reopened, synchronize]
     branches: [master]  # Automatic test
     paths:
+      - .github/workflows/.common.yml
       - .github/workflows/sabnzbd-test.yml
       - sabnzbd/**
       - Common.ps1
