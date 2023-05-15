@@ -4,6 +4,7 @@ on:
   push:
     branches: [master]  # Automatic update
     paths:
+      - .github/workflows/.common.yml
       - .github/workflows/ilspy-update.yml
       - ilspy/**
       - Common.ps1

@@ -5,6 +5,7 @@ on:
     types: [opened, edited, reopened, synchronize]
     branches: [master]  # Automatic test
     paths:
+      - .github/workflows/.common.yml
       - .github/workflows/airserver-test.yml
       - airserver/**
       - Common.ps1
