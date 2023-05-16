@@ -50,12 +50,12 @@ jobs:
           if ($Env:test -ne 'true' -and $Env:force -eq 'true') {
             $arguments.Force = $true
           }
-          $update = if ($Env:test -eq 'true') {
+          $script = if ($Env:test -eq 'true') {
             './test_all.ps1'
           } else {
             './update_all.ps1'
           }
-          [array] $packages = & $update @arguments -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
+          [array] $packages = & $script @arguments -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
             $_ | ConvertTo-Json -Compress
           }
           $packages = ConvertTo-Json $packages -Compress

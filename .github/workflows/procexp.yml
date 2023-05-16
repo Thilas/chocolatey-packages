@@ -35,8 +35,6 @@ on:
           - Test
           - Update
 
-run-name: ${{ fromJSON(format(vars.NAME_MAPPING, fromJSON('{"0 4 * * *":"Test","5 */6 * * *":"Update"}')[github.event.schedule], inputs.type))[github.event_name] }}
-
 jobs:
   job:
     name: ${{ fromJSON(format(vars.NAME_MAPPING, fromJSON('{"0 4 * * *":"Test","5 */6 * * *":"Update"}')[github.event.schedule], inputs.type))[github.event_name] }}
