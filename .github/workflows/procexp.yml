@@ -36,11 +36,26 @@ on:
           - Update
 
 jobs:
-  job:
-    name: ${{ fromJSON(format(vars.NAMEMAPPING, fromJSON('{"0 4 * * *":"Test","5 */6 * * *":"Update"}')[github.event.schedule], inputs.type))[github.event_name] }}
+  # job:
+  #   name: ${{ fromJSON(format(vars.NAMEMAPPING, fromJSON('{"0 4 * * *":"Test","5 */6 * * *":"Update"}')[github.event.schedule], inputs.type))[github.event_name] }}
+  #   uses: ./.github/workflows/.new.yml
+  #   with:
+  #     packages: ${{ github.workflow }}
+  #     test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
+  #     force: ${{ inputs.type == 'Force update' }}
+  #   secrets: inherit
+
+  test:
+    name: Test
+    if: github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test'
     uses: ./.github/workflows/.new.yml
     with:
-      packages: ${{ github.workflow }}
-      test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
+      test: true
+
+  update:
+    name: Update
+    if: github.event_name != 'pull_request' && github.event.schedule != '0 4 * * *' && inputs.type != 'Test'
+    uses: ./.github/workflows/.new.yml
+    with:
       force: ${{ inputs.type == 'Force update' }}
     secrets: inherit

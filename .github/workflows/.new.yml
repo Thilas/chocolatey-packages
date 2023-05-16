@@ -4,11 +4,10 @@ on:
       packages:
         description: Packages (comma-separated values)
         type: string
-        required: true
+        default: ${{ github.workflow }}
       test:
         description: Test
         type: boolean
-        required: true
       force:
         description: Force update
         type: boolean
