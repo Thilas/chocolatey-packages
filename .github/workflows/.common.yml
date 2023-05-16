@@ -14,7 +14,7 @@ on:
 
 jobs:
   update:
-    name: Update ${{ inputs.packages }}
+    name: Update ${{ github.workflow }}
     runs-on: windows-latest
     timeout-minutes: 20
 
