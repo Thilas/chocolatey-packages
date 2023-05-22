@@ -7,7 +7,7 @@ Package can be verified like this:
 
 1. Go to
 
-   x32: https://github.com/icsharpcode/ILSpy/releases/download/v8.0-preview4/ILSpy_binaries_8.0.0.7313-preview4.zip
+   x32: https://github.com/icsharpcode/ILSpy/releases/download/v8.0/ILSpy_binaries_8.0.0.7345.zip
 
    to download the installer.
 
@@ -15,7 +15,7 @@ Package can be verified like this:
    - Use powershell function 'Get-FileHash'
    - Use Chocolatey utility 'checksum.exe'
 
-   checksum32: 045832D3B66880B0530E505597FA1E6AD699ADF7FE3C66727F061526FDCE0175
+   checksum32: 2F3CB188EAC706C08EA278201B4854030FD091697FB41F1B5654CB3A5835AE37
 
 File 'LICENSE.txt' is obtained from:
    https://github.com/icsharpcode/ILSpy/blob/master/doc/license.txt
