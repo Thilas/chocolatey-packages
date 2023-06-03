@@ -2,7 +2,7 @@
 
 [chocolatey/Thilas](https://chocolatey.org/profiles/Thilas)
 |
-[Workflow Status](Status.md)
+[Workflow status](Status.md)
 |
 [Failed updates](https://github.com/Thilas/chocolatey-packages/actions?query=is%3Afailure)
 
