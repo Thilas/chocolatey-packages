@@ -4,7 +4,7 @@
 |
 [Workflow status](Status.md)
 |
-[Failed updates](https://github.com/Thilas/chocolatey-packages/actions?query=is%3Afailure)
+[Failed updates](https://github.com/Thilas/chocolatey-packages/actions?query=event%3Aschedule+is%3Afailure)
 
 This repository contains [chocolatey automatic packages](https://chocolatey.org/docs/automatic-packages).
 The repository is setup so that you can manage your packages entirely from the GitHub web interface (using GitHub Actions to update and push packages) and/or using the local repository copy.
