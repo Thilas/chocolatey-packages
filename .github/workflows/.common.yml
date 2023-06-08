@@ -13,7 +13,7 @@ on:
         type: boolean
 
 env:
-  # force_chocolatey_upgrade: true
+  force_chocolatey_upgrade: false
 
 jobs:
   update:
