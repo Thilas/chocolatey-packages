@@ -13,7 +13,7 @@ on:
         type: boolean
 
 env:
-  force_chocolatey_upgrade: false
+  force_chocolatey_upgrade: true
 
 jobs:
   update:
@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Upgrade chocolatey
-        if: env.force_chocolatey_upgrade
+        if: env.force_chocolatey_upgrade == 'true'
         run: choco upgrade -y --no-progress chocolatey
 
       - name: Install AU
@@ -127,7 +127,7 @@ jobs:
 
     steps:
       - name: Upgrade chocolatey
-        if: env.force_chocolatey_upgrade
+        if: env.force_chocolatey_upgrade == 'true'
         run: choco upgrade -y --no-progress chocolatey
 
       - name: Remove package if installed
