@@ -12,9 +12,6 @@ on:
         description: Force update
         type: boolean
 
-env:
-  force_chocolatey_upgrade: true
-
 jobs:
   update:
     name: Update ${{ github.workflow }}
@@ -35,10 +32,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Upgrade chocolatey
-        if: env.force_chocolatey_upgrade == 'true'
-        run: choco upgrade -y --no-progress chocolatey
 
       - name: Install AU
         run: |
@@ -126,10 +119,6 @@ jobs:
       PackageVersion: ${{ fromJSON(matrix.package).version }}
 
     steps:
-      - name: Upgrade chocolatey
-        if: env.force_chocolatey_upgrade == 'true'
-        run: choco upgrade -y --no-progress chocolatey
-
       - name: Remove package if installed
         run: |
           if (choco list -r --local `"$Env:PackageName`") {
