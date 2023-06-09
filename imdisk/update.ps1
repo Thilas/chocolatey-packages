@@ -4,7 +4,7 @@ param([switch] $Force)
 . "$PSScriptRoot\..\Common.ps1"
 
 function global:au_GetLatest {
-    # HTTPS doesn't work as of today
+    # HTTPS doesn't work as of today (2023-06-07)
     $url = 'http://www.ltr-data.se/opencode.html'
     try {
         Invoke-WebRequest -Uri $url -UseBasicParsing -Method Head | Out-Null

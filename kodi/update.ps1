@@ -10,9 +10,7 @@ function global:au_GetLatest {
         -GetVersion { param($Link)
             $versionPattern = '-(?<Version>\d+(?:\.\d+){1,3})-'
             $value = if ($Link.href -match "$versionPattern.+_(?<Prerelease>[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+| \d+)*)-") {
-                $prerelease = $Matches.Prerelease.Replace(' ', '.')
-                # for now, chocolatey does only support SemVer v1 (no dot separated identifiers in pre-release):
-                if ($prerelease -match '\.') { return }
+                $prerelease = $Matches.Prerelease
                 '{0}-{1}' -f $Matches.Version, $prerelease
             } elseif ($Link.href -match $versionPattern) {
                 $Matches.Version

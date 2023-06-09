@@ -35,11 +35,11 @@ jobs:
 
       - name: Install AU
         run: |
-          git clone -q https://github.com/majkinetor/au.git $Env:TEMP/au
+          git clone -q https://github.com/Thilas/au.git $Env:TEMP/au
           . "$Env:TEMP/au/scripts/Install-AU.ps1" $Env:au_version
 
       - name: Install chocolatey-core.extension # required for several packages
-        run: choco install -y chocolatey-core.extension
+        run: choco install -y --no-progress chocolatey-core.extension
 
       - name: Update packages
         id: updates
@@ -122,7 +122,7 @@ jobs:
       - name: Remove package if installed
         run: |
           if (choco list -r --local `"$Env:PackageName`") {
-            choco uninstall -y `"$Env:PackageName`"
+            choco uninstall -y --no-progress `"$Env:PackageName`"
           }
 
       - name: Download Packages artifact
@@ -132,7 +132,7 @@ jobs:
 
       - name: Install package
         run: |
-          choco install -y `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source `"'.;https://community.chocolatey.org/api/v2/'`" --force --debug
+          choco install -y --no-progress `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source `"'.;https://community.chocolatey.org/api/v2/'`" --force --debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
         timeout-minutes: 10
 
@@ -154,14 +154,14 @@ jobs:
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
         if: env.PackageName != 'airserver'
         run: |
-          choco uninstall -y `"$Env:PackageName`" --debug
+          choco uninstall -y --no-progress `"$Env:PackageName`" --debug
           if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
         timeout-minutes: 10
 
       - name: Take failure screenshot
         if: failure()
         run: |
-          choco install nircmd
+          choco install -y --no-progress nircmd
           nircmd savescreenshotfull desktop.png
 
       - name: Upload failure screenshot into Information artifact
