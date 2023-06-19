@@ -20,7 +20,7 @@ jobs:
 
     env:
       # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
-      au_version: master
+      au_version: release
 
     steps:
       - name: Set up git
