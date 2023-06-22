@@ -33,7 +33,6 @@ Example: `choco install subtitleedit --params "/NoDesktopIcon /NoSetFileTypes"`
     <bugTrackerUrl>https://github.com/SubtitleEdit/subtitleedit/issues</bugTrackerUrl>
     <dependencies>
       <dependency id="chocolatey-core.extension" version="1.3.3" />
-      <dependency id="netfx-4.7.2" version="4.7.2.0" />
     </dependencies>
   </metadata>
   <files>

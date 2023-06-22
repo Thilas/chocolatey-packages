@@ -32,9 +32,6 @@ Visual Studio Code is a lightweight but powerful source code editor which runs o
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/vscodium.portable</packageSourceUrl>
     <docsUrl>https://code.visualstudio.com/docs</docsUrl>
     <bugTrackerUrl>https://github.com/VSCodium/vscodium/issues</bugTrackerUrl>
-    <dependencies>
-      <dependency id="dotnet4.5.2" version="4.5.2.20140902" />
-    </dependencies>
   </metadata>
   <files>
     <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
