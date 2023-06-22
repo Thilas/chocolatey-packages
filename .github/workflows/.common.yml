@@ -14,8 +14,6 @@ on:
 
 jobs:
   update:
-    concurrency: ${{ inputs.test && github.run_id || 'update' }}
-
     name: Update ${{ github.workflow }}
     runs-on: windows-latest
     timeout-minutes: 20
