@@ -22,7 +22,7 @@ on:
       - update_vars.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
-    - cron: 5 */6 * * * # Scheduled update
+    - cron: 45 1-23/6 * * * # Scheduled update
   workflow_dispatch:    # Manual run
     inputs:
       type:
@@ -37,7 +37,7 @@ on:
 
 jobs:
   job:
-    name: ${{ fromJSON(format('{{"pull_request":"Test","push":"Update","schedule":"{0}","workflow_dispatch":"{1}"}}', fromJSON('{"0 4 * * *":"Test","5 */6 * * *":"Update"}')[github.event.schedule], inputs.type))[github.event_name] }}
+    name: ${{ fromJSON(format('{{"pull_request":"Test","push":"Update","schedule":"{0}","workflow_dispatch":"{1}"}}', fromJSON('{"0 4 * * *":"Test","45 1-23/6 * * *":"Update"}')[github.event.schedule], inputs.type))[github.event_name] }}
     uses: ./.github/workflows/.common.yml
     with:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
