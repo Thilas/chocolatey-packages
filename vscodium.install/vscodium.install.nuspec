@@ -50,7 +50,6 @@ Example: `choco install vscodium.install --params "/NoDesktopIcon /NoAddToPath"`
     <bugTrackerUrl>https://github.com/VSCodium/vscodium/issues</bugTrackerUrl>
     <dependencies>
       <dependency id="chocolatey-core.extension" version="1.3.3" />
-      <dependency id="dotnet4.5.2" version="4.5.2.20140902" />
     </dependencies>
   </metadata>
   <files>

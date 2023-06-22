@@ -33,9 +33,6 @@ Features:
     <tags>airserver admin trial airplay googlecast miracast screen mirroring appletv chromecast</tags>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/airserver</packageSourceUrl>
     <docsUrl>https://support.airserver.com/</docsUrl>
-    <!--<dependencies>
-      <dependency id="kb2999226" />
-    </dependencies>-->
   </metadata>
   <files>
     <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
