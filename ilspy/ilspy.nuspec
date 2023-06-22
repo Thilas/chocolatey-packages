@@ -31,6 +31,9 @@
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/ilspy</packageSourceUrl>
     <docsUrl>https://github.com/icsharpcode/ILSpy/wiki</docsUrl>
     <bugTrackerUrl>https://github.com/icsharpcode/ILSpy/issues</bugTrackerUrl>
+    <dependencies>
+      <dependency id="dotnet-6.0-desktopruntime" />
+    </dependencies>
   </metadata>
   <files>
     <file src="legal\**" target="legal" />
