@@ -24,7 +24,7 @@ on:
       - update_vars.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
-    - cron: 5 */6 * * * # Scheduled update
+    - cron: 35 2-23/6 * * * # Scheduled update
   workflow_dispatch:    # Manual run
     inputs:
       type:
