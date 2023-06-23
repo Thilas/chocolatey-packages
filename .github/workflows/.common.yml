@@ -16,7 +16,7 @@ jobs:
   update:
     name: Update ${{ github.workflow }}
     runs-on: windows-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
 
     env:
       # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
@@ -35,8 +35,8 @@ jobs:
 
       - name: Install AU
         run: |
-          git clone -q https://github.com/Thilas/au.git "$Env:TEMP/au"
-          . "$Env:TEMP/au/scripts/Install-AU.ps1" $Env:au_version
+          git clone -q https://github.com/Thilas/au.git "$env:TEMP/au"
+          . "$env:TEMP/au/scripts/Install-AU.ps1" $env:au_version
 
       # - name: Install chocolatey-core.extension # required for several packages
       #   run: choco install -y --no-progress chocolatey-core.extension
@@ -45,9 +45,9 @@ jobs:
         id: updates
         run: |
           $arguments = @{
-            Name = $Env:packages -replace " ","" -split ","
+            Name = $env:packages -replace " ","" -split ","
           }
-          if ($Env:force -eq "true") {
+          if ($env:force -eq "true") {
             $arguments.Force = $true
           }
           [array] $packages = ./update_all.ps1 @arguments | ForEach-Object {
@@ -55,7 +55,7 @@ jobs:
           }
           $packages = ConvertTo-Json $packages -Compress
           "Packages = $packages"
-          "packages=$packages" >> $Env:GITHUB_OUTPUT
+          "packages=$packages" >> $env:GITHUB_OUTPUT
         env:
           packages: ${{ inputs.packages }}
           force: ${{ inputs.test || inputs.force }}
@@ -65,7 +65,7 @@ jobs:
 
       - name: Publish report
         if: always() && hashFiles('report.md')
-        run: Get-Content "report.md" >> $Env:GITHUB_STEP_SUMMARY
+        run: Get-Content "report.md" >> $env:GITHUB_STEP_SUMMARY
 
       - name: Prepare Packages artifact
         if: always() && hashFiles('**/*.nupkg')
@@ -100,14 +100,14 @@ jobs:
     timeout-minutes: 20
 
     env:
-      PackageName: ${{ fromJSON(matrix.package).name }}
-      PackageVersion: ${{ fromJSON(matrix.package).version }}
+      package_name: ${{ fromJSON(matrix.package).name }}
+      package_version: ${{ fromJSON(matrix.package).version }}
 
     steps:
       - name: Remove package if needed
         run: |
-          if (choco list -r $Env:PackageName) {
-            choco uninstall -y --no-progress $Env:PackageName
+          if (choco list -r $env:package_name) {
+            choco uninstall -y --no-progress $env:package_name
           }
 
       - name: Download Packages artifact
@@ -117,30 +117,34 @@ jobs:
 
       - name: Install package
         run: |
-          choco install -y --no-progress $Env:PackageName --version $Env:PackageVersion --source "'.;https://community.chocolatey.org/api/v2/'" --force --verbose --debug
+          choco install -y --no-progress $env:package_name --version $env:package_version --source "'.;https://community.chocolatey.org/api/v2/'" $env:debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
+        env:
+          debug: ${{ runner.debug == '1' && '--verbose --debug' }}
         timeout-minutes: 10
 
       - name: Determine package information path
         id: information
         run: |
-          $path = Join-Path $Env:ChocolateyInstall ".chocolatey/$Env:PackageName.$Env:PackageVersion"
+          $path = Join-Path $env:ChocolateyInstall ".chocolatey/$env:package_name.$env:package_version"
           $path = $path -replace "\\", "/"
           Get-ChildItem $path
-          "path=$path" >> $Env:GITHUB_OUTPUT
+          "path=$path" >> $env:GITHUB_OUTPUT
 
       - name: Upload Information artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Information ${{ env.PackageName }} ${{ env.PackageVersion }} on ${{ matrix.os }}
+          name: Information ${{ env.package_name }} ${{ env.package_version }} on ${{ matrix.os }}
           path: ${{ steps.information.outputs.path }}
 
       - name: Uninstall package
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
-        if: env.PackageName != 'airserver'
+        if: env.package_name != 'airserver'
         run: |
-          choco uninstall -y --no-progress $Env:PackageName --verbose --debug
+          choco uninstall -y --no-progress $env:package_name $env:debug
           if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
+        env:
+          debug: ${{ runner.debug == '1' && '--verbose --debug' }}
         timeout-minutes: 10
 
       - name: Take failure screenshot
@@ -153,5 +157,5 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v3
         with:
-          name: Information ${{ env.PackageName }} ${{ env.PackageVersion }} on ${{ matrix.os }}
+          name: Information ${{ env.package_name }} ${{ env.package_version }} on ${{ matrix.os }}
           path: desktop.png
