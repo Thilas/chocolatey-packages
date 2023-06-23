@@ -9,7 +9,7 @@ on:
       - .github/workflows/sabnzbd.yml
       - sabnzbd/**
       - Common.ps1
-      - test_all.ps1
+      # - test_all.ps1
       - update_vars.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
