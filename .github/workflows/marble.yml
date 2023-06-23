@@ -6,11 +6,11 @@ on:
     branches: [master]
     paths:
       # - .github/workflows/.common.yml
-      - .github/workflows/marble.yml
+      # - .github/workflows/marble.yml
       - marble/**
       - Common.ps1
       # - test_all.ps1
-      - update_vars.ps1
+      # - update_vars.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
     - cron: 15 1-23/6 * * * # Scheduled update
