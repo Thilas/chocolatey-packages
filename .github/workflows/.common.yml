@@ -117,10 +117,11 @@ jobs:
 
       - name: Install package
         run: |
-          choco install -y --no-progress $env:package_name --version $env:package_version --source "'.;https://community.chocolatey.org/api/v2/'" $env:debug
+          $debug = if ($env:debug) { "--verbose --debug" }
+          choco install -y --no-progress $env:package_name --version $env:package_version --source "'.;https://community.chocolatey.org/api/v2/'" $debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
         env:
-          debug: ${{ runner.debug == '1' && '--verbose --debug' }}
+          debug: ${{ runner.debug }}
         timeout-minutes: 10
 
       - name: Determine package information path
@@ -141,10 +142,11 @@ jobs:
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
         if: env.package_name != 'airserver'
         run: |
-          choco uninstall -y --no-progress $env:package_name $env:debug
+          $debug = if ($env:debug) { "--verbose --debug" }
+          choco uninstall -y --no-progress $env:package_name $debug
           if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
         env:
-          debug: ${{ runner.debug == '1' && '--verbose --debug' }}
+          debug: ${{ runner.debug }}
         timeout-minutes: 10
 
       - name: Take failure screenshot
