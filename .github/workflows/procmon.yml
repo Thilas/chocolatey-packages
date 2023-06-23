@@ -5,7 +5,7 @@ on:
     types: [opened, reopened, synchronize]
     branches: [master]
     paths:
-      - .github/workflows/.common.yml
+      # - .github/workflows/.common.yml
       - .github/workflows/procmon.yml
       - procmon/**
       - Common.ps1

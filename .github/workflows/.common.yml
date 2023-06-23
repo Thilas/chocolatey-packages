@@ -16,6 +16,7 @@ jobs:
   update:
     name: Update ${{ github.workflow }}
     runs-on: windows-latest
+    # runs-on: ubuntu-latest
     timeout-minutes: 20
 
     env:
@@ -23,39 +24,36 @@ jobs:
       au_version: release
 
     steps:
-      - name: Set up git
-        if: ${{ !inputs.test }}
-        run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "<>"
-          git config --global core.safecrlf false
+      # - name: Set up git
+      #   if: ${{ !inputs.test }}
+      #   run: |
+      #     git config --global user.name "GitHub Actions Bot"
+      #     git config --global user.email "<>"
+      #     git config --global core.safecrlf false
 
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Install AU
+        # shell: pwsh
         run: |
           git clone -q https://github.com/Thilas/au.git $Env:TEMP/au
           . "$Env:TEMP/au/scripts/Install-AU.ps1" $Env:au_version
 
-      - name: Install chocolatey-core.extension # required for several packages
-        run: choco install -y --no-progress chocolatey-core.extension
+      # - name: Install chocolatey-core.extension # required for several packages
+      #   run: choco install -y --no-progress chocolatey-core.extension
 
       - name: Update packages
         id: updates
+        # shell: pwsh
         run: |
           $arguments = @{
             Name = $Env:packages -replace ' ','' -split ','
           }
-          if ($Env:test -ne 'true' -and $Env:force -eq 'true') {
+          if ($Env:force -eq 'true') {
             $arguments.Force = $true
           }
-          $script = if ($Env:test -eq 'true') {
-            './test_all.ps1'
-          } else {
-            './update_all.ps1'
-          }
-          [array] $packages = & $script @arguments -ThrowOnErrors -PassThru -UpdatesOnly | ForEach-Object {
+          [array] $packages = ./update_all.ps1 @arguments | ForEach-Object {
             $_ | ConvertTo-Json -Compress
           }
           $packages = ConvertTo-Json $packages -Compress
@@ -63,24 +61,14 @@ jobs:
           "packages=$packages" >> $Env:GITHUB_OUTPUT
         env:
           packages: ${{ inputs.packages }}
-          test: ${{ inputs.test }}
-          force: ${{ inputs.force }}
+          force: ${{ inputs.test || inputs.force }}
           github_user_repo: ${{ github.repository }}
-          github_api_key: ${{ secrets.GITHUB_TOKEN }}
-          au_push: ${{ !inputs.test }}
-          api_key: ${{ secrets.CHOCOLATEY_KEY }}
+          # api_key: ${{ secrets.CHOCOLATEY_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish report
-        if: always() && hashFiles('Update-AUPackages.md', 'Update-Force-Test*.md')
-        run: Get-Content 'Update-AUPackages.md', 'Update-Force-Test*.md' -ErrorAction SilentlyContinue >> $Env:GITHUB_STEP_SUMMARY
-
-      - name: Upload Info artifact
-        if: always() && hashFiles('update_info.xml')
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: Info
-          path: update_info.xml
+        if: always() && hashFiles('report.md')
+        run: Get-Content 'report.md' -ErrorAction SilentlyContinue >> $Env:GITHUB_STEP_SUMMARY
 
       - name: Prepare Packages artifact
         if: always() && hashFiles('**/*.nupkg')
@@ -90,7 +78,7 @@ jobs:
 
       - name: Upload Packages artifact
         if: always() && hashFiles('Packages/*.nupkg')
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3
         with:
           name: Packages
           path: Packages/*.nupkg
@@ -98,7 +86,7 @@ jobs:
     outputs:
       updates: ${{ steps.updates.outputs.packages }}
 
-  packages:
+  test:
     if: needs.update.outputs.updates != 'null'
     needs: update
 
@@ -119,20 +107,20 @@ jobs:
       PackageVersion: ${{ fromJSON(matrix.package).version }}
 
     steps:
-      - name: Remove package if installed
+      - name: Remove package if needed
         run: |
-          if (choco list -r --local `"$Env:PackageName`") {
+          if (choco list -r `"$Env:PackageName`") {
             choco uninstall -y --no-progress `"$Env:PackageName`"
           }
 
       - name: Download Packages artifact
-        uses: actions/download-artifact@v3.0.2
+        uses: actions/download-artifact@v3
         with:
           name: Packages
 
       - name: Install package
         run: |
-          choco install -y --no-progress `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source `"'.;https://community.chocolatey.org/api/v2/'`" --force --debug
+          choco install -y --no-progress `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source `"'.;https://community.chocolatey.org/api/v2/'`" --force --verbose --debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
         timeout-minutes: 10
 
@@ -145,7 +133,7 @@ jobs:
           "path=$path" >> $Env:GITHUB_OUTPUT
 
       - name: Upload Information artifact
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3
         with:
           name: Information ${{ env.PackageName }} ${{ env.PackageVersion }} on ${{ matrix.os }}
           path: ${{ steps.information.outputs.path }}
@@ -154,7 +142,7 @@ jobs:
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
         if: env.PackageName != 'airserver'
         run: |
-          choco uninstall -y --no-progress `"$Env:PackageName`" --debug
+          choco uninstall -y --no-progress `"$Env:PackageName`" --verbose --debug
           if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
         timeout-minutes: 10
 
@@ -166,7 +154,7 @@ jobs:
 
       - name: Upload failure screenshot into Information artifact
         if: failure()
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3
         with:
           name: Information ${{ env.PackageName }} ${{ env.PackageVersion }} on ${{ matrix.os }}
           path: desktop.png
