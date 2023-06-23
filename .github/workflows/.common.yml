@@ -15,17 +15,12 @@ on:
 jobs:
   update:
     name: Update ${{ github.workflow }}
-    # runs-on: windows-latest
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     timeout-minutes: 20
 
     env:
       # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
       au_version: release
-
-    defaults:
-      run:
-        shell: pwsh
 
     steps:
       # - name: Set up git
@@ -40,8 +35,8 @@ jobs:
 
       - name: Install AU
         run: |
-          git clone -q https://github.com/Thilas/au.git au
-          . "./au/scripts/Install-AU.ps1" $Env:au_version
+          git clone -q https://github.com/Thilas/au.git "$Env:TEMP/au"
+          . "$Env:TEMP/au/scripts/Install-AU.ps1" $Env:au_version
 
       # - name: Install chocolatey-core.extension # required for several packages
       #   run: choco install -y --no-progress chocolatey-core.extension
@@ -50,9 +45,9 @@ jobs:
         id: updates
         run: |
           $arguments = @{
-            Name = $Env:packages -replace ' ','' -split ','
+            Name = $Env:packages -replace " ","" -split ","
           }
-          if ($Env:force -eq 'true') {
+          if ($Env:force -eq "true") {
             $arguments.Force = $true
           }
           [array] $packages = ./update_all.ps1 @arguments | ForEach-Object {
@@ -70,13 +65,13 @@ jobs:
 
       - name: Publish report
         if: always() && hashFiles('report.md')
-        run: Get-Content 'report.md' >> $Env:GITHUB_STEP_SUMMARY
+        run: Get-Content "report.md" >> $Env:GITHUB_STEP_SUMMARY
 
       - name: Prepare Packages artifact
         if: always() && hashFiles('**/*.nupkg')
         run: |
           New-Item Packages -ItemType Directory
-          Get-ChildItem '*.nupkg' -Recurse | Move-Item -Destination Packages
+          Get-ChildItem "*.nupkg" -Recurse | Move-Item -Destination Packages
 
       - name: Upload Packages artifact
         if: always() && hashFiles('Packages/*.nupkg')
@@ -111,8 +106,8 @@ jobs:
     steps:
       - name: Remove package if needed
         run: |
-          if (choco list -r `"$Env:PackageName`") {
-            choco uninstall -y --no-progress `"$Env:PackageName`"
+          if (choco list -r $Env:PackageName) {
+            choco uninstall -y --no-progress $Env:PackageName
           }
 
       - name: Download Packages artifact
@@ -122,7 +117,7 @@ jobs:
 
       - name: Install package
         run: |
-          choco install -y --no-progress `"$Env:PackageName`" --version `"$Env:PackageVersion`" --source `"'.;https://community.chocolatey.org/api/v2/'`" --force --verbose --debug
+          choco install -y --no-progress $Env:PackageName --version $Env:PackageVersion --source "'.;https://community.chocolatey.org/api/v2/'" --force --verbose --debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
         timeout-minutes: 10
 
@@ -130,7 +125,7 @@ jobs:
         id: information
         run: |
           $path = Join-Path $Env:ChocolateyInstall ".chocolatey/$Env:PackageName.$Env:PackageVersion"
-          $path = $path -replace '\\', '/'
+          $path = $path -replace "\\", "/"
           Get-ChildItem $path
           "path=$path" >> $Env:GITHUB_OUTPUT
 
@@ -144,7 +139,7 @@ jobs:
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
         if: env.PackageName != 'airserver'
         run: |
-          choco uninstall -y --no-progress `"$Env:PackageName`" --verbose --debug
+          choco uninstall -y --no-progress $Env:PackageName --verbose --debug
           if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
         timeout-minutes: 10
 
