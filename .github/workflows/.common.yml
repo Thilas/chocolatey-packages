@@ -40,8 +40,8 @@ jobs:
 
       - name: Install AU
         run: |
-          git clone -q https://github.com/Thilas/au.git $Env:TEMP/au
-          . "$Env:TEMP/au/scripts/Install-AU.ps1" $Env:au_version
+          git clone -q https://github.com/Thilas/au.git au
+          . "./au/scripts/Install-AU.ps1" $Env:au_version
 
       # - name: Install chocolatey-core.extension # required for several packages
       #   run: choco install -y --no-progress chocolatey-core.extension
