@@ -6,11 +6,10 @@ on:
     branches: [master]
     paths:
       - .github/workflows/.common.yml
-      - .github/workflows/hashcheck.yml
+      # - .github/workflows/hashcheck.yml
       - hashcheck/**
       - Common.ps1
-      - test_all.ps1
-      - update_vars.ps1
+      - update_all.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
     - cron: 25 0-23/6 * * * # Scheduled update
