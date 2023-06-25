@@ -41,13 +41,9 @@ jobs:
       - name: Update packages
         id: updates
         run: |
-          $arguments = @{
-            Name = $env:packages -replace " ","" -split ","
-          }
-          if ($env:force -eq "true") {
-            $arguments.Force = $true
-          }
-          [array] $packages = ./update_all.ps1 @arguments | ForEach-Object {
+          $names = $env:packages -replace " ","" -split ","
+          $force = $env:force -eq "true"
+          [array] $packages = ./update_all.ps1 -Name $names -Force:$force | ForEach-Object {
             $_ | ConvertTo-Json -Compress
           }
           $packages = ConvertTo-Json $packages -Compress
