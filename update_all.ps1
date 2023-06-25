@@ -1,19 +1,20 @@
 ﻿param(
     [string[]] $Name,
     [switch] $Force,
-    [switch] $WhatIf,
     [string] $Root = $PSScriptRoot # Path to the AU packages
 )
 
 $global:au_Root = Resolve-Path $Root
 
 $options = [ordered] @{
-    WhatIf        = $WhatIf                                 # Whatif all packages
+    WhatIf        = $au_WhatIf                              # Whatif all packages
     Force         = $Force                                  # Force all packages
     Timeout       = 120                                     # Connection timeout in seconds
     UpdateTimeout = 300                                     # Update timeout in seconds
     Threads       = 10                                      # Number of background jobs to use
-    Push          = $false                                  # Push to chocolatey
+    Push          = $env:au_push -eq 'true'                 # Push to chocolatey
+    PushAll       = $true                                   # Allow to push multiple packages at once
+    # PluginPath    = ''                                      # Path to user plugins
 
     IgnoreOn = @(                                           # Error message parts to set the package ignore status
         'Could not create SSL/TLS secure channel'
@@ -52,16 +53,26 @@ $options = [ordered] @{
         Type = 'markdown'                                   # Report type: markdown or text
         Path = "$PSScriptRoot\report.md"                    # Path where to save the report
         Params = @{                                         # Report parameters:
-            Github_UserRepo = $Env:github_user_repo         #   Markdown: shows user info in upper right corner
+            Github_UserRepo = $env:github_user_repo         #   Markdown: shows user info in upper right corner
             NoAppVeyor  = $true                             #   Markdown: do not show AppVeyor build shield
             Title       = 'AU Report'                       #   Markdown, Text: Title of the report, by default 'Update-AUPackages'
             UserMessage = @(                                #   Markdown, Text: Custom user message to show
-                "[Build](https://github.com/$Env:github_user_repo/actions)"
-                "[Releases](https://github.com/$Env:github_user_repo/releases)"
+                "[Build](https://github.com/$env:github_user_repo/actions)"
+                "[Releases](https://github.com/$env:github_user_repo/releases)"
             ) -join " | "
             NoIcons     = $false                            #   Markdown: don't show icon
             IconSize    = 32                                #   Markdown: icon size
         }
+    }
+
+    Git = @{
+        User     = ''                                       # Git username, leave empty if github api key is used
+        Password = $env:github_api_key                      # Password if username is not empty, otherwise api key
+    }
+
+    GitReleases  = @{
+        ApiToken    = $env:github_api_key                   # Your github api key
+        ReleaseType = 'package'                             # Either 1 release per date, or 1 release per package
     }
 }
 

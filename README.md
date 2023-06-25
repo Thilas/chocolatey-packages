@@ -56,6 +56,7 @@ The following global variables influence the execution of `update_all.ps1` scrip
 
 ```powershell
 $au_NoPlugins = $true        #Do not execute plugins
+$au_Push      = $false       #Do not push to chocolatey
 ```
 
 You can also call AU method `Update-AUPackages` (alias `updateall`) on its own in the repository root. This will just run the updater for the each package without any other option from `update_all.ps1` script. For example to force update of all packages with a single command execute:

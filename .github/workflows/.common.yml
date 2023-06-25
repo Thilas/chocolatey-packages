@@ -16,19 +16,19 @@ jobs:
   update:
     name: Update ${{ github.workflow }}
     runs-on: windows-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
 
     env:
       # Set au version to use or omit to use the latest. Specify branch name to use development version from Github
       au_version: release
 
     steps:
-      # - name: Set up git
-      #   if: ${{ !inputs.test }}
-      #   run: |
-      #     git config --global user.name "GitHub Actions Bot"
-      #     git config --global user.email "<>"
-      #     git config --global core.safecrlf false
+      - name: Set up git
+        if: ${{ !inputs.test }}
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "<>"
+          git config --global core.safecrlf false
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -37,9 +37,6 @@ jobs:
         run: |
           git clone -q https://github.com/Thilas/au.git "$env:TEMP/au"
           . "$env:TEMP/au/scripts/Install-AU.ps1" $env:au_version
-
-      # - name: Install chocolatey-core.extension # required for several packages
-      #   run: choco install -y --no-progress chocolatey-core.extension
 
       - name: Update packages
         id: updates
@@ -60,7 +57,9 @@ jobs:
           packages: ${{ inputs.packages }}
           force: ${{ inputs.test || inputs.force }}
           github_user_repo: ${{ github.repository }}
-          # api_key: ${{ secrets.CHOCOLATEY_KEY }}
+          github_api_key: ${{ secrets.GITHUB_TOKEN }}
+          au_push: ${{ !inputs.test }}
+          api_key: ${{ secrets.CHOCOLATEY_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish report
@@ -71,7 +70,7 @@ jobs:
         if: always() && hashFiles('**/*.nupkg')
         run: |
           New-Item Packages -ItemType Directory
-          Get-ChildItem "*.nupkg" -Recurse | Move-Item -Destination Packages
+          Get-ChildItem *.nupkg -Recurse | Move-Item -Destination Packages
 
       - name: Upload Packages artifact
         if: always() && hashFiles('Packages/*.nupkg')
@@ -84,8 +83,8 @@ jobs:
       updates: ${{ steps.updates.outputs.packages }}
 
   test:
+    needs: [update]
     if: needs.update.outputs.updates != 'null'
-    needs: update
 
     strategy:
       fail-fast: false
