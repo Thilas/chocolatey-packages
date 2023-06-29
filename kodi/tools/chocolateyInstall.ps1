@@ -5,12 +5,12 @@ $packageArgs = @{
     packageName    = 'kodi'
     softwareName   = 'Kodi*'
     fileType       = 'exe'
-    url            = 'https://mirrors.kodi.tv/releases/windows/win32/kodi-20.1-Nexus-x86.exe'
-    url64bit       = 'https://mirrors.kodi.tv/releases/windows/win64/kodi-20.1-Nexus-x64.exe'
+    url            = 'https://mirrors.kodi.tv/releases/windows/win32/kodi-20.2-Nexus-x86.exe'
+    url64bit       = 'https://mirrors.kodi.tv/releases/windows/win64/kodi-20.2-Nexus-x64.exe'
     silentArgs     = '/S'
-    checksum       = 'bb0f6d2bff2b195fad9d76eb10e4f0ffa1dbdfda3f6100b98b76fc9a869d8724'
+    checksum       = '696ef2d1adafd70cb5b7ab2a4692d33e73f914bcb595411afa21158c83659e22'
     checksumType   = 'sha256'
-    checksum64     = 'e6973858cf711cf354b4b07e9df739326b60337bb91b3b7e6da0acadd0158d85'
+    checksum64     = 'e52b3d25e8577a8c83f8a90b573edb4f4f5e402013acbbeed0457cfa5401bc0c'
     checksumType64 = 'sha256'
     validExitCodes = @(0)
 }
