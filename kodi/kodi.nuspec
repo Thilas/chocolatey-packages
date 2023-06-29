@@ -7,7 +7,7 @@
     <title>Kodi</title>
     <authors>XBMC Foundation</authors>
     <owners>dtgm,Thilas</owners>
-    <licenseUrl>https://github.com/xbmc/xbmc/blob/master/LICENSES/README.md</licenseUrl>
+    <licenseUrl>https://github.com/xbmc/xbmc/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://kodi.tv/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@82f4f776a22eba1824666293707a33eef623d12c/kodi/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -23,7 +23,7 @@ It allows users to play and view most videos, music, podcasts, and other digital
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/kodi</packageSourceUrl>
     <docsUrl>https://kodi.wiki/</docsUrl>
     <mailingListUrl>https://forum.kodi.tv/</mailingListUrl>
-    <bugTrackerUrl>https://trac.kodi.tv/</bugTrackerUrl>
+    <bugTrackerUrl>https://github.com/xbmc/xbmc/issues</bugTrackerUrl>
   </metadata>
   <files>
     <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
