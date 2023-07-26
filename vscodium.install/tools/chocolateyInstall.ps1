@@ -21,9 +21,9 @@ $packageArgs = @{
     url            = 'https://github.com/VSCodium/vscodium/releases/download/1.80.1.23194/VSCodiumSetup-ia32-1.80.1.23194.exe'
     url64bit       = 'https://github.com/VSCodium/vscodium/releases/download/1.80.1.23194/VSCodiumSetup-x64-1.80.1.23194.exe'
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-    checksum       = 'bdb9b1b69831a0312f472862f54d2e5e87321e3409978572a9817e5a550ff577'
+    checksum       = 'f4035f54e2646fbe249ccf073c963f3637f847f7313964c0e8566c898b8560c2'
     checksumType   = 'sha256'
-    checksum64     = '9b3c3e8c9710c8c725e982a3675ce76d48a0766212114aa23e3e04473cee16fb'
+    checksum64     = '99c0394fd89af8bf616b0e30d1b9bb3bb9ff0b861b7d6c767396b81afbc8585f'
     checksumType64 = 'sha256'
     validExitCodes = @(0, 3010, 1641)
 }
