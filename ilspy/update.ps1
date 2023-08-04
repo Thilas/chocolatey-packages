@@ -8,7 +8,7 @@ function global:au_GetLatest {
         -Repository 'icsharpcode/ILSpy' `
         -GetTagName { param($TagName) $TagName -replace '-final$', '' } `
         -FileType 'zip' `
-        -IsUri32 { param($Uri) $Uri -match '_binaries_' }
+        -IsUri64 { param($Uri) $Uri -match '_binaries_.+\bx64\b' }
 }
 
 function global:au_BeforeUpdate { Get-RemoteFiles -Purge -NoSuffix }
@@ -20,8 +20,8 @@ function global:au_SearchReplace {
             "^([$]fileType\s*=\s*)'.*'$"    = "`$1'$($Latest.FileType)'"
         }
         'legal\VERIFICATION.txt' = @{
-            "(?i)(\s+x32:).*"               = "`$1 $($Latest.Url32)"
-            "(?i)(checksum32:).*"           = "`$1 $($Latest.Checksum32)"
+            "(?i)(\s+x64:).*"               = "`$1 $($Latest.Url64)"
+            "(?i)(checksum64:).*"           = "`$1 $($Latest.Checksum64)"
         }
     }
 }

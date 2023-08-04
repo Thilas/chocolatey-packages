@@ -10,10 +10,10 @@ $packageArgs = @{
 }
 # *** Automatically filled ***
 
-$packageArgs.file = Get-Item ("$toolsDir\*.{0}" -f $fileType)
+$packageArgs.file64 = Get-Item ("$toolsDir\*.{0}" -f $fileType)
 
 Get-ChocolateyUnzip @packageArgs
-Remove-Item $packageArgs.file -ErrorAction SilentlyContinue
+Remove-Item $packageArgs.file64 -ErrorAction SilentlyContinue
 
 New-Item "$toolsDir\ilspy.exe.gui" -Type File -Force | Out-Null
 
