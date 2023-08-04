@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium</id>
-    <version>1.80.2.23209</version>
+    <version>1.81.0.23216</version>
     <title>VSCodium</title>
     <authors>Microsoft,Peter Squicciarini</authors>
     <owners>Thilas</owners>
@@ -49,7 +49,7 @@ Example: `choco install vscodium --params "/NoDesktopIcon /NoAddToPath"`
     <docsUrl>https://code.visualstudio.com/docs</docsUrl>
     <bugTrackerUrl>https://github.com/VSCodium/vscodium/issues</bugTrackerUrl>
     <dependencies>
-      <dependency id="vscodium.install" version="[1.80.2.23209]" />
+      <dependency id="vscodium.install" version="[1.81.0.23216]" />
     </dependencies>
   </metadata>
   <files />
