@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium.portable</id>
-    <version>1.82.1.23255</version>
+    <version>1.82.2.23257</version>
     <title>VSCodium (Portable)</title>
     <authors>Microsoft,Peter Squicciarini</authors>
     <owners>Thilas</owners>
