@@ -251,6 +251,7 @@ function Get-GitHubLatest {
         [ValidateNotNullOrEmpty()]
         [string] $Repository,
         [switch] $NoPrerelease,
+        [scriptblock] $ReleaseFilter, # optional callback, param($Release)
         [scriptblock] $GetTagName, # optional callback, param($TagName, $Release)
         [int] $StreamFieldCount = 0, # optional, 0 means single stream
         [Parameter(Mandatory)]
@@ -268,6 +269,9 @@ function Get-GitHubLatest {
     $releases = Invoke-RestMethod -Uri "https://api.github.com/repos/$Repository/releases?per_page=10" -UseBasicParsing -Headers $headers
     if ($NoPrerelease) {
         $releases = $releases | Where-Object -Not 'prerelease'
+    }
+    if ($ReleaseFilter) {
+        $releases = $releases | Where-Object { & $ReleaseFilter -Release $_ }
     }
 
     $releases | ForEach-Object {
