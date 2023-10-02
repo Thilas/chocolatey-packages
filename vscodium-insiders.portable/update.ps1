@@ -6,6 +6,7 @@ param([switch] $Force)
 function global:au_GetLatest {
     Get-GitHubLatest `
         -Repository 'VSCodium/vscodium-insiders' `
+        -GetTagName { param($TagName) $TagName -replace '-insider$', '' } `
         -FileType 'zip' `
         -IsUri32 { param($Uri) $Uri -match '\bVSCodium-win32-ia32\b' } `
         -IsUri64 { param($Uri) $Uri -match '\bVSCodium-win32-x64\b' }
