@@ -1,4 +1,4 @@
-name: vscodium
+name: vscodium-insiders
 
 on:
   pull_request:         # Automatic test
@@ -6,14 +6,14 @@ on:
     branches: [master]
     paths:
       - .github/workflows/.common.yml
-      # - .github/workflows/vscodium.yml
-      - vscodium/**
-      - vscodium.*/**
+      # - .github/workflows/vscodium-insiders.yml
+      - vscodium-insiders/**
+      - vscodium-insiders.*/**
       - Common.ps1
       - update_all.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
-    - cron: 45 2-23/6 * * * # Scheduled update
+    - cron: 35 2-23/6 * * * # Scheduled update
   workflow_dispatch:    # Manual run
     inputs:
       type:
@@ -31,7 +31,7 @@ jobs:
     name: ${{ inputs.type || (github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *') && 'Test' || 'Update' }}
     uses: ./.github/workflows/.common.yml
     with:
-      packages: vscodium, vscodium.install, vscodium.portable
+      packages: vscodium-insiders, vscodium-insiders.install, vscodium-insiders.portable
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
     secrets: inherit
