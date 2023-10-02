@@ -1,4 +1,4 @@
-# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@c6bc7188363aecd38726935a305d586a594b0525/vscodium/icon.png" width="48" height="48"/> [VSCodium (Portable)](https://chocolatey.org/packages/vscodium.portable)
+# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@c6bc7188363aecd38726935a305d586a594b0525/vscodium-insiders/icon.png" width="48" height="48"/> [VSCodium - Insiders (Portable)](https://chocolatey.org/packages/vscodium-insiders.portable)
 
 Free/Libre Open Source Software binaries of [VS Code](https://chocolatey.org/packages/vscode).
 

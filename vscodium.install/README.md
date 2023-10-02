@@ -1,8 +1,12 @@
-# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@3613049f2b409f2656a40a09079b1a0851171dfd/vscodium/icon.png" width="48" height="48"/> [VSCodium (Install)](https://chocolatey.org/packages/vscodium.install)
+# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@c6bc7188363aecd38726935a305d586a594b0525/vscodium/icon.png" width="48" height="48"/> [VSCodium (Install)](https://chocolatey.org/packages/vscodium.install)
 
-Free/Libre Open Source Software binaries of [Visual Studio Code](https://chocolatey.org/packages/vscode).
+Free/Libre Open Source Software binaries of [VS Code](https://chocolatey.org/packages/vscode).
 
-Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a rich ecosystem of extensions for other languages (such as C++, C#, Java, Python, PHP, Go) and runtimes (such as .NET and Unity).
+VSCodium is a community-driven, freely-licensed binary distribution of Microsoft's editor VS Code.
+
+![screenshot](https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@c6bc7188363aecd38726935a305d586a594b0525/vscodium/screenshot.png)
+
+VS Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a rich ecosystem of extensions for other languages (such as C++, C#, Java, Python, PHP, Go) and runtimes (such as .NET and Unity).
 
 ## Features
 
@@ -26,5 +30,3 @@ Example: `choco install vscodium.install --params "/NoDesktopIcon /NoAddToPath"`
 
 * The package uses default install options except that it adds context menu entries and VSCodium isn't started after installation.
 * You can [disable auto-update](https://code.visualstudio.com/docs/supporting/faq#_how-do-i-opt-out-of-vs-code-autoupdates) if you prefer to update VS Code on your own schedule.
-
-![screenshot](https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@657099dac6a46b93b79700820f37f1b15f937534/vscodium/screenshot.png)
