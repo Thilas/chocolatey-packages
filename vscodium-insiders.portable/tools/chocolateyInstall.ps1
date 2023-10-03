@@ -39,8 +39,8 @@ if (!$oldPath) {
     New-Item -ItemType Directory -Path $dataPath -Force -ErrorAction SilentlyContinue
 }
 
-$binPath = Join-Path $installationPath 'bin\codium.cmd'
-Install-BinFile -Name 'codium' -Path $binPath
+$binPath = Join-Path $installationPath 'bin\codium-insiders.cmd'
+Install-BinFile -Name 'codium-insiders' -Path $binPath
 
 Set-Content $logPath $installationPath -Encoding UTF8 -Force
 

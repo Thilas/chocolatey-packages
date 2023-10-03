@@ -11,7 +11,7 @@ Write-Verbose "Reading Installation Path from $logPath"
 $installationPath = Get-Content $logPath
 Write-Verbose "Previous Installation Path: $installationPath"
 
-Uninstall-BinFile -Name 'codium'
+Uninstall-BinFile -Name 'codium-insiders'
 
 if (Test-Path $installationPath -ErrorAction SilentlyContinue) {
     Remove-Item -Path $installationPath -ErrorAction SilentlyContinue -Recurse -Force
