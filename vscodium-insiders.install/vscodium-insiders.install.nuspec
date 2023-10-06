@@ -40,7 +40,7 @@ Example: `choco install vscodium-insiders.install --params "/NoDesktopIcon /NoAd
 ## Notes
 
 * The package uses default install options except that it adds context menu entries and VSCodium isn't started after installation.
-* You can [disable auto-update](https://code.visualstudio.com/docs/supporting/faq#_how-do-i-opt-out-of-vs-code-autoupdates) if you prefer to update VS Code on your own schedule.
+* You can [disable auto-update](https://code.visualstudio.com/docs/supporting/faq#_how-do-i-opt-out-of-vs-code-autoupdates) if you prefer to update VSCodium on your own schedule.
 ]]></description>
     <summary>VSCodium - Insiders (Install)</summary>
     <releaseNotes>[Updates](https://code.visualstudio.com/updates/#_preview-features)</releaseNotes>
