@@ -30,7 +30,7 @@ By default, Strawberry Perl is installed in `C:\Strawberry\`. This can be change
     <projectSourceUrl>https://github.com/StrawberryPerl/Perl-Dist-Strawberry</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/strawberryperl</packageSourceUrl>
     <docsUrl>https://strawberryperl.com/support.html</docsUrl>
-    <mailingListUrl>https://www.mail-archive.com/win32-vanilla@perl.org/maillist.html</mailingListUrl>
+    <mailingListUrl>https://www.mail-archive.com/win32-vanilla%40perl.org/maillist.html</mailingListUrl>
     <bugTrackerUrl>https://rt.cpan.org/Public/Dist/Display.html?Name=Perl-Dist-Strawberry</bugTrackerUrl>
   </metadata>
   <files>
