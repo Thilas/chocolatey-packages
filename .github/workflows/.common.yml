@@ -46,12 +46,12 @@ jobs:
           [array] $packages = ./update_all.ps1 -Name $names -Force:$force | ForEach-Object {
             $_ | ConvertTo-Json -Compress
           }
-          $packages = ConvertTo-Json $packages -Compress
-          "Packages = $packages"
+          $packagesJson = ConvertTo-Json $packages -Compress
+          "Packages = $packagesJson"
           if ($force -and $names.Length -ne $packages.Length) {
             throw "Some expected packages were not updated."
           }
-          "packages=$packages" >> $env:GITHUB_OUTPUT
+          "packages=$packagesJson" >> $env:GITHUB_OUTPUT
         env:
           packages: ${{ inputs.packages }}
           force: ${{ inputs.test || inputs.force }}
