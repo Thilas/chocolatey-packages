@@ -80,7 +80,7 @@ jobs:
 
   test:
     needs: [update]
-    if: needs.update.outputs.updates != 'null'
+    if: inputs.test || inputs.force || needs.update.outputs.updates != 'null'
 
     strategy:
       fail-fast: false
