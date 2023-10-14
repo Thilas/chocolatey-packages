@@ -388,12 +388,17 @@ filter Get-Uri {
     param(
         [Parameter(ValueFromPipelineByPropertyName)]
         [uri] $BaseUri,
-        [Parameter(ValueFromPipelineByPropertyName)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
+        [ValidateNotNullOrEmpty()]
         [Alias("href")]
         [string] $RelativeUrl,
         [switch] $ForceHttps
     )
-    $uri = [uri]::new($BaseUri, $RelativeUrl)
+    $uri = if ($BaseUri) {
+        [uri]::new($BaseUri, $RelativeUrl)
+    } else {
+        [uri]::new($RelativeUrl)
+    }
     if ($ForceHttps -and $uri.Scheme -eq [uri]::UriSchemeHttp) {
         $builder = [System.UriBuilder]::new($uri)
         $builder.Scheme = [uri]::UriSchemeHttps
