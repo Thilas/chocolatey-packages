@@ -5,9 +5,9 @@ param($IncludeStream, [switch] $Force)
 
 function global:au_GetLatest {
     Get-Latest `
-        -ReleasesUri 'https://wiki.eclipse.org/Simultaneous_Release' `
-        -TagNamesPattern '<th\b[^>]*>\s*.*\b(?<Release>\d+-\d+)\b.*\s*</th\b[^>]*>\s*<td\b[^>]*>\s*.*\b(?<TagName>\d+\.\d+)\b.*\s*</td\b' `
-        -LinkPattern '/downloads/packages/release/(?<Release>\d+-\d+)/r' `
+        -ReleasesUri 'https://raw.githubusercontent.com/eclipse-simrel/.github/main/wiki/Simultaneous_Release.md' `
+        -TagNamePattern '<tr class="\w+">\s*<td><p>[\s\S]*?\b(?<Release>\d+-\d+)\b[\s\S]*?</p></td>\s*<td><p>[\s\S]*?\b(?<TagName>\d+\.\d+)\b[\s\S]*?</p></td>' `
+        -LinkPattern '\bhref="(?<Url>https://www.eclipse.org/downloads/packages/release/(?<Release>\d+-\d+)/r)"' `
         -StreamFieldCount 2
 }
 
@@ -15,28 +15,37 @@ function Get-Latest {
     [CmdletBinding()]
     param(
         [uri] $ReleasesUri,
-        [string] $TagNamesPattern, # must include Release and TagName captures
-        [string] $LinkPattern, # must include a Release capture
+        [string] $TagNamePattern, # must include Release and TagName captures
+        [string] $LinkPattern,    # must include Url and Release captures
         [int] $StreamFieldCount
     )
     $releases = Invoke-WebRequest -Uri $ReleasesUri -UseBasicParsing
 
+    # Let's remove HTML comments first
+    $content = $releases.Content -replace '<!--[\s\S]*?-->', ''
+
     $tagNames = @{ }
-    $result = $releases.Content | Select-String -Pattern $TagNamesPattern -AllMatches
-    $result.Matches | ForEach-Object {
+    $content `
+    | Select-String -Pattern $TagNamePattern -AllMatches `
+    | ForEach-Object Matches `
+    | Select-Object -First 10
+    | ForEach-Object {
         $tagNames.Add($_.Groups['Release'].Value, $_.Groups['TagName'].Value)
     }
 
     $result = [ordered] @{ }
-    $releases.Links `
-    | Where-Object { $_.href -match $LinkPattern -and $tagNames.Keys -contains $Matches.Release } `
+    $content `
+    | Select-String -Pattern $LinkPattern -AllMatches `
+    | ForEach-Object Matches `
+    | Where-Object {
+        $tagNames.ContainsKey($_.Groups['Release'].Value)
+    } `
     | ForEach-Object {
-        $_.href -match $LinkPattern
-        $release = $Matches.Release
+        $release = $_.Groups['Release'].Value
         $tagName = $tagNames.$release
         $version = Get-Version $tagName
 
-        $uri = $_ | Get-Uri -BaseUri $ReleasesUri -ForceHttps
+        $uri = Get-Uri -BaseUri $_.Groups['Url'].Value -ForceHttps
         $isUri32 = if ($version -lt '4.10') {
             { param($Uri) $Uri -match "\bjee\b.*\bwin32\b" -and $Uri -notmatch '\bx86_64\b' }
         }
