@@ -46,6 +46,7 @@ jobs:
           [array] $packages = ./update_all.ps1 -Name $names -Force:$force | ForEach-Object {
             $_ | ConvertTo-Json -Compress
           }
+          if (!$packages) { $packages = @() }
           $packagesJson = ConvertTo-Json $packages -Compress
           "Packages = $packagesJson"
           if ($force -and $names.Length -ne $packages.Length) {
