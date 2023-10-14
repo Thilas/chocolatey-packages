@@ -48,6 +48,9 @@ jobs:
           }
           $packages = ConvertTo-Json $packages -Compress
           "Packages = $packages"
+          if ($force -and $names.Length -ne $packages.Length) {
+            throw "Some expected packages were not updated."
+          }
           "packages=$packages" >> $env:GITHUB_OUTPUT
         env:
           packages: ${{ inputs.packages }}
@@ -80,7 +83,6 @@ jobs:
 
   test:
     needs: [update]
-    if: inputs.test || inputs.force || needs.update.outputs.updates != 'null'
 
     strategy:
       fail-fast: false
