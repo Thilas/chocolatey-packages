@@ -45,7 +45,7 @@ function Get-Latest {
         $tagName = $tagNames.$release
         $version = Get-Version $tagName
 
-        $uri = Get-Uri -RelativeUrl $_.Groups['Url'].Value -ForceHttps
+        $uri = Get-Uri -BaseUri $_.Groups['Url'].Value -ForceHttps
         $isUri32 = if ($version -lt '4.10') {
             { param($Uri) $Uri -match "\bjee\b.*\bwin32\b" -and $Uri -notmatch '\bx86_64\b' }
         }
