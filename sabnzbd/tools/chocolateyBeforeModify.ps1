@@ -12,7 +12,7 @@ $installPath = Get-InstallPath $packageName $softwareName
 
 if ($installPath) {
     Write-Host "Uninstalling service from $installPath..."
-    'SABnzbd-console.exe', 'SABnzbd-service.exe', 'SABnzbd-helper.exe' `
+    'SABnzbd-console.exe', 'SABnzbd-service.exe', 'SABnzbd-helper.exe', 'SABnzbd.exe' `
     | ForEach-Object { Join-Path $installPath $_ } `
     | Where-Object { Test-Path $_ } `
     | ForEach-Object {
