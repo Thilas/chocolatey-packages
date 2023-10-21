@@ -5,9 +5,9 @@ $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'psinfo'
-    url            = ''
+    url            = 'https://download.sysinternals.com/files/PSTools.zip'
     unzipLocation  = $toolsDir
-    checksum       = ''
+    checksum       = 'a9ca77dfe03ce15004157727bb43ba66f00ceb215362c9b3d199f000edaa8d61'
     checksumType   = 'sha256'
     validExitCodes = @(0)
 }
