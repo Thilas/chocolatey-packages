@@ -1,0 +1,35 @@
+name: diskmon
+
+on:
+  pull_request:         # Automatic test
+    types: [opened, reopened, synchronize]
+    branches: [master]
+    paths:
+      - .github/workflows/.common.yml
+      - .github/workflows/diskmon.yml
+      - diskmon/**
+      - Common.ps1
+      - update_all.ps1
+  schedule:
+    - cron: 0 4 * * *   # Scheduled test
+    - cron: 55 2-23/6 * * * # Scheduled update
+  workflow_dispatch:    # Manual run
+    inputs:
+      type:
+        description: Type
+        type: choice
+        required: true
+        default: Test
+        options:
+          - Force update
+          - Test
+          - Update
+
+jobs:
+  job:
+    name: ${{ inputs.type || (github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *') && 'Test' || 'Update' }}
+    uses: ./.github/workflows/.common.yml
+    with:
+      test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
+      force: ${{ inputs.type == 'Force update' }}
+    secrets: inherit

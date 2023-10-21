@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>psinfo</id>
+    <version></version>
+    <title>PsInfo</title>
+    <authors>Mark Russinovich</authors>
+    <owners>Thilas,dtgm</owners>
+    <licenseUrl>https://learn.microsoft.com/en-us/sysinternals/license-terms</licenseUrl>
+    <projectUrl>https://learn.microsoft.com/en-us/sysinternals/downloads/psinfo</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description><![CDATA[PsInfo is a command-line tool that gathers key information about the local or remote Windows NT/2000 system, including the type of installation, kernel build, registered organization and owner, number of processors and their type, amount of physical memory, the install date of the system, and if its a trial version, the expiration date.
+]]></description>
+    <summary>PsInfo is a command-line tool that gathers key information about the local or remote Windows NT/2000 system</summary>
+    <releaseNotes>[Blog](https://techcommunity.microsoft.com/t5/sysinternals-blog/bg-p/Sysinternals-Blog)</releaseNotes>
+    <copyright>Copyright © Mark Russinovich</copyright>
+    <tags>psinfo tools cli sysinternals proccess info</tags>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/psinfo</packageSourceUrl>
+    <bugTrackerUrl>https://learn.microsoft.com/en-us/answers/tags/435/sysinternals</bugTrackerUrl>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
+  </files>
+</package>
