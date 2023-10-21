@@ -6,10 +6,10 @@
     <version>17.5.0</version>
     <title>Process Explorer</title>
     <authors>Mark Russinovich</authors>
-    <owners>d.hilgarth,Thilas</owners>
-    <licenseUrl>https://docs.microsoft.com/en-us/sysinternals/license-terms</licenseUrl>
-    <projectUrl>https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer</projectUrl>
-    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@40e52e777320be942096265f280a011e991ba5c7/procexp/icon.png</iconUrl>
+    <owners>Thilas,d.hilgarth</owners>
+    <licenseUrl>https://learn.microsoft.com/en-us/sysinternals/license-terms</licenseUrl>
+    <projectUrl>https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer</projectUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@de52ec688c3894483381c83c0c964fbb3b5eb960/procexp/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[Ever wondered which program has a particular file or directory open? Now you can find out. Process Explorer shows you information about which handles and DLLs processes have opened or loaded.
 
@@ -17,12 +17,12 @@ The Process Explorer display consists of two sub-windows. The top window always 
 
 The unique capabilities of Process Explorer make it useful for tracking down DLL-version problems or handle leaks, and provide insight into the way Windows and applications work.
 ]]></description>
-    <summary>Process Explorer shows you information about which handles and DLLs processes have opened or loaded.</summary>
-    <releaseNotes>[Blog](https://docs.microsoft.com/en-us/sysinternals/)</releaseNotes>
+    <summary>Process Explorer shows you information about which handles and DLLs processes have opened or loaded</summary>
+    <releaseNotes>[Blog](https://techcommunity.microsoft.com/t5/sysinternals-blog/bg-p/Sysinternals-Blog)</releaseNotes>
     <copyright>Copyright © Mark Russinovich</copyright>
     <tags>procexp tools sysinternals proccesses handles dlls</tags>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/procexp</packageSourceUrl>
-    <bugTrackerUrl>https://docs.microsoft.com/en-us/answers/topics/windows-sysinternals-procexp.html</bugTrackerUrl>
+    <bugTrackerUrl>https://learn.microsoft.com/en-us/answers/tags/435/sysinternals</bugTrackerUrl>
   </metadata>
   <files>
     <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />

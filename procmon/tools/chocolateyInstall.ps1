@@ -15,7 +15,7 @@ $packageArgs = @{
 
 Install-ChocolateyZipPackage @packageArgs
 
-@('procmon') | ForEach-Object {
+@('Procmon', 'Procmon64') | ForEach-Object {
     New-Item "$toolsDir\$_.exe.gui" -Type File -Force | Out-Null
 }
 
@@ -27,5 +27,6 @@ New-ItemProperty -Path $registryPath -Name 'EulaAccepted' -Value 1 -Force | Out-
 
 $shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) 'Process Monitor.lnk'
 if (-not (Test-Path $shortcutPath)) {
-    Install-ChocolateyShortcut -ShortcutFilePath $shortcutPath -TargetPath "$toolsDir\procmon.exe"
+    $targetPath = if ([Environment]::Is64BitOperatingSystem) { 'Procmon64.exe' } else { 'Procmon.exe' }
+    Install-ChocolateyShortcut -ShortcutFilePath $shortcutPath -TargetPath "$toolsDir\$targetPath"
 }
