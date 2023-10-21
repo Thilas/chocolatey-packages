@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>diskmon</id>
-    <version></version>
+    <version>2.2.0</version>
     <title>DiskMon</title>
     <authors>Mark Russinovich</authors>
     <owners>Thilas,dtgm</owners>

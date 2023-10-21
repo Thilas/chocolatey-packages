@@ -1,13 +1,13 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 
 $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'diskmon'
-    url            = ''
+    url            = 'https://download.sysinternals.com/files/DiskMon.zip'
     unzipLocation  = $toolsDir
-    checksum       = ''
+    checksum       = '36c85a6dd3ae9b4a9723a9229f9bf55b5bcac607d5725e9ef100d0a67adba8d3'
     checksumType   = 'sha256'
     validExitCodes = @(0)
 }
