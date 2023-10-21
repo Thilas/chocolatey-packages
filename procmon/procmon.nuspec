@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>procmon</id>
-    <version>3.96.0</version>
+    <version>3.96.0.20231021</version>
     <title>Process Monitor</title>
     <authors>Mark Russinovich</authors>
     <owners>Thilas,d.hilgarth</owners>
