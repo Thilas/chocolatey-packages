@@ -1,4 +1,4 @@
-# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@8e49b572ba0d78626a9cff9c09d932d76274795b/eclipse/icon.png" width="48" height="48"/> [Eclipse](https://chocolatey.org/packages/eclipse)
+# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@8e49b572ba0d78626a9cff9c09d932d76274795b/eclipse/icon.png" width="48" height="48"/> [Eclipse](https://community.chocolatey.org/packages/eclipse)
 
 Eclipse is famous for our Java Integrated Development Environment (IDE), but our C/C++ IDE and PHP IDE are pretty cool too. You can easily combine language support and other features into any of our default packages, and the Eclipse Marketplace allows for virtually unlimited customization and extension.
 

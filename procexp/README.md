@@ -1,4 +1,4 @@
-# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@40e52e777320be942096265f280a011e991ba5c7/procexp/icon.png" width="48" height="48"/> [Process Explorer](https://chocolatey.org/packages/procexp)
+# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@40e52e777320be942096265f280a011e991ba5c7/procexp/icon.png" width="48" height="48"/> [Process Explorer](https://community.chocolatey.org/packages/procexp)
 
 Ever wondered which program has a particular file or directory open? Now you can find out. Process Explorer shows you information about which handles and DLLs processes have opened or loaded.
 

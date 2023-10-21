@@ -1,6 +1,6 @@
-# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@c6bc7188363aecd38726935a305d586a594b0525/vscodium-insiders/icon.png" width="48" height="48"/> [VSCodium - Insiders (Install)](https://chocolatey.org/packages/vscodium-insiders.install)
+# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@c6bc7188363aecd38726935a305d586a594b0525/vscodium-insiders/icon.png" width="48" height="48"/> [VSCodium - Insiders (Install)](https://community.chocolatey.org/packages/vscodium-insiders.install)
 
-Free/Libre Open Source Software binaries of [VS Code](https://chocolatey.org/packages/vscode).
+Free/Libre Open Source Software binaries of [VS Code](https://community.chocolatey.org/packages/vscode).
 
 VSCodium is a community-driven, freely-licensed binary distribution of Microsoft's editor VS Code.
 

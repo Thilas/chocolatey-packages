@@ -1,4 +1,4 @@
-# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@58d4825d117dae7fcf9100ba5d4fa0e4563ff7f7/strawberryperl/icon.png" width="48" height="48"/> [Strawberry Perl](https://chocolatey.org/packages/strawberryperl)
+# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@58d4825d117dae7fcf9100ba5d4fa0e4563ff7f7/strawberryperl/icon.png" width="48" height="48"/> [Strawberry Perl](https://community.chocolatey.org/packages/strawberryperl)
 
 **Perl** is a programming language suitable for writing simple scripts as well as complex applications - see https://www.perl.org
 

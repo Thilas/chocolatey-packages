@@ -1,4 +1,4 @@
-# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@058df13746c9cfa791d72eedd05f888d48a1bc1a/atom/icon.png" width="48" height="48"/> [Atom](https://chocolatey.org/packages/atom)
+# <img src="https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@058df13746c9cfa791d72eedd05f888d48a1bc1a/atom/icon.png" width="48" height="48"/> [Atom](https://community.chocolatey.org/packages/atom)
 
 Atom is a text editor that's modern, approachable, yet hackable to the core—a tool you can customize to do anything but also use productively without ever touching a config file.
 
