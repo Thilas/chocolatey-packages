@@ -11,6 +11,9 @@ on:
       force:
         description: Force update
         type: boolean
+      test_scripts:
+        description: JSON serialized list of Powershell scripts to test a package
+        type: string
 
 jobs:
   update:
@@ -113,6 +116,31 @@ jobs:
         with:
           name: Packages
 
+      - name: Tests before install
+        if: inputs.test_scripts
+        run: |
+          $results = $env:scripts -split "`r?`n" | ForEach-Object {
+            if ($env:debug) {
+              $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
+            }
+            try {
+              $out = @()
+              Invoke-Expression $_ *>&1 | ForEach-Object { $out += $_ }
+              if ($LASTEXITCODE) { throw "Test failed." }
+              Write-Host "❌ $_"
+              $out | Out-Host
+              return $true
+            } catch {
+              Write-Host "✅ $_"
+            }
+          }
+          if ($results -contains $true)
+            throw "Tests failed."
+          }
+        env:
+          debug: ${{ runner.debug }}
+          scripts: ${{ inputs.test_scripts }}
+
       - name: Install package
         run: |
           $debug = if ($env:debug) { "--verbose --debug" }
@@ -136,6 +164,31 @@ jobs:
           name: Information ${{ env.package_name }} ${{ env.package_version }} on ${{ matrix.os }}
           path: ${{ steps.information.outputs.path }}
 
+      - name: Tests after install
+        if: inputs.test_scripts
+        run: |
+          $results = $env:scripts -split "`r?`n" | ForEach-Object {
+            if ($env:debug) {
+              $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
+            }
+            try {
+              $out = @()
+              Invoke-Expression $_ *>&1 | ForEach-Object { $out += $_ }
+              if ($LASTEXITCODE) { throw "Test failed." }
+              Write-Host "✅ $_"
+            } catch {
+              Write-Host "❌ $_"
+              $out, $_ | Out-Host
+              return $true
+            }
+          }
+          if ($results -contains $true)
+            throw "Tests failed."
+          }
+        env:
+          debug: ${{ runner.debug }}
+          scripts: ${{ inputs.test_scripts }}
+
       - name: Uninstall package
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
         if: env.package_name != 'airserver'
@@ -146,6 +199,31 @@ jobs:
         env:
           debug: ${{ runner.debug }}
         timeout-minutes: 10
+
+      - name: Tests after uninstall
+        if: inputs.test_scripts
+        run: |
+          $results = $env:scripts -split "`r?`n" | ForEach-Object {
+            if ($env:debug) {
+              $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
+            }
+            try {
+              $out = @()
+              Invoke-Expression $_ *>&1 | ForEach-Object { $out += $_ }
+              if ($LASTEXITCODE) { throw "Test failed." }
+              Write-Host "❌ $_"
+              $out | Out-Host
+              return $true
+            } catch {
+              Write-Host "✅ $_"
+            }
+          }
+          if ($results -contains $true)
+            throw "Tests failed."
+          }
+        env:
+          debug: ${{ runner.debug }}
+          scripts: ${{ inputs.test_scripts }}
 
       - name: Take failure screenshot
         if: failure()

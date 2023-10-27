@@ -32,4 +32,5 @@ jobs:
     with:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
+      test_scripts: psinfo
     secrets: inherit
