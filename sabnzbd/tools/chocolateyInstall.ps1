@@ -30,7 +30,7 @@ if ($installPath) {
     | Where-Object { !(Join-Path $installPath $_.Name | Test-Path) } `
     | Copy-Item -Destination $installPath
 
-    $exePath = Join-Path $installPath 'SABnzbd.exe'
+    $exePath = Join-Path $installPath 'SABnzbd-console.exe'
     $iniPath = Join-Path $Env:LOCALAPPDATA 'sabnzbd\sabnzbd.ini'
     Start-ChocolateyProcessAsAdmin -WorkingDirectory $installPath -ExeToRun $exePath -Statements "-f `"$iniPath`" install" | Out-Null
     Set-Service 'SABnzbd' -StartupType Automatic
