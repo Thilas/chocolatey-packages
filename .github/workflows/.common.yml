@@ -134,7 +134,7 @@ jobs:
               Write-Host "✅ $_"
             }
           }
-          if ($results -contains $true)
+          if ($results -contains $true) {
             throw "Tests failed."
           }
         env:
@@ -182,7 +182,7 @@ jobs:
               return $true
             }
           }
-          if ($results -contains $true)
+          if ($results -contains $true) {
             throw "Tests failed."
           }
         env:
@@ -218,7 +218,7 @@ jobs:
               Write-Host "✅ $_"
             }
           }
-          if ($results -contains $true)
+          if ($results -contains $true) {
             throw "Tests failed."
           }
         env:
