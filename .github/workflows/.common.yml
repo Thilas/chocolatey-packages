@@ -123,15 +123,16 @@ jobs:
             if ($env:debug) {
               $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
             }
+            $script = $_
             try {
               $out = @()
-              Invoke-Expression $_ *>&1 | ForEach-Object { $out += $_ }
+              Invoke-Expression $script *>&1 | ForEach-Object { $out += $_ }
               if ($LASTEXITCODE) { throw "Test failed." }
-              Write-Host "❌ $_"
+              Write-Host "❌ $script"
               $out | Out-Host
               return $true
             } catch {
-              Write-Host "✅ $_"
+              Write-Host "✅ $script"
             }
           }
           if ($results -contains $true) {
@@ -171,13 +172,14 @@ jobs:
             if ($env:debug) {
               $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
             }
+            $script = $_
             try {
               $out = @()
-              Invoke-Expression $_ *>&1 | ForEach-Object { $out += $_ }
+              Invoke-Expression $script *>&1 | ForEach-Object { $out += $_ }
               if ($LASTEXITCODE) { throw "Test failed." }
-              Write-Host "✅ $_"
+              Write-Host "✅ $script"
             } catch {
-              Write-Host "❌ $_"
+              Write-Host "❌ $script"
               $out, $_ | Out-Host
               return $true
             }
@@ -207,15 +209,16 @@ jobs:
             if ($env:debug) {
               $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
             }
+            $script = $_
             try {
               $out = @()
-              Invoke-Expression $_ *>&1 | ForEach-Object { $out += $_ }
+              Invoke-Expression $script *>&1 | ForEach-Object { $out += $_ }
               if ($LASTEXITCODE) { throw "Test failed." }
-              Write-Host "❌ $_"
+              Write-Host "❌ $script"
               $out | Out-Host
               return $true
             } catch {
-              Write-Host "✅ $_"
+              Write-Host "✅ $script"
             }
           }
           if ($results -contains $true) {
