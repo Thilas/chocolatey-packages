@@ -34,4 +34,21 @@ jobs:
       packages: vscodium-insiders, vscodium-insiders.install, vscodium-insiders.portable
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
+      test_cases: |
+        - Run codium-insiders --version
+          codium-insiders --version
+        - Start VSCodium
+          codium-insiders
+          $sw = [System.Diagnostics.Stopwatch]::StartNew()
+          while ($sw.ElapsedMilliseconds -lt 30000) {
+            if (Get-Process "VSCodium - Insiders" -ErrorAction SilentlyContinue | Where-Object MainWindowHandle -NE 0) {
+              return
+            }
+            Start-Sleep -Milliseconds 500
+          }
+          throw "Process start timed out."
+        - Close VSCodium
+          Get-Process "VSCodium - Insiders" -ErrorAction SilentlyContinue | Should -Not -BeNullOrEmpty
+          Get-Process "VSCodium - Insiders" | ForEach-Object CloseMainWindow | Out-Null
+          Wait-Process "VSCodium - Insiders" -Timeout 30
     secrets: inherit

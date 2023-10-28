@@ -6,11 +6,17 @@ on:
         type: string
         default: ${{ github.workflow }}
       test:
-        description: Test
+        description: Test update
         type: boolean
       force:
         description: Force update
         type: boolean
+      test_cases:
+        description: |
+          List of test cases
+          - {title}
+            {script}
+        type: string
 
 jobs:
   update:
@@ -113,6 +119,32 @@ jobs:
         with:
           name: Packages
 
+      - name: Tests before install
+        if: inputs.test_cases
+        run: |
+          if ($env:debug) {
+            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
+          }
+          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
+          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
+            try {
+              $out = @()
+              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
+              if ($LASTEXITCODE) { throw "Test failed." }
+              "❌ {0}" -f $test_cases[$i] | Write-Host
+              $out | Out-Host
+              return $true
+            } catch {
+              "✅ {0}" -f $test_cases[$i] | Write-Host
+            }
+          }
+          if ($results -contains $true) {
+            throw "Tests failed."
+          }
+        env:
+          debug: ${{ runner.debug }}
+          test_cases: ${{ inputs.test_cases }}
+
       - name: Install package
         run: |
           $debug = if ($env:debug) { "--verbose --debug" }
@@ -136,6 +168,32 @@ jobs:
           name: Information ${{ env.package_name }} ${{ env.package_version }} on ${{ matrix.os }}
           path: ${{ steps.information.outputs.path }}
 
+      - name: Tests after install
+        if: inputs.test_cases
+        run: |
+          if ($env:debug) {
+            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
+          }
+          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
+          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
+            try {
+              $out = @()
+              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
+              if ($LASTEXITCODE) { throw "Test failed." }
+              "✅ {0}" -f $test_cases[$i] | Write-Host
+            } catch {
+              "❌ {0}" -f $test_cases[$i] | Write-Host
+              $out, $_ | Out-Host
+              return $true
+            }
+          }
+          if ($results -contains $true) {
+            throw "Tests failed."
+          }
+        env:
+          debug: ${{ runner.debug }}
+          scripts: ${{ inputs.test_cases }}
+
       - name: Uninstall package
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
         if: env.package_name != 'airserver'
@@ -146,6 +204,32 @@ jobs:
         env:
           debug: ${{ runner.debug }}
         timeout-minutes: 10
+
+      - name: Tests after uninstall
+        if: inputs.test_cases
+        run: |
+          if ($env:debug) {
+            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
+          }
+          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
+          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
+            try {
+              $out = @()
+              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
+              if ($LASTEXITCODE) { throw "Test failed." }
+              "❌ {0}" -f $test_cases[$i] | Write-Host
+              $out | Out-Host
+              return $true
+            } catch {
+              "✅ {0}" -f $test_cases[$i] | Write-Host
+            }
+          }
+          if ($results -contains $true) {
+            throw "Tests failed."
+          }
+        env:
+          debug: ${{ runner.debug }}
+          scripts: ${{ inputs.test_cases }}
 
       - name: Take failure screenshot
         if: failure()
