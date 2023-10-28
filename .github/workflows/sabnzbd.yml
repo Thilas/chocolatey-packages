@@ -36,5 +36,5 @@ jobs:
         - Check SABnzbd service
           Get-Service SABnzbd | ForEach-Object Status | Should -Be "Running"
         - Test web interface
-          Invoke-WebRequest "http://127.0.0.1:8080/" -UseBasicParsing
+          Invoke-WebRequest "http://localhost:8080/" -UseBasicParsing
     secrets: inherit

@@ -36,13 +36,15 @@ jobs:
         - Start diskmon
           diskmon
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
-          while ($sw.ElapsedMilliseconds -lt 60000) {
-            if (Get-Process diskmon* -ErrorAction SilentlyContinue | Where-Object MainWindowHandle -NE 0) {
+          while ($sw.ElapsedMilliseconds -lt 30000) {
+            if (Get-Process diskmon* | Where-Object MainWindowHandle -NE 0) {
               return
             }
             Start-Sleep -Milliseconds 500
           }
           throw "Process start timed out."
         - Close diskmon
-          Get-Process diskmon* | Should -Not -BeNullOrEmpty; Stop-Process -Name diskmon*
+          Get-Process diskmon* | Should -Not -BeNullOrEmpty
+          Get-Process diskmon* | ForEach-Object CloseMainWindow | Out-Null
+          Wait-Process diskmon* -Timeout 30
     secrets: inherit
