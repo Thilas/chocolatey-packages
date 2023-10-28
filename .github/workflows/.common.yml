@@ -6,13 +6,16 @@ on:
         type: string
         default: ${{ github.workflow }}
       test:
-        description: Test
+        description: Test update
         type: boolean
       force:
         description: Force update
         type: boolean
-      test_scripts:
-        description: JSON serialized list of Powershell scripts to test a package
+      test_cases:
+        description: |
+          List of test cases
+          - {title}
+            {script}
         type: string
 
 jobs:
@@ -117,22 +120,22 @@ jobs:
           name: Packages
 
       - name: Tests before install
-        if: inputs.test_scripts
+        if: inputs.test_cases
         run: |
-          $results = $env:scripts -split "`r?`n" | Where-Object { $_ } | ForEach-Object {
-            if ($env:debug) {
-              $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
-            }
-            $script = $_
+          if ($env:debug) {
+            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
+          }
+          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
+          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
             try {
               $out = @()
-              Invoke-Expression $script *>&1 | ForEach-Object { $out += $_ }
+              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
               if ($LASTEXITCODE) { throw "Test failed." }
-              Write-Host "❌ $script"
+              "❌ {0}" -f $test_cases[$i] | Write-Host
               $out | Out-Host
               return $true
             } catch {
-              Write-Host "✅ $script"
+              "✅ {0}" -f $test_cases[$i] | Write-Host
             }
           }
           if ($results -contains $true) {
@@ -140,7 +143,7 @@ jobs:
           }
         env:
           debug: ${{ runner.debug }}
-          scripts: ${{ inputs.test_scripts }}
+          test_cases: ${{ inputs.test_cases }}
 
       - name: Install package
         run: |
@@ -166,20 +169,20 @@ jobs:
           path: ${{ steps.information.outputs.path }}
 
       - name: Tests after install
-        if: inputs.test_scripts
+        if: inputs.test_cases
         run: |
-          $results = $env:scripts -split "`r?`n" | Where-Object { $_ } | ForEach-Object {
-            if ($env:debug) {
-              $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
-            }
-            $script = $_
+          if ($env:debug) {
+            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
+          }
+          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
+          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
             try {
               $out = @()
-              Invoke-Expression $script *>&1 | ForEach-Object { $out += $_ }
+              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
               if ($LASTEXITCODE) { throw "Test failed." }
-              Write-Host "✅ $script"
+              "✅ {0}" -f $test_cases[$i] | Write-Host
             } catch {
-              Write-Host "❌ $script"
+              "❌ {0}" -f $test_cases[$i] | Write-Host
               $out, $_ | Out-Host
               return $true
             }
@@ -189,7 +192,7 @@ jobs:
           }
         env:
           debug: ${{ runner.debug }}
-          scripts: ${{ inputs.test_scripts }}
+          scripts: ${{ inputs.test_cases }}
 
       - name: Uninstall package
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
@@ -203,22 +206,22 @@ jobs:
         timeout-minutes: 10
 
       - name: Tests after uninstall
-        if: inputs.test_scripts
+        if: inputs.test_cases
         run: |
-          $results = $env:scripts -split "`r?`n" | Where-Object { $_ } | ForEach-Object {
-            if ($env:debug) {
-              $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
-            }
-            $script = $_
+          if ($env:debug) {
+            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
+          }
+          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
+          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
             try {
               $out = @()
-              Invoke-Expression $script *>&1 | ForEach-Object { $out += $_ }
+              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
               if ($LASTEXITCODE) { throw "Test failed." }
-              Write-Host "❌ $script"
+              "❌ {0}" -f $test_cases[$i] | Write-Host
               $out | Out-Host
               return $true
             } catch {
-              Write-Host "✅ $script"
+              "✅ {0}" -f $test_cases[$i] | Write-Host
             }
           }
           if ($results -contains $true) {
@@ -226,7 +229,7 @@ jobs:
           }
         env:
           debug: ${{ runner.debug }}
-          scripts: ${{ inputs.test_scripts }}
+          scripts: ${{ inputs.test_cases }}
 
       - name: Take failure screenshot
         if: failure()

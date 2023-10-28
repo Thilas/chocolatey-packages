@@ -32,7 +32,9 @@ jobs:
     with:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
-      test_scripts: |
-        Get-Service SABnzbd | ForEach-Object Status | Should -Be "Running"
-        Invoke-WebRequest "http://127.0.0.1:8080/" -UseBasicParsing
+      test_cases: |
+        - Check SABnzbd service
+          Get-Service SABnzbd | ForEach-Object Status | Should -Be "Running"
+        - Test web interface
+          Invoke-WebRequest "http://127.0.0.1:8080/" -UseBasicParsing
     secrets: inherit
