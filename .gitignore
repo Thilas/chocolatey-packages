@@ -10,3 +10,5 @@
 *.msi
 *.rar
 *.zip
+
+/redis/tools/*

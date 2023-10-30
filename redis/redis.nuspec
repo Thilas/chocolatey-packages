@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>redis</id>
+    <version></version>
+    <title>Redis</title>
+    <authors>Salvatore Sanfilippo,yes8080</authors>
+    <owners>Thilas,jfrench</owners>
+    <licenseUrl>https://redis.io/docs/about/license/</licenseUrl>
+    <projectUrl>https://redis.io/</projectUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@47b08189f6a528f9ad9a9b8b578486b730b86f66/redis/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description><![CDATA[Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.
+
+### Core capabilities
+
+- In-memory data structures: Well-known as a "data structure server", with support for strings, hashes, lists, sets, sorted sets, streams, and more.
+- Programmability: Server-side scripting with Lua and server-side stored procedures with Redis Functions.
+- Extensibility: A module API for building custom extensions to Redis in C, C++, and Rust.
+- Persistence: Keeps the dataset in memory for fast access, but can also persist all writes to permanent storage to survive reboots and system failures.
+- Clustering: Horizontal scalability with hash-based sharding, scaling to millions of nodes with automatic re-partitioning when growing the cluster.
+- High availability: Replication with automatic failover for both standalone and clustered deployments.
+
+### Disclaimer
+
+You should use it for local development and follow Redis official guidance to deploy it on Linux for production environment. This project doesn't bear any responsibility for any losses caused by using it and is only for learning and exchange purposes.
+]]></description>
+    <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
+    <releaseNotes>[Releases](https://github.com/redis-windows/redis-windows/releases)</releaseNotes>
+    <copyright>Copyright © Salvatore Sanfilippo</copyright>
+    <tags>redis admin nosql database cache</tags>
+    <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/redis</packageSourceUrl>
+    <docsUrl>https://redis.io/docs/</docsUrl>
+    <mailingListUrl>https://groups.google.com/g/redis-db</mailingListUrl>
+    <bugTrackerUrl>https://github.com/redis-windows/redis-windows/issues</bugTrackerUrl>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
+  </files>
+</package>
