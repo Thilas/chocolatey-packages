@@ -47,6 +47,7 @@ jobs:
       - name: Update packages
         id: updates
         run: |
+          "choco version $(choco -v)"
           $names = $env:packages -replace " ","" -split ","
           $force = $env:force -eq "true"
           [array] $packages = ./update_all.ps1 -Name $names -Force:$force | ForEach-Object {
@@ -68,17 +69,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish report
-        if: always() && hashFiles('report.md')
+        if: ${{ always() && hashFiles('report.md') }}
         run: Get-Content "report.md" >> $env:GITHUB_STEP_SUMMARY
 
       - name: Prepare Packages artifact
-        if: always() && hashFiles('**/*.nupkg')
+        if: ${{ always() && hashFiles('**/*.nupkg') }}
         run: |
           New-Item Packages -ItemType Directory
           Get-ChildItem *.nupkg -Recurse | Move-Item -Destination Packages
 
       - name: Upload Packages artifact
-        if: always() && hashFiles('Packages/*.nupkg')
+        if: ${{ always() && hashFiles('Packages/*.nupkg') }}
         uses: actions/upload-artifact@v3
         with:
           name: Packages
@@ -89,7 +90,7 @@ jobs:
 
   test:
     needs: [update]
-    if: needs.update.outputs.updates != 'null'
+    if: ${{ needs.update.outputs.updates != 'null' }}
 
     strategy:
       fail-fast: false
@@ -110,7 +111,9 @@ jobs:
     steps:
       - name: Remove package if needed
         run: |
-          if (choco list -r $env:package_name) {
+          "choco version $(choco -v)"
+          choco list -r $env:package_name | Tee-Object -Variable installed
+          if ($installed) {
             choco uninstall -y --no-progress $env:package_name
           }
 
@@ -120,7 +123,7 @@ jobs:
           name: Packages
 
       - name: Tests before install
-        if: inputs.test_cases
+        if: ${{ inputs.test_cases }}
         run: |
           if ($env:debug) {
             $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
@@ -169,7 +172,7 @@ jobs:
           path: ${{ steps.information.outputs.path }}
 
       - name: Tests after install
-        if: inputs.test_cases
+        if: ${{ inputs.test_cases }}
         run: |
           if ($env:debug) {
             $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
@@ -196,7 +199,7 @@ jobs:
 
       - name: Uninstall package
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
-        if: env.package_name != 'airserver'
+        if: ${{ env.package_name != 'airserver' }}
         run: |
           $debug = if ($env:debug) { "--verbose --debug" }
           choco uninstall -y --no-progress $env:package_name $debug
@@ -206,7 +209,7 @@ jobs:
         timeout-minutes: 10
 
       - name: Tests after uninstall
-        if: inputs.test_cases
+        if: ${{ inputs.test_cases }}
         run: |
           if ($env:debug) {
             $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
@@ -232,13 +235,13 @@ jobs:
           scripts: ${{ inputs.test_cases }}
 
       - name: Take failure screenshot
-        if: failure()
+        if: ${{ failure() }}
         run: |
           choco install -y --no-progress nircmd
           nircmd savescreenshotfull desktop.png
 
       - name: Upload failure screenshot into Information artifact
-        if: failure()
+        if: ${{ failure() }}
         uses: actions/upload-artifact@v3
         with:
           name: Information ${{ env.package_name }} ${{ env.package_version }} on ${{ matrix.os }}
