@@ -47,7 +47,7 @@ jobs:
       - name: Update packages
         id: updates
         run: |
-          "choco version $(choco -v)"
+          "choco version $(choco --version)"
           $names = $env:packages -replace " ","" -split ","
           $force = $env:force -eq "true"
           [array] $packages = ./update_all.ps1 -Name $names -Force:$force | ForEach-Object {
@@ -111,8 +111,8 @@ jobs:
     steps:
       - name: Remove package if needed
         run: |
-          "choco version $(choco -v)"
-          choco list -r $env:package_name | Tee-Object -Variable installed
+          "choco version $(choco --version)"
+          choco list --exact --limit-output $env:package_name | Tee-Object -Variable installed
           if ($installed) {
             choco uninstall -y --no-progress $env:package_name
           }
