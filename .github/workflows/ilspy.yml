@@ -34,7 +34,7 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start ILSpy
-          ILSpy
+          Start-Process ILSpy
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
           while ($sw.ElapsedMilliseconds -lt 30000) {
             if (Get-Process ILSpy* | Where-Object MainWindowHandle -NE 0) {
