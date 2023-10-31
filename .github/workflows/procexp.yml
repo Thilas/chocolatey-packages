@@ -37,6 +37,8 @@ jobs:
           procexp
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
           while ($sw.ElapsedMilliseconds -lt 30000) {
+            $sw
+            Get-Process procexp* | Where-Object MainWindowHandle -NE 0
             if (Get-Process procexp* | Where-Object MainWindowHandle -NE 0) {
               return
             }
@@ -46,5 +48,6 @@ jobs:
         - Close procexp
           Get-Process procexp* | Should -Not -BeNullOrEmpty
           Get-Process procexp* | ForEach-Object CloseMainWindow | Out-Null
+          "waiting..."
           Wait-Process procexp* -Timeout 30
     secrets: inherit

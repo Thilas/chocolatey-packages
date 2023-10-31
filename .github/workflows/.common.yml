@@ -129,20 +129,18 @@ jobs:
             $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
           }
           $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          $results = for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
+          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
             try {
               $out = @()
               Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
-              if ($LASTEXITCODE) { throw "Test failed." }
+              if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
               "❌ {0}" -f $test_cases[$i] | Write-Host
               $out | Out-Host
-              return $true
             } catch {
               "✅ {0}" -f $test_cases[$i] | Write-Host
+              continue
             }
-          }
-          if ($results -contains $true) {
-            throw "Tests failed."
+            throw "Test failed."
           }
         env:
           debug: ${{ runner.debug }}
@@ -178,20 +176,17 @@ jobs:
             $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
           }
           $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          $results = for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
+          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
             try {
               $out = @()
               Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
-              if ($LASTEXITCODE) { throw "Test failed." }
+              if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
               "✅ {0}" -f $test_cases[$i] | Write-Host
             } catch {
               "❌ {0}" -f $test_cases[$i] | Write-Host
               $out, $_ | Out-Host
-              return $true
+              throw
             }
-          }
-          if ($results -contains $true) {
-            throw "Tests failed."
           }
         env:
           debug: ${{ runner.debug }}
@@ -208,27 +203,25 @@ jobs:
           debug: ${{ runner.debug }}
         timeout-minutes: 10
 
-      - name: Tests after uninstall
+        - name: Tests after uninstall
         if: ${{ inputs.test_cases }}
         run: |
           if ($env:debug) {
             $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
           }
           $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          $results = for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
+          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
             try {
               $out = @()
               Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
-              if ($LASTEXITCODE) { throw "Test failed." }
+              if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
               "❌ {0}" -f $test_cases[$i] | Write-Host
               $out | Out-Host
-              return $true
             } catch {
               "✅ {0}" -f $test_cases[$i] | Write-Host
+              continue
             }
-          }
-          if ($results -contains $true) {
-            throw "Tests failed."
+            throw "Test failed."
           }
         env:
           debug: ${{ runner.debug }}
