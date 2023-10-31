@@ -203,7 +203,7 @@ jobs:
           debug: ${{ runner.debug }}
         timeout-minutes: 10
 
-        - name: Tests after uninstall
+      - name: Tests after uninstall
         if: ${{ inputs.test_cases }}
         run: |
           if ($env:debug) {
