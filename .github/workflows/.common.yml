@@ -129,7 +129,7 @@ jobs:
             $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
           }
           $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
+          $results = for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
             try {
               $out = @()
               Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
@@ -178,7 +178,7 @@ jobs:
             $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
           }
           $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
+          $results = for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
             try {
               $out = @()
               Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
@@ -195,7 +195,7 @@ jobs:
           }
         env:
           debug: ${{ runner.debug }}
-          scripts: ${{ inputs.test_cases }}
+          test_cases: ${{ inputs.test_cases }}
 
       - name: Uninstall package
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
@@ -215,7 +215,7 @@ jobs:
             $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
           }
           $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
+          $results = for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
             try {
               $out = @()
               Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
@@ -232,7 +232,7 @@ jobs:
           }
         env:
           debug: ${{ runner.debug }}
-          scripts: ${{ inputs.test_cases }}
+          test_cases: ${{ inputs.test_cases }}
 
       - name: Take failure screenshot
         if: ${{ failure() }}
