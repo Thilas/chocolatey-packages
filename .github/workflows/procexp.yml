@@ -34,7 +34,9 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start procexp
+          "before start"
           procexp
+          "after start"
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
           while ($sw.ElapsedMilliseconds -lt 30000) {
             $sw

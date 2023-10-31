@@ -34,7 +34,9 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start procmon
-          procmon
+          "before start"
+          Start-Process procmon
+          "after start"
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
           while ($sw.ElapsedMilliseconds -lt 30000) {
             if (Get-Process procmon* | Where-Object MainWindowHandle -NE 0) {
