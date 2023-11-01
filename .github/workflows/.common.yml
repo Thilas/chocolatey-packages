@@ -136,7 +136,7 @@ jobs:
               if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
               "::group::❌ {0}" -f $test_cases[$i], $out, "::endgroup::"
             } catch {
-              "::group::✅ {0}" -f $test_cases[$i], $out, "::endgroup::"
+              "::group::✅ {0}" -f $test_cases[$i], $out, $_, "::endgroup::"
               continue
             }
             throw "Test failed."
@@ -215,7 +215,7 @@ jobs:
               if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
               "::group::❌ {0}" -f $test_cases[$i], $out, "::endgroup::"
             } catch {
-              "::group::✅ {0}" -f $test_cases[$i], $out, "::endgroup::"
+              "::group::✅ {0}" -f $test_cases[$i], $out, $_, "::endgroup::"
               continue
             }
             throw "Test failed."
