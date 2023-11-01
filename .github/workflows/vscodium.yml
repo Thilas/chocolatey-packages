@@ -35,10 +35,27 @@ jobs:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
+        - Test codium --version
+          try {
+            write-host "1"
+            codium --version
+          } catch {
+            $_ | out-host
+          }
+          try {
+            write-host "2"
+            Start-Process codium --version
+          } catch {
+            $_ | out-host
+          }
+          try {
+            write-host "3"
+            Start-Process codium --version -LoadUserProfile
+          } catch {
+            $_ | out-host
+          }
         - Run codium --version
-          # Write-Host "Path: $env:Path"
-          # Get-Command codium | Out-Host
-          codium --version
+          Start-Process codium --version -LoadUserProfile
         - Start VSCodium
           Start-Process codium -LoadUserProfile
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
