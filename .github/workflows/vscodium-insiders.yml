@@ -36,8 +36,8 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Run codium-insiders --version
-          Write-Host "Path: $env:Path"
-          Get-Command codium | Out-Host
+          # Write-Host "Path: $env:Path"
+          # Get-Command codium | Out-Host
           codium-insiders --version
         - Start VSCodium
           Start-Process codium-insiders -LoadUserProfile
