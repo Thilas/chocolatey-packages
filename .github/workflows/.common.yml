@@ -134,10 +134,9 @@ jobs:
               $out = @()
               Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
               if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
-              "❌ {0}" -f $test_cases[$i] | Write-Host
-              $out | Out-Host
+              "::group::❌ {0}" -f $test_cases[$i], $out, "::endgroup::"
             } catch {
-              "✅ {0}" -f $test_cases[$i] | Write-Host
+              "::group::✅ {0}" -f $test_cases[$i], $out, "::endgroup::"
               continue
             }
             throw "Test failed."
@@ -181,10 +180,9 @@ jobs:
               $out = @()
               Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
               if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
-              "✅ {0}" -f $test_cases[$i] | Write-Host
+              "::group::✅ {0}" -f $test_cases[$i], $out, "::endgroup::"
             } catch {
-              "❌ {0}" -f $test_cases[$i] | Write-Host
-              $out, $_ | Out-Host
+              "::group::❌ {0}" -f $test_cases[$i], $out, "::endgroup::"
               throw
             }
           }
@@ -215,10 +213,9 @@ jobs:
               $out = @()
               Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
               if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
-              "❌ {0}" -f $test_cases[$i] | Write-Host
-              $out | Out-Host
+              "::group::❌ {0}" -f $test_cases[$i], $out, "::endgroup::"
             } catch {
-              "✅ {0}" -f $test_cases[$i] | Write-Host
+              "::group::✅ {0}" -f $test_cases[$i], $out, "::endgroup::"
               continue
             }
             throw "Test failed."
