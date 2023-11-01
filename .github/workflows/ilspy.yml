@@ -37,9 +37,6 @@ jobs:
           Start-Process ILSpy -PassThru
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
           while ($sw.ElapsedMilliseconds -lt 30000) {
-            $sw | out-host
-            Get-Process ILSpy* | out-host
-            Get-Process ILSpy* | % MainWindowHandle | out-host
             if (Get-Process ILSpy* | Where-Object MainWindowHandle -NE 0) {
               return
             }
@@ -47,7 +44,12 @@ jobs:
           }
           throw "Process start timed out."
         - Close ILSpy
-          Get-Process ILSpy* | Should -Not -BeNullOrEmpty
-          Get-Process ILSpy* | ForEach-Object CloseMainWindow | Out-Null
-          Wait-Process ILSpy* -Timeout 30
+          Get-Process ILSpy* | out-host
+          Get-Process ILSpy* | Where-Object MainWindowHandle -NE 0 | ForEach-Object CloseMainWindow
+          try {
+            Wait-Process ILSpy* -Timeout 30
+          } catch {
+            Get-Process ILSpy* | out-host
+            throw
+          }
     secrets: inherit
