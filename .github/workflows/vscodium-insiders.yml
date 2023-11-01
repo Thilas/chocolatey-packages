@@ -36,9 +36,11 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Run codium-insiders --version
+          Write-Host "Path: $env:Path"
+          Get-Command codium | Out-Host
           codium-insiders --version
         - Start VSCodium
-          codium-insiders
+          Start-Process codium-insiders
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
           while ($sw.ElapsedMilliseconds -lt 30000) {
             if (Get-Process "VSCodium - Insiders" -ErrorAction SilentlyContinue | Where-Object MainWindowHandle -NE 0) {
