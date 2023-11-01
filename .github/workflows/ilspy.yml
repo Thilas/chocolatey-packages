@@ -34,22 +34,21 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start ILSpy
-          Start-Process ILSpy -PassThru
+          Start-Process ILSpy -LoadUserProfile -NoNewWindow
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
           while ($sw.ElapsedMilliseconds -lt 30000) {
-            if (Get-Process ILSpy* | Where-Object MainWindowHandle -NE 0) {
+            if ($p = Get-Process ILSpy* | Where-Object MainWindowHandle -NE 0) {
+              $p, ("Started in {0}ms" -f $sw.ElapsedMilliseconds)
               return
             }
-            Start-Sleep -Milliseconds 500
+            Start-Sleep -Milliseconds 100
           }
           throw "Process start timed out."
         - Close ILSpy
-          Get-Process ILSpy* | out-host
-          Get-Process ILSpy* | Where-Object MainWindowHandle -NE 0 | ForEach-Object CloseMainWindow
-          try {
-            Wait-Process ILSpy* -Timeout 30
-          } catch {
-            Get-Process ILSpy* | out-host
-            throw
-          }
+          Get-Process ILSpy* | Tee-Object -Variable p
+          $p | Should -Not -BeNullOrEmpty
+          $sw = [System.Diagnostics.Stopwatch]::StartNew()
+          $p | ForEach-Object CloseMainWindow
+          Wait-Process ILSpy* -Timeout 30
+          "Closed in {0}ms" -f $sw.ElapsedMilliseconds
     secrets: inherit
