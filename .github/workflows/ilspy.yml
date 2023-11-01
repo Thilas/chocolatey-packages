@@ -33,7 +33,7 @@ jobs:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
-        - Start GUI
+        - Start program
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
           Start-Process ILSpy -LoadUserProfile -NoNewWindow -PassThru | Tee-Object -Variable p
           while (!($p | Where-Object MainWindowHandle -NE 0)) {
@@ -44,7 +44,7 @@ jobs:
             Get-Process ILSpy | Tee-Object -Variable p
           }
           "Started in {0}ms" -f $sw.ElapsedMilliseconds
-        - Close GUI
+        - Close program
           Get-Process ILSpy | Tee-Object -Variable p
           #$p | Should -Not -BeNullOrEmpty
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
