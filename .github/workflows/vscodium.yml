@@ -54,6 +54,7 @@ jobs:
           } catch {
             $_ | out-host
           }
+          Get-Command codium
         - Run codium --version
           Start-Process codium --version -LoadUserProfile
         - Start VSCodium
