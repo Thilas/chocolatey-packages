@@ -40,7 +40,7 @@ jobs:
           Get-Command codium | Out-Host
           codium --version
         - Start VSCodium
-          Start-Process codium
+          Start-Process codium -LoadUserProfile
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
           while ($sw.ElapsedMilliseconds -lt 30000) {
             if (Get-Process VSCodium -ErrorAction SilentlyContinue | Where-Object MainWindowHandle -NE 0) {

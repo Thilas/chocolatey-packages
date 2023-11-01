@@ -40,7 +40,7 @@ jobs:
           Get-Command codium | Out-Host
           codium-insiders --version
         - Start VSCodium
-          Start-Process codium-insiders
+          Start-Process codium-insiders -LoadUserProfile
           $sw = [System.Diagnostics.Stopwatch]::StartNew()
           while ($sw.ElapsedMilliseconds -lt 30000) {
             if (Get-Process "VSCodium - Insiders" -ErrorAction SilentlyContinue | Where-Object MainWindowHandle -NE 0) {
