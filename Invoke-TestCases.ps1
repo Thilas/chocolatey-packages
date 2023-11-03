@@ -18,7 +18,7 @@ function Find-Window {
         public static extern IntPtr FindWindow(IntPtr lpClassName, string lpWindowName);
 '@
 
-    $win32 = Add-Type -Namespace Win32 -Name FindWindow -MemberDefinition $code -PassThru
+    $win32 = Add-Type -Namespace Win32 -Name API -MemberDefinition $code -PassThru
     $hwnd  = $win32::FindWindow([System.IntPtr]::Zero, $Name)
     if ($hwnd -eq [System.IntPtr]::Zero) {
         throw [System.ComponentModel.Win32Exception]::new()
