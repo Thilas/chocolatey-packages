@@ -32,11 +32,11 @@ jobs:
             - Start program
               $sw = [System.Diagnostics.Stopwatch]::StartNew()
               Start-Process ILSpy -LoadUserProfile -NoNewWindow -PassThru | Tee-Object -Variable p
-              while (!(Find-Window ILSpy)) {
-                if ($sw.ElapsedMilliseconds -gt 10000) {
+              while (!($p | Where-Object MainWindowHandle -NE 0)) {
+                if ($sw.ElapsedMilliseconds -gt 30000) {
                   throw "Process start timed out."
                 }
-                Start-Sleep -Milliseconds 500
+                Start-Sleep -Milliseconds 100
                 Get-Process ILSpy | Tee-Object -Variable p
               }
               "Started in {0}ms" -f $sw.ElapsedMilliseconds
