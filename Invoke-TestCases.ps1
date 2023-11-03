@@ -7,6 +7,26 @@ if ($env:debug) {
     $VerbosePreference = $DebugPreference = $InformationPreference = 'Continue'
 }
 
+function Find-Window {
+    [CmdletBinding()]
+    param(
+        [string] $Name
+    )
+
+    $code = @'
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern IntPtr FindWindow(IntPtr lpClassName, string lpWindowName);
+'@
+
+    $win32 = Add-Type -Namespace Win32 -Name FindWindow -MemberDefinition $code -PassThru
+    $hwnd  = $win32::FindWindow([System.IntPtr]::Zero, $Name)
+    if ($hwnd -eq [System.IntPtr]::Zero) {
+        throw [System.ComponentModel.Win32Exception]::new()
+    }
+
+    return $hwnd
+}
+
 function Write-Outcome {
     [CmdletBinding()]
     param(
