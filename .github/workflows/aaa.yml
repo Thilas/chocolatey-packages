@@ -1,0 +1,60 @@
+name: aaa
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [master]
+    paths:
+      - .github/workflows/aaa.yml
+
+jobs:
+  test:
+    runs-on: windows-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: Install
+        run: |
+          $debug = if ($env:debug) { "--verbose --debug" }
+          choco install -y --no-progress procexp $debug
+          if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
+        env:
+          debug: ${{ runner.debug }}
+
+      - name: Tests
+        run: |
+          if ($env:debug) {
+            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
+          }
+          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
+          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
+            try {
+              $out = @()
+              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
+              if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
+              "::group::✅ {0}" -f $test_cases[$i]
+              $out, "::endgroup::"
+            } catch {
+              "::group::❌ {0}" -f $test_cases[$i]
+              $out, "::endgroup::"
+              throw
+            }
+          }
+        env:
+          debug: ${{ runner.debug }}
+          test_cases: |
+            - Start procexp
+              Start-Process procexp
+              $sw = [System.Diagnostics.Stopwatch]::StartNew()
+              while ($sw.ElapsedMilliseconds -lt 30000) {
+                if (Get-Process procexp* | Where-Object MainWindowHandle -NE 0) {
+                  return
+                }
+                Start-Sleep -Milliseconds 500
+              }
+              throw "Process start timed out."
+            - Close procexp
+              Get-Process procexp* | Should -Not -BeNullOrEmpty
+              Get-Process procexp* | ForEach-Object CloseMainWindow | Out-Null
+              "waiting..."
+              Wait-Process procexp* -Timeout 30
