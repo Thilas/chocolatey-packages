@@ -13,48 +13,37 @@ jobs:
     timeout-minutes: 2
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Install
         run: |
           $debug = if ($env:debug) { "--verbose --debug" }
-          choco install -y --no-progress procexp $debug
+          choco install -y -i --no-progress ilspy $debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
         env:
           debug: ${{ runner.debug }}
 
       - name: Tests
-        run: |
-          if ($env:debug) {
-            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
-          }
-          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
-            try {
-              $out = @()
-              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
-              if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
-              "::group::✅ {0}" -f $test_cases[$i]
-              $out, "::endgroup::"
-            } catch {
-              "::group::❌ {0}" -f $test_cases[$i]
-              $out, "::endgroup::"
-              throw
-            }
-          }
+        run: ./Invoke-TestCases.ps1
         env:
           debug: ${{ runner.debug }}
           test_cases: |
-            - Start procexp
-              Start-Process procexp
+            - Start program
               $sw = [System.Diagnostics.Stopwatch]::StartNew()
-              while ($sw.ElapsedMilliseconds -lt 30000) {
-                if (Get-Process procexp* | Where-Object MainWindowHandle -NE 0) {
-                  return
+              Start-Process ILSpy -LoadUserProfile -NoNewWindow -PassThru | Tee-Object -Variable p
+              while (!($p | Where-Object MainWindowHandle -NE 0)) {
+                if ($sw.ElapsedMilliseconds -gt 30000) {
+                  throw "Process start timed out."
                 }
-                Start-Sleep -Milliseconds 500
+                Start-Sleep -Milliseconds 100
+                Get-Process ILSpy | Tee-Object -Variable p
               }
-              throw "Process start timed out."
-            - Close procexp
-              Get-Process procexp* | Should -Not -BeNullOrEmpty
-              Get-Process procexp* | ForEach-Object CloseMainWindow | Out-Null
-              "waiting..."
-              Wait-Process procexp* -Timeout 30
+              "Started in {0}ms" -f $sw.ElapsedMilliseconds
+            - Close program
+              Get-Process ILSpy | Tee-Object -Variable p
+              #$p | Should -Not -BeNullOrEmpty
+              $sw = [System.Diagnostics.Stopwatch]::StartNew()
+              $p | ForEach-Object CloseMainWindow
+              Wait-Process ILSpy -Timeout 30
+              "Closed in {0}ms" -f $sw.ElapsedMilliseconds
