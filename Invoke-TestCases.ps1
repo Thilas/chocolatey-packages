@@ -87,6 +87,7 @@ function Write-Outcome {
 }
 
 $testCases = $env:test_cases -split '^-\s+(.+)\s*$', 0, 'Multiline'
+$testCases -join '----'
 for ($i = 1; $i -lt $testCases.length - 1; $i += 2) {
     $logs = @()
     try {

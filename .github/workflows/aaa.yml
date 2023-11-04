@@ -31,6 +31,7 @@ jobs:
           debug: ${{ runner.debug }}
 
       - name: Upload screenshots
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: Screenshots
