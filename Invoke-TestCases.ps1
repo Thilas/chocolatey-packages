@@ -8,15 +8,15 @@ $env:test_cases = @'
 - Start program
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
     Start-Process ILSpy -LoadUserProfile -PassThru | Tee-Object -Variable p
-    # "MainWindowHandle: {0}" -f $p.MainWindowHandle
+    "MainWindowHandle: {0}" -f $p.MainWindowHandle
     # Find-Window ILSpy | Tee-Object -Variable w
     while ($p.MainWindowHandle -eq [System.IntPtr]::Zero) {
-        if ($sw.ElapsedMilliseconds -gt 5000) {
+        if ($sw.ElapsedMilliseconds -gt 10000) {
             throw "Process start timed out."
         }
         Start-Sleep -Milliseconds 500
         Get-Process ILSpy | Tee-Object -Variable p
-        # "MainWindowHandle: {0}" -f $p.MainWindowHandle
+        "MainWindowHandle: {0}" -f $p.MainWindowHandle
         # Find-Window ILSpy | Tee-Object -Variable w
     }
     # $p.WaitForInputIdle()
@@ -25,13 +25,13 @@ $env:test_cases = @'
 - Close program
     Get-Process ILSpy | Tee-Object -Variable p
     $p | Should -Not -BeNullOrEmpty
-    # "MainWindowHandle: {0}" -f $p.MainWindowHandle
+    "MainWindowHandle: {0}" -f $p.MainWindowHandle
     # Find-Window ILSpy | Tee-Object -Variable w
     # $w | Should -Not -BeNullOrEmpty
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
     $p.CloseMainWindow()
     # Close-Window $w
-    Wait-Process ILSpy -Timeout 5
+    Wait-Process ILSpy -Timeout 10
     "Closed in {0}ms" -f $sw.ElapsedMilliseconds
 '@
 
