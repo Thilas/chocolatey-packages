@@ -6,13 +6,14 @@ param(
 $ErrorActionPreference = 'Stop'
 $env:test_cases = @'
 - Start program
+    nircmd savescreenshotfull "desktop.1.0.start.png"
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
     Start-Process ILSpy -LoadUserProfile -PassThru | Tee-Object -Variable p
     "MainWindowHandle: {0}" -f $p.MainWindowHandle
     # Find-Window ILSpy | Tee-Object -Variable w
     $i = 1
     while ($p.MainWindowHandle -eq [System.IntPtr]::Zero) {
-        nircmd savescreenshotfull "desktop.starting.$i.png"
+        nircmd savescreenshotfull "desktop.1.$i.starting.png"
         if ($sw.ElapsedMilliseconds -gt 10000) {
             throw "Process start timed out."
         }
@@ -25,25 +26,26 @@ $env:test_cases = @'
     # $p.WaitForInputIdle()
     # "MainWindowHandle: {0}" -f $p.MainWindowHandle
     "Started in {0}ms" -f $sw.ElapsedMilliseconds
-    nircmd savescreenshotfull "desktop.started.png"
+    nircmd savescreenshotfull "desktop.1.started.png"
 - Close program
+    nircmd savescreenshotfull "desktop.2.0.close.png"
     Get-Process ILSpy | Tee-Object -Variable p
     $p | Should -Not -BeNullOrEmpty
     "MainWindowHandle: {0}" -f $p.MainWindowHandle
     # Find-Window ILSpy | Tee-Object -Variable w
     # $w | Should -Not -BeNullOrEmpty
-    nircmd savescreenshotfull "desktop.closing.png"
+    nircmd savescreenshotfull "desktop.2.1.closing.png"
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
     $p.CloseMainWindow()
     # Close-Window $w
     try {
         Wait-Process ILSpy -Timeout 10
     } catch {
-        nircmd savescreenshotfull "desktop.failed.png"
+        nircmd savescreenshotfull "desktop.2.2.failed.png"
         throw
     }
     "Closed in {0}ms" -f $sw.ElapsedMilliseconds
-    nircmd savescreenshotfull "desktop.closed.png"
+    nircmd savescreenshotfull "desktop.2.closed.png"
 '@
 
 if ($env:debug) {
