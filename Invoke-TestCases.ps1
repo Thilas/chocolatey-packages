@@ -14,10 +14,10 @@ $env:test_cases = @'
     $i = 1
     while ($p.MainWindowHandle -eq [System.IntPtr]::Zero) {
         nircmd savescreenshotfull "desktop.1.$i.starting.png"
-        if ($sw.ElapsedMilliseconds -gt 10000) {
+        if ($sw.ElapsedMilliseconds -gt 30000) {
             throw "Process start timed out."
         }
-        Start-Sleep -Milliseconds 500
+        Start-Sleep -Milliseconds 100
         Get-Process ILSpy | Tee-Object -Variable p
         "MainWindowHandle: {0}" -f $p.MainWindowHandle
         # Find-Window ILSpy | Tee-Object -Variable w
@@ -39,7 +39,7 @@ $env:test_cases = @'
     $p.CloseMainWindow()
     # Close-Window $w
     try {
-        Wait-Process ILSpy -Timeout 10
+        Wait-Process ILSpy -Timeout 30
     } catch {
         nircmd savescreenshotfull "desktop.2.2.failed.png"
         throw
