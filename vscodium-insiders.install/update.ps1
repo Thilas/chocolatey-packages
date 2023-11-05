@@ -33,5 +33,5 @@ function global:au_SearchReplace {
 }
 
 if ($MyInvocation.InvocationName -ne '.') {
-    Update-Package -ChecksumFor all -Force:$Force
+    Update-Package -ChecksumFor 64 -Force:$Force
 }
