@@ -25,12 +25,15 @@ function Start-Program {
     if ($ScreenshotPrefix) { nircmd savescreenshotfull "$ScreenshotPrefix.1.start.png" }
 
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
-    Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -LoadUserProfile -PassThru
-    | Tee-Object -Variable processes
+    Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -LoadUserProfile -PassThru -OutVariable processes
     Write-Verbose "MainWindowHandle(s): $($processes.MainWindowHandle -join ', ')"
 
     $i = 1
-    while ($processes.MainWindowHandle -eq [System.IntPtr]::Zero) {
+    while ($true) {
+        if ($processes | Where-Object MainWindowHandle -NE [System.IntPtr]::Zero) {
+            break
+        }
+
         if ($ScreenshotPrefix -and $DebugPreference -eq 'Continue') { nircmd savescreenshotfull "$ScreenshotPrefix.2.$i.starting.png" }
         if ($sw.Elapsed.TotalSeconds -gt $TimeoutSec) {
             if ($ScreenshotPrefix) { nircmd savescreenshotfull "$ScreenshotPrefix.3.failed.png" }
@@ -38,7 +41,7 @@ function Start-Program {
         }
 
         Start-Sleep -Milliseconds 100
-        Get-Process -Name $ProcessName | Tee-Object -Variable processes
+        Get-Process -Name $ProcessName -OutVariable processes
         Write-Verbose "MainWindowHandle(s): $($processes.MainWindowHandle -join ', ')"
         $i++
     }
@@ -59,9 +62,12 @@ function Close-Program {
 
     if ($ScreenshotPrefix) { nircmd savescreenshotfull "$ScreenshotPrefix.4.close.png" }
 
-    Get-Process -Name $ProcessName | Tee-Object -Variable processes
+    Get-Process -Name $ProcessName -OutVariable processes
     if (!$processes) {
         throw 'Cannot find a process with the name "{0}".' -f $ProcessName
+    }
+    if (!($processes | Where-Object MainWindowHandle -NE [System.IntPtr]::Zero)) {
+        throw 'Cannot find any window on processes with the name "{0}".' -f $ProcessName
     }
 
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
