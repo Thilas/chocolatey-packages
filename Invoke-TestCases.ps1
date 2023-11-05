@@ -3,6 +3,13 @@ param(
     [switch] $Inverse
 )
 
+# $ErrorActionPreference = 'Stop'
+# $stp = Get-Command ILSpy | ForEach-Object Path
+# $action = New-ScheduledTaskAction $stp
+# $trigger = New-ScheduledTaskTrigger -Once -At ([datetime]::Now.AddSeconds(60))
+# $st = Register-ScheduledTask ILSpy -Action $action -Trigger $trigger
+# $st | Unregister-ScheduledTask -Confirm:$false
+
 $ErrorActionPreference = 'Stop'
 $env:test_cases = @'
 - Start program
@@ -13,11 +20,12 @@ $env:test_cases = @'
     # Find-Window ILSpy | Tee-Object -Variable w
     $i = 1
     while ($p.MainWindowHandle -eq [System.IntPtr]::Zero) {
-        nircmd savescreenshotfull "desktop.1.$i.starting.png"
-        if ($sw.ElapsedMilliseconds -gt 30000) {
+        # nircmd savescreenshotfull "desktop.1.$i.starting.png"
+        if ($sw.ElapsedMilliseconds -gt 60000) {
+            nircmd savescreenshotfull "desktop.1.failed.png"
             throw "Process start timed out."
         }
-        Start-Sleep -Milliseconds 100
+        Start-Sleep -Milliseconds 500
         Get-Process ILSpy | Tee-Object -Variable p
         "MainWindowHandle: {0}" -f $p.MainWindowHandle
         # Find-Window ILSpy | Tee-Object -Variable w
@@ -39,7 +47,7 @@ $env:test_cases = @'
     $p.CloseMainWindow()
     # Close-Window $w
     try {
-        Wait-Process ILSpy -Timeout 30
+        Wait-Process ILSpy -Timeout 60
     } catch {
         nircmd savescreenshotfull "desktop.2.2.failed.png"
         throw
