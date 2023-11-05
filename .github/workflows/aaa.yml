@@ -19,18 +19,20 @@ jobs:
       - name: Install
         run: |
           $debug = if ($env:RUNNER_DEBUG) { "--verbose --debug" }
-          choco install -y -i --no-progress ilspy nircmd $debug
+          choco install -y -i --no-progress ilspy psinfo nircmd $debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
-          nircmd savescreenshotfull desktop.0.0.install.png
+          nircmd savescreenshotfull desktop.install.png
 
       - name: Test
         run: ./test.ps1
         env:
           test_cases: |
+            - psinfo
+              Invoke-Program psinfo -ScreenshotPrefix desktop
             - Start program
-                Start-Program ILSpy -ScreenshotPrefix desktop
+              Start-Program ILSpy -ScreenshotPrefix desktop
             - Close program
-                Close-Program ILSpy -ScreenshotPrefix desktop
+              Close-Program ILSpy -ScreenshotPrefix desktop
 
 
       - name: Upload screenshots

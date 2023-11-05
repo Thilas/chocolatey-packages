@@ -3,9 +3,43 @@ param(
     [switch] $Inverse
 )
 
-$VerbosePreference = 'Continue'
+$ErrorActionPreference = 'Stop'
 if ($env:RUNNER_DEBUG) {
     $VerbosePreference = $DebugPreference = $InformationPreference = 'Continue'
+}
+
+# Public
+
+function Invoke-Program {
+    [CmdletBinding(PositionalBinding = $false)]
+    param(
+        [Parameter(Mandatory, Position = 0)]
+        [ValidateNotNullOrEmpty()]
+        [string] $FilePath,
+        [Parameter(Position = 1)]
+        [string[]] $ArgumentList,
+        [int] $TimeoutSec = 60,
+        [string] $ScreenshotPrefix
+    )
+
+    Add-Screenshot $ScreenshotPrefix "invoke.1"
+    $sw = [System.Diagnostics.Stopwatch]::StartNew()
+    Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -LoadUserProfile -NoNewWindow -PassThru
+    | Tee-Object -Variable initialProcess
+    | Format-Process
+
+    try {
+        $initialProcess | Wait-Process -Timeout $TimeoutSec
+        if ($initialProcess.ExitCode) {
+            throw "Process failed with exit code {0}." -f $initialProcess.ExitCode
+        }
+    } catch {
+        Add-Screenshot $ScreenshotPrefix "invoke.2.failed"
+        throw
+    }
+
+    'Invoked in {0}ms' -f $sw.ElapsedMilliseconds
+    Add-Screenshot $ScreenshotPrefix "invoke.2.done"
 }
 
 function Start-Program {
@@ -17,37 +51,40 @@ function Start-Program {
         [Parameter(Position = 1)]
         [string[]] $ArgumentList,
         [ValidateNotNullOrEmpty()]
-        [string] $ProcessName = $FilePath,
+        [string] $ProcessName,
+        [switch] $Shim,
         [int] $TimeoutSec = 60,
         [string] $ScreenshotPrefix
     )
 
-    if ($ScreenshotPrefix) { nircmd savescreenshotfull "$ScreenshotPrefix.1.start.png" }
-
+    Add-Screenshot $ScreenshotPrefix "start.1"
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
-    Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -LoadUserProfile -PassThru -OutVariable processes
-    Write-Verbose "MainWindowHandle(s): $($processes.MainWindowHandle -join ', ')"
+    Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -LoadUserProfile -PassThru
+    | Tee-Object -Variable initialProcess
+    | Format-Process
+    if ($Shim ) {
+        $initialProcess | Wait-Process -Timeout $TimeoutSec
+    }
+    if (!$ProcessName) {
+        $ProcessName = $initialProcess.Name
+    }
 
-    $i = 1
-    while ($true) {
-        if ($processes | Where-Object MainWindowHandle -NE [System.IntPtr]::Zero) {
+    for ($i = 1; ; $i++) {
+        Start-Sleep -Milliseconds 100
+        Get-Process -Name $ProcessName -OutVariable processes | Format-Process
+        if ($processes | Where-Object MainWindowHandle -NE 0) {
             break
         }
 
-        if ($ScreenshotPrefix -and $DebugPreference -eq 'Continue') { nircmd savescreenshotfull "$ScreenshotPrefix.2.$i.starting.png" }
+        Add-Screenshot $ScreenshotPrefix "start.2.$i.starting"
         if ($sw.Elapsed.TotalSeconds -gt $TimeoutSec) {
-            if ($ScreenshotPrefix) { nircmd savescreenshotfull "$ScreenshotPrefix.3.failed.png" }
+            Add-Screenshot $ScreenshotPrefix "start.3.failed"
             throw 'Process start timed out.'
         }
-
-        Start-Sleep -Milliseconds 100
-        Get-Process -Name $ProcessName -OutVariable processes
-        Write-Verbose "MainWindowHandle(s): $($processes.MainWindowHandle -join ', ')"
-        $i++
     }
 
     'Started in {0}ms' -f $sw.ElapsedMilliseconds
-    if ($ScreenshotPrefix) { nircmd savescreenshotfull "$ScreenshotPrefix.3.started.png" }
+    Add-Screenshot $ScreenshotPrefix "start.3.done"
 }
 
 function Close-Program {
@@ -60,30 +97,61 @@ function Close-Program {
         [string] $ScreenshotPrefix
     )
 
-    if ($ScreenshotPrefix) { nircmd savescreenshotfull "$ScreenshotPrefix.4.close.png" }
-
-    Get-Process -Name $ProcessName -OutVariable processes
+    Add-Screenshot $ScreenshotPrefix "close.1"
+    Get-Process -Name $ProcessName -OutVariable processes | Format-Process
     if (!$processes) {
         throw 'Cannot find a process with the name "{0}".' -f $ProcessName
     }
-    if (!($processes | Where-Object MainWindowHandle -NE [System.IntPtr]::Zero)) {
-        throw 'Cannot find any window on processes with the name "{0}".' -f $ProcessName
+    if (!($processes | Where-Object MainWindowHandle -NE 0)) {
+        throw 'Cannot find any windows on a process with the name "{0}".' -f $ProcessName
     }
 
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
-    Write-Verbose "MainWindowHandle(s): $($processes.MainWindowHandle -join ', ')"
     $processes.CloseMainWindow()
-    if ($ScreenshotPrefix -and $DebugPreference -eq 'Continue') { nircmd savescreenshotfull "$ScreenshotPrefix.5.closing.png" }
+    Add-Screenshot $ScreenshotPrefix "close.2.closing"
 
     try {
         Wait-Process -Name $ProcessName -Timeout $TimeoutSec
     } catch {
-        if ($ScreenshotPrefix) { nircmd savescreenshotfull "$ScreenshotPrefix.6.failed.png" }
+        Add-Screenshot $ScreenshotPrefix "close.3.failed"
         throw
     }
 
     'Closed in {0}ms' -f $sw.ElapsedMilliseconds
-    if ($ScreenshotPrefix) { nircmd savescreenshotfull "$ScreenshotPrefix.6.closed.png" }
+    Add-Screenshot $ScreenshotPrefix "close.3.done"
+}
+
+# Private
+
+filter Format-Process {
+    [CmdletBinding(PositionalBinding = $false)]
+    param(
+        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+        [ValidateNotNull()]
+        [System.Diagnostics.Process] $InputObject
+    )
+    "Process Id = {0,-10}, Name = {1,-16}, hWnd = {2,-10}" -f @(
+        $InputObject.Id
+        $InputObject.ProcessName
+        $InputObject.MainWindowHandle
+    ) | Write-Verbose
+}
+
+function Add-Screenshot {
+    [CmdletBinding(PositionalBinding = $false)]
+    param(
+        [Parameter(Position = 0)]
+        [string] $Prefix,
+        [Parameter(Mandatory, Position = 1)]
+        [ValidateNotNullOrEmpty()]
+        [string] $Name
+    )
+    if ($Prefix -and $DebugPreference -eq 'Continue') {
+        if (!(Get-Command nircmd)) {
+            choco install -y --no-progress nircmd
+        }
+        nircmd savescreenshotfull "$Prefix.$Name.png"
+    }
 }
 
 function Write-Outcome {
