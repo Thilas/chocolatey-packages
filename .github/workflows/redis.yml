@@ -33,8 +33,6 @@ jobs:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
-        - Run redis-cli -v
-          redis-cli -v
-        - Run redis-server -v
-          redis-server -v
+        - redis-cli -v
+        - redis-server -v
     secrets: inherit

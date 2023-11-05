@@ -85,6 +85,13 @@ jobs:
           name: Packages
           path: Packages/*.nupkg
 
+      - name: Upload Test artifact
+        if: ${{ hashFiles('Packages/*.nupkg') }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test
+          path: test.ps1
+
     outputs:
       updates: ${{ steps.updates.outputs.packages }}
 
@@ -122,38 +129,23 @@ jobs:
         with:
           name: Packages
 
+      - name: Download Test artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: Test
+
       - name: Tests before install
         if: ${{ inputs.test_cases }}
-        run: |
-          if ($env:debug) {
-            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
-          }
-          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
-            try {
-              $out = @()
-              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
-              if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
-              "::group::❌ {0}" -f $test_cases[$i]
-              $out, "::endgroup::"
-            } catch {
-              "::group::✅ {0}" -f $test_cases[$i]
-              $out, $_, "::endgroup::"
-              continue
-            }
-            throw "Test failed."
-          }
+        run: ./test.ps1 -Inverse
         env:
-          debug: ${{ runner.debug }}
           test_cases: ${{ inputs.test_cases }}
+          screenshot_prefix: desktop
 
       - name: Install package
         run: |
-          $debug = if ($env:debug) { "--verbose --debug" }
+          $debug = if ($env:RUNNER_DEBUG) { "--verbose --debug" }
           choco install -y --no-progress $env:package_name --version $env:package_version --source "'.;https://community.chocolatey.org/api/v2/'" $debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
-        env:
-          debug: ${{ runner.debug }}
         timeout-minutes: 10
 
       - name: Determine package information path
@@ -172,63 +164,26 @@ jobs:
 
       - name: Tests after install
         if: ${{ inputs.test_cases }}
-        run: |
-          if ($env:debug) {
-            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
-          }
-          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
-            try {
-              $out = @()
-              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
-              if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
-              "::group::✅ {0}" -f $test_cases[$i]
-              $out, "::endgroup::"
-            } catch {
-              "::group::❌ {0}" -f $test_cases[$i]
-              $out, "::endgroup::"
-              throw
-            }
-          }
+        run: ./test.ps1
         env:
-          debug: ${{ runner.debug }}
           test_cases: ${{ inputs.test_cases }}
+          screenshot_prefix: desktop
 
       - name: Uninstall package
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
         if: ${{ env.package_name != 'airserver' }}
         run: |
-          $debug = if ($env:debug) { "--verbose --debug" }
+          $debug = if ($env:RUNNER_DEBUG) { "--verbose --debug" }
           choco uninstall -y --no-progress $env:package_name $debug
           if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
-        env:
-          debug: ${{ runner.debug }}
         timeout-minutes: 10
 
       - name: Tests after uninstall
         if: ${{ inputs.test_cases }}
-        run: |
-          if ($env:debug) {
-            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
-          }
-          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
-            try {
-              $out = @()
-              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
-              if ($LASTEXITCODE) { throw "Test failed with exit code $LASTEXITCODE." }
-              "::group::❌ {0}" -f $test_cases[$i]
-              $out, "::endgroup::"
-            } catch {
-              "::group::✅ {0}" -f $test_cases[$i]
-              $out, $_, "::endgroup::"
-              continue
-            }
-            throw "Test failed."
-          }
+        run: ./test.ps1 -Inverse
         env:
-          debug: ${{ runner.debug }}
           test_cases: ${{ inputs.test_cases }}
+          screenshot_prefix: desktop
 
       - name: Take failure screenshot
         if: ${{ failure() }}
@@ -241,4 +196,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Information ${{ env.package_name }} ${{ env.package_version }} on ${{ matrix.os }}
-          path: desktop.png
+          path: desktop*.png

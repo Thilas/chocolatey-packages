@@ -35,40 +35,9 @@ jobs:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
-        - Test codium --version
-          try {
-            write-host "1"
-            codium --version
-          } catch {
-            $_ | out-host
-          }
-          try {
-            write-host "2"
-            Start-Process codium --version
-          } catch {
-            $_ | out-host
-          }
-          try {
-            write-host "3"
-            Start-Process codium --version -LoadUserProfile
-          } catch {
-            $_ | out-host
-          }
-          Get-Command codium
-        - Run codium --version
-          Start-Process codium --version -LoadUserProfile
-        - Start VSCodium
-          Start-Process codium -LoadUserProfile
-          $sw = [System.Diagnostics.Stopwatch]::StartNew()
-          while ($sw.ElapsedMilliseconds -lt 30000) {
-            if (Get-Process VSCodium -ErrorAction SilentlyContinue | Where-Object MainWindowHandle -NE 0) {
-              return
-            }
-            Start-Sleep -Milliseconds 500
-          }
-          throw "Process start timed out."
-        - Close VSCodium
-          Get-Process VSCodium -ErrorAction SilentlyContinue | Should -Not -BeNullOrEmpty
-          Get-Process VSCodium | ForEach-Object CloseMainWindow | Out-Null
-          Wait-Process VSCodium -Timeout 30
+        - codium --version
+        - Start program
+          Start-Program codium -ProcessName VSCodium
+        - Close program
+          Close-Program VSCodium
     secrets: inherit

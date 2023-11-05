@@ -33,18 +33,8 @@ jobs:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
-        - Start procmon
-          Start-Process procmon
-          $sw = [System.Diagnostics.Stopwatch]::StartNew()
-          while ($sw.ElapsedMilliseconds -lt 30000) {
-            if (Get-Process procmon* | Where-Object MainWindowHandle -NE 0) {
-              return
-            }
-            Start-Sleep -Milliseconds 500
-          }
-          throw "Process start timed out."
-        - Close procmon
-          Get-Process procmon* | Should -Not -BeNullOrEmpty
-          Get-Process procmon* | ForEach-Object CloseMainWindow | Out-Null
-          Wait-Process procmon* -Timeout 30
+        - Start program
+          Start-Program procmon -ProcessName procmon*
+        - Close program
+          Close-Program procmon*
     secrets: inherit
