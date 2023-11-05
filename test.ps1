@@ -1,5 +1,6 @@
 [CmdletBinding(PositionalBinding = $false)]
 param(
+    [string] $Tests = $env:test_cases,
     [switch] $Inverse
 )
 
@@ -123,20 +124,6 @@ function Close-Program {
 
 # Private
 
-filter Format-Process {
-    [CmdletBinding(PositionalBinding = $false)]
-    param(
-        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-        [ValidateNotNull()]
-        [System.Diagnostics.Process] $InputObject
-    )
-    "Process Id = {0,-10}, Name = {1,-16}, hWnd = {2,-10}" -f @(
-        $InputObject.Id
-        $InputObject.ProcessName
-        $InputObject.MainWindowHandle
-    ) | Write-Verbose
-}
-
 function Add-Screenshot {
     [CmdletBinding(PositionalBinding = $false)]
     param(
@@ -154,26 +141,48 @@ function Add-Screenshot {
     }
 }
 
-function Write-Outcome {
+filter ConvertTo-TestCases {
     [CmdletBinding(PositionalBinding = $false)]
     param(
-        [Parameter(Mandatory, Position = 0)]
-        [ValidateNotNullOrEmpty()]
-        [string] $TestCase,
-        [switch] $Success,
-        [psobject[]] $Logs
+        [Parameter(Position = 0, ValueFromPipeline)]
+        [string] $InputObject
     )
-    $icon = $Success ? '✅' : '❌'
-    "::group::$icon $TestCase"
-    $Logs
-    '::endgroup::'
+    $list = $InputObject -split '^-\s+(.+)\s*$', 0, 'Multiline'
+    for ($i = 1; $i -lt $list.length - 1; $i += 2) {
+        [pscustomobject] @{
+            Title  = $list[$i]
+            Script = $list[$i + 1].Trim() ? $list[$i + 1].Trim() : $list[$i]
+        }
+    }
 }
 
-$testCases = $env:test_cases -split '^-\s+(.+)\s*$', 0, 'Multiline'
-for ($i = 1; $i -lt $testCases.length - 1; $i += 2) {
+filter Format-Process {
+    [CmdletBinding(PositionalBinding = $false)]
+    param(
+        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+        [ValidateNotNull()]
+        [System.Diagnostics.Process] $InputObject
+    )
+    "Process Id = {0,-10}, Name = {1,-16}, hWnd = {2,-10}" -f @(
+        $InputObject.Id
+        $InputObject.ProcessName
+        $InputObject.MainWindowHandle
+    ) | Write-Verbose
+}
+
+filter Invoke-TestCase {
+    [CmdletBinding(PositionalBinding = $false)]
+    param(
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
+        [ValidateNotNullOrEmpty()]
+        [string] $Title,
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
+        [ValidateNotNullOrEmpty()]
+        [string] $Script
+    )
     $logs = @()
     try {
-        Invoke-Expression $testCases[$i + 1] *>&1
+        Invoke-Expression $Script *>&1
         | ForEach-Object {
             $logs += $_
         }
@@ -182,19 +191,38 @@ for ($i = 1; $i -lt $testCases.length - 1; $i += 2) {
         }
 
         if (!$Inverse) {
-            Write-Outcome $testCases[$i] -Success -Logs $logs
-            continue
+            Write-Outcome $Title -Success -Logs $logs
+            return
         }
     } catch {
         if ($Inverse) {
-            Write-Outcome $testCases[$i] -Success -Logs $logs, $_
-            continue
+            Write-Outcome $Title -Success -Logs $logs, $_
+            return
         }
 
-        Write-Outcome $testCases[$i] -Logs $logs
+        Write-Outcome $Title -Logs $logs
         throw
     }
 
-    Write-Outcome $testCases[$i] -Logs $logs
+    Write-Outcome $Title -Logs $logs
     throw 'Test failed.'
 }
+
+function Write-Outcome {
+    [CmdletBinding(PositionalBinding = $false)]
+    param(
+        [Parameter(Mandatory, Position = 0)]
+        [ValidateNotNullOrEmpty()]
+        [string] $Title,
+        [switch] $Success,
+        [psobject[]] $Logs
+    )
+    $icon = $Success ? '✅' : '❌'
+    "::group::$icon $Title"
+    $Logs
+    '::endgroup::'
+}
+
+$Tests
+| ConvertTo-TestCases
+| Invoke-TestCase

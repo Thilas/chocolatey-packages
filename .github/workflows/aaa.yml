@@ -28,12 +28,10 @@ jobs:
         env:
           test_cases: |
             - psinfo
-              Invoke-Program psinfo -ScreenshotPrefix desktop
             - Start program
               Start-Program ILSpy -ScreenshotPrefix desktop
             - Close program
               Close-Program ILSpy -ScreenshotPrefix desktop
-
 
       - name: Upload screenshots
         if: always()
