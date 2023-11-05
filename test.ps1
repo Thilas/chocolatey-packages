@@ -108,7 +108,7 @@ function Close-Program {
     }
 
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
-    $processes.CloseMainWindow()
+    $processes.CloseMainWindow() | Write-Verbose
     Add-Screenshot $ScreenshotPrefix "close.2.closing"
 
     try {
