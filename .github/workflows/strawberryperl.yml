@@ -33,5 +33,8 @@ jobs:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
+        - test
+          $env:Path
+          Get-Command perl*
         - perl --version
     secrets: inherit

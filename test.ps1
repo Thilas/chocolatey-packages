@@ -40,7 +40,8 @@ function Start-Program {
 
     for ($i = 1; ; $i++) {
         Start-Sleep -Milliseconds 100
-        Get-Process -Name $ProcessName -OutVariable processes | Format-Process
+        Get-Process -Name $ProcessName -ErrorAction SilentlyContinue -OutVariable processes
+        | Format-Process
         if ($processes | Where-Object MainWindowHandle -NE 0) {
             break
         }
@@ -67,7 +68,8 @@ function Close-Program {
     )
 
     Add-Screenshot $ScreenshotPrefix "close.1"
-    Get-Process -Name $ProcessName -OutVariable processes | Format-Process
+    Get-Process -Name $ProcessName -ErrorAction SilentlyContinue -OutVariable processes
+    | Format-Process
     if (!$processes) {
         throw 'Cannot find a process with the name "{0}".' -f $ProcessName
     }
@@ -102,7 +104,7 @@ function Add-Screenshot {
         [string] $Name
     )
     if ($Prefix -and $DebugPreference -eq 'Continue') {
-        if (!(Get-Command nircmd)) {
+        if (!(Get-Command nircmd -ErrorAction SilentlyContinue)) {
             choco install -y --no-progress nircmd
         }
         nircmd savescreenshotfull "$Prefix.$Name.png"
