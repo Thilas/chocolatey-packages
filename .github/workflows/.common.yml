@@ -117,11 +117,6 @@ jobs:
             choco uninstall -y --no-progress $env:package_name
           }
 
-      - name: Take fake screenshot
-        run: |
-          choco install -y --no-progress nircmd
-          nircmd savescreenshotfull desktop.png
-
       - name: Download Packages artifact
         uses: actions/download-artifact@v3
         with:
