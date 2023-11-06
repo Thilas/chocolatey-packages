@@ -35,5 +35,6 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - perl --version
-          C:\Strawberry\perl\bin\perl --version
+          Get-Command perl | ForEach-Object Source | Should -BeLike 'C:\Strawberry\*\perl.exe'
+          perl --version
     secrets: inherit
