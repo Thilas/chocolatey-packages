@@ -37,5 +37,5 @@ jobs:
         - Check Serviio service
           Get-Service Serviio | ForEach-Object Status | Should -Be "Running"
         - Test web interface
-          Invoke-WebRequest "http://localhost:23424/mediabrowser" -MaximumRetryCount 60 -RetryIntervalSec 1
+          Invoke-WebApp "http://localhost:23424/mediabrowser"
     secrets: inherit
