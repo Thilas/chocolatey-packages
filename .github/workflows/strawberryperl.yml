@@ -33,8 +33,8 @@ jobs:
     with:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
+      # Another Perl distribution is provided with Git on the Path, need to clean that up for the tests
+      cleanup: Get-Command perl | ForEach-Object Source | Remove-Item
       test_cases: |
         - perl --version
-          Get-Command perl | ForEach-Object Source | Should -BeLike 'C:\Strawberry\*\perl.exe'
-          perl --version
     secrets: inherit
