@@ -6,9 +6,10 @@ on:
     branches: [master]
     paths:
       - .github/workflows/.common.yml
-      # - .github/workflows/sabnzbd.yml
+      - .github/workflows/sabnzbd.yml
       - sabnzbd/**
       - Common.ps1
+      - test.ps1
       - update_all.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
@@ -36,5 +37,5 @@ jobs:
         - Check SABnzbd service
           Get-Service SABnzbd | ForEach-Object Status | Should -Be "Running"
         - Test web interface
-          Invoke-WebRequest "http://localhost:8080/" -UseBasicParsing
+          Invoke-WebApp "http://localhost:8080/"
     secrets: inherit

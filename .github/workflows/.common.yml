@@ -11,11 +11,19 @@ on:
       force:
         description: Force update
         type: boolean
+      cleanup:
+        description: Optional cleanup script to run at the beginning of tests
+        type: string
+      uninstall:
+        description: Uninstall package
+        type: boolean
+        default: true
       test_cases:
         description: |
           List of test cases
+          - {one-line script}
           - {title}
-            {script}
+            {multi-line script}
         type: string
 
 jobs:
@@ -116,13 +124,18 @@ jobs:
       package_version: ${{ fromJSON(matrix.package).version }}
 
     steps:
-      - name: Remove package if needed
+      - name: Cleanup environment
         run: |
           "Chocolatey v$(choco --version)"
           choco list --exact --limit-output $env:package_name | Tee-Object -Variable installed
           if ($installed) {
             choco uninstall -y --no-progress $env:package_name
           }
+          if ($env:cleanup) {
+            Invoke-Expression $env:cleanup
+          }
+        env:
+          cleanup: ${{ inputs.cleanup }}
 
       - name: Download Packages artifact
         uses: actions/download-artifact@v3
@@ -170,8 +183,7 @@ jobs:
           screenshot_prefix: desktop
 
       - name: Uninstall package
-        # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
-        if: ${{ env.package_name != 'airserver' }}
+        if: ${{ inputs.uninstall }}
         run: |
           $debug = if ($env:RUNNER_DEBUG) { "--verbose --debug" }
           choco uninstall -y --no-progress --remove-dependencies $env:package_name $debug

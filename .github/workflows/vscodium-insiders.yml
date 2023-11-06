@@ -6,10 +6,11 @@ on:
     branches: [master]
     paths:
       - .github/workflows/.common.yml
-      # - .github/workflows/vscodium-insiders.yml
+      - .github/workflows/vscodium-insiders.yml
       - vscodium-insiders/**
       - vscodium-insiders.*/**
       - Common.ps1
+      - test.ps1
       - update_all.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test

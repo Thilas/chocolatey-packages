@@ -100,6 +100,31 @@ function Close-Program {
     Add-Screenshot $ScreenshotPrefix "close.3.done"
 }
 
+function Invoke-WebApp {
+    [CmdletBinding(PositionalBinding = $false)]
+    param(
+        [Parameter(Mandatory, Position = 0)]
+        [ValidateNotNull()]
+        [uri] $Uri,
+        [int] $TimeoutSec = 60
+    )
+    $sw = [System.Diagnostics.Stopwatch]::StartNew()
+    while ($true) {
+        try {
+            Invoke-WebRequest -Uri $Uri
+            break
+        } catch {
+            if ($sw.Elapsed.TotalSeconds -gt $TimeoutSec) {
+                Write-Error 'WebApp invoke timed out.' -ErrorAction Continue
+                throw
+            }
+            "WebApp can't be reached: {0}" -f $_.Exception.Message | Write-Warning
+        }
+        Start-Sleep -Milliseconds 100
+    }
+    'Invoked in {0}ms' -f $sw.ElapsedMilliseconds
+}
+
 # Private
 
 function Add-Screenshot {

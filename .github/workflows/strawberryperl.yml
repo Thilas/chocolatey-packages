@@ -6,9 +6,10 @@ on:
     branches: [master]
     paths:
       - .github/workflows/.common.yml
-      # - .github/workflows/strawberryperl.yml
+      - .github/workflows/strawberryperl.yml
       - strawberryperl/**
       - Common.ps1
+      - test.ps1
       - update_all.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
@@ -32,7 +33,8 @@ jobs:
     with:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
+      # Another Perl distribution is provided with Git on the Path, need to clean that up for the tests
+      cleanup: Get-Command perl | ForEach-Object Source | Remove-Item
       test_cases: |
         - perl --version
-          C:\Strawberry\perl\bin\perl --version
     secrets: inherit

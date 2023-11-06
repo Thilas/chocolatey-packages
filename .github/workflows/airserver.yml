@@ -32,4 +32,6 @@ jobs:
     with:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
+      # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
+      uninstall: false
     secrets: inherit
