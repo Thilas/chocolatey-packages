@@ -39,7 +39,7 @@ jobs:
         - Test web interface
           netstat -a -b
           "----"
-          netstat -a -b
           Start-Sleep 30
+          netstat -a -b
           Invoke-WebRequest "http://localhost:23424/mediabrowser" -UseBasicParsing
     secrets: inherit
