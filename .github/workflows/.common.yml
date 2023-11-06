@@ -47,6 +47,7 @@ jobs:
       - name: Update packages
         id: updates
         run: |
+          "Chocolatey v$(choco --version)"
           $names = $env:packages -replace " ","" -split ","
           $force = $env:force -eq "true"
           [array] $packages = ./update_all.ps1 -Name $names -Force:$force | ForEach-Object {
@@ -68,28 +69,35 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish report
-        if: always() && hashFiles('report.md')
+        if: ${{ always() && hashFiles('report.md') }}
         run: Get-Content "report.md" >> $env:GITHUB_STEP_SUMMARY
 
       - name: Prepare Packages artifact
-        if: always() && hashFiles('**/*.nupkg')
+        if: ${{ always() && hashFiles('**/*.nupkg') }}
         run: |
           New-Item Packages -ItemType Directory
           Get-ChildItem *.nupkg -Recurse | Move-Item -Destination Packages
 
       - name: Upload Packages artifact
-        if: always() && hashFiles('Packages/*.nupkg')
+        if: ${{ always() && hashFiles('Packages/*.nupkg') }}
         uses: actions/upload-artifact@v3
         with:
           name: Packages
           path: Packages/*.nupkg
+
+      - name: Upload Test artifact
+        if: ${{ hashFiles('Packages/*.nupkg') }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test
+          path: test.ps1
 
     outputs:
       updates: ${{ steps.updates.outputs.packages }}
 
   test:
     needs: [update]
-    if: needs.update.outputs.updates != 'null'
+    if: ${{ needs.update.outputs.updates != 'null' }}
 
     strategy:
       fail-fast: false
@@ -110,7 +118,9 @@ jobs:
     steps:
       - name: Remove package if needed
         run: |
-          if (choco list -r $env:package_name) {
+          "Chocolatey v$(choco --version)"
+          choco list --exact --limit-output $env:package_name | Tee-Object -Variable installed
+          if ($installed) {
             choco uninstall -y --no-progress $env:package_name
           }
 
@@ -119,39 +129,23 @@ jobs:
         with:
           name: Packages
 
+      - name: Download Test artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: Test
+
       - name: Tests before install
-        if: inputs.test_cases
-        run: |
-          if ($env:debug) {
-            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
-          }
-          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
-            try {
-              $out = @()
-              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
-              if ($LASTEXITCODE) { throw "Test failed." }
-              "❌ {0}" -f $test_cases[$i] | Write-Host
-              $out | Out-Host
-              return $true
-            } catch {
-              "✅ {0}" -f $test_cases[$i] | Write-Host
-            }
-          }
-          if ($results -contains $true) {
-            throw "Tests failed."
-          }
+        if: ${{ inputs.test_cases }}
+        run: ./test.ps1 -Inverse
         env:
-          debug: ${{ runner.debug }}
           test_cases: ${{ inputs.test_cases }}
+          screenshot_prefix: desktop
 
       - name: Install package
         run: |
-          $debug = if ($env:debug) { "--verbose --debug" }
+          $debug = if ($env:RUNNER_DEBUG) { "--verbose --debug" }
           choco install -y --no-progress $env:package_name --version $env:package_version --source "'.;https://community.chocolatey.org/api/v2/'" $debug
           if ($LASTEXITCODE -in 1641, 3010) { exit 0 }
-        env:
-          debug: ${{ runner.debug }}
         timeout-minutes: 10
 
       - name: Determine package information path
@@ -169,77 +163,37 @@ jobs:
           path: ${{ steps.information.outputs.path }}
 
       - name: Tests after install
-        if: inputs.test_cases
-        run: |
-          if ($env:debug) {
-            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
-          }
-          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
-            try {
-              $out = @()
-              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
-              if ($LASTEXITCODE) { throw "Test failed." }
-              "✅ {0}" -f $test_cases[$i] | Write-Host
-            } catch {
-              "❌ {0}" -f $test_cases[$i] | Write-Host
-              $out, $_ | Out-Host
-              return $true
-            }
-          }
-          if ($results -contains $true) {
-            throw "Tests failed."
-          }
+        if: ${{ inputs.test_cases }}
+        run: ./test.ps1
         env:
-          debug: ${{ runner.debug }}
-          scripts: ${{ inputs.test_cases }}
+          test_cases: ${{ inputs.test_cases }}
+          screenshot_prefix: desktop
 
       - name: Uninstall package
         # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
-        if: env.package_name != 'airserver'
+        if: ${{ env.package_name != 'airserver' }}
         run: |
-          $debug = if ($env:debug) { "--verbose --debug" }
-          choco uninstall -y --no-progress $env:package_name $debug
+          $debug = if ($env:RUNNER_DEBUG) { "--verbose --debug" }
+          choco uninstall -y --no-progress --remove-dependencies $env:package_name $debug
           if ($LASTEXITCODE -in 1605, 1614, 1641, 3010) { exit 0 }
-        env:
-          debug: ${{ runner.debug }}
         timeout-minutes: 10
 
       - name: Tests after uninstall
-        if: inputs.test_cases
-        run: |
-          if ($env:debug) {
-            $VerbosePreference = $DebugPreference = $InformationPreference = "Continue"
-          }
-          $test_cases = $env:test_cases -split "^-\s+(.+)\s*$", 0, "Multiline"
-          for ($i = 1; $i -lt $test_cases.length - 1; $i += 2) {
-            try {
-              $out = @()
-              Invoke-Expression $test_cases[$i + 1] *>&1 | ForEach-Object { $out += $_ }
-              if ($LASTEXITCODE) { throw "Test failed." }
-              "❌ {0}" -f $test_cases[$i] | Write-Host
-              $out | Out-Host
-              return $true
-            } catch {
-              "✅ {0}" -f $test_cases[$i] | Write-Host
-            }
-          }
-          if ($results -contains $true) {
-            throw "Tests failed."
-          }
+        if: ${{ inputs.test_cases }}
+        run: ./test.ps1 -Inverse
         env:
-          debug: ${{ runner.debug }}
-          scripts: ${{ inputs.test_cases }}
+          test_cases: ${{ inputs.test_cases }}
+          screenshot_prefix: desktop
 
       - name: Take failure screenshot
-        if: failure()
+        if: ${{ failure() }}
         run: |
           choco install -y --no-progress nircmd
           nircmd savescreenshotfull desktop.png
 
       - name: Upload failure screenshot into Information artifact
-        if: failure()
+        if: ${{ failure() }}
         uses: actions/upload-artifact@v3
         with:
           name: Information ${{ env.package_name }} ${{ env.package_version }} on ${{ matrix.os }}
-          path: desktop.png
+          path: desktop*.png

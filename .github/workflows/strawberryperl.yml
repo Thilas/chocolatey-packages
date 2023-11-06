@@ -33,6 +33,6 @@ jobs:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
-        - Run perl --version
-          perl --version
+        - perl --version
+          C:\Strawberry\perl\bin\perl --version
     secrets: inherit

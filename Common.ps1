@@ -266,7 +266,7 @@ function Get-GitHubLatest {
     $headers = if ($Env:GITHUB_TOKEN) { @{
         Authorization = "Bearer $Env:GITHUB_TOKEN"
     } }
-    $releases = Invoke-RestMethod -Uri "https://api.github.com/repos/$Repository/releases?per_page=10" -UseBasicParsing -Headers $headers
+    $releases = Invoke-RestMethod -Uri "https://api.github.com/repos/$Repository/releases?per_page=30" -UseBasicParsing -Headers $headers
     if ($NoPrerelease) {
         $releases = $releases | Where-Object -Not 'prerelease'
     }
