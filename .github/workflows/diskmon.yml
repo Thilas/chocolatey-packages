@@ -34,7 +34,7 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start program
-          Start-Program diskmon -ProcessName diskmon*
+          Start-Program diskmon -Shim -ProcessName diskmon*
         - Close program
           Close-Program diskmon*
     secrets: inherit

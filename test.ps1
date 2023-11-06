@@ -9,6 +9,14 @@ if ($env:RUNNER_DEBUG) {
     $VerbosePreference = $DebugPreference = $InformationPreference = 'Continue'
 }
 
+if ($env:ChocolateyInstall) {
+    $chocolateyProfile = Join-Path $env:ChocolateyInstall "helpers\chocolateyProfile.psm1"
+    if (Test-Path $chocolateyProfile) {
+        Import-Module $chocolateyProfile
+        Update-SessionEnvironment
+    }
+}
+
 # Public
 
 function Start-Program {
@@ -19,9 +27,9 @@ function Start-Program {
         [string] $FilePath,
         [Parameter(Position = 1)]
         [string[]] $ArgumentList,
+        [switch] $Shim,
         [ValidateNotNullOrEmpty()]
         [string] $ProcessName,
-        [switch] $Shim,
         [int] $TimeoutSec = 60,
         [string] $ScreenshotPrefix = $env:screenshot_prefix
     )
