@@ -6,7 +6,7 @@
     <version>7.0.14</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
-    <owners>Thilas,jfrench</owners>
+    <owners>Thilas</owners>
     <licenseUrl>https://redis.io/docs/about/license/</licenseUrl>
     <projectUrl>https://redis.io/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@47b08189f6a528f9ad9a9b8b578486b730b86f66/redis/icon.png</iconUrl>
