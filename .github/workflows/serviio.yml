@@ -37,9 +37,5 @@ jobs:
         - Check Serviio service
           Get-Service Serviio | ForEach-Object Status | Should -Be "Running"
         - Test web interface
-          netstat -a -b
-          "----"
-          Start-Sleep 30
-          netstat -a -b
-          Invoke-WebRequest "http://localhost:23424/mediabrowser" -UseBasicParsing
+          Invoke-WebRequest "http://localhost:23424/mediabrowser" -MaximumRetryCount 60 -RetryIntervalSec 1
     secrets: inherit
