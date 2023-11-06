@@ -14,8 +14,9 @@ on:
       test_cases:
         description: |
           List of test cases
+          - {one-line script}
           - {title}
-            {script}
+            {multi-line script}
         type: string
 
 jobs:

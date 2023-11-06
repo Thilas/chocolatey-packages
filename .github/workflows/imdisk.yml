@@ -6,9 +6,10 @@ on:
     branches: [master]
     paths:
       - .github/workflows/.common.yml
-      # - .github/workflows/imdisk.yml
+      - .github/workflows/imdisk.yml
       - imdisk/**
       - Common.ps1
+      - test.ps1
       - update_all.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
