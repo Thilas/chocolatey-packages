@@ -9,6 +9,7 @@ on:
       - .github/workflows/airserver.yml
       - airserver/**
       - Common.ps1
+      - test.ps1
       - update_all.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
@@ -34,4 +35,9 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       # AirServer requires Wireless-Networking while uninstalling, feature not installed on GitHub agents
       uninstall: false
+      test_cases: |
+        - Start program
+          Start-Program 'AirServer Universal*' -Shortcut
+        - Close program
+          Close-Program AirServer
     secrets: inherit

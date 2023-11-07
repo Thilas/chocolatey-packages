@@ -9,6 +9,7 @@ on:
       - .github/workflows/stellarium.yml
       - stellarium/**
       - Common.ps1
+      - test.ps1
       - update_all.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
@@ -34,7 +35,7 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start program
-          Start-Program Stellarium -Shortcut
+          Start-Program Stellarium -Shortcut -SplashScreen
         - Close program
-          Close-Program Stellarium
+          Close-Program stellarium
     secrets: inherit

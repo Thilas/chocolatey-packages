@@ -31,6 +31,7 @@ function Start-Program {
         [switch] $Shim,
         [Parameter(ParameterSetName = 'Shortcut')]
         [switch] $Shortcut,
+        [switch] $SplashScreen,
         [ValidateNotNullOrEmpty()]
         [string] $ProcessName,
         [int] $TimeoutSec = 60,
@@ -52,15 +53,20 @@ function Start-Program {
     }
     if (!$ProcessName) {
         $ProcessName = $initialProcess.Name
-        Write-Verbose "ProcessName = $ProcessName"
     }
 
+    $splashScreenHandles = @()
     for ($i = 1; ; $i++) {
         Start-Sleep -Milliseconds 100
         Get-Process -Name $ProcessName -ErrorAction SilentlyContinue -OutVariable processes
         | Format-Process
-        if ($processes | Where-Object MainWindowHandle -NE 0) {
-            break
+        if ($processes | Where-Object MainWindowHandle -NotIn 0, $splashScreenHandles) {
+            if (!$SplashScreen -or $splashScreenHandles) {
+                break
+            }
+
+            $splashScreenHandles = [int[]] $processes.MainWindowHandle | Where-Object { $_ -ne 0 }
+            Write-Verbose "Splash screen handles: $splashScreenHandles"
         }
 
         Add-Screenshot $ScreenshotPrefix "start.2.$i.starting"
