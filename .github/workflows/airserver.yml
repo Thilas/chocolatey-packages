@@ -37,7 +37,7 @@ jobs:
       uninstall: false
       test_cases: |
         - Start program
-          Start-Program 'AirServer Universal*' -Shortcut
+          Start-Program 'AirServer Universal*' -Shortcut -ProcessName AirServer
         - Close program
           Close-Program AirServer
     secrets: inherit

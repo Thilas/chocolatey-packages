@@ -45,14 +45,19 @@ function Start-Program {
     "Starting $FilePath $ArgumentList..."
     Add-Screenshot $ScreenshotPrefix "start.1"
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
-    Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -PassThru
-    | Tee-Object -Variable initialProcess
-    | Format-Process
-    if ($Shim) {
-        $initialProcess | Wait-Process -Timeout $TimeoutSec
-    }
-    if (!$ProcessName) {
-        $ProcessName = $initialProcess.Name
+    if ($Shortcut -and $ProcessName) {
+        & $FilePath $ArgumentList
+        Get-Process -Name $ProcessName | Format-Process
+    } else {
+        Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -PassThru
+        | Tee-Object -Variable initialProcess
+        | Format-Process
+        if ($Shim) {
+            $initialProcess | Wait-Process -Timeout $TimeoutSec
+        }
+        if (!$ProcessName) {
+            $ProcessName = $initialProcess.Name
+        }
     }
 
     $splashScreenHandles = @()
