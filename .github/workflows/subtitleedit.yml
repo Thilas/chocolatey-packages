@@ -9,6 +9,7 @@ on:
       - .github/workflows/subtitleedit.yml
       - subtitleedit/**
       - Common.ps1
+      - test.ps1
       - update_all.ps1
   schedule:
     - cron: 0 4 * * *   # Scheduled test
@@ -32,4 +33,9 @@ jobs:
     with:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
+      test_cases: |
+        - Start program
+          Start-Program 'Subtitle Edit' -Shortcut
+        - Close program
+          Close-Program 'SubtitleEdit'
     secrets: inherit

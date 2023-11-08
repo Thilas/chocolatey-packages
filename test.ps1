@@ -20,38 +20,58 @@ if ($env:ChocolateyInstall) {
 # Public
 
 function Start-Program {
-    [CmdletBinding(PositionalBinding = $false)]
+    [CmdletBinding(DefaultParameterSetName = 'Default', PositionalBinding = $false)]
     param(
         [Parameter(Mandatory, Position = 0)]
         [ValidateNotNullOrEmpty()]
         [string] $FilePath,
         [Parameter(Position = 1)]
         [string[]] $ArgumentList,
+        [Parameter(ParameterSetName = 'Default')]
         [switch] $Shim,
+        [Parameter(ParameterSetName = 'Shortcut')]
+        [switch] $Shortcut,
+        [switch] $SplashScreen,
         [ValidateNotNullOrEmpty()]
         [string] $ProcessName,
         [int] $TimeoutSec = 60,
         [string] $ScreenshotPrefix = $env:screenshot_prefix
     )
 
-    Add-Screenshot $ScreenshotPrefix "start.1"
-    $sw = [System.Diagnostics.Stopwatch]::StartNew()
-    Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -LoadUserProfile -PassThru
-    | Tee-Object -Variable initialProcess
-    | Format-Process
-    if ($Shim ) {
-        $initialProcess | Wait-Process -Timeout $TimeoutSec
-    }
-    if (!$ProcessName) {
-        $ProcessName = $initialProcess.Name
+    if ($Shortcut) {
+        $FilePath = Get-Shortcut $FilePath
     }
 
+    "Starting $FilePath $ArgumentList..."
+    Add-Screenshot $ScreenshotPrefix "start.1"
+    $sw = [System.Diagnostics.Stopwatch]::StartNew()
+    if ($Shortcut -and $ProcessName) {
+        & $FilePath $ArgumentList
+        Get-Process -Name $ProcessName | Format-Process
+    } else {
+        Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -PassThru
+        | Tee-Object -Variable initialProcess
+        | Format-Process
+        if ($Shim) {
+            $initialProcess | Wait-Process -Timeout $TimeoutSec
+        }
+        if (!$ProcessName) {
+            $ProcessName = $initialProcess.Name
+        }
+    }
+
+    $splashScreenHandles = @()
     for ($i = 1; ; $i++) {
         Start-Sleep -Milliseconds 100
         Get-Process -Name $ProcessName -ErrorAction SilentlyContinue -OutVariable processes
         | Format-Process
-        if ($processes | Where-Object MainWindowHandle -NE 0) {
-            break
+        if ($processes | Where-Object MainWindowHandle -NotIn 0, $splashScreenHandles) {
+            if (!$SplashScreen -or $splashScreenHandles) {
+                break
+            }
+
+            $splashScreenHandles = [int[]] $processes.MainWindowHandle | Where-Object { $_ -ne 0 }
+            Write-Verbose "Splash screen handles: $splashScreenHandles"
         }
 
         Add-Screenshot $ScreenshotPrefix "start.2.$i.starting"
@@ -75,6 +95,7 @@ function Close-Program {
         [string] $ScreenshotPrefix = $env:screenshot_prefix
     )
 
+    "Closing $ProcessName..."
     Add-Screenshot $ScreenshotPrefix "close.1"
     Get-Process -Name $ProcessName -ErrorAction SilentlyContinue -OutVariable processes
     | Format-Process
@@ -108,6 +129,7 @@ function Invoke-WebApp {
         [uri] $Uri,
         [int] $TimeoutSec = 60
     )
+    "Invoking $Uri..."
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
     while ($true) {
         try {
@@ -171,6 +193,28 @@ filter Format-Process {
         $InputObject.ProcessName
         $InputObject.MainWindowHandle
     ) | Write-Verbose
+}
+
+function Get-Shortcut {
+    [CmdletBinding(PositionalBinding = $false)]
+    param(
+        [Parameter(Mandatory, Position = 0)]
+        [ValidateNotNullOrEmpty()]
+        [string] $Name
+    )
+    $userStartMenu   = [System.Environment]::GetFolderPath('StartMenu')
+    $commonStartMenu = [System.Environment]::GetFolderPath('CommonStartMenu')
+    $shortcut = Get-ChildItem $userStartMenu, $commonStartMenu -Filter *.lnk -File -Recurse
+                | Where-Object BaseName -Like $Name
+                | ForEach-Object FullName
+    if (!$shortcut) {
+        throw 'Cannot find a shortcut with the name "{0}".' -f $Name
+    }
+    if ($shortcut -is [array]) {
+        $shortcut | Write-Verbose
+        throw 'Found multiple shortcuts with the name "{0}".' -f $Name
+    }
+    return $shortcut
 }
 
 filter Invoke-TestCase {
