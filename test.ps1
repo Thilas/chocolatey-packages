@@ -46,6 +46,8 @@ function Start-Program {
     Add-Screenshot $ScreenshotPrefix "start.1"
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
     if ($Shortcut -and $ProcessName) {
+        # Some shortcuts doesn't have an explicit target (but works anyway).
+        # In such case, we need a process name to proceed.
         & $FilePath $ArgumentList
         Get-Process -Name $ProcessName | Format-Process
     } else {
@@ -56,6 +58,10 @@ function Start-Program {
             $initialProcess | Wait-Process -Timeout $TimeoutSec
         }
         if (!$ProcessName) {
+            if (!$initialProcess.Name) {
+                "Refreshing initial process information to get its name..."
+                $initialProcess.Refresh()
+            }
             $ProcessName = $initialProcess.Name
         }
     }
@@ -190,7 +196,7 @@ filter Format-Process {
     )
     "Process Id = {0,-10}, Name = {1,-16}, hWnd = {2,-10}" -f @(
         $InputObject.Id
-        $InputObject.ProcessName
+        $InputObject.Name
         $InputObject.MainWindowHandle
     ) | Write-Verbose
 }
