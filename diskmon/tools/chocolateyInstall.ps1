@@ -26,7 +26,7 @@ if (!(Test-Path $registryPath)) {
 New-ItemProperty -Path $registryPath -Name 'EulaAccepted' -Value 1 -Force | Out-Null
 
 $shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) 'DiskMon.lnk'
-if (-not (Test-Path $shortcutPath)) {
+if (!(Test-Path $shortcutPath)) {
     $targetPath = if ([Environment]::Is64BitOperatingSystem) { 'Diskmon64.exe' } else { 'Diskmon.exe' }
     Install-ChocolateyShortcut -ShortcutFilePath $shortcutPath -TargetPath "$toolsDir\$targetPath" -RunAsAdmin
 }

@@ -26,7 +26,7 @@ if (!(Test-Path $registryPath)) {
 New-ItemProperty -Path $registryPath -Name 'EulaAccepted' -Value 1 -Force | Out-Null
 
 $shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) 'Process Explorer.lnk'
-if (-not (Test-Path $shortcutPath)) {
+if (!(Test-Path $shortcutPath)) {
     $targetPath = if ([Environment]::Is64BitOperatingSystem) { 'procexp64.exe' } else { 'procexp.exe' }
     Install-ChocolateyShortcut -ShortcutFilePath $shortcutPath -TargetPath "$toolsDir\$targetPath"
 }

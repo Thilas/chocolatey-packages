@@ -18,6 +18,6 @@ Remove-Item $packageArgs.file64 -ErrorAction SilentlyContinue
 New-Item "$toolsDir\ilspy.exe.gui" -Type File -Force | Out-Null
 
 $shortcutPath = Join-Path $([Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonPrograms)) 'ILSpy.lnk'
-if (-not (Test-Path $shortcutPath)) {
+if (!(Test-Path $shortcutPath)) {
     Install-ChocolateyShortcut -ShortcutFilePath $shortcutPath -TargetPath "$toolsDir\ilspy.exe"
 }
