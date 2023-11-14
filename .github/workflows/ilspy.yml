@@ -35,7 +35,7 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start program
-          Start-Program ILSpy -Shim
+          Start-Program ILSpy
         - Close program
           Close-Program ILSpy
     secrets: inherit

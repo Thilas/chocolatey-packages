@@ -38,7 +38,7 @@ jobs:
       test_cases: |
         - codium-insiders --version
         - Start program
-          Start-Program codium-insiders -ProcessName "VSCodium - Insiders"
+          Start-Program "VSCodium - Insiders" -FilePath codium-insiders
         - Close program
           Close-Program "VSCodium - Insiders"
     secrets: inherit

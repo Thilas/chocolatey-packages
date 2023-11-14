@@ -38,7 +38,7 @@ jobs:
       test_cases: |
         - codium --version
         - Start program
-          Start-Program codium -ProcessName VSCodium
+          Start-Program VSCodium -FilePath codium
         - Close program
           Close-Program VSCodium
     secrets: inherit

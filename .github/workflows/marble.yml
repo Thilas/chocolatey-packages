@@ -35,7 +35,7 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start program
-          Start-Program Marble -Shortcut -Verbose -Debug
+          Start-Program marble-qt -FilePath Marble -Shortcut -Verbose -Debug
         - Close program
           Close-Program marble-qt -Verbose -Debug
     secrets: inherit

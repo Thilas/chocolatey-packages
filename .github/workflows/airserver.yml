@@ -37,7 +37,7 @@ jobs:
       # Tests and uninstall can't pass.
       # test_cases: |
       #   - Start program
-      #     Start-Program 'AirServer Universal*' -Shortcut -ProcessName AirServer
+      #     Start-Program AirServer -FilePath "AirServer Universal*" -Shortcut
       #   - Close program
       #     Close-Program AirServer
       uninstall: false

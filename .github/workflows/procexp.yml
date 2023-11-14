@@ -35,7 +35,7 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start program
-          Start-Program procexp -Shim -ProcessName procexp*
+          Start-Program procexp* -FilePath procexp
         - Close program
           Close-Program procexp*
     secrets: inherit
