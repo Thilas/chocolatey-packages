@@ -58,11 +58,11 @@ function Start-Program {
             $initialProcess | Wait-Process -Timeout $TimeoutSec
         }
         if (!$ProcessName) {
-            if (!$initialProcess.Name) {
-                "Refreshing initial process information to get its name..."
-                $initialProcess.Refresh()
+            $ProcessName = if ($initialProcess.Name) {
+                $initialProcess.Name
+            } else {
+                Split-Path $FilePath -LeafBase
             }
-            $ProcessName = $initialProcess.Name
         }
     }
 
