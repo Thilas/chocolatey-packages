@@ -35,7 +35,7 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start program
-          Start-Program kodi -Shortcut
+          Start-Program Kodi -Shortcut
         - Close program
           Close-Program kodi
     secrets: inherit

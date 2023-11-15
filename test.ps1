@@ -20,24 +20,24 @@ if ($env:ChocolateyInstall) {
 # Public
 
 function Start-Program {
-    [CmdletBinding(PositionalBinding = $false)]
+    [CmdletBinding(DefaultParameterSetName = 'Default', PositionalBinding = $false)]
     param(
         [Parameter(Mandatory, Position = 0)]
-        [ValidateNotNullOrEmpty()]
-        [string] $ProcessName,
         [ValidateNotNullOrEmpty()]
         [string] $FilePath,
         [Parameter(Position = 1)]
         [string[]] $ArgumentList,
+        [Parameter(ParameterSetName = 'Default')]
+        [switch] $Shim,
+        [Parameter(ParameterSetName = 'Shortcut')]
         [switch] $Shortcut,
         [switch] $SplashScreen,
+        [ValidateNotNullOrEmpty()]
+        [string] $ProcessName,
         [int] $TimeoutSec = 60,
         [string] $ScreenshotPrefix = $env:screenshot_prefix
     )
 
-    if (!$FilePath) {
-        $FilePath = $ProcessName
-    }
     if ($Shortcut) {
         $FilePath = Get-Shortcut $FilePath
     }
@@ -45,8 +45,26 @@ function Start-Program {
     "Starting $FilePath $ArgumentList..."
     Add-Screenshot $ScreenshotPrefix "start.1"
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
-    & $FilePath $ArgumentList
-    Get-Process -Name $ProcessName | Format-Process
+    if ($Shortcut -and $ProcessName) {
+        # Some shortcuts doesn't have an explicit target (but works anyway).
+        # In such case, we need a process name to proceed.
+        & $FilePath $ArgumentList
+        Get-Process -Name $ProcessName | Format-Process
+    } else {
+        Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -PassThru
+        | Tee-Object -Variable initialProcess
+        | Format-Process
+        if ($Shim) {
+            $initialProcess | Wait-Process -Timeout $TimeoutSec
+        }
+        if (!$ProcessName) {
+            $ProcessName = if ($initialProcess.Name) {
+                $initialProcess.Name
+            } else {
+                Split-Path $FilePath -LeafBase
+            }
+        }
+    }
 
     $splashScreenHandles = @()
     for ($i = 1; ; $i++) {

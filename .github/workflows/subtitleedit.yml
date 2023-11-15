@@ -35,7 +35,7 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start program
-          Start-Program SubtitleEdit -FilePath "Subtitle Edit" -Shortcut
+          Start-Program "Subtitle Edit" -Shortcut
         - Close program
           Close-Program SubtitleEdit
     secrets: inherit

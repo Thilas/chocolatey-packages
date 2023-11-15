@@ -35,7 +35,7 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start program
-          Start-Program rundll32 -FilePath "LAV Video Configuration" -Shortcut
+          Start-Program "LAV Video Configuration" -Shortcut
         - Close program
           Close-Program rundll32
     secrets: inherit
