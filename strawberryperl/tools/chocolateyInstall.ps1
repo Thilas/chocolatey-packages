@@ -5,9 +5,9 @@ $packageArgs = @{
     packageName    = 'strawberryperl'
     softwareName   = 'Strawberry Perl *'
     fileType       = 'msi'
-    url64bit       = 'https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases/download/SP_5380_5361/strawberry-perl-5.38.0.1-64bit.msi'
+    url64bit       = 'https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases/download/SP_53821_64bit/strawberry-perl-5.38.2.1-64bit.msi'
     silentArgs     = '/qn /norestart'
-    checksum64     = 'a9b44e50424dcc7e40b8f67d906c76a15469af3d5998e04635fa8465a0a56877'
+    checksum64     = 'faf79086776585a297b4cb58ac017a9acda45cb71942c1aa28d18987b1659e3b'
     checksumType64 = 'sha256'
     validExitCodes = @(0, 3010, 1641)
 }
