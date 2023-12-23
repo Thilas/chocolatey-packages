@@ -8,9 +8,9 @@ $packageCacheLocation = Get-PackageCacheLocation
 # *** Automatically filled ***
 $packageArgs = @{
     packageName   = 'subtitleedit'
-    url           = 'https://github.com/SubtitleEdit/subtitleedit/releases/download/4.0.2/SubtitleEdit-4.0.2-Setup.zip'
+    url           = 'https://github.com/SubtitleEdit/subtitleedit/releases/download/4.0.3/SubtitleEdit-4.0.3-Setup.zip'
     unzipLocation = $packageCacheLocation
-    checksum      = '0b9dcd7373c3d85e52129cc81fec28091a4ed0d7f776ff1fe2f237cf864171b2'
+    checksum      = '105f390578228e184bc7cc3e10ba70eb71c874aeed4a751449fc330d1611e0c4'
     checksumType  = 'sha256'
 }
 # *** Automatically filled ***
