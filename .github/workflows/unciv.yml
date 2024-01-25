@@ -35,7 +35,7 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start program
-          Start-Program Unciv -Shim
+          Start-Program Unciv -Shortcut
         - Close program
           Close-Program Unciv
     secrets: inherit
