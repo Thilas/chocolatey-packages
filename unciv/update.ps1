@@ -15,12 +15,14 @@ function global:au_BeforeUpdate { Get-RemoteFiles -Purge -NoSuffix }
 function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1' = @{
-            "^(\s*packageName\s*=\s*)'.*'$" = "`$1'$($Latest.PackageName)'"
-            "^([$]fileType\s*=\s*)'.*'$"    = "`$1'$($Latest.FileType)'"
+            '^(\s*file64\s*=\s*)".*"$'      = '$1"$toolsDir\{0}"' -f $Latest.FileName64
+        }
+        'tools\chocolateyBeforeModify.ps1' = @{
+            '^(\s*zipFileName\s*=\s*)".*"$' = '$1"{0}"' -f $Latest.FileName64
         }
         'legal\VERIFICATION.txt' = @{
-            "(?i)(\s+x64:).*"               = "`$1 $($Latest.Url64)"
-            "(?i)(checksum64:).*"           = "`$1 $($Latest.Checksum64)"
+            '(?i)(\s+x64:).*'               = '$1 {0}' -f $Latest.Url64
+            '(?i)(checksum64:).*'           = '$1 {0}' -f $Latest.Checksum64
         }
     }
 }
