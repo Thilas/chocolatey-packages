@@ -6,7 +6,7 @@ $installationPath = Join-Path (Get-ToolsLocation) 'Unciv'
 # *** Automatically filled ***
 $packageArgs = @{
     packageName = $Env:ChocolateyPackageName
-    file64      = "$toolsDir\xxx"
+    file64      = "$toolsDir\Unciv-Windows64.zip"
     destination = $installationPath
 }
 # *** Automatically filled ***

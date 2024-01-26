@@ -3,7 +3,7 @@
 # *** Automatically filled ***
 $packageArgs = @{
     packageName = $Env:ChocolateyPackageName
-    zipFileName = "xxx"
+    zipFileName = "Unciv-Windows64.zip"
 }
 # *** Automatically filled ***
 
