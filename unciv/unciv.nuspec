@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>unciv</id>
+    <version>xx</version>
+    <title>Unciv</title>
+    <authors>yairm210</authors>
+    <owners>Thilas</owners>
+    <licenseUrl>https://github.com/yairm210/Unciv/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://yairm210.itch.io/unciv</projectUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@5cdaecc9537c5718947840c16c77acf07c8f2bc4/unciv/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description><![CDATA[An open-source reimplementation of the most famous civilization-building game ever - fast, small, no ads, free forever!
+
+Build your civilization, research technologies, expand your cities and defeat your foes!
+]]></description>
+    <summary>Civ V remake for Android &amp; Desktop</summary>
+    <releaseNotes>[Releases](https://github.com/yairm210/Unciv/releases)</releaseNotes>
+    <copyright>Copyright © yairm210</copyright>
+    <tags>unciv foss 2D 4X civ civilization moddable</tags>
+    <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/unciv</packageSourceUrl>
+    <docsUrl>https://yairm210.github.io/Unciv/</docsUrl>
+    <bugTrackerUrl>https://github.com/yairm210/Unciv/issues</bugTrackerUrl>
+  </metadata>
+  <files>
+    <file src="legal\**" target="legal" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
+  </files>
+</package>
