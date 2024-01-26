@@ -34,9 +34,9 @@ jobs:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
       # Unciv does not look like to be supported on Windows Server(?)
-      test_cases: |
-        - Start program
-          Start-Program Unciv -Shortcut -Verbose -Debug
-        - Close program
-          Close-Program Unciv
+      # test_cases: |
+      #   - Start program
+      #     Start-Program Unciv -Shortcut -Verbose -Debug
+      #   - Close program
+      #     Close-Program Unciv -Verbose -Debug
     secrets: inherit
