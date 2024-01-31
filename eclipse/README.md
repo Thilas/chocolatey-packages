@@ -24,6 +24,7 @@ The following package parameters can be set:
 
 * `/InstallationPath` or `/InstallLocation` - Where to install the binaries to - defaults to "`$Env:ProgramFiles\Eclipse Foundation\$packageVersion`"
 * `/Multi-User` - Configure Eclipse as a multi-user install
+* `/Mirror-Id` - Use a specific mirror id instead of an automatic one to download Eclipse installer, must be an integer
 
 These parameters can be passed to the installer with the use of `--params`.
-For example: `--params "'/InstallationPath=C:\path\to\installation /Multi-User'"`.
+For example: `--params "'/InstallationPath=C:\path\to\installation /Multi-User /Mirror-Id=1'"`.
