@@ -32,6 +32,16 @@ $packageArgs = @{
 }
 # *** Automatically filled ***
 
+if ($packageParameters.ContainsKey('Mirror-Id')) {
+    $mirrorId = $packageParameters.Item('Mirror-Id') -as [int]
+    if ($null -eq $mirrorId) {
+        throw "Invalid mirror id, integer expected but got: $($packageParameters.Item('Mirror-Id'))"
+    }
+    Write-Host "Using mirror id: $mirrorId"
+    $packageArgs.url      = $packageArgs.url      -replace '&r=1$', "&mirror_id=$mirrorId"
+    $packageArgs.url64bit = $packageArgs.url64bit -replace '&r=1$', "&mirror_id=$mirrorId"
+}
+
 Install-ChocolateyZipPackage @packageArgs
 
 $logPath = Join-Path $toolsDir "eclipse.$packageVersion.txt"
