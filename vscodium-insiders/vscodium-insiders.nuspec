@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium-insiders</id>
-    <version>1.86.2.24052</version>
+    <version>1.87.0.24058</version>
     <title>VSCodium - Insiders</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -51,7 +51,7 @@ Example: `choco install vscodium-insiders --params "/NoDesktopIcon /NoAddToPath"
     <docsUrl>https://code.visualstudio.com/docs</docsUrl>
     <bugTrackerUrl>https://github.com/VSCodium/vscodium/issues</bugTrackerUrl>
     <dependencies>
-      <dependency id="vscodium-insiders.install" version="[1.86.2.24052]" />
+      <dependency id="vscodium-insiders.install" version="[1.87.0.24058]" />
     </dependencies>
   </metadata>
   <files />
