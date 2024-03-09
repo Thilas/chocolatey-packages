@@ -29,6 +29,12 @@ To create a new package see [Creating the package updater script](https://github
 
 In a package directory run: `Test-Package`. This function can be used to start testing in [chocolatey-test-environment](https://github.com/majkinetor/chocolatey-test-environment) via `Vagrant` parameter or it can test packages locally.
 
+To test in WindowsSandbox use `.vscode/test.ps1` from a package directory like this (`-ChocoParameters` is optional):
+
+```
+../.vscode/test.ps1 -ChocoParameters ''
+```
+
 ## Automatic package update
 
 ### Single package

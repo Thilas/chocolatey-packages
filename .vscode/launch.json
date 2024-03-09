@@ -10,7 +10,14 @@
             "name": "PowerShell Launch Current File",
             "script": "${workspaceFolder}/.vscode/debug.ps1",
             "args": ["-Path", "${file}"],
-            "cwd": "${file}"
-        }
-    ]
+            "cwd": "${fileDirname}"
+        },
+        {
+            "type": "PowerShell",
+            "request": "launch",
+            "name": "Test package in WindowsSandbox",
+            "script": "${workspaceFolder}/.vscode/test.ps1",
+            "cwd": "${fileDirname}"
+        },
+    ],
 }
