@@ -7,7 +7,7 @@ Package can be verified like this:
 
 1. Go to
 
-   x64: https://github.com/redis-windows/redis-windows/releases/download/7.0.15/Redis-7.0.15-Windows-x64.tar.gz
+   x64: https://github.com/redis-windows/redis-windows/releases/download/7.2.4/Redis-7.2.4-Windows-x64.tar.gz
 
    to download the installer.
 
@@ -15,7 +15,7 @@ Package can be verified like this:
    - Use powershell function 'Get-FileHash'
    - Use Chocolatey utility 'checksum.exe'
 
-   checksum64: EB04E2040C067A8FB29E55056F35D9D4569670A26E7AD915B5FD1A440D91A204
+   checksum64: 4D5F901E8E7EA42A0B4B2365D31953D3A27C21F21557823C89514784A585A918
 
 File 'LICENSE.txt' is obtained from:
    https://github.com/redis-windows/redis-windows/blob/main/LICENSE

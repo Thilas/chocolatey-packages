@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>7.0.15</version>
+    <version>7.2.4</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
