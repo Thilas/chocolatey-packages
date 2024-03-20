@@ -6,25 +6,32 @@ param([switch] $Force)
 function global:au_GetLatest {
     Get-GitHubLatest `
         -Repository 'redis-windows/redis-windows' `
+        -ReleaseFilter {
+            param($Release)
+            # From now on (2024-03-20), zip file is used instead of tar.gz
+            # Because releases before 6.0 don't have one, we filter them out
+            $version = Get-Version $Release.tag_name
+            $version -ge '6.0'
+        } `
         -StreamFieldCount 2 `
-        -FileType 'tar.gz' `
-        -IsUri64 { param($Uri) $Uri -match '\bx64\b' -and $Uri -notmatch '-with-Service\b' }
+        -FileType 'zip' `
+        -IsUri64 { param($Uri) $Uri -match '\bx64\b' -and $Uri -match '\bmsys2\b' -and $Uri -notmatch '-with-Service\b' }
 }
 
 function global:au_BeforeUpdate {
     Get-RemoteFiles -Purge -NoSuffix
 
-    $7z   = "$Env:ChocolateyInstall\tools\7z.exe"
-    $file = Get-Item 'tools\*.tar.gz'
+    Set-Alias 7z "$Env:chocolateyInstall\tools\7z.exe"
+    $file = Get-Item 'tools\*.zip'
     if (!$file) {
         throw 'File is missing.'
     }
     if ($file -is [array]) {
         throw 'Multiple files found.'
     }
-    cmd "/c `"`"`"$7z`"`" x `"`"$file`"`" -so | `"`"$7z`"`" x -si -ttar`""
+    $directory = Split-Path $file -LeafBase
+    7z x tools\*.zip
     Remove-Item 'tools' -Recurse -Force
-    $directory = [System.IO.Path]::GetFileNameWithoutExtension([io.Path]::GetFileNameWithoutExtension($file))
     Move-Item $directory 'tools'
 }
 
