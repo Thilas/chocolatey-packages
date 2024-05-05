@@ -6,7 +6,9 @@ param($IncludeStream, [switch] $Force)
 function global:au_GetLatest {
     Get-GitHubLatest `
         -Repository 'StrawberryPerl/Perl-Dist-Strawberry' `
-        -ReleaseFilter { param($Release) $Release.tag_name -notlike 'dev_*' } `
+        -ReleaseFilter { param($Release)
+            $Release.tag_name -notlike 'dev_*' -and $Release.tag_name -ne 'patched_cpan_modules'
+        } `
         -GetTagName { param($Release) Get-Version $Release.name -Delimiter ' ' } `
         -StreamFieldCount 2 `
         -FileType 'msi' `
