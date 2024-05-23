@@ -49,7 +49,7 @@ jobs:
 
       - name: Install AU
         run: |
-          git clone -q https://github.com/Thilas/au.git -b release "$env:TEMP/au"
+          git clone -q https://github.com/Thilas/chocolatey-au.git -b release "$env:TEMP/au"
           . "$env:TEMP/au/scripts/Install-AU.ps1" $env:au_version
 
       - name: Update packages
