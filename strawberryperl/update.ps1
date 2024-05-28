@@ -9,10 +9,17 @@ function global:au_GetLatest {
         -ReleaseFilter { param($Release)
             $Release.tag_name -notlike 'dev_*' -and $Release.tag_name -ne 'patched_cpan_modules'
         } `
-        -GetTagName { param($Release) Get-Version $Release.name -Delimiter ' ' } `
+        -GetTagName { param($Release)
+            $version = Get-Version $Release.name -Delimiter ' '
+            if (($version.Version.Minor % 2) -eq 1 -and !$version.Prerelease) {
+                # Odd versions are for tests, so let's make it a prerelease
+                $version.Prerelease = 'test'
+            }
+            return $version
+        } `
         -StreamFieldCount 2 `
         -FileType 'msi' `
-        -IsUri64 { param($Uri, $Version) $Uri -match '\b64bit\b' -and $Uri -like "*$Version*" } `
+        -IsUri64 { param($Uri, $Version) $Uri -match '\b64bit\b' -and $Uri -like "*$($Version.Version)*" } `
         -Latest @{
             SoftwareName   = 'Strawberry Perl *'
             SilentArgs     = '/qn /norestart'
