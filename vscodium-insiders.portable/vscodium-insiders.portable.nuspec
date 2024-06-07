@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium-insiders.portable</id>
-    <version>1.90.0.24158</version>
+    <version>1.91.0.24159</version>
     <title>VSCodium - Insiders (Portable)</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
