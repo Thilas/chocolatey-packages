@@ -1,8 +1,8 @@
 function Get-MergeTasks([hashtable] $pp) {
     $tasks = @()
-    $tasks += '!'* $pp.NoDesktopIcon     + 'desktopicon'
-    $tasks += '!'* $pp.NoDesktopIcon     + 'desktopicon\user'
-    $tasks += '!'* $pp.NoDesktopIcon     + 'desktopicon\common'
+    foreach($desktopicon in ('desktopicon','desktopicon\user','desktopicon\common')) {
+        $tasks += '!'* $pp.NoDesktopIcon + $desktopicon
+    }
     $tasks += '!'* $pp.NoQuicklaunchIcon + 'quicklaunchicon'
     $tasks += '!'* $pp.NoSetFileTypes    + 'associate_common'
     $tasks += '!'*!$pp.ResetDictionaries + 'reset_dictionaries'
