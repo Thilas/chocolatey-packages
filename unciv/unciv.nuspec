@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.13.0</version>
+    <version>4.13.1</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
