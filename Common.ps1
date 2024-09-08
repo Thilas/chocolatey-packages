@@ -299,7 +299,10 @@ function Get-GitHubLatest {
         $tagName = $release.tag_name
         $version = $release.Version
         Write-Verbose "  Version: $version"
-        $stream = @{ Version = $version }
+        $stream = @{
+            Version      = $version
+            ReleaseNotes = "[Releases](https://github.com/$Repository/releases)`n`n" + $release.body
+        }
 
         $pattern = "{0}.*{1}$" -f [regex]::Escape($tagName), [regex]::Escape(".$FileType")
         $assets = $release.assets | Where-Object "browser_download_url" -Match $pattern
