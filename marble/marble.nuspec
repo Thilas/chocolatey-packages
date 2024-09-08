@@ -7,17 +7,17 @@
     <title>Marble</title>
     <authors>Marble Team</authors>
     <owners>Thilas</owners>
-    <licenseUrl>https://cgit.kde.org/marble.git/tree/LICENSE.txt</licenseUrl>
+    <licenseUrl>https://invent.kde.org/education/marble/-/blob/master/COPYING.DOC</licenseUrl>
     <projectUrl>https://marble.kde.org/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@5cb1f2e767a74ecc8261fa6e4f5376e1b04fe953/marble/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description><![CDATA[Marble is a Virtual Globe and World Atlas that you can use to learn more about Earth: You can pan and zoom around and you can look up places and roads. A mouse click on a place label will provide the respective Wikipedia article.
 ]]></description>
     <summary>Find your way and explore the world! Marble is a virtual globe and world atlas — your swiss army knife for maps.</summary>
-    <releaseNotes>[Summary](https://cgit.kde.org/marble.git/)</releaseNotes>
+    <releaseNotes>[ChangeLog](https://invent.kde.org/education/marble/-/blob/master/ChangeLog)</releaseNotes>
     <copyright>Copyright © Marble Team</copyright>
     <tags>marble admin globe world atlas map earth</tags>
-    <projectSourceUrl>https://cgit.kde.org/marble.git/</projectSourceUrl>
+    <projectSourceUrl>https://invent.kde.org/education/marble</projectSourceUrl>
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/marble</packageSourceUrl>
     <docsUrl>https://marble.kde.org/documentation.php</docsUrl>
     <mailingListUrl>https://mail.kde.org/mailman/listinfo/marble-devel</mailingListUrl>
