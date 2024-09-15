@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.13.7</version>
+    <version>4.13.8</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,15 +18,19 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.13.7
+## 4.13.8
 
-Performance improvements!
+Allowed starting Scenarios, including Multiplayer, through the 'New Game' screen! :D
 
-Added Barbarian image variants for AbsoluteUnits by Pelo
+WLTK + continuous rendering no longer cause city tiles to be dimmed
 
-AI is displeased when you become the new ally of a city-state it was the ally of
+Fixed Scenario mods being undownloadable and needing to restart game to access Scenario picker
 
-kick/skip turn in mutliplayer only active if the game contains the current player ID]]></releaseNotes>
+Added Barbarian Musketman and Worker variants for AbsoluteUnits
+
+Images are restored to ruleset correctly when resuming open game screen
+
+BNW unit sprites for HexaRealm - By GeneralWadaling]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
