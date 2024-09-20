@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>4.3.3</version>
+    <version>4.4.0-Alpha1</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>dtgm,Thilas</owners>
@@ -30,7 +30,44 @@ SABnzbd now ships with 16 localizations: English, Dansk, Deutsch, Español (cast
 SABnzbd is an open-source cross-platform binary newsreader written in Python. It simplifies the process of downloading from Usenet dramatically, thanks to its web-based user interface and advanced built-in post-processing options that automatically verify, repair, extract and clean up posts downloaded from Usenet.
 ]]></description>
     <summary>Free and easy binary newsreader</summary>
-    <releaseNotes>[Changelog](https://sabnzbd.org/downloads)</releaseNotes>
+    <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
+
+Release Notes - SABnzbd 4.4.0 Alpha 1
+=========================================================
+
+This is the first test release of SABnzbd 4.4.0.
+
+## New features since 4.3.0
+
+* Subtitle files will be deobfuscated if required.
+* Interface is no longer hosted on `http://hostname:port/sabnzbd` but only
+  on `http://hostname:port/`, in preparation for new internal web server.
+  Custom `url_base` can be configured in Special settings.
+* macOS: Dropped support for macOS 10.12 and below.
+
+## Bug fixes since 4.3.0
+
+* Toggling of Servers could result in jobs being stuck at 99%.
+* Config restart would always determine redirect URL instead of using current.
+
+## Upgrade notices
+
+* You can directly upgrade from version 3.0.0 and newer.
+* Upgrading from older versions will require performing a `Queue repair`.
+* Downgrading from version 4.2.0 or newer to 3.7.2 or older will require
+  performing a `Queue repair` due to changes in the internal data format.
+
+## Known problems and solutions
+
+* Read `ISSUES.txt` or https://sabnzbd.org/wiki/introduction/known-issues
+
+## About
+SABnzbd is an open-source cross-platform binary newsreader.
+It simplifies the process of downloading from Usenet dramatically, thanks to its web-based
+user interface and advanced built-in post-processing options that automatically verify, repair,
+extract and clean up posts downloaded from Usenet.
+
+(c) Copyright 2007-2024 by The SABnzbd-Team (sabnzbd.org)]]></releaseNotes>
     <copyright>Copyright © The SABnzbd-team</copyright>
     <tags>sabnzbd admin download binary usenet newsreader</tags>
     <projectSourceUrl>https://github.com/sabnzbd/sabnzbd</projectSourceUrl>
