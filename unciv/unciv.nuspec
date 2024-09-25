@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.13.10</version>
+    <version>4.13.11</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,19 +18,19 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.13.10
+## 4.13.11
 
-Tilesets: Added edge tile images!
+Better AI evaluation for 'win the game' buildings
 
-Great prophets bought in city with different religion do not get incorrect warning popup
+Modding:
+- Trigger uniques from religious beliefs activate correctly
+- Added 'removing the [promotion] promotion/status' unit action modifier
+- Added 'upon gaining/losing [promotionName] promotion' unit trigger uniques 
+- Allow comment uniques and timed uniques in event choices
 
-Getting all resources does not eliminate WLTK day
+Re-activate Thai language, now with diacritic support
 
-modding: Added validations for 'replaces' being set when 'uniqueTo' is not (units/buildings/improvements)
-
-Invalid MP games cannot be 'joined'
-
-Changing rulesets in new game screen no longer leads to fake error warnings]]></releaseNotes>
+Improve AI tech and policy choices  - By EmperorPinguin]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
