@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.13.12</version>
+    <version>4.13.13</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,15 +18,17 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.13.12
+## 4.13.13
 
-Cannot have 2 research agreements at once due to counteroffers
+Minimized MP game update IO by ignoring games older than 2 weeks for 'update all'
 
-Modding: Added 'upon losing/gaining the [promotion] status' unit triggers
+Resolved ANRs when pausing game due to game clone time
 
-Mod branch parsing (downloading from user input url) can now handle branch names containing '/'
+Resolved ANRs when starting a new game (checking for multuplayer server connection)
 
-Fixed 'Top' edge tiles not showing - kudos @legacymtgsalvationuser69544]]></releaseNotes>
+Protect terrainImage against incorrectly configured mods (natural wonder turnsInto is not in ruleset)
+
+Resolved race-condition error for loading terrain icons]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
