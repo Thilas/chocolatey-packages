@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>7.4.0</version>
+    <version>7.4.1</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -27,7 +27,40 @@
 You should use it for local development and follow Redis official guidance to deploy it on Linux for production environment. This project doesn't bear any responsibility for any losses caused by using it and is only for learning and exchange purposes.
 ]]></description>
     <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
-    <releaseNotes>[Releases](https://github.com/redis-windows/redis-windows/releases)</releaseNotes>
+    <releaseNotes><![CDATA[[Releases](https://github.com/redis-windows/redis-windows/releases)
+
+Upgrade urgency SECURITY: See security fixes below.
+
+Security fixes
+==============
+
+* (CVE-2024-31449) Lua library commands may lead to stack overflow and potential RCE.
+* (CVE-2024-31227) Potential Denial-of-service due to malformed ACL selectors.
+* (CVE-2024-31228) Potential Denial-of-service due to unbounded pattern matching.
+
+Hashes
+=========
+
+Algorithm : SHA256
+Hash      : E7A4BD7BE3EDD469D5B7831B7FA894317D337313CD19335F1493EC22C18C40E8
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.1-Windows-x64-msys2.zip
+
+
+Algorithm : SHA256
+Hash      : 37ECAF785CB72F933E13538C043AB49C7F97F6BCA1DE0EDB69A16BFB05788FA6
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.1-Windows-x64-msys2-with-Service.zip
+
+
+Algorithm : SHA256
+Hash      : D1B87CA1F622FC4A7B5AAED4CC052FE9F9560CCA8B661AC77C178EAFBC11B4B1
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.1-Windows-x64-cygwin.zip
+
+
+Algorithm : SHA256
+Hash      : 041D1B3327D868873DD4214C1534FC5E8E748F0BF3202FB7BB8F829E94E08D03
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.1-Windows-x64-cygwin-with-Service.zip
+
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/11154679931]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
