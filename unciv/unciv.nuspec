@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.13.13</version>
+    <version>4.13.14</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,17 +18,19 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.13.13
+## 4.13.14
 
-Minimized MP game update IO by ignoring games older than 2 weeks for 'update all'
+Ruleset validation for personalities with victory types not present in ruleset
 
-Resolved ANRs when pausing game due to game clone time
+Added mod download percentage tracking
 
-Resolved ANRs when starting a new game (checking for multuplayer server connection)
+Adjacent tiles updated when tile in changed in map editor, to update relevant edge tile images
 
-Protect terrainImage against incorrectly configured mods (natural wonder turnsInto is not in ruleset)
+Remove '-0 HP' from city attack notifications
 
-Resolved race-condition error for loading terrain icons]]></releaseNotes>
+Improve AI city settling, science game, and belief picking  - By EmperorPinguin
+
+Add two population-related conditional uniques  - By PLynx01]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
