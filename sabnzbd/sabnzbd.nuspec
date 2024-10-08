@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>4.4.0-Alpha1</version>
+    <version>4.4.0-Alpha2</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>dtgm,Thilas</owners>
@@ -32,7 +32,7 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 4.4.0 Alpha 1
+Release Notes - SABnzbd 4.4.0 Alpha 2
 =========================================================
 
 This is the first test release of SABnzbd 4.4.0.
@@ -40,9 +40,6 @@ This is the first test release of SABnzbd 4.4.0.
 ## New features since 4.3.0
 
 * Subtitle files will be deobfuscated if required.
-* Interface is no longer hosted on `http://hostname:port/sabnzbd` but only
-  on `http://hostname:port/`, in preparation for new internal web server.
-  Custom `url_base` can be configured in Special settings.
 * macOS: Dropped support for macOS 10.12 and below.
 
 ## Bug fixes since 4.3.0
