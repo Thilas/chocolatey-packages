@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium.portable</id>
-    <version>1.94.0.24281</version>
+    <version>1.94.0.24282</version>
     <title>VSCodium (Portable)</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -32,13 +32,11 @@ VS Code is a lightweight but powerful source code editor which runs on your desk
 update vscode to [1.94.0](https://code.visualstudio.com/updates/v1_94)
 
 ## What's Changed
-* fix: check both `arm64` and `aarch64` by @Suyun114 in https://github.com/VSCodium/vscodium/pull/2041
-* feat(1.94): update patches and build process by @daiyam in https://github.com/VSCodium/vscodium/pull/2047
+* build: correctly build pr to generate assets by @daiyam in https://github.com/VSCodium/vscodium/pull/2051
+* fix: remove unnecessary hook for reh by @daiyam in https://github.com/VSCodium/vscodium/pull/2050
 
-## New Contributors
-* @Suyun114 made their first contribution in https://github.com/VSCodium/vscodium/pull/2041
 
-**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.93.1.24256...1.94.0.24281]]></releaseNotes>
+**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.94.0.24281...1.94.0.24282]]></releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini, The VSCodium contributors</copyright>
     <tags>vscodium foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
     <projectSourceUrl>https://github.com/VSCodium/vscodium</projectSourceUrl>
