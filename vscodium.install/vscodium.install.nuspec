@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium.install</id>
-    <version>1.94.1.24283</version>
+    <version>1.94.2.24284</version>
     <title>VSCodium (Install)</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -45,16 +45,9 @@ Example: `choco install vscodium.install --params "/NoDesktopIcon /NoAddToPath"`
     <summary>VSCodium (Install)</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/VSCodium/vscodium/releases)
 
-update vscode to [1.94.1](https://code.visualstudio.com/updates/v1_94)
+update vscode to [1.94.2](https://code.visualstudio.com/updates/v1_94)
 
-## What's Changed
-* add basedpyright to alternative extensions list by @DetachHead in https://github.com/VSCodium/vscodium/pull/1833
-* feat(1.94.1): manually set correct commit id by @daiyam in https://github.com/VSCodium/vscodium/pull/2054
-
-## New Contributors
-* @DetachHead made their first contribution in https://github.com/VSCodium/vscodium/pull/1833
-
-**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.94.0.24282...1.94.1.24283]]></releaseNotes>
+**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.94.1.24283...1.94.2.24284]]></releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini, The VSCodium contributors</copyright>
     <tags>vscodium admin foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
     <projectSourceUrl>https://github.com/VSCodium/vscodium</projectSourceUrl>
