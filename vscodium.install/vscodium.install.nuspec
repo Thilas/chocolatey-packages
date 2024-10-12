@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium.install</id>
-    <version>1.94.2.24284</version>
+    <version>1.94.2.24286</version>
     <title>VSCodium (Install)</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -47,7 +47,11 @@ Example: `choco install vscodium.install --params "/NoDesktopIcon /NoAddToPath"`
 
 update vscode to [1.94.2](https://code.visualstudio.com/updates/v1_94)
 
-**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.94.1.24283...1.94.2.24284]]></releaseNotes>
+## What's Changed
+* fix: correctly read user's product.json by @daiyam in https://github.com/VSCodium/vscodium/pull/2057
+
+
+**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.94.2.24284...1.94.2.24286]]></releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini, The VSCodium contributors</copyright>
     <tags>vscodium admin foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
     <projectSourceUrl>https://github.com/VSCodium/vscodium</projectSourceUrl>
