@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.13.15</version>
+    <version>4.13.16</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,21 +18,17 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.13.15
+## 4.13.16
 
-Fixed spies stealing multiple tech steals in one turn
+AI: Better rules to not build unit-carrying units
 
-Resolved new game ANRs in a better way
+Units that can withdraw before melee do not do so when escorting civilian units
 
-AI: 
-- Keep 'don't spread religion' promises better
-- Greatly discourage attacking stronger enemies
+Modding: 
+- Filtering uniques are also checked for in unit types
+- Added 'if [modFilter] is not enabled' conditional
 
-Modding:
-- Added 'Remaining [civFilter] Civilizations' as countable value
-- Conditional phrasing: 'for [civFilter]' -> 'for [civFilter] Civilizations'
-- Resolved badly configured ruins causing crashes
-- Added 'City-State' as value for nationFilter]]></releaseNotes>
+UI: Free tech pickable in any way you enter the tech screen]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
