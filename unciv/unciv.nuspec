@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.13.18</version>
+    <version>4.13.19</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,18 +18,19 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.13.18
+## 4.13.19
 
-Better AI decisions for policy branches
+Update mods even if we have cached data 
 
-Modding: 
-- Allow fallback to 'UnitTypeIcons/$unitName' if 'UnitIcons/$unitName' does not exist
-- Added unique-weighted decision for policy branches
-- Better 'hidden when' uniques for disabled religion, victory types
+Modding: Unit icon falls back to UnitTypeIcons/<unitType> successfully
 
-Resolved rare crash when map contains improvements not in ruleset
+Cities reduce tile movement cost to 1 (on e.g. hills), per Civ V
 
-Add unique to show construction when unbuildable - By SeventhM]]></releaseNotes>
+Add Specialists Tutorial - By itanasi 
+
+Add `<when espionage is enabled>` conditional  - By RobLoach
+
+Allow purchasing wonders with gold when explicitly given a unique - By SeventhM]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
