@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>4.4.0-Alpha2</version>
+    <version>4.4.0-Beta1</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>dtgm,Thilas</owners>
@@ -32,10 +32,10 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 4.4.0 Alpha 2
+Release Notes - SABnzbd 4.4.0 Beta 1
 =========================================================
 
-This is the first test release of SABnzbd 4.4.0.
+This is the first beta release of SABnzbd 4.4.0.
 
 ## New features since 4.3.0
 
@@ -45,7 +45,10 @@ This is the first test release of SABnzbd 4.4.0.
 ## Bug fixes since 4.3.0
 
 * Toggling of Servers could result in jobs being stuck at 99%.
+* Corrupt NZB's could also result in jobs being stuck at 99%.
 * Config restart would always determine redirect URL instead of using current.
+* Correctly handle `disk full` errors from Unrar.
+* Create new history database in case of `no such table` error.
 
 ## Upgrade notices
 
