@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.14.3</version>
+    <version>4.14.4</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,17 +18,15 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.14.3
+## 4.14.4
 
-Fixed Wait action when auto unit cycle is disabled
+Memory optimizations
 
-Unresearchable techs not added when starting in advanced era
+AI: Use Great Artists for Golden Ages 
 
-modding:
-- Added validation to event uniques
-- 'upon gaining/losing the [promotion] status' triggers correctly
-- 'upon building a [improvementFilter] improvement' triggers correctly
-- 'Becomes [terrainName] when adjacent to [terrainFilter]' accepts conditionals]]></releaseNotes>
+modding: Added 'on [difficulty] difficulty' conditional 
+
+Avoid Growth and Food Ranking Improvements  - By itanasi]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
