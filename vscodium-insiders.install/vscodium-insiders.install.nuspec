@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium-insiders.install</id>
-    <version>1.96.0.24310</version>
+    <version>1.96.0.24311</version>
     <title>VSCodium - Insiders (Install)</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -45,7 +45,7 @@ Example: `choco install vscodium-insiders.install --params "/NoDesktopIcon /NoAd
     <summary>VSCodium - Insiders (Install)</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/VSCodium/vscodium-insiders/releases)
 
-update vscode to [231d37338a58ff22c223a7ed7d4c1e7142c513d2](https://github.com/microsoft/vscode/tree/231d37338a58ff22c223a7ed7d4c1e7142c513d2)]]></releaseNotes>
+update vscode to [f87f8a56f3a30238076bee3db39c245bd69be264](https://github.com/microsoft/vscode/tree/f87f8a56f3a30238076bee3db39c245bd69be264)]]></releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini, The VSCodium contributors</copyright>
     <tags>vscodium vscodium-insiders admin foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
     <projectSourceUrl>https://github.com/VSCodium/vscodium-insiders</projectSourceUrl>
