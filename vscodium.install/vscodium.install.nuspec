@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium.install</id>
-    <version>1.95.1.24307</version>
+    <version>1.95.2.24313</version>
     <title>VSCodium (Install)</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -45,22 +45,23 @@ Example: `choco install vscodium.install --params "/NoDesktopIcon /NoAddToPath"`
     <summary>VSCodium (Install)</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/VSCodium/vscodium/releases)
 
-update vscode to [1.95.1](https://code.visualstudio.com/updates/v1_95)
+update vscode to [1.95.2](https://code.visualstudio.com/updates/v1_95)
 
 ## What's Changed
-* feat(1.95): update patches by @daiyam in https://github.com/VSCodium/vscodium/pull/2055
-* feat: signing windows .exe by @daiyam in https://github.com/VSCodium/vscodium/pull/2058
-* fix(riscv64): bump nodejs to 20.16.0 by @kxxt in https://github.com/VSCodium/vscodium/pull/2061
-* feat(1.95): update patches by @daiyam in https://github.com/VSCodium/vscodium/pull/2066
-* build(windows): add signing with SignPath by @daiyam in https://github.com/VSCodium/vscodium/pull/2069
-* feat(linux): update XDG_RUNTIME_DIR for flatpak by @daiyam in https://github.com/VSCodium/vscodium/pull/2071
-* fix(linux): move patch so it's enabled during compile job by @daiyam in https://github.com/VSCodium/vscodium/pull/2073
-* fix: tree-sitter is optional by @daiyam in https://github.com/VSCodium/vscodium/pull/2076
-* fix: build ppc64(bis) by @daiyam in https://github.com/VSCodium/vscodium/pull/2077
-* build(windows): pre-compile on linux by @daiyam in https://github.com/VSCodium/vscodium/pull/2080
+* build: split big arch patch (wip) by @daiyam in https://github.com/VSCodium/vscodium/pull/2085
+* Add Render Glitch Workwaround to DOCS.MD by @266-750Balloons in https://github.com/VSCodium/vscodium/pull/1699
+* feat: loong64 support for reh server by @darkyzhou in https://github.com/VSCodium/vscodium/pull/2087
+* fix: Crashpad disabled regardless of `enable-crash-reporter` argv #1832 by @AgFlore in https://github.com/VSCodium/vscodium/pull/1838
+* fix: mismatch with arch enum and move misplaced code by @daiyam in https://github.com/VSCodium/vscodium/pull/2092
+* fix appimage build by setting ARCH env by @KnowZero in https://github.com/VSCodium/vscodium/pull/2095
 
+## New Contributors
+* @266-750Balloons made their first contribution in https://github.com/VSCodium/vscodium/pull/1699
+* @darkyzhou made their first contribution in https://github.com/VSCodium/vscodium/pull/2087
+* @AgFlore made their first contribution in https://github.com/VSCodium/vscodium/pull/1838
+* @KnowZero made their first contribution in https://github.com/VSCodium/vscodium/pull/2095
 
-**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.94.2.24286...1.95.1.24307]]></releaseNotes>
+**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.95.1.24307...1.95.2.24313]]></releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini, The VSCodium contributors</copyright>
     <tags>vscodium admin foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
     <projectSourceUrl>https://github.com/VSCodium/vscodium</projectSourceUrl>
