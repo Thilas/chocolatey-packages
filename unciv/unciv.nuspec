@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.14.4</version>
+    <version>4.14.5</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,15 +18,21 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.14.4
+## 4.14.5
 
-Memory optimizations
+Coast edge images for HexaRealm tiles by legacymtgsalvationuser69544 :)
 
-AI: Use Great Artists for Golden Ages 
+Place edge images over terrains and under improvements, where possible
 
-modding: Added 'on [difficulty] difficulty' conditional 
+City-state unique units are not taken from civs within this game
 
-Avoid Growth and Food Ranking Improvements  - By itanasi]]></releaseNotes>
+Don't assume the city-state ally knows the civ that attacked the city-state
+
+Modding:
+- Comment text is displayed on event choices
+- Don't allow triggers to decrease city population below 1
+
+Added owned tiles countable - By PLynx01]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
