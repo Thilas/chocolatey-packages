@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium.portable</id>
-    <version>1.95.2.24313</version>
+    <version>1.95.3.24321</version>
     <title>VSCodium (Portable)</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -29,23 +29,260 @@ VS Code is a lightweight but powerful source code editor which runs on your desk
     <summary>VSCodium (Portable)</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/VSCodium/vscodium/releases)
 
-update vscode to [1.95.2](https://code.visualstudio.com/updates/v1_95)
+update vscode to [1.95.3](https://code.visualstudio.com/updates/v1_95)
 
 ## What's Changed
-* build: split big arch patch (wip) by @daiyam in https://github.com/VSCodium/vscodium/pull/2085
-* Add Render Glitch Workwaround to DOCS.MD by @266-750Balloons in https://github.com/VSCodium/vscodium/pull/1699
-* feat: loong64 support for reh server by @darkyzhou in https://github.com/VSCodium/vscodium/pull/2087
-* fix: Crashpad disabled regardless of `enable-crash-reporter` argv #1832 by @AgFlore in https://github.com/VSCodium/vscodium/pull/1838
-* fix: mismatch with arch enum and move misplaced code by @daiyam in https://github.com/VSCodium/vscodium/pull/2092
-* fix appimage build by setting ARCH env by @KnowZero in https://github.com/VSCodium/vscodium/pull/2095
+* fix(linux): update electron to fix menu bug by @daiyam in https://github.com/VSCodium/vscodium/pull/2117
 
-## New Contributors
-* @266-750Balloons made their first contribution in https://github.com/VSCodium/vscodium/pull/1699
-* @darkyzhou made their first contribution in https://github.com/VSCodium/vscodium/pull/2087
-* @AgFlore made their first contribution in https://github.com/VSCodium/vscodium/pull/1838
-* @KnowZero made their first contribution in https://github.com/VSCodium/vscodium/pull/2095
 
-**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.95.1.24307...1.95.2.24313]]></releaseNotes>
+**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.95.3.24320...1.95.3.24321
+
+## x86 64bits
+
+<table>
+  <tr>
+    <td rowspan="7">Windows</td>
+    <td>User Installer</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodiumUserSetup-x64-1.95.3.24321.exe">VSCodiumUserSetup-x64-1.95.3.24321.exe</a></td>
+  </tr>
+  <tr>
+    <td>System Installer</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodiumSetup-x64-1.95.3.24321.exe">VSCodiumSetup-x64-1.95.3.24321.exe</a></td>
+  </tr>
+  <tr>
+    <td>.zip</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-win32-x64-1.95.3.24321.zip">VSCodium-win32-x64-1.95.3.24321.zip</a></td>
+  </tr>
+  <tr>
+    <td>.msi - updates enabled</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-x64-1.95.3.24321.msi">VSCodium-x64-1.95.3.24321.msi</a></td>
+  </tr>
+  <tr>
+    <td>.msi - updates disabled</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-x64-updates-disabled-1.95.3.24321.msi">VSCodium-x64-updates-disabled-1.95.3.24321.msi</a></td>
+  </tr>
+  <tr>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-win32-x64-1.95.3.24321.tar.gz">vscodium-reh-win32-x64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-win32-x64-1.95.3.24321.tar.gz">vscodium-reh-web-win32-x64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td rowspan="4">macOS</td>
+    <td>.dmg</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium.x64.1.95.3.24321.dmg">VSCodium.x64.1.95.3.24321.dmg</a></td>
+  </tr>
+  <tr>
+    <td>.zip</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-darwin-x64-1.95.3.24321.zip">VSCodium-darwin-x64-1.95.3.24321.zip</a></td>
+  </tr>
+  <tr>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-darwin-x64-1.95.3.24321.tar.gz">vscodium-reh-darwin-x64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-darwin-x64-1.95.3.24321.tar.gz">vscodium-reh-web-darwin-x64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+  <td rowspan="7">Linux</td>
+    <td>.deb</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/codium_1.95.3.24321_amd64.deb">codium_1.95.3.24321_amd64.deb</a></td>
+  </tr>
+  <tr>
+    <td>.rpm</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/codium-1.95.3.24321-el9.x86_64.rpm">codium-1.95.3.24321-el9.x86_64.rpm</a></td>
+  </tr>
+  <tr>
+    <td>.tar.gz</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-linux-x64-1.95.3.24321.tar.gz">VSCodium-linux-x64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>AppImage</td>
+    <td>
+      <a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-1.95.3.24321.glibc2.25-x86_64.AppImage">VSCodium-1.95.3.24321.glibc2.25-x86_64.AppImage</a><br />
+      <a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-1.95.3.24321.glibc2.25-x86_64.AppImage.zsync">VSCodium-1.95.3.24321.glibc2.25-x86_64.AppImage.zsync</a>
+    </td>
+  </tr>
+  <tr>
+    <td>Snap</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/codium_1.95.3.24321_amd64.snap">codium_1.95.3.24321_amd64.snap</a></td>
+  </tr>
+  <tr>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-linux-x64-1.95.3.24321.tar.gz">vscodium-reh-linux-x64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-linux-x64-1.95.3.24321.tar.gz">vscodium-reh-web-linux-x64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Alpine</td>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-alpine-x64-1.95.3.24321.tar.gz">vscodium-reh-alpine-x64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-alpine-x64-1.95.3.24321.tar.gz">vscodium-reh-web-alpine-x64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+</table>
+
+## ARM 64bits
+
+<table>
+  <tr>
+    <td rowspan="3">Windows</td>
+    <td>User Installer</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodiumUserSetup-arm64-1.95.3.24321.exe">VSCodiumUserSetup-arm64-1.95.3.24321.exe</a></td>
+  </tr>
+  <tr>
+    <td>System Installer</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodiumSetup-arm64-1.95.3.24321.exe">VSCodiumSetup-arm64-1.95.3.24321.exe</a></td>
+  </tr>
+  <tr>
+    <td>.zip</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-win32-arm64-1.95.3.24321.zip">VSCodium-win32-arm64-1.95.3.24321.zip</a></td>
+  </tr>
+  <tr>
+    <td rowspan="4">macOS</td>
+    <td>.dmg</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium.arm64.1.95.3.24321.dmg">VSCodium.arm64.1.95.3.24321.dmg</a></td>
+  </tr>
+  <tr>
+    <td>.zip</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-darwin-arm64-1.95.3.24321.zip">VSCodium-darwin-arm64-1.95.3.24321.zip</a></td>
+  </tr>
+  <tr>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-darwin-arm64-1.95.3.24321.tar.gz">vscodium-reh-darwin-arm64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-darwin-arm64-1.95.3.24321.tar.gz">vscodium-reh-web-darwin-arm64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td rowspan="6">Linux</td>
+    <td>.deb</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/codium_1.95.3.24321_arm64.deb">codium_1.95.3.24321_arm64.deb</a></td>
+  </tr>
+  <tr>
+    <td>.rpm</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/codium-1.95.3.24321-el9.aarch64.rpm">codium-1.95.3.24321-el9.aarch64.rpm</a></td>
+  </tr>
+  <tr>
+    <td>.tar.gz</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-linux-arm64-1.95.3.24321.tar.gz">VSCodium-linux-arm64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Snap</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/codium_1.95.3.24321_arm64.snap">codium_1.95.3.24321_arm64.snap</a></td>
+  </tr>
+  <tr>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-linux-arm64-1.95.3.24321.tar.gz">vscodium-reh-linux-arm64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-linux-arm64-1.95.3.24321.tar.gz">vscodium-reh-web-linux-arm64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Alpine</td>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-alpine-arm64-1.95.3.24321.tar.gz">vscodium-reh-alpine-arm64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-alpine-arm64-1.95.3.24321.tar.gz">vscodium-reh-web-alpine-arm64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+</table>
+
+## ARM 32bits
+
+<table>
+  <tr>
+    <td rowspan="5">Linux</td>
+    <td>.deb</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/codium_1.95.3.24321_armhf.deb">codium_1.95.3.24321_armhf.deb</a></td>
+  </tr>
+  <tr>
+    <td>.rpm</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/codium-1.95.3.24321-el9.armv7hl.rpm">codium-1.95.3.24321-el9.armv7hl.rpm</a></td>
+  </tr>
+  <tr>
+    <td>.tar.gz</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-linux-armhf-1.95.3.24321.tar.gz">VSCodium-linux-armhf-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-linux-armhf-1.95.3.24321.tar.gz">vscodium-reh-linux-armhf-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-linux-armhf-1.95.3.24321.tar.gz">vscodium-reh-web-linux-armhf-1.95.3.24321.tar.gz</a></td>
+  </tr>
+</table>
+
+## PPC 64bits
+
+<table>
+  <tr>
+    <td rowspan="2">Linux</td>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-linux-ppc64le-1.95.3.24321.tar.gz">vscodium-reh-linux-ppc64le-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-linux-ppc64le-1.95.3.24321.tar.gz">vscodium-reh-web-linux-ppc64le-1.95.3.24321.tar.gz</a></td>
+  </tr>
+</table>
+
+## RISC-V 64bits
+
+<table>
+  <tr>
+    <td rowspan="3">Linux</td>
+    <td>.tar.gz</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/VSCodium-linux-riscv64-1.95.3.24321.tar.gz">VSCodium-linux-riscv64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-linux-riscv64-1.95.3.24321.tar.gz">vscodium-reh-linux-riscv64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-linux-riscv64-1.95.3.24321.tar.gz">vscodium-reh-web-linux-riscv64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+</table>
+
+## Loong 64bits
+
+<table>
+  <tr>
+    <td rowspan="2">Linux</td>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-linux-loong64-1.95.3.24321.tar.gz">vscodium-reh-linux-loong64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-linux-loong64-1.95.3.24321.tar.gz">vscodium-reh-web-linux-loong64-1.95.3.24321.tar.gz</a></td>
+  </tr>
+</table>
+
+## s390x
+
+<table>
+  <tr>
+    <td rowspan="2">Linux</td>
+    <td>Remote Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-linux-s390x-1.95.3.24321.tar.gz">vscodium-reh-linux-s390x-1.95.3.24321.tar.gz</a></td>
+  </tr>
+  <tr>
+    <td>Web Host</td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.95.3.24321/vscodium-reh-web-linux-s390x-1.95.3.24321.tar.gz">vscodium-reh-web-linux-s390x-1.95.3.24321.tar.gz</a></td>
+  </tr>
+</table>]]></releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini, The VSCodium contributors</copyright>
     <tags>vscodium foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
     <projectSourceUrl>https://github.com/VSCodium/vscodium</projectSourceUrl>
