@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.14.10</version>
+    <version>4.14.11</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,21 +18,20 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.14.10
+## 4.14.11
 
-Fixed Flood Plains generation
+Added Github + Discord icon links on main menu
 
-Fixed crash when swapping while retreating
+City construction progress is reset when puppeting, not when annexing
 
-Added debug option to show tile image locations
+Mods:
+- Allow loading games where a buildings' 'replaces' has been removed
+- Allow loading games with natural wonders that have been removed from mods
+- Only add city ruins improvements if they exist in the ruleset
 
-Worker units do not try and swap with non-adjacent tiles
+Added lake-land edge tiles - by legacymtgsalvationuser69544
 
-Better MP update error handling
-
-Resolved crashes due to incorrect music state
-
-Console cannot change player type for non-major civs or allow adding cities to spectator/barbarian]]></releaseNotes>
+Move Capital building function from city to civ  - By SeventhM]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
