@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium-insiders.portable</id>
-    <version>1.96.0.24332</version>
+    <version>1.96.0.24334</version>
     <title>VSCodium - Insiders (Portable)</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -29,7 +29,7 @@ VS Code is a lightweight but powerful source code editor which runs on your desk
     <summary>VSCodium - Insiders (Portable)</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/VSCodium/vscodium-insiders/releases)
 
-update vscode to [709e28fc21bfb5ed982c04e7e5bd53279cf8869e](https://github.com/microsoft/vscode/tree/709e28fc21bfb5ed982c04e7e5bd53279cf8869e)]]></releaseNotes>
+update vscode to [275faf6f08b7aa50843f3c18406b4d5969784e52](https://github.com/microsoft/vscode/tree/275faf6f08b7aa50843f3c18406b4d5969784e52)]]></releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini, The VSCodium contributors</copyright>
     <tags>vscodium vscodium-insiders foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
     <projectSourceUrl>https://github.com/VSCodium/vscodium-insiders</projectSourceUrl>
