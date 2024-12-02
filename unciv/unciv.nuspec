@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.14.11</version>
+    <version>4.14.12</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,20 +18,23 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.14.11
+## 4.14.12
 
-Added Github + Discord icon links on main menu
+Allow unit triggers to be used in unit-triggered events
 
-City construction progress is reset when puppeting, not when annexing
+Memory and rendering performance improvements
 
-Mods:
-- Allow loading games where a buildings' 'replaces' has been removed
-- Allow loading games with natural wonders that have been removed from mods
-- Only add city ruins improvements if they exist in the ruleset
+Solved ANRs while building crash screen
 
-Added lake-land edge tiles - by legacymtgsalvationuser69544
+Spies assigned to cities moved to other civs are returned to hideout
 
-Move Capital building function from city to civ  - By SeventhM]]></releaseNotes>
+Automated workers don't remove terrain features without the proper tech
+
+Removed 'please' from Civ demands to make them more demand-y
+
+Fix promotion uniques being ignored if it didn't match a promotion names  - By SeventhM
+
+Notifications can link to URLs  - By touhidurrr]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
