@@ -49,11 +49,7 @@ function Get-Latest {
         $isUri32 = if ($version -lt '4.10') {
             { param($Uri) $Uri -match "\bjee\b.*\bwin32\b" -and $Uri -notmatch '\bx86_64\b' }
         }
-        $isUri64 = if ($version -lt '4.10') {
-            { param($Uri) $Uri -match "\bjee\b.*\bwin32\b" -and $Uri -notmatch '\bx86_64\b' }
-        } else {
-            { param($Uri) $Uri -match "\bjee\b.*\bwin32\b" }
-        }
+        $isUri64 = { param($Uri) $Uri -match "\bjee\b.*\bwin32\b" -and $Uri -match '\bx86_64\b' }
 
         $latest = Get-BasicLatest `
             -ReleaseUri $uri `
