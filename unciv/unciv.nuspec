@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.14.13</version>
+    <version>4.14.14</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,17 +18,21 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.14.13
+## 4.14.14
 
-SIGNIFICANT memory performance improvements for large maps
+Automated air units respect 'Cannot move' unique
 
-'Stats from tiles' uniques work with terrain + improvement filter combos
+Resolved rare New Game Screen 'application not responding' errors
 
-Layout for resource icons in city screen when in resistance - fixed
+AI: 
+- Don't pick most expensive tech as free tech, if it's marked as '0 weight for AI decisions'
+- Decreased base Fort value to not build it instead of useful improvements
 
-Remove server notifications - bad user experience
+Remove images of expended units
 
-hexarealm: Fix Snow-Lake edges - By RobLoach]]></releaseNotes>
+Display city state type name for battle bonuses
+
+'Unit built' notification selects the built unit]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
