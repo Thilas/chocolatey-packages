@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium-insiders</id>
-    <version>1.96.0.24344</version>
+    <version>1.96.0.24345</version>
     <title>VSCodium - Insiders</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -45,7 +45,7 @@ Example: `choco install vscodium-insiders --params "/NoDesktopIcon /NoAddToPath"
     <summary>VSCodium - Insiders</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/VSCodium/vscodium-insiders/releases)
 
-update vscode to [b18e7a700033b39ed2c3975759b6327c8205f958](https://github.com/microsoft/vscode/tree/b18e7a700033b39ed2c3975759b6327c8205f958)]]></releaseNotes>
+update vscode to [475acb4b9bdd77d4204224990bf288ed5bfe6b0e](https://github.com/microsoft/vscode/tree/475acb4b9bdd77d4204224990bf288ed5bfe6b0e)]]></releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini, The VSCodium contributors</copyright>
     <tags>vscodium vscodium-insiders admin foss cross-platform microsoft visualstudiocode vscode development editor ide javascript typescript</tags>
     <projectSourceUrl>https://github.com/VSCodium/vscodium-insiders</projectSourceUrl>
@@ -53,7 +53,7 @@ update vscode to [b18e7a700033b39ed2c3975759b6327c8205f958](https://github.com/m
     <docsUrl>https://code.visualstudio.com/docs</docsUrl>
     <bugTrackerUrl>https://github.com/VSCodium/vscodium/issues</bugTrackerUrl>
     <dependencies>
-      <dependency id="vscodium-insiders.install" version="[1.96.0.24344]" />
+      <dependency id="vscodium-insiders.install" version="[1.96.0.24345]" />
     </dependencies>
   </metadata>
   <files />
