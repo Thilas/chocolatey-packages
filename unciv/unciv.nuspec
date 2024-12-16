@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.14.15</version>
+    <version>4.14.16</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,27 +18,25 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.14.15
+## 4.14.16
 
-UI improvements:
+CPU performance improvements
 
-- Tile Info Table 
-- Changed Black to Charcoal 
-- Unit description table
+UI: 
+- Better 'close unit table' button 
+- Better options checkboxes, slider buttons, multiplayer server UI  - By Toxile
 
-Fixed cities built on pillages roads colored red
+Bugfixes:
+- Buy button active when civ can purchase items in puppets
+- Paused music no longer resumes on game resume
 
-Fixed scroll position indicator
+By SeventhM:
+- Unified unique for gaining stats/stockpiles 
+- Pantheon cost respects game speed modifer 
 
-Fixed Thai diacritic support
-
-Added 'exit' button in world screen popup menu
-
-Fixed AI religion belief assessment
-
-Increase starting Luxury amount to match Civ 5 - By SeventhM
-
-UI fixes: dividers, checkbox-to-text spacing, multiplayer tab connection button  - By Toxile (new contributor!)]]></releaseNotes>
+AI: 
+- Better Food Weights for citizen management - By itanasi
+- Prevent incorrect settler retreat - By EmperorPinguin]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
