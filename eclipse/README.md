@@ -22,7 +22,7 @@ Tools for Java developers creating Java EE and Web applications, including a Jav
 ### Package Parameters
 The following package parameters can be set:
 
-* `/InstallationPath` or `/InstallLocation` - Where to install the binaries to - defaults to "`$Env:ProgramFiles\Eclipse Foundation\$packageVersion`"
+* `/InstallationPath` or `/InstallLocation` - Where to install the binaries to - defaults to "`$Env:ProgramFiles\Eclipse $packageVersion`"
 * `/Multi-User` - Configure Eclipse as a multi-user install
 * `/Mirror-Id` - Use a specific mirror id instead of an automatic one to download Eclipse installer, must be an integer
 
