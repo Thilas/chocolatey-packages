@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>subtitleedit</id>
-    <version>4.0.9</version>
+    <version>4.0.10</version>
     <title>Subtitle Edit</title>
     <authors>Nikolaj Lynge Olsson</authors>
     <owners>Thilas,Waterdrop</owners>
@@ -29,24 +29,24 @@ Example: `choco install subtitleedit --params "/NoDesktopIcon /NoSetFileTypes"`
 ## [Change log](https://raw.githubusercontent.com/SubtitleEdit/subtitleedit/master/Changelog.txt)
 
 ## Files
-**[SubtitleEdit-4.0.9-Setup.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/4.0.9/SubtitleEdit-4.0.9-Setup.zip)**
+**[SubtitleEdit-4.0.10-Setup.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/4.0.10/SubtitleEdit-4.0.10-Setup.zip)**
 Windows installer version, .NET 4.8, 64/32-bit (will run 64 bit on 64-bit OS - so do use 64-bit codecs/VLC on 64-bit OS!)
 Thx to XhmikosR for creating the Windows installer :)
 Thx to LeonCheung for gfx :)
-SHA256 Checksum: `1f63d567a464122d2050c882c17a8c5d985799d36c7a234b4e8e54b29939b873`
-SubtitleEdit-4.0.9-Setup.exe SHA256 Checksum: `f1dbc298f29aa28391977869b3955ee07caf8622ff79c66046d6c90a4d6f77ea`
+SHA256 Checksum: `cd4d4c837e1a1e5b36e08564b5393fec9ec2454c3f996e9e6a75d3677de52ea2`
+SubtitleEdit-4.0.10-Setup.exe SHA256 Checksum: `1677d2e5dabb08ea76b4b32dbcde302b395ad8d5a613ac34c4e582b3502cc66f`
 
-**[SE409.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/4.0.9/SE409.zip)**
+**[SE4010.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/4.0.10/SE4010.zip)**
 Portable version, .NET 4.8, 64/32-bit (will run 64 bit on 64-bit OS - so do use 64-bit codecs/VLC on 64-bit OS!)
 This version is for Linux users too: https://www.nikse.dk/SubtitleEdit/Help#linux
-SHA256 Checksum: `3436f93c5531103ce25aa07a2d47a82346978ef3de3fd31a39bef93961d0c145`
+SHA256 Checksum: `60dddda7cba49327ee4818a8794106d94a32bef5cb251b3137c86900c756c2b0`
 
-**[SE409FI.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/4.0.9/SE409FI.zip)**
+**[SE4010FI.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/4.0.10/SE4010FI.zip)**
 Portable version of SE with Finnish dictionaries, .NET 4.8, 64/32-bit (will run 64 bit on 64-bit OS - so do use 64-bit codecs/VLC on 64-bit OS!)
 Spell check component: http://voikko.sourceforge.net/
 Thx to vm for Finnish language file :)
 Thx to SimplyTheBOSS for testing + OCR helper files :)
-SHA256 Checksum: `4296601a8188848f9ec35cd37ae6df0472972cd0622e6babd10fb5d9bb006692`]]></releaseNotes>
+SHA256 Checksum: `dfdf71242168813ed7be40fc5226a848c2d2447c0a5b5969126e60bb8dc8a7ec`]]></releaseNotes>
     <copyright>Copyright © Nikse</copyright>
     <tags>subtitleedit admin subtitle editor video OCR sync merge split convert</tags>
     <projectSourceUrl>https://github.com/SubtitleEdit/subtitleedit</projectSourceUrl>
