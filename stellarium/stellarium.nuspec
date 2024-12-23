@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>stellarium</id>
-    <version>24.3.0</version>
+    <version>24.4.0</version>
     <title>Stellarium</title>
     <authors>Stellarium Developers</authors>
     <owners>Thilas,dtgm</owners>
@@ -18,128 +18,97 @@
 
 **The installers are located in the "Assets" section at the end of these release notes!**
 
-[![Github Release](https://img.shields.io/github/downloads/Stellarium/stellarium/v24.3/total.svg)](https://github.com/Stellarium/stellarium/releases/v24.3)
+[![Github Release](https://img.shields.io/github/downloads/Stellarium/stellarium/v24.4/total.svg)](https://github.com/Stellarium/stellarium/releases/v24.4)
 
 ## Release notes
-The Stellarium Team has released version 24.3.
+The Stellarium Team has released final version in this year - 24.4.
 
 The major changes of this version:
-- Performance improvements for computation of Solar system bodies positions
-- Improvements in plugins and AstroCalc tools
+- Changes in DSO rendering
+- Improvements in Core
+- Improvements in Telescope Control plugin
 - Updates in sky cultures
-- Updates in GUI
 
 Behind the scenes, many more minor issues were fixed.
 
-TELESCOPE USERS
-
-We have identified some bugs in the TelescopeControl plugin on
-the Qt6-based releases.
-
-Telescope users, please try whether this solves your problems.
-If not, we are looking for those of you with programming skills to help
-us fixing remaining issues. Reward possible!
-
 ## What's Changed
 Full list of changes:
-- Added ability a batch drawing of asteroid and comet markers (GH: #3847)
-- Added tiny circles as optional markers for minor bodies (GH: #3847)
-- Added multithreading computations of positions for Solar system bodies (GH: #3847)
-- Added tooltip for new option in AstroCalc/Ephemeris tool
-- Added ability to use a wider range of dates for AstroCalc/Ephemeris tool (GH: #3880)
-- Added a reddish tint over the landscape when sun is low (GH: #3858, #3855)
-- Added abort telescope slew signals to LX200 and NexStar telescopes (GH: #2754)
-- Added setting dynamic limits for wide range of dates in AstroCalc tools
-- Added ability to use a wider range of dates for AstroCalc/RTS tool 
-- Added links for multi-opposition unnumbered objects and one-opposition objects into bookmarks in Solar System Editor plugin
-- Added info for total candidates for adding in Solar System Editor plugin
-- Added ability to use a wider range of dates for AstroCalc/Phenomena tool (GH: #1327)
-- Added ability to hide the constellation art button (GH: #3830)
-- Added context support for exoplanet detection methods and exoplanetary classes (GH: #3798)
-- Added comments for tooltips (GH: #3786)
+- Added optional drop shadow behind InfoText
+- Added ability of immediate-store for (hopefully) all main program properties (GH: #3987)
+- Added designation for η Car star (GH: #633)
+- Added code for Tachelhit language
+- Added sidereal time in degrees to StelObject InfoMap
+- Added test to avoid missing colors for NebCl type
+- Added new nomenclature
+- Added alias for Asia/Choibalsan time zone (GH: #3955, #3953)
+- Added proper name for LDN43
+- Fixed kerning of curved text (GH: #4006)
+- Fixed application of text baseline shift
+- Fixed Milky Way texture (GH: #3995)
+- Fixed typos (GH: #3993, #4015)
+- Fixed mistakes in Korean SC (GH: #3994)
+- Fixed proper motion for pulsars
+- Fixed minimum target version for macOS when Qt5 is using
+- Fixed color for NebCl type
+- Fixed sizes of proportional hints for DSO
+- Fixed description of Arabic (Lunar mansions) SC (GH: #3938)
+- Fixed description of Arabic (Arabian peninsula) SC (GH: #3944)
+- Fixed typos in Arabic (Indigenous) skyculture (GH: #3939)
+- Fixed BOM char in source code
+- Fixed constellation Pleiades (HR -> HIP) in Greek (Leiden Aratea) SC (GH: #3931)
+- Fixed translating months in AstroCalc/Graphs after changing language (GH: #3907)
+- Fixed typos in Mongolian skyculture (GH: #3913)
+- Fixed typos in Indian skyculture (GH: #3908)
+- Fixed typos in Romanian skyculture (GH: #3912)
+- Fixed few security alerts for JS code (GH: #3918, #3920, #3917)
+- Fixed compiling planetarium in some systems (GH: #3905)
+- Fixed missing parts of refactoring
+- Fixed setting 2 lines in ArchaeoLines plugin (GH: #3909)
+- Fixed saving selected object information (GH: #3910)
 - Fixed coordinates in '20 Fun Naked-Eye Double Stars' script (GH: #3835)
-- Fixed typos in Maya skyculture
-- Fixed linking with <execution> which may require libtbb
-- Fixed messing in solar eclipse maps (GH: #3894)
-- Fixed TimeZone for Xochicalco (GH: #3897)
-- Fixed missing old-fashioned storing of new settings (GH: #3847)
-- Fixed saving new option for AstroCalc/Ephemeris tool
-- Fixed the circumstances discovery for few comets
-- Fixed parsing MPC large numbers in Solar System Editor plugin (GH: #3882)
-- Fixed Andromeda lines for Modern (S&T) sky culture (GH: #3865)
-- Fixed Calendars plugin
-- Fixed support common names for sky cultures (GH: #3845)
-- Fixed typos in sky cultures (GH: #3854, #3838, #3842, #3845)
-- Fixed working Search Tool/Lists tool when list of asterisms is empty (GH: #3853)
-- Fixed duplicate Satellites filter window (GH: #3825)
-- Fixed landscape label drawing
-- Fixed “group”/“groups” mistake in Satellites plugin (GH: #3826)
-- Fixed mistake in novae catalog (GH: #3831)
-- Fixed a string for StelObject info (GH: #3813)
-- Fixed missing feature for limiting magnitude for Solar system bodies (GH: #3817)
-- Fixed re-display data when "boundless" flag is changed in AstroCalc/Ephemeris tool (GH: #3811)
-- Fixed sorting rules for phase and elongation in the AstroCalc/Ephemeris tool (GH: #3810)
-- Fixed tooltip in AstroCalc/Graphs tool (GH: #3809)
-- Fixed Andromeda lines for Modern (IAU) sky culture
-- Fixed messages in tooltips for AstroCalc tools (GH: #3801)
-- Fixed selection of objects in AstroCalc/WUT tool (GH: #3799)
-- Fixed translation issue for multiple detection methods for one exoplanet (GH: #3798)
-- Fixed translation issue for exoplanetary classes of potentially habitable exoplanets (GH: #3798)
-- Fixed displaying of morphological descriptions for globular star clusters (GH: #3782)
-- Fixed bug in TUI plug-in (GH: #3784)
-- Fixed coordinates of SN 1181A
-- Fixed custom user dir option
-- Changed core: small speedup for Preetham atmosphere
-- Changed core: avoid StelBottomBar redraws when not needed
-- Changed core: speed-up InfoPanel
-- Changed core: avoid some costly computations
-- Changed core: Allow display of colors for each planet and per minor body type (GH: #3878, #3849)
-- Changed core: Allow to draw planet orbits together with orbit of selected object (GH: #3878, #3849)
-- Changed core: speedup for nomenclature items
-- Changed core: use QLatin1String for string literal comparison for Solar system objects
-- Changed core: simplify gridline intersect callbacks (GH: #3792)
-- Changed core: Use QLatin1String for string literal comparison in Planet and SolarSystem classes
-- Changed core: Restored code of QtCompress (optional; bundled) (GH: #3802)
-- Changed core: Allow disabling StelAudioMgr at runtime (GH: #3775)
-- Changed GUI: Obvious improvement for Oculars GUI
-- Changed Exoplanets plug-in: The list of detection methods of exoplanet has been revised
-- Changed Satellites plugin: setting the new defaults for timerate limits for displaying satellites (x1000 or ~16 minutes per second) for smooth rendering the scene (GH: #3890)
-- Changed Satellites plugin: speedups of computations
-- Changed Telescope Control plugin: Disable ASCOM on Qt6 (GH: #3887)
-- Changed Telescope Control plugin: Disable sync button if telescope does not support it
+- Changed core: keep FOV search radius in hiDPI screen consistent from user perspective (GH: #3985)
+- Changed core: attempt to resolve HIP first (GH: #3980)
+- Changed core: Refactoring drawing nebulae markers (GH: #3968)
+- Changed core: Allow dimming of DSO hints and labels
+- Changed core: Make some landscape variables static, and properties of LandscapeMgr (GH: #3951, #3574)
+- Changed core and Solar System Editor plugin: improved size of small asteroids
+- Changed core: Rewrite spheric mirror to make it more efficient (GH: #3535, #3954)
+- Changed core: Remove a useless OpenGL call
+- Changed Telescope Control plugin: Show an even more clear hint that ASCOM is disabled in Qt6 builds
+- Changed Telescope Control plugin: INDI support is optional now
+- Changed Telescope Control plugin: switch to INDI v2.1.1 (GH: #3269)
+- Changed Satellites plugin: User can decide if newly added satellites are visible by default now (GH: #3986)
+- Changed Satellites plugin: Avoid bad orbit lines (GH: #3934)
+- Changed Satellites plug-in: small speedup
+- Changed Calendars plugin: add drop shadow for better readability
+- Updated Norse SC (GH: #3990, #3991)
 - Updated default list of locations
-- Updated default catalog of satellites
-- Updated default catalog of pulsars
-- Updated default catalog of novae
-- Updated default catalog of exoplanets
 - Updated default list of minor bodies
+- Updated list of planetary features
+- Updated discovery circumstances for comets and for minor planets
 - Updated photometry data for satellites
-- Updated discovery circumstances for comets and minor planets
-- Updated planetary nomenclature data
 - Updated translations
-- Updated lists of interesting stars
-- Removed old comets
-- Removed erroneous DSO names
-- Removed links to dead wiki (GH: #3874)
-- Removed link to MPC Numbered objects list from bookmarks in Solar System Editor plugin (a huge data)
-- Removed unused code
-- Removed unneeded tooltips (GH: #3797, #3796)
+- Updated infrastructure: Let system-installed fast_float be found (GH: #3949)
+- Updated WebUI in Remote Control plug-in (GH: #3929)
+- Updated JS libraries in Remote Control plugin-in (GH: #3923)
+- Updated default catalog of pulsars
+- Removed texture of NGC104 
 
 ## Packages notes
 package | note
 ------------|---------
-stellarium-24.3.tar.gz | Stellarium 24.3 for UNIX/Linux (source code). <br />__MD5:__ 375367ffdfbbe3e4d4443ecebacf97ae <br />__SHA256:__ c3ffb56a049061c7754bafab176146a2c4474ecede108d650f3c7551e1eae50a
-stellarium-24.3.tar.bz2 | Stellarium 24.3 for UNIX/Linux (source code). <br />__MD5:__ 1b601909f727bfdd7d72ea5a70fa3962 <br />__SHA256:__ bf8f24496fdecceefd75ec4ee60f57f7973905d94e3cd4c195d4d188dc25c8ce
-stellarium-24.3.tar.xz | Stellarium 24.3 for UNIX/Linux (source code). <br />__MD5:__ a2f0a8dd0f2aeb49c05fb38aa63f929b <br />__SHA256:__ 03dad30f4031bdc2d200146e7c587249ea75dbdb88c8ae13632829aac5540b08
-stellarium-24.3.zip | Stellarium 24.3 for UNIX/Linux (source code). <br />__MD5:__ ceb89c2742f2d051ae9fdcf882025296 <br />__SHA256:__ dfad69ba4d1a24e738a9ed2fc3a2f167410f1f92c044355a4a8a0b3a387fa20a
-stellarium-24.3-qt5-win32.exe | Stellarium 24.3 for Windows (x86_32; Windows 7+) based on Qt 5.12.6 (Visual Studio 2017). <br /> __MD5__: 9ccf4d8e033ac6e1fcd004056ec9994b <br />__SHA256__: f2f1ac3b1509596209266bc69056b2738849308ea81a304e8887e0159c43b4ee
-stellarium-24.3-qt5-win64.exe | Stellarium 24.3 for Windows (x86_64; Windows 7+) based on Qt 5.12.6 (Visual Studio 2017). <br /> __MD5__: 6ea90049cfe91cd16a0c8fcc0adf2297 <br />__SHA256__: e419544880224a9a5590b4c1985fe17c5afd502249b9c6fd68f4106bc982b6ad
-stellarium-24.3-qt6-win64.exe | Stellarium 24.3 for Windows (x86_64; Windows 10+) based on Qt 6.5.3 (Visual Studio 2019). <br /> __MD5__: ffc5d67216eef800bc865ab40502c1b7 <br />__SHA256__: d137912a94c1f2c3f25b0b36f20e2e7d3610b337b854bcd82bb66dba61e38a01
-stellarium-24.3-qt6-arm64.exe | Stellarium 24.3 for Windows (ARM64; Windows 10+) based on Qt 6.5.3 (Visual Studio 2022). <br /> __MD5__: c84d4b2ada0373c84388d0b39f8b68d4 <br />__SHA256__: e73c4d4371436e6f9a90afb77985e4aa7775935f0bf6ddc3fba385e124cf6299
-Stellarium-24.3-qt6-macOS.zip | Stellarium 24.3 for macOS (universal; macOS 11.0+) based on Qt 6.5.3 (AppleClang 16.0.0). <br /> __MD5__: 99a660bba53af10703eef112c68d11b2 <br />__SHA256__: 52462403d3d5c16613c364b023efbddbb1b036140d60e68f70f67a6c0dc8e519
-Stellarium-24.3-qt5-x86_64.zip | Stellarium 24.3 for macOS (x86_64; macOS 10.14+) based on Qt 5.12.12 (AppleClang 13.0.0). <br /> __MD5__: 24d42ee209cdab22cbc4f2b0722a98a2 <br />__SHA256__: 6e4fb74715010f213fa4bf55affa1661b572b4b9e1705aa3f882744293350394
-Stellarium-24.3-qt5-x86_64.AppImage | Stellarium 24.3 for Linux (amd64; glibc 2.31) based on Qt 5.12.8 (GCC 9.4.0). <br /> __MD5__: 075ca71b9f07fef80f3d2984bcc52dbc <br />__SHA256__: 2c136618ede7fb0687d8371a95a004e4bf9f00e0a1a83359de88b04aeec1cf0b
-Stellarium-24.3-qt6-x86_64.AppImage | Stellarium 24.3 for Linux (amd64; glibc 2.35) based on Qt 6.2.4 (GCC 11.4.0). <br /> __MD5__: be7710c2323197b0bbb637c3c6f6e92a <br />__SHA256__: 304764814caa5a23c0b848abc7e429e0ec1ef9e1f90ae999d9ef197c422562b3
+stellarium-24.4.tar.gz | Source code of Stellarium 24.4. <br />__MD5:__ eabf3b7357a40073245f29faa5ee5c83 <br />__SHA256:__ 433bb8a0380313e6d9e4caf62395b724f4d74262c8aae426a0fe1a5e61a29cbb
+stellarium-24.4.tar.bz2 | Source code of Stellarium 24.4. <br />__MD5:__ cc976adc3d31831a0c2e4fa11ceb585f <br />__SHA256:__ 103359554d41cf195d8200ea74de83515eb2f595260587783d3135ed9acf1d2c
+stellarium-24.4.tar.xz | Source code of Stellarium 24.4. <br />__MD5:__ dc317cfd181e79043de2c38d6104908e <br />__SHA256:__ 84386ad6261bbad7851a56febe673ec73adc7a3b49156b33af6c534e85ac8f8d
+stellarium-24.4.zip | Source code of Stellarium 24.4. <br />__MD5:__ 7c7ddfd42a75a8216f37562c8a73f68a <br />__SHA256:__ 7c3211a341449cadd4fe592f0ab3e0f03db06b2f86e5aa210b47cc396ce4f3c7
+stellarium-24.4-qt5-win32.exe | Stellarium 24.4 for Windows (x86_32; Windows 7+) based on Qt 5.12.6 (Visual Studio 2017). <br /> __MD5__: be04387af333b42db8fb2c3ce81e68f8<br />__SHA256__: 71b620f40b330af0444791181684942df7b8bd51c73b72a32b3e2c3d0109a127
+stellarium-24.4-qt5-win64.exe | Stellarium 24.4 for Windows (x86_64; Windows 7+) based on Qt 5.12.6 (Visual Studio 2017). <br /> __MD5__: 7a94fcaa6f4c466965128a51d67d421f <br />__SHA256__: e662ce010c6fb18bf7138f7209a0b0fb0f4127be30d0c053842942639975dcdd
+stellarium-24.4-qt6-win64.exe | Stellarium 24.4 for Windows (x86_64; Windows 10+) based on Qt 6.5.3 (Visual Studio 2019). <br /> __MD5__: dabcb566eed1a97304d727737841ddb8 <br />__SHA256__: c52a7a2da4e0639457d1c4a2010d4bdbf47594710fac179fdfa69718d83bc36b
+stellarium-24.4-qt6-arm64.exe | Stellarium 24.4 for Windows (ARM64; Windows 10+) based on Qt 6.5.3 (Visual Studio 2022). <br /> __MD5__: 28250785a9f64e578042c997d6c2ad38 <br />__SHA256__: 8219feea683696b2fe36ea02c68581cc02d4e5aa8b5a1593676b05888a0f5a87
+Stellarium-24.4-qt6-macOS.zip | Stellarium 24.4 for macOS (universal; macOS 11.0+) based on Qt 6.5.3 (AppleClang 16.0.0). <br /> __MD5__: ed1e9ec3b3ff376ce2812530c2af42f2 <br />__SHA256__: e3a8c9ac2c7e52b4eb971b84941e801affaa69f156b844f806c42dbd9f08f63c
+Stellarium-24.4-qt5-x86_64.zip | Stellarium 24.4 for macOS (x86_64; macOS 10.13+) based on Qt 5.12.12 (AppleClang 13.0.0). <br /> __MD5__: da227cf4d3bb0168fbf519693876a431 <br />__SHA256__: 2474235caf179cdc0d1fe0b70b6da39a13c16aaf24faf9740ced2ea3c3543ad7
+Stellarium-24.4-qt5-x86_64.AppImage | Stellarium 24.4 for Linux (amd64; glibc 2.31) based on Qt 5.12.8 (GCC 9.4.0). <br /> __MD5__: bb6f74d11b3eee3f7c738ab4d8be4310 <br />__SHA256__: d87bad1be41495c743b253267a79b1873f357b75589f2e976ee158f4f3cdf3a0
+Stellarium-24.4-qt6-x86_64.AppImage | Stellarium 24.4 for Linux (amd64; glibc 2.35) based on Qt 6.2.4 (GCC 11.4.0). <br /> __MD5__: 8ba2aa3e7425d395c8de9bfa4057be37 <br />__SHA256__: 79a5bd45375cc952587aa44ac44efcd37303684cff6d488b8f4b59a6257eefb6
 
 ## Verify
 ### GPG signature
@@ -150,7 +119,7 @@ Stellarium-24.3-qt6-x86_64.AppImage | Stellarium 24.3 for Linux (amd64; glibc 2.
   **id:** `rsa4096/BF38D4D02A328DFF 2012-04-07`
   **fingerprint:** `7915 1C2E 6351 E727 8DA1  A730 BF38 D4D0 2A32 8DFF`
 3. Verify the binary file is valid (tarball for example)
-  `gpgv --keyring ./stellarium.gpg stellarium-24.3.tar.gz.asc stellarium-24.3.tar.gz`]]></releaseNotes>
+  `gpgv --keyring ./stellarium.gpg stellarium-24.4.tar.gz.asc stellarium-24.4.tar.gz`]]></releaseNotes>
     <copyright>Copyright © Stellarium Developers</copyright>
     <tags>stellarium admin planetarium sky stars constellations</tags>
     <projectSourceUrl>https://github.com/Stellarium/stellarium</projectSourceUrl>
