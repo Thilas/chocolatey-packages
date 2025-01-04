@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.14.19</version>
+    <version>4.15.0</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,21 +18,21 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.14.19
+## 4.15.0
 
-Memory performance improvements
+Modding:
+- 'Costs [amount] [stockpiledResource]' works for improvements
+- 'free building' unique respects replacement buildings
+- Adjacency checks do not check the current tile
+- Allow city level stockpiles - By SeventhM
 
-City-state stat percent bonuses apply correctly
+UI:
+- Larger 'per turn' text for gold and faith
+- disabled buttons no longer cause click-through
+- Improved city screen queue - By sulai
+- Edit Babylon's icon - By SpacedOutChicken
 
-More uniques work with 'in this city' conditional
-
-Terrain images in fonts no longer flipped
-
-Pathfinding: Avoid unfriendly city state tiles when this doesn't affect movement speed 
-
-Change Babylon's image to Lamassu  - By SpacedOutChicken
-
-Let AI choose healing promotions - By EmperorPinguin]]></releaseNotes>
+City states will get angry at you if you steal their lands - By Emandac]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
