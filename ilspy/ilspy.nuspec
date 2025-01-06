@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>ilspy</id>
-    <version>9.0.0-preview3</version>
+    <version>9.0.0-rc</version>
     <title>ILSpy</title>
     <authors>SharpDevelop Team</authors>
     <owners>dtgm,Thilas</owners>
@@ -26,40 +26,29 @@
     <summary>ILSpy is the open-source .NET assembly browser and decompiler.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/icsharpcode/ILSpy/releases)
 
-ILSpy 9.x is based on .NET 8.0. All artifacts **except** the self-contained distribution are built framework-dependent, which means [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) must be installed prior to starting ILSpy.
-
-# Breaking Changes in `ICSharpCode.Decompiler`
-* Remove `IsRef`, `IsOut` and `IsIn` flags from `IParameter`
-* Replace `ParameterModifiers` with `ReferenceKind`.
+ILSpy 9.x is based on .NET 8.0. All artifacts **except** the self-contained distribution are built framework-dependent, which means [.NET 8.0 or later](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) must be installed prior to starting ILSpy.
 
 # New Language Features
-* Update pattern detection to Roslyn 4.11.0
-* Support types that provide DisposeAsync without implementing IAsyncDisposable.
-* Add support for C# 12 primary constructors.
-* Add support for C# 12 'ref readonly' parameters
+* Updated pattern detection to Roslyn 4.12
 
 # Contributions
-* Add smooth scrolling to settings panels and DecompilerTextView (see #3244 by @tom-englert)
-* Decompiler Settings: Checkbox in group header does not reflect state of the group (see #3252 by @tom-englert)
-* Various WPF-related refactorings by @tom-englert (see #3257, #3266, #3274, #3283, #3285, #3291, #3292, #3294, #3295, #3297, #3298, #3299, #3302, #3308 and #3314)
-* Ignore empty version directories of dotnet (#3265 by @Herrmel)
-* Fix Derived Types Node always being empty (#3280 by @Applesauce314) 
+* [Diagramming](https://github.com/icsharpcode/ILSpy/wiki/Diagramming) feature by @h0lg (see #3324)
+* More WPF-related refactorings by @tom-englert (see #3325 and #3335)
+* High DPI fixes by @CreateAndInject (see #3348 and #3350)
+* Missing DecompilerSettings by @naratteu (see #3356)
 
 # Enhancements
-* Allow running tests on ARM64 (see #3231)
-* Alow collecting analyzers annotated with `ExportAnalyzerAttribute` (see #3239)
-* Fix #3237: Use ref readonly locals for `readonly.ldelema`
-* Fix #3001: Support new resources format in ResourcesFile/ResXResourceWriter
-* Fix #3134: Include `newobj`, `initobj` and `call` instructions in `TypeInstantiatedByAnalyzer`
-* Fix #3089: Add comment regarding .constraint prefix expressed as cast in C#
+* Allow implicit conversions in switch
+
+# Performance
+* Performance: Initialize ToolPanes in `DockWorkspace.InitializeLayout()` instead of the property getter to avoid WPF seeing them in `InitializeComponent()` and rendering all panes docked at the right before the layout is properly initialized.
 
 # Bug fixes
-* Fix #3209: Ensure using directives are added for extension methods in higher level patterns such as: foreach -> `GetEnumerator()`, collection initializer -> `Add()` and deconstruction -> `Deconstruct()`.
-* Fix #3255: Ignore exceptions while decoding sequence point blobs.
-* Fix #2166: Unnecessary uint casts/conversions for certain bitwise operations
-* Fix #3310: Filter out copy-constructor only if it's an actual record type.
+* Fix #3319: KeyDownEvent field reference was replaced with KeyDown event reference.
+* Fix #3349: Make ILSpy ready for .NET 10
+* Fix #3361: switch-value conversion was losing its target type.
 
-And many other fixes, for a full list click [here](https://github.com/icsharpcode/ILSpy/compare/v9.0-preview2...v9.0-preview3).]]></releaseNotes>
+And many other fixes, for a full list click [here](https://github.com/icsharpcode/ILSpy/compare/v9.0-preview3...v9.0-rc).]]></releaseNotes>
     <copyright>Copyright © SharpDevelop Team</copyright>
     <tags>ilspy foss dotnet assembly decompiler</tags>
     <!-- <projectSourceUrl>https://github.com/icsharpcode/ILSpy</projectSourceUrl> -->
