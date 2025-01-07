@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>7.4.1</version>
+    <version>7.4.2</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -31,36 +31,47 @@ You should use it for local development and follow Redis official guidance to de
 
 Upgrade urgency SECURITY: See security fixes below.
 
-Security fixes
-==============
+### Security fixes
 
-* (CVE-2024-31449) Lua library commands may lead to stack overflow and potential RCE.
-* (CVE-2024-31227) Potential Denial-of-service due to malformed ACL selectors.
-* (CVE-2024-31228) Potential Denial-of-service due to unbounded pattern matching.
+- (CVE-2024-46981) Lua script commands may lead to remote code execution
+- (CVE-2024-51741) Denial-of-service due to malformed ACL selectors
 
+### Bug fixes
+
+- https://github.com/redis/redis/pull/13627 Crash on module memory defragmentation
+- https://github.com/redis/redis/pull/13338 Streams: `XINFO` lag field is wrong when tombstone is after the `last_id` of the consume group
+- https://github.com/redis/redis/pull/13473 Streams: `XTRIM` does not update the maximal tombstone, leading to an incorrect lag
+- https://github.com/redis/redis/pull/13470 `INFO` after `HDEL` show wrong number of hash keys with expiration
+- https://github.com/redis/redis/pull/13476 Fix a race condition in the `cache_memory` of `functionsLibCtx`
+- https://github.com/redis/redis/pull/13626 Memory leak on failed RDB loading
+- https://github.com/redis/redis/pull/13539 Hash: fix key ref for a hash that no longer has fields with expiration on `RENAME`/`MOVE`/`SWAPDB`/`RESTORE`
+- https://github.com/redis/redis/pull/13443 Cluster: crash when loading cluster config
+- https://github.com/redis/redis/pull/13422 Cluster: `CLUSTER SHARDS` returns empty array
+- https://github.com/redis/redis/pull/13465 Cluster: incompatibility with older node versions
+- https://github.com/redis/redis/pull/13608 Cluster: `SORT ... GET #`: incorrect error message
 Hashes
 =========
 
 Algorithm : SHA256
-Hash      : E7A4BD7BE3EDD469D5B7831B7FA894317D337313CD19335F1493EC22C18C40E8
-Path      : D:\a\redis-windows\redis-windows\Redis-7.4.1-Windows-x64-msys2.zip
+Hash      : 65C8D2FF57572AFA3CF4634820D4CDB8921E82760B272AD1DD12F38308414A96
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.2-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : 37ECAF785CB72F933E13538C043AB49C7F97F6BCA1DE0EDB69A16BFB05788FA6
-Path      : D:\a\redis-windows\redis-windows\Redis-7.4.1-Windows-x64-msys2-with-Service.zip
+Hash      : 70DCA38B1BED63F66362D9962B5DB593FA111FA1BC09D8C21A01B01D18FAFA66
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.2-Windows-x64-msys2-with-Service.zip
 
 
 Algorithm : SHA256
-Hash      : D1B87CA1F622FC4A7B5AAED4CC052FE9F9560CCA8B661AC77C178EAFBC11B4B1
-Path      : D:\a\redis-windows\redis-windows\Redis-7.4.1-Windows-x64-cygwin.zip
+Hash      : 85725DE3FD3A780CC6509CCB489E736085F5D926856D7A52FC2CBABF010D6BE8
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.2-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : 041D1B3327D868873DD4214C1534FC5E8E748F0BF3202FB7BB8F829E94E08D03
-Path      : D:\a\redis-windows\redis-windows\Redis-7.4.1-Windows-x64-cygwin-with-Service.zip
+Hash      : 627E4C2C484647C2B60EC262158FB05981C81F6B761C154F45F9979014B7519C
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.2-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/11154679931]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/12643895539]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
