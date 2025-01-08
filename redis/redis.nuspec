@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>7.4.2</version>
+    <version>7.2.7</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -33,45 +33,41 @@ Upgrade urgency SECURITY: See security fixes below.
 
 ### Security fixes
 
-- (CVE-2024-46981) Lua script commands may lead to remote code execution
-- (CVE-2024-51741) Denial-of-service due to malformed ACL selectors
+* (CVE-2024-46981) Lua script commands may lead to remote code execution
+* (CVE-2024-51741) Denial-of-service due to malformed ACL selectors
 
 ### Bug fixes
 
-- https://github.com/redis/redis/pull/13627 Crash on module memory defragmentation
-- https://github.com/redis/redis/pull/13338 Streams: `XINFO` lag field is wrong when tombstone is after the `last_id` of the consume group
-- https://github.com/redis/redis/pull/13473 Streams: `XTRIM` does not update the maximal tombstone, leading to an incorrect lag
-- https://github.com/redis/redis/pull/13470 `INFO` after `HDEL` show wrong number of hash keys with expiration
-- https://github.com/redis/redis/pull/13476 Fix a race condition in the `cache_memory` of `functionsLibCtx`
-- https://github.com/redis/redis/pull/13626 Memory leak on failed RDB loading
-- https://github.com/redis/redis/pull/13539 Hash: fix key ref for a hash that no longer has fields with expiration on `RENAME`/`MOVE`/`SWAPDB`/`RESTORE`
-- https://github.com/redis/redis/pull/13443 Cluster: crash when loading cluster config
-- https://github.com/redis/redis/pull/13422 Cluster: `CLUSTER SHARDS` returns empty array
-- https://github.com/redis/redis/pull/13465 Cluster: incompatibility with older node versions
-- https://github.com/redis/redis/pull/13608 Cluster: `SORT ... GET #`: incorrect error message
+* https://github.com/redis/redis/pull/13380 Possible crash due to OOM panic on invalid command
+* https://github.com/redis/redis/pull/13338 Streams: `XINFO` lag field is wrong when tombstone is after the `last_id` of the consume group
+* https://github.com/redis/redis/pull/13473 Streams: `XTRIM` does not update the maximal tombstone, leading to an incorrect lag
+* https://github.com/redis/redis/pull/13311 Cluster: crash due to unblocking client during slot migration
+* https://github.com/redis/redis/pull/13443 Cluster: crash when loading cluster config
+* https://github.com/redis/redis/pull/13422 Cluster: `CLUSTER SHARDS` returns empty array
+* https://github.com/redis/redis/pull/13465 Cluster: incompatibility with older node versions
 Hashes
 =========
 
 Algorithm : SHA256
-Hash      : 65C8D2FF57572AFA3CF4634820D4CDB8921E82760B272AD1DD12F38308414A96
-Path      : D:\a\redis-windows\redis-windows\Redis-7.4.2-Windows-x64-msys2.zip
+Hash      : B13B718CD88FE6F2D032D5B6BCD97A2A0A1F150DEE8197AA3AD25CA044BECE71
+Path      : D:\a\redis-windows\redis-windows\Redis-7.2.7-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : 70DCA38B1BED63F66362D9962B5DB593FA111FA1BC09D8C21A01B01D18FAFA66
-Path      : D:\a\redis-windows\redis-windows\Redis-7.4.2-Windows-x64-msys2-with-Service.zip
+Hash      : 49D74E32042839061F06AB91CA84AE9BF4064249894D29F2A13E222A3BC65A7F
+Path      : D:\a\redis-windows\redis-windows\Redis-7.2.7-Windows-x64-msys2-with-Service.zip
 
 
 Algorithm : SHA256
-Hash      : 85725DE3FD3A780CC6509CCB489E736085F5D926856D7A52FC2CBABF010D6BE8
-Path      : D:\a\redis-windows\redis-windows\Redis-7.4.2-Windows-x64-cygwin.zip
+Hash      : 64FBA36D56A3463E82F0154464E62AD174AED662C625D21A54248A004898BF98
+Path      : D:\a\redis-windows\redis-windows\Redis-7.2.7-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : 627E4C2C484647C2B60EC262158FB05981C81F6B761C154F45F9979014B7519C
-Path      : D:\a\redis-windows\redis-windows\Redis-7.4.2-Windows-x64-cygwin-with-Service.zip
+Hash      : 4C5E765453A17D3D79AF7FD91BB71E1F0AF8CDFA0D6F301D1EA5E2C802DD88DA
+Path      : D:\a\redis-windows\redis-windows\Redis-7.2.7-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/12643895539]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/12669845191]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
