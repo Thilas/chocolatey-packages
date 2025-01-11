@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.15.1</version>
+    <version>4.15.2</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,18 +18,27 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.15.1
+## 4.15.2
 
-Show total number of cities in city table
+Added notification when enemy religion spread converts a city 
 
-Avoid ANRs when loading games
+Added 'has denied your trade request' notification 
 
-Resolve rare crash for corrupted game settings
+Ruins stat gifts modified by game speed
+
+Fixed padding for map view icons for small minimaps
+
+Fixed rare crash
+
+Remove invalid 'last seen improvements'
 
 By sulai:
-- Add GoogleMaps-like pinching (!!!)
-- Tweak UI city screen
-- Correct alignment of text to icons]]></releaseNotes>
+- Tweaks for Screen Size small-portrait 
+- Map pinching, revised 
+
+Hide invisible resources for AI - By EmperorPinguin
+
+Move Until Healed wake up to startTurn so Fortify lasts until start of turn - By itanasi]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
