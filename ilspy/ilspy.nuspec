@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>ilspy</id>
-    <version>9.0.0-rc</version>
+    <version>9.0.0</version>
     <title>ILSpy</title>
     <authors>SharpDevelop Team</authors>
     <owners>dtgm,Thilas</owners>
@@ -26,29 +26,92 @@
     <summary>ILSpy is the open-source .NET assembly browser and decompiler.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/icsharpcode/ILSpy/releases)
 
-ILSpy 9.x is based on .NET 8.0. All artifacts **except** the self-contained distribution are built framework-dependent, which means [.NET 8.0 or later](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) must be installed prior to starting ILSpy.
+ILSpy 9.x is based on .NET 8.0. All artifacts **except** the self-contained distribution are built framework-dependent, which means [.NET 8.0.x or later](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) must be installed prior to starting ILSpy.
+
+Generic themes of this release were refactoring the old WPF code base and moving away from platform-dependent implementations to make reuse easier via our ILSpyX package.
+
+A few notable picks from the "What's new" department for you to check out: WebCIL and standalone ECMA-335 metadata support, as well as diagramming (either via ilspycmd or assembly context menu). And in general quality-of-life improvements like the ability to disable automatic assembly loading, performance improvements via DATAS and future-proofing for .NET 10.
 
 # New Language Features
+* Add support for C# 12 primary constructors.
+* Add support for C# 12 'ref readonly' parameters
+* Added support for switch on `(ReadOnly)Span<char>` using a compiler-generated hash function.
+* Added new `a.GetValueOrDefault(b) -> a ?? b` transform for side-effect-free default values.
+* Support types that provide DisposeAsync without implementing IAsyncDisposable.
 * Updated pattern detection to Roslyn 4.12
+
+# Enhancements
+* Added support for reading WebCIL assemblies (IL embedded in WASM) (see #3184)
+* Added support for reading standalone ECMA-335 metadata (portable PDB and other metadata blobs) (see #3149)
+* #3118: Add "Clear assembly list" menu item.
+* #2893: Add option to disable automatic assembly loading.
+* Allow implicit conversions in switch
+* IL output: Add indentation level to make it easier to see custom attributes belonging to interface implementations.
+* IL output: Print metadata token of custom attribute.
+* Replace native interop CommandLineToArgvW with parsing in Process.Unix.cs from System.Diagnostics.Process #3201
+* Natural Sort without interop #3196
+* AOT and x-plat changes #3203
+* Allow running tests on ARM64 (see #3231)
+* Alow collecting analyzers annotated with `ExportAnalyzerAttribute` (see #3239)
+* Fix #3237: Use ref readonly locals for `readonly.ldelema`
+* Fix #3001: Support new resources format in ResourcesFile/ResXResourceWriter
+* Fix #3134: Include `newobj`, `initobj` and `call` instructions in `TypeInstantiatedByAnalyzer`
+* Fix #3089: Add comment regarding .constraint prefix expressed as cast in C#
+* Fix #3372: Fix loading a DLL that contains byte sequences matching ZIP central directory
+* Use Microsoft.Sbom.Targets in NuGets #3346
 
 # Contributions
 * [Diagramming](https://github.com/icsharpcode/ILSpy/wiki/Diagramming) feature by @h0lg (see #3324)
-* More WPF-related refactorings by @tom-englert (see #3325 and #3335)
+* Various WPF-related refactorings by @tom-englert (see #3257, #3266, #3274, #3283, #3285, #3291, #3292, #3294, #3295, #3297, #3298, #3299, #3302, #3308, #3314, #3325 and #3335)
 * High DPI fixes by @CreateAndInject (see #3348 and #3350)
+* TreeView: Add referenced types, members and exported types under references (#3092, @fowl2)
+* Adjust colors of AvalonEdit built-in highlightings for dark themes (#3138, @ltrzesniewski)
+* Add support for `Mono C# compiler 2.6.4` pinned region with array variable (#3110, @ElektroKill)
+* Add smooth scrolling to settings panels and DecompilerTextView (see #3244 by @tom-englert)
+* Ignore empty version directories of dotnet (#3265 by @Herrmel)
 * Missing DecompilerSettings by @naratteu (see #3356)
-
-# Enhancements
-* Allow implicit conversions in switch
+* Fix metadata display of `DynamicLocalVariable` and `DefaultNamespace` custom debug information (#3111, @ElektroKill)
+* Read and use tuple element names and dynamic type information from PDBs (#3114, @ElektroKill)
+* Bugfix: infinite loop in `DetermineEffectiveAccessibility` (#3164, @yzdeveloper)
+* Decompiler Settings: Checkbox in group header does not reflect state of the group (see #3252 by @tom-englert)
+* Fix Derived Types Node always being empty (#3280 by @Applesauce314) 
 
 # Performance
+* Activate Dynamic Adaptation To Application Sizes (DATAS) (#3122).
+* RDP hardware acceleration (#3122): Enabling hardware acceleration for Remote Desktop Protocol (RDP) to boost performance.
 * Performance: Initialize ToolPanes in `DockWorkspace.InitializeLayout()` instead of the property getter to avoid WPF seeing them in `InitializeComponent()` and rendering all panes docked at the right before the layout is properly initialized.
 
+# Breaking Changes
+* ICSharpCode.Decompiler: Added `MetadataFile` base class for `PEFile`
+* ICSharpCode.Decompiler: `IModule.PEFile` is now named `IModule.MetadataFile`
+* ICSharpCode.Decompiler/ILSpyX: Added `IFileLoader` API to allow for easier extensibility of supported file formats (see #3191)
+* ILSpy: Split BAML decompiler into library and add-in (see #3178)
+* ILSpy/ILSpyX: Moved non-UI analyzer API to ILSpyX (see #3186)
+* ICSharpCode.Decompiler: `IProjectFileWriter` and `IProjectInfoProvider` APIs are now public (see #3151 and #3191)
+* `@file` support with breaking changes to command line options #3205
+* New single instance handling #3212
+* Remove `IsRef`, `IsOut` and `IsIn` flags from `IParameter`
+* Replace `ParameterModifiers` with `ReferenceKind`.
+
 # Bug fixes
+* Fix #3072: Ignoring resources with the same name as a namespace.
+* Fix bug in `UnknownType`: Ensuring that the FullName of nested unknown types contains the outer type name(s), not just the namespace and nested type name.
+* Fix #3153: Always using SHA1 for public key tokens.
+* Fix ILSpy for ZIP files/VSIX with bundle signatures: Enabling ILSpy to open ZIP files and VSIX packages containing bundle signatures.
+* Omit package entries from the treeview that denote the directory.
+* Fix #3142: Exception when analyzing source of library with global assembly attributes
+* Fix #3113: Remove GetAlternativeName and instead reuse existing names, if there are no conflicts.
+* Fix #3197: Bug when trying to read a bundle/archive file
+* Fix #3189: Support primitive types in Expression.Constant(object) pattern in Expression Trees
+* Fix #3209: Ensure using directives are added for extension methods in higher level patterns such as: foreach -> `GetEnumerator()`, collection initializer -> `Add()` and deconstruction -> `Deconstruct()`.
+* Fix #3255: Ignore exceptions while decoding sequence point blobs.
+* Fix #2166: Unnecessary uint casts/conversions for certain bitwise operations
+* Fix #3310: Filter out copy-constructor only if it's an actual record type.
 * Fix #3319: KeyDownEvent field reference was replaced with KeyDown event reference.
 * Fix #3349: Make ILSpy ready for .NET 10
 * Fix #3361: switch-value conversion was losing its target type.
 
-And many other fixes, for a full list click [here](https://github.com/icsharpcode/ILSpy/compare/v9.0-preview3...v9.0-rc).]]></releaseNotes>
+And many other fixes, for a full list click [here](https://github.com/icsharpcode/ILSpy/compare/v8.2...v9.0).]]></releaseNotes>
     <copyright>Copyright © SharpDevelop Team</copyright>
     <tags>ilspy foss dotnet assembly decompiler</tags>
     <!-- <projectSourceUrl>https://github.com/icsharpcode/ILSpy</projectSourceUrl> -->
