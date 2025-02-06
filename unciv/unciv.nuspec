@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.15.8</version>
+    <version>4.15.9</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,15 +18,23 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.15.8
+## 4.15.9
 
-'Triggers a global alert upon build start' works for units
+Rendering performance improvements
 
-UX:
-- Added generated map type preview in New Game screen :D
-- Better panel sizing in New Game screen
+Map example for new games is *only an example* and does not cause lag
 
-Fixed multiple buy buttons in construction info table]]></releaseNotes>
+Generate map tab in map editor properly scrollable
+
+Added missing attack notification translations
+
+Fixed unit statuses causing game to be unloadable 
+
+By itanasi:
+- Add small Skip/Cycle Button
+- Settling Suggestion Improvements
+
+Add turn start unique - By SeventhM]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
