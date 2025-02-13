@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.15.10</version>
+    <version>4.15.11</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,23 +18,19 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.15.10
+## 4.15.11
 
-modding: Validate tech row value
+UI: Fixed edges for edge tiles on word wrap maps
 
-UI: More visible railroads
+Fixed automated road connections attempting to go through impassible tiles
 
-Display unexplored tiles 1-tile out from explored tiles
+Modding: Changed stockpile names to be human readable
 
-Retain zoom when moving between different city screens
+Units with logistics that attacked but did not move, no longer heal
 
-Stats in notifications no longer have number format 'baked in'
+Added feature to save unitType promotion - By Emandac
 
-Map no longer makes map options left-right scrollable
-
-Only show 'move spies' button if there are places to move spies
-
-Add Shuffle Civ option - By itanasi]]></releaseNotes>
+Add 'Will be destroyed when pillaged' unique - By PLynx01]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
