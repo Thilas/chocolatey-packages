@@ -35,15 +35,14 @@ function global:au_GetLatest {
             SilentArgs     = '-y'
             ValidExitCodes = '0'
         }
-    # If the url does not contain the version, let's check if one exists
+    # If the url does not contain the version, let's check if it works
     $pattern = "_{0}\b" -f [regex]::Escape($latest.Version)
     if ($latest.Url32 -notmatch $pattern) {
-        $uriWithVersion = [uri]::new($latest.Url32, 'imdiskinst_{0}.exe' -f $latest.Version)
         try {
-            Invoke-WebRequest -Method Head -Uri $uriWithVersion -UseBasicParsing | Out-Null
-            # If so, let's use it instead
-            $latest.Url32 = $uriWithVersion
+            Invoke-WebRequest -Method Head -Uri $latest.Url32 -UseBasicParsing | Out-Null
         } catch {
+            # If not, we'll try to guess another one containing the version
+            $latest.Url32 = [uri]::new($latest.Url32, 'imdiskinst_{0}.exe' -f $latest.Version)
         }
     }
     return $latest
