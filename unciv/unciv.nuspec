@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.15.13</version>
+    <version>4.15.14</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,27 +18,23 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.15.13
+## 4.15.14
 
-Add .ico file to Windows zip
+Modding:
+- Added 'worked' and 'pillaged' tile filters
+- unitFilter catches status names
+- before/after/while researching tech uniques accept techFilter
+- 'Will not be chosen for new games' works for major nations
 
-MacOS dock icon
+Fixed crash when moving selected spies via long-click
 
-Added 'tile setpillaged' to dev console
+Console tile checkfilter works for resources
 
-Fixed duplicate units by spamming upgrade
+By EmperorPinguin:
+- Add tech cost uniques 
+- Move CS tribute modifiers to mod constants 
 
-'upon gaining the [promotion] promotion' activates for free promotions
-
-Added statuses to promotion screen
-
-Hide 'hidden in world screen' resources from overview tab
-
-Solved 'duplicate resource' bug
-
-Fix free populatoion buildings not working when settling cities - By SeventhM
-
-AbsoluteUnits ancient era Settler - by Basil]]></releaseNotes>
+tooltip for purchase blocked by unit - By saejo]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
