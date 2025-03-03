@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>strawberryperl</id>
-    <version>5.40.0.1</version>
+    <version>5.34.3.1</version>
     <title>Strawberry Perl</title>
     <authors>shawnlaffan,KMX,Curtis Jewell,Adam Kennedy</authors>
     <owners>Thilas,alanstevens</owners>
@@ -24,7 +24,13 @@ By default, Strawberry Perl is installed in `C:\Strawberry\`. This can be change
 `choco install strawberryperl --install-arguments="INSTALLDIR=""C:\tools\Strawberry"""`.
 ]]></description>
     <summary>Strawberry Perl is a binary distribution of Perl for the Windows operating system.</summary>
-    <releaseNotes>[Releases](https://strawberryperl.com/releases.html)</releaseNotes>
+    <releaseNotes><![CDATA[[Releases](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases)
+
+Strawberry Perl 5.34.3.1. 
+
+MSI and portable editions only. There are no plans for a PDL version.
+
+Note that this uses the same external library stack as 5.32.  These have not been updated.  The primary intended use is for continuous integration and other general testing.]]></releaseNotes>
     <copyright>Copyright © KMX</copyright>
     <tags>strawberryperl admin perl script gcc cpan</tags>
     <projectSourceUrl>https://github.com/StrawberryPerl/Perl-Dist-Strawberry</projectSourceUrl>
