@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.15.14</version>
+    <version>4.15.15</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,23 +18,19 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.15.14
+## 4.15.15
 
-Modding:
-- Added 'worked' and 'pillaged' tile filters
-- unitFilter catches status names
-- before/after/while researching tech uniques accept techFilter
-- 'Will not be chosen for new games' works for major nations
+Added uniques to make AI value resources at set prices 
 
-Fixed crash when moving selected spies via long-click
+Allow trading stockpiled resources
 
-Console tile checkfilter works for resources
+Added unique to change promotion XP cost - By Emandac
 
 By EmperorPinguin:
-- Add tech cost uniques 
-- Move CS tribute modifiers to mod constants 
+- Bugfix: puppet science cost increase 
+- Fix puppet city description 
 
-tooltip for purchase blocked by unit - By saejo]]></releaseNotes>
+Add a filter for religions - By SeventhM]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
