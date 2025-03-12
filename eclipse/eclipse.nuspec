@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>eclipse</id>
-    <version>4.34.0</version>
+    <version>4.35.0</version>
     <title>Eclipse</title>
     <authors>Eclipse Foundation</authors>
     <owners>Utrecht,Almere,Thilas</owners>
@@ -33,7 +33,7 @@ Tools for Java developers creating Java EE and Web applications, including a Jav
 ### Package Parameters
 The following package parameters can be set:
 
-* `/InstallationPath` or `/InstallLocation` - Where to install the binaries to - defaults to "`$Env:ProgramFiles\Eclipse Foundation\$packageVersion`"
+* `/InstallationPath` or `/InstallLocation` - Where to install the binaries to - defaults to "`$Env:ProgramFiles\Eclipse $packageVersion`"
 * `/Multi-User` - Configure Eclipse as a multi-user install
 * `/Mirror-Id` - Use a specific mirror id instead of an automatic one to download Eclipse installer, must be an integer
 
