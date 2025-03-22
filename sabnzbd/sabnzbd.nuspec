@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>4.5.0-Beta2</version>
+    <version>4.5.0-RC1</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>dtgm,Thilas</owners>
@@ -32,11 +32,10 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 4.5.0 Beta 2
+Release Notes - SABnzbd 4.5.0 Release Candidate 1
 =========================================================
 
-This is the second Beta release of 4.5.0.
-Additional features will be added before the final release.
+This is the first Release Candidate for the 4.5.0 release.
 
 ## New features in 4.5.0
 
@@ -44,6 +43,7 @@ Additional features will be added before the final release.
 * Added more diagnostic information about the system.
 * Use XFF headers for login validation if `verify_xff_header` is enabled.
 * Added Turkish translation (by @cardpuncher).
+* Added `unrar_parameters` option to supply custom Unrar parameters.
 * Windows: Removed MultiPar support.
 * Windows and macOS: Updated Python to 3.13.2, 7zip to 24.09,
   Unrar to 7.10 and par2cmdline-turbo to 1.2.0.
