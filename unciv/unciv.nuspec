@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.16.1</version>
+    <version>4.16.2</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,21 +18,23 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.16.1
+## 4.16.2
 
-Changed 'tiles we can move to' indication from circles to covering the tile
+Added settings for circles vs hexagons for movable tiles
 
-Convert 'conditional settlers' to workers upon capture
+Modding:
+- Added 'civ checkcountable' console command
+- Trigger 'on tile enter' before removing barb camps / ruins
+- Suggest conditional order in uniques, for performance
+- Harden unique parameters to disallow negative numbers where not relevant
 
-Selected unit fadein/fadeout it much more visible
+Eureka unique - By EmperorPinguin
 
-Added notification when unit set to sleep/defend until healed has fully healed
+By SomeTroglodyte:
+- Improve save file name and errors handling
+- Better Countable handling
 
-Faster listing for existing saves - By SomeTroglodyte
-
-Pillage uniques moddability - By EmperorPinguin
-
-Civ V - Gods & Kings: Fix William personality - By RobLoach]]></releaseNotes>
+Fix untranslated strings - By Ouaz]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
