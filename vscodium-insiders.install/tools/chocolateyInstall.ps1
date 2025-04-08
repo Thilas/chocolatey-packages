@@ -5,7 +5,7 @@ $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 # *** Automatically filled ***
 $softwareName = 'VSCodium Insiders'
-$version      = '1.100.2343'
+$version      = '1.100.2359'
 # *** Automatically filled ***
 
 if (!$Env:ChocolateyForce -and $version -eq (Get-UninstallRegistryKey $softwareName).DisplayVersion) {
@@ -18,9 +18,9 @@ $packageArgs = @{
     packageName    = 'vscodium-insiders.install'
     softwareName   = $softwareName
     fileType       = 'exe'
-    url64bit       = 'https://github.com/VSCodium/vscodium-insiders/releases/download/1.100.02343-insider/VSCodiumSetup-x64-1.100.02343-insider.exe'
+    url64bit       = 'https://github.com/VSCodium/vscodium-insiders/releases/download/1.100.02359-insider/VSCodiumSetup-x64-1.100.02359-insider.exe'
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-    checksum64     = '4cf6fb41ae86372981cbdc3e673958d58f606c5b41ec38d258e4ecd3d19353b5'
+    checksum64     = 'db0a388bf1bc31dcc51ce3184b3cbd1fa608634449015ce4925072d4d3b9b49d'
     checksumType64 = 'sha256'
     validExitCodes = @(0, 3010, 1641)
 }
