@@ -21,9 +21,9 @@ Write-Verbose "Installation Path: $installationPath"
 # *** Automatically filled ***
 $packageArgs = @{
     packageName    = 'vscodium-insiders.portable'
-    url64bit       = 'https://github.com/VSCodium/vscodium-insiders/releases/download/1.100.02386-insider/VSCodium-win32-x64-1.100.02386-insider.zip'
+    url64bit       = 'https://github.com/VSCodium/vscodium-insiders/releases/download/1.100.02391-insider/VSCodium-win32-x64-1.100.02391-insider.zip'
     unzipLocation  = $installationPath
-    checksum64     = '72688e1b2093e00266e3822cd3580178f0597a4cfabc69124f33609d00537fc6'
+    checksum64     = '3ec6f5eb5276f854f21cec69869b557ca3ca147eea841053f74c7c47d92b8d2c'
     checksumType64 = 'sha256'
 }
 # *** Automatically filled ***
