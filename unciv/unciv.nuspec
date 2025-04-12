@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.16.2</version>
+    <version>4.16.3</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,23 +18,20 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.16.2
+## 4.16.3
 
-Added settings for circles vs hexagons for movable tiles
+Ruleset validation: Hide performance suggestions from users, they're now mod-checker only
 
-Modding:
-- Added 'civ checkcountable' console command
-- Trigger 'on tile enter' before removing barb camps / ruins
-- Suggest conditional order in uniques, for performance
-- Harden unique parameters to disallow negative numbers where not relevant
+Maintenance for improved Code quality
 
-Eureka unique - By EmperorPinguin
+Prevent wrong multiplicators when using the 'for every [countable]' Unique in complex ways
+
+Resolved  - City states don't get continually researchable techs automatically
 
 By SomeTroglodyte:
-- Improve save file name and errors handling
-- Better Countable handling
-
-Fix untranslated strings - By Ouaz]]></releaseNotes>
+- Map editor save/load now support the PgUp/PgDown keyboard keys
+- Improve validation of Countables
+- Fix NullPointerException from Countables evaluation]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
