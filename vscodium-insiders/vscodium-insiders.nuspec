@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium-insiders</id>
-    <version>1.100.2662</version>
+    <version>1.100.2674</version>
     <title>VSCodium - Insiders</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -53,7 +53,7 @@ update vscode to [1b000ef82b3c3082833f6b04e050bc0e4e12ae3b](https://github.com/m
     <docsUrl>https://code.visualstudio.com/docs</docsUrl>
     <bugTrackerUrl>https://github.com/VSCodium/vscodium/issues</bugTrackerUrl>
     <dependencies>
-      <dependency id="vscodium-insiders.install" version="[1.100.2662]" />
+      <dependency id="vscodium-insiders.install" version="[1.100.2674]" />
     </dependencies>
   </metadata>
   <files />
