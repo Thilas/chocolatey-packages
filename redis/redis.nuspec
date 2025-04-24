@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>7.2.7</version>
+    <version>7.4.3</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -29,45 +29,43 @@ You should use it for local development and follow Redis official guidance to de
     <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/redis-windows/redis-windows/releases)
 
-Upgrade urgency SECURITY: See security fixes below.
+Update urgency: `SECURITY`: There are security fixes in the release.
 
 ### Security fixes
 
-* (CVE-2024-46981) Lua script commands may lead to remote code execution
-* (CVE-2024-51741) Denial-of-service due to malformed ACL selectors
+* (CVE-2025-21605) An unauthenticated client can cause an unlimited growth of output buffers
 
 ### Bug fixes
 
-* https://github.com/redis/redis/pull/13380 Possible crash due to OOM panic on invalid command
-* https://github.com/redis/redis/pull/13338 Streams: `XINFO` lag field is wrong when tombstone is after the `last_id` of the consume group
-* https://github.com/redis/redis/pull/13473 Streams: `XTRIM` does not update the maximal tombstone, leading to an incorrect lag
-* https://github.com/redis/redis/pull/13311 Cluster: crash due to unblocking client during slot migration
-* https://github.com/redis/redis/pull/13443 Cluster: crash when loading cluster config
-* https://github.com/redis/redis/pull/13422 Cluster: `CLUSTER SHARDS` returns empty array
-* https://github.com/redis/redis/pull/13465 Cluster: incompatibility with older node versions
+* https://github.com/redis/redis/pull/13661 `FUNCTION FLUSH` - memory leak when using jemalloc
+* https://github.com/redis/redis/pull/13793 `WAITAOF` returns prematurely
+* https://github.com/redis/redis/pull/13853 `SLAVEOF` - crash when clients are blocked on lazy free
+* https://github.com/redis/redis/pull/13863 `RANDOMKEY` - infinite loop during client pause
+* https://github.com/redis/redis/pull/13877 ShardID inconsistency when both primary and replica support it
+
 Hashes
 =========
 
 Algorithm : SHA256
-Hash      : B13B718CD88FE6F2D032D5B6BCD97A2A0A1F150DEE8197AA3AD25CA044BECE71
-Path      : D:\a\redis-windows\redis-windows\Redis-7.2.7-Windows-x64-msys2.zip
+Hash      : 9E94BDEDDC25BAA362CAEFBC2A3003DEBB8890D4BD239DABFFA4200928D0658C
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.3-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : 49D74E32042839061F06AB91CA84AE9BF4064249894D29F2A13E222A3BC65A7F
-Path      : D:\a\redis-windows\redis-windows\Redis-7.2.7-Windows-x64-msys2-with-Service.zip
+Hash      : 18ACBB88C70C9FF55E76F87C8516D985C2AB3F159DB3683F436B87A468F17545
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.3-Windows-x64-msys2-with-Service.zip
 
 
 Algorithm : SHA256
-Hash      : 64FBA36D56A3463E82F0154464E62AD174AED662C625D21A54248A004898BF98
-Path      : D:\a\redis-windows\redis-windows\Redis-7.2.7-Windows-x64-cygwin.zip
+Hash      : F6FE3DBBEA180672FE08CBA80759168EA68A51CD7EE4F097E1B8905A053D0AD1
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.3-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : 4C5E765453A17D3D79AF7FD91BB71E1F0AF8CDFA0D6F301D1EA5E2C802DD88DA
-Path      : D:\a\redis-windows\redis-windows\Redis-7.2.7-Windows-x64-cygwin-with-Service.zip
+Hash      : E21FA8C30FDDDC2356A5A1B6098A765A61960FCC585CF40EC3CD4D9C471DA856
+Path      : D:\a\redis-windows\redis-windows\Redis-7.4.3-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/12669845191]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/14632064330]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
