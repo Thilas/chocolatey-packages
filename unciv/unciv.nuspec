@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.16.6</version>
+    <version>4.16.7</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,22 +18,17 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.16.6
+## 4.16.7
 
-Demands/Requests from other civs do not stop other events registering
+Countable can accept arbitrary mathematical Expressions - Kudos AutumnPizazz for kicking this off, SomeTroglodyte for parser implementation!
 
-Better 'Pay to improve CS resource'
+Added 'search mods' in new game screen and mod checker
 
-Seed pillage randomness to avoid save-scum
+Fixed bugs in unique validation and in countable validation
 
-Modding: 
-- Added misspelling tests for uniqueTo for buildings, units and improvements
-- Triggerable uniques on promotions only activate once when added on creation
-- Beliefs can have AI decision modifiers, and do in base rulesets
+Allow automation for settlers with conditional settling uniques
 
-Finish city-state quests upon acquiring great person
-
-Prevent AI placing units near citadels - by EmperorPinguin]]></releaseNotes>
+Add 'Cannot embark' unit unique - By PLynx01]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
