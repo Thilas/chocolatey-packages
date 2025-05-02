@@ -7,7 +7,7 @@ Package can be verified like this:
 
 1. Go to
 
-   x64: https://github.com/redis-windows/redis-windows/releases/download/7.2.8/Redis-7.2.8-Windows-x64-msys2.zip
+   x64: https://github.com/redis-windows/redis-windows/releases/download/8.0.0/Redis-8.0.0-Windows-x64-msys2.zip
 
    to download the installer.
 
@@ -15,7 +15,7 @@ Package can be verified like this:
    - Use powershell function 'Get-FileHash'
    - Use Chocolatey utility 'checksum.exe'
 
-   checksum64: AA6D4206A08D1189DD7A57C78201540A53B12350E1AD09EE7CACA04120600656
+   checksum64: 405E36E172D597CE1089A51FAE7DCD952BEB646BD02DCAF1019D99AB2CF47229
 
 File 'LICENSE.txt' is obtained from:
    https://github.com/redis-windows/redis-windows/blob/main/LICENSE
