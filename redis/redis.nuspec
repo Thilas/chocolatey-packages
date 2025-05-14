@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>8.0.0</version>
+    <version>8.0.1</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -29,98 +29,50 @@ You should use it for local development and follow Redis official guidance to de
     <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/redis-windows/redis-windows/releases)
 
-This is the General Availability release of Redis Open Source 8.0.
+Update urgency: `MODERATE`: Program an upgrade of the server, but it's not urgent.
 
-Redis 8.0 deprecates previous Redis and Redis Stack versions.
+### Performance and resource utilization improvements
 
-Stand alone RediSearch, RedisJSON, RedisTimeSeries, and RedisBloom are no longer needed as they are now part of Redis.
+- https://github.com/redis/redis/pull/13959 Vector sets - faster `VSIM` `FILTER` parsing
 
+### Bug fixes
 
-### Major changes compared to 7.4.2
+- [#QE6083](https://github.com/RediSearch/RediSearch/pull/6083) Query Engine - revert default policy `search-on-timeout` to `RETURN`
+- [#QE6050](https://github.com/RediSearch/RediSearch/pull/6050) Query Engine - `@__key` on `FT.AGGREGATE` used as reserved field name preventing access to Redis keyspace
+- [#QE6077](https://github.com/RediSearch/RediSearch/pull/6077) Query Engine - crash when calling `FT.CURSOR DEL` while retrieving from the CURSOR
 
-- Name change: Redis Community Edition is now Redis Open Source
-- License change: licensed under your choice of 
-  - (a) the Redis Source Available License 2.0 (RSALv2); or
-  - (b) the Server Side Public License v1 (SSPLv1); or
-  - (c) the GNU Affero General Public License (AGPLv3)
-- Redis Query engine and 8 new data structures are now an integral part of Redis 8
-  - (1) Redis Query Engine, which now supports both horizontal and vertical scaling for search, query and vector workloads
-  - (2) JSON - a queryable JSON document
-  - (3) Time series
-  - (4-8) Five probabilistic data structures: Bloom filter, Cuckoo filter, Count-min sketch, Top-k, and t-digest
-  - (9) Vector set [beta] - a data structure designed for Vector Similarity Search, inspired by Sorted set
-  - These nine components are included in all binary distributions
+### Notes
 
-  - See instructions in the README.md file on how to build from source with all these components
-  - New configuration file: redis-full.conf - loads Redis with all these components, 
-    and contains new configuration parameters for Redis Query engine and the new data structures 
-  - New ACL categories: `@search`, `@json`, `@timeseries`, `@bloom`, `@cuckoo`, `@cms`, `@topk`, `@tdigest`
-  - Commands are also included in the existing ACL categories (`@read`, `@write`, etc.)
+- Fixed wrong text in the license files
 
-- More than 30 performance and resource utilization improvements
-- A new I/O threading implementation which enables throughput increase on multi-core environments
-  (set with `io-threads` configuration parameter)
-- An improved replication mechanism which is more performant and robust
-- New hash commands - `HGETDEL`, `HGETEX`, `HSETEX`
-
-For more details, see the release notes of [8.0-M01](https://github.com/redis/redis/releases/tag/8.0-m01), [8.0-M02](https://github.com/redis/redis/releases/tag/8.0-m02), [8.0-M03](https://github.com/redis/redis/releases/tag/8.0-m03), [8.0-M04](https://github.com/redis/redis/releases/tag/8.0-m04), and [8.0-RC1](https://github.com/redis/redis/releases/tag/8.0-rc1)
-
-### Binary distributions
-
-- Alpine and Debian Docker images - https://hub.docker.com/_/redis
-- Install using snap - see https://github.com/redis/redis-snap
-- Install using brew - see https://github.com/redis/homebrew-redis
-- Install using RPM - see https://github.com/redis/redis-rpm
-- Install using Debian APT - see https://github.com/redis/redis-debian
-
-### Operating systems we test Redis 8.0 on
-
-- Ubuntu 20.04 (Focal Fossa), 22.04 (Jammy Jellyfish), 24.04 (Noble Numbat)
-- Rocky Linux 8.10, 9.5
-- AlmaLinux 8.10, 9.5
-- Debian 11 (Bullseye), 12 (Bookworm)
-- macOS 13 (Ventura), 14 (Sonoma), 15 (Sequoia)
-
-### Supported upgrade paths (by replication or persistence)
-
-- From previous Redis versions, without modules
-- From previous Redis versions with modules (RediSearch, RedisJSON, RedisTimeSeries, RedisBloom)
-- From Redis Stack 7.2 or 7.4
-
-### Security fixes (compared to 8.0-RC1)
-
-
-* (CVE-2025-21605) An unauthenticated client can cause an unlimited growth of output buffers
-
-### Bug fixes (compared to 8.0-RC1)
-
-- https://github.com/redis/redis/pull/13966, https://github.com/redis/redis/pull/13932 `CLUSTER SLOTS` - TLS port update not reflected
-- https://github.com/redis/redis/pull/13958 `XTRIM`, `XADD` - incorrect lag due to trimming stream
-- https://github.com/redis/redis/pull/13931 `HGETEX` - wrong order of keyspace notifications
 
 Hashes
 =========
+MSYS2 Builds Hashes
+====================
 
 Algorithm : SHA256
-Hash      : 405E36E172D597CE1089A51FAE7DCD952BEB646BD02DCAF1019D99AB2CF47229
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.0-Windows-x64-msys2.zip
-
-
-Algorithm : SHA256
-Hash      : A7FE384AC0ECE3313D9A07AC6B2E018429154D1B9CEF1FD61B94F000C0627B35
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.0-Windows-x64-msys2-with-Service.zip
+Hash      : 952FED3E5ABF5A053D6D93A775A8EFF7CD928CC9582ED91D101A98A0F3B612A1
+Path      : D:\a\redis-windows\redis-windows\Redis-8.0.1-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : F7920963A9F80A9F453359E202B75F4644EDE895C341F390ED7336F141EF5DFC
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.0-Windows-x64-cygwin.zip
+Hash      : F478D0EFA1DFB0B13E6BB110A749D60220BDFBCB432C103368C5517F349E1E49
+Path      : D:\a\redis-windows\redis-windows\Redis-8.0.1-Windows-x64-msys2-with-Service.zip
+
+Cygwin Builds Hashes
+====================
+
+Algorithm : SHA256
+Hash      : 647B82959892DBEB5BFA941A689B84239489258C528DC3B5429E19BA3287AAE9
+Path      : D:\a\redis-windows\redis-windows\Redis-8.0.1-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : 72474312DD297D619D02ECDD75D40DB3E967C6376AADFF22036460F731A75408
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.0-Windows-x64-cygwin-with-Service.zip
+Hash      : B60F872B443C8507D6AAD3861B7FE4ABA1692EC4EF38DC803FD6F92421D4A4BD
+Path      : D:\a\redis-windows\redis-windows\Redis-8.0.1-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/14797606408]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/15011027162]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
