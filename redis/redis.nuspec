@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>8.0.1</version>
+    <version>8.0.2</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -29,21 +29,18 @@ You should use it for local development and follow Redis official guidance to de
     <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/redis-windows/redis-windows/releases)
 
-Update urgency: `MODERATE`: Program an upgrade of the server, but it's not urgent.
+Update urgency: `SECURITY`: There are security fixes in the release.
 
-### Performance and resource utilization improvements
+### Security fixes
 
-- https://github.com/redis/redis/pull/13959 Vector sets - faster `VSIM` `FILTER` parsing
+- (CVE-2025-27151) redis-check-aof may lead to stack overflow and potential RCE
 
 ### Bug fixes
+- https://github.com/redis/redis/pull/14081 Cron-based timers run twice as fast when active defrag is enabled
 
-- [#QE6083](https://github.com/RediSearch/RediSearch/pull/6083) Query Engine - revert default policy `search-on-timeout` to `RETURN`
-- [#QE6050](https://github.com/RediSearch/RediSearch/pull/6050) Query Engine - `@__key` on `FT.AGGREGATE` used as reserved field name preventing access to Redis keyspace
-- [#QE6077](https://github.com/RediSearch/RediSearch/pull/6077) Query Engine - crash when calling `FT.CURSOR DEL` while retrieving from the CURSOR
+### Other general improvements
 
-### Notes
-
-- Fixed wrong text in the license files
+- https://github.com/redis/redis/pull/14048 `LOLWUT` for Redis 8
 
 
 Hashes
@@ -52,27 +49,27 @@ MSYS2 Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 952FED3E5ABF5A053D6D93A775A8EFF7CD928CC9582ED91D101A98A0F3B612A1
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.1-Windows-x64-msys2.zip
+Hash      : B31C06FD8ADB5E01DA1E0F17F714C047E4D436B6FF962D1F29B6B53EF1C9479B
+Path      : D:\a\redis-windows\redis-windows\Redis-8.0.2-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : F478D0EFA1DFB0B13E6BB110A749D60220BDFBCB432C103368C5517F349E1E49
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.1-Windows-x64-msys2-with-Service.zip
+Hash      : F79F527B8D8863B8C0C75B036A1BFB4E4A7F7BFA8ADC4B016A0FD76AA5B1AE87
+Path      : D:\a\redis-windows\redis-windows\Redis-8.0.2-Windows-x64-msys2-with-Service.zip
 
 Cygwin Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 647B82959892DBEB5BFA941A689B84239489258C528DC3B5429E19BA3287AAE9
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.1-Windows-x64-cygwin.zip
+Hash      : D41EC84E74E4972D01830E22D72EEFBE5E8D506E778B560F5CA6BE4D836C32ED
+Path      : D:\a\redis-windows\redis-windows\Redis-8.0.2-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : B60F872B443C8507D6AAD3861B7FE4ABA1692EC4EF38DC803FD6F92421D4A4BD
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.1-Windows-x64-cygwin-with-Service.zip
+Hash      : 4248B1D84AEBCDBFFE4B8CBC01B64980F812A4F22D4B32AB8C34713140449C98
+Path      : D:\a\redis-windows\redis-windows\Redis-8.0.2-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/15011027162]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/15290252314]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
