@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>strawberryperl</id>
-    <version>5.40.2.1</version>
+    <version>5.40.2.2</version>
     <title>Strawberry Perl</title>
     <authors>shawnlaffan,KMX,Curtis Jewell,Adam Kennedy</authors>
     <owners>Thilas,alanstevens</owners>
