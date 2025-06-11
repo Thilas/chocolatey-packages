@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>eclipse</id>
-    <version>4.35.0</version>
+    <version>4.36.0</version>
     <title>Eclipse</title>
     <authors>Eclipse Foundation</authors>
     <owners>Utrecht,Almere,Thilas</owners>
