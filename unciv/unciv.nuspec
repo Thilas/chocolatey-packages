@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.16.13</version>
+    <version>4.16.15</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,21 +18,18 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.16.13
+## 4.16.15
 
-Fixed techs showing '0 turns' and yet not being researched
+Fixed Gold being translated in trade offer with peace treaty
 
-Fixed trigger uniques with broken city filters
+By metablaster:
+- Improved diagram colors in global politics 
+- Fix crash for automated Fighter units 
+- Fix automated long range units not heading to enemy city
 
-Only buildable improvements are viable comparisons for determining if a City Center can provide a resource
+modding: Show status page for civilian units - By SomeTroglodyte
 
-Added 'era number', 'speed modifier for stat' countables - by SomeTroglodyte 
-
-Add buildingFilter to building maintenance unique - By PLynx01
-
-Add Civ unique dialogue when asking for Declaration of Friendship - By ReallyBasicName
-
-Improved AI road planning - By metablaster]]></releaseNotes>
+Add 'don't spy on us' has a demand - By Emandac]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
