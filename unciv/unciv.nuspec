@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.16.15</version>
+    <version>4.16.16</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,18 +18,21 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.16.15
-
-Fixed Gold being translated in trade offer with peace treaty
+## 4.16.16
 
 By metablaster:
-- Improved diagram colors in global politics 
-- Fix crash for automated Fighter units 
-- Fix automated long range units not heading to enemy city
+- update missing world screen image annotation 
+- Table and colors for diplomatic relations between human players in diplomacy screen. 
+- Fix automated units not auto upgrading when enabled
+- Fix broken translations 
 
-modding: Show status page for civilian units - By SomeTroglodyte
+By RobLoach:
+- Allow using `[relativeAmount]% Gold from Great Merchant trade missions` on units 
+- Fix Civilopedia 'required Building' links for Wonders 
 
-Add 'don't spy on us' has a demand - By Emandac]]></releaseNotes>
+'Stacked with unit' conditional unique - By PLynx01
+
+Hexarealm edge tiles restructuring - by hackedpassword]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
