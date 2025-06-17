@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>4.5.1</version>
+    <version>4.5.2-RC1</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>dtgm,Thilas</owners>
@@ -32,8 +32,19 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 4.5.1
+Release Notes - SABnzbd 4.5.2 Release Candidate 1
 =========================================================
+
+## Bug fixes and changes in 4.5.2
+
+* Added Tab and Shift+Tab navigation to move between rename fields in queue.
+* Invalid cookies of other services could result in errors.
+* Internet Bandwidth test could be stuck in infinite loop.
+* RSS readout did not ignore torrent alternatives.
+* Prowl and Pushover settings did not load correctly.
+* Renamed `osx` to `macos` internally.
+* API: Removed `B` post-fix from `quota` and `left_quota` fields in `queue`.
+* Windows and macOS: Updated par2cmdline-turbo to 1.3.0.
 
 ## Bug fixes and changes in 4.5.1
 
