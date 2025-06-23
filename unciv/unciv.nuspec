@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.16.18</version>
+    <version>4.16.19</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,25 +18,17 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.16.18
+## 4.16.19
 
-Sprites do not change to base color when moving
+AI performance optimization
 
-Barbarian workers no longer construct improvements
+By RobLoach:
+- Fix number popup with commas in the number 
+- Add `Gain control over [positiveAmount] tiles [cityFilter]` Triggerable 
 
-modding: Allowed stat reserve to get happiness
+AI: update getStatDifferenceFromBuilding - By EmperorPinguin
 
-console: Can set game turn
-
-modding validation: Catch empty altases.json file
-
-Add `[relativeAmount]% [resourceFilter] resource production` Unique - By RobLoach
-
-Refactor RulesetValidator into two files - By SomeTroglodyte
-
-Fix broken chart in victory status - By metablaster
-
-Edge restructure update - By hackedpassword]]></releaseNotes>
+Improve ruleset validator - By SomeTroglodyte]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
