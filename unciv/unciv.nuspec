@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.17.0</version>
+    <version>4.17.1</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,17 +18,20 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.17.0
+## 4.17.1
 
-AI considers tile damage when deciding on which tile to heal on
+CPU performance improvements
 
-Fixed building maintenance unique
+Fixed dev console requiring scrolling on small UI settings
 
-By SomeTroglodyte:
-- Improve ModChecker UI 
-- Allow mods with no global uniques, no ruins or no difficulties file
+By SomeTroglodyte: 
+- Fix console `tile find` for quoted input or filters, requiring correct uppercase 
+- Fix mod checker not offering to auto-update Uniques for extension mods 
+- Speed and Difficulty uniques treated as part of GlobalUniques
 
-AI: better handling of improvement-buildings - By EmperorPinguin]]></releaseNotes>
+Make Machu Picchu and Neuschwanstein need a non-Natural Wonder mountain - By SpacedOutChicken
+
+Fix display for mod names with dashes in them - By RobLoach]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
