@@ -35,10 +35,10 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       # AirServer requires Wireless-Networking, feature not installed on GitHub agents.
       # Tests and uninstall can't pass.
-      # test_cases: |
-      #   - Start program
-      #     Start-Program "AirServer Universal*" -Shortcut -ProcessName AirServer
-      #   - Close program
-      #     Close-Program AirServer
+      test_cases: |
+        - Start program
+          Start-Program "AirServer Universal*" -Shortcut -ProcessName AirServer
+        - Close program
+          Close-Program AirServer
       uninstall: false
     secrets: inherit
