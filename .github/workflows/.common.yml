@@ -112,8 +112,8 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.update.outputs.updates) }}
         os:
-          - windows-2019
-          # - windows-2022
+          - windows-2022
+          # - windows-2025
 
     name: Test ${{ fromJSON(matrix.package).name }} ${{ fromJSON(matrix.package).version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
