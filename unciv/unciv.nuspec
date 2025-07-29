@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.17.9</version>
+    <version>4.17.10</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,21 +18,22 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.17.9
+## 4.17.10
 
-Remove irrelevant counteroffer notifications when the trade request is invalid
+Fix crash when opening victory screen on the first turn
 
-By EmperorPinguin: 
-- AI: better explore logic 
-- AI: reduce food weight for small cities 
-- AI: able to choose instant heal promotions 
-- AI: don't annex cities if it causes severe unhappiness 
+modding: Add misspelling corrections to unique parameters in mod checker
 
-Add 'on [difficulty] or higher' conditional - By RobLoach
+By SomeTroglodyte:
+- Fix unit icon disappearing on right-click of unit's tile 
+- Fix autoplay+tutorials softlock
 
-By metablaster:
-- Show religion display name when enhancement is made 
-- Fix embassy trade offer crashes]]></releaseNotes>
+By EmperorPinguin:
+- AI: exclude great general from escort logic 
+- AI: better utilization of promoted units 
+- AI: lower threshold for minimum acceptable newcity tile 
+
+Add unit action icons for triggerables - By RobLoach]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
