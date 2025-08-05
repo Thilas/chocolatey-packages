@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>8.0.3</version>
+    <version>8.2.0</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -29,21 +29,64 @@ You should use it for local development and follow Redis official guidance to de
     <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/redis-windows/redis-windows/releases)
 
-Update urgency: `SECURITY`: There are security fixes in the release.
+This is the General Availability release of Redis Open Source 8.2.
 
-### Security fixes
+### Major changes compared to 8.0
 
-* (CVE-2025-32023) Fix out-of-bounds write in `HyperLogLog` commands
-* (CVE-2025-48367) Retry accepting other connections even if the accepted connection reports an error
+- Streams - new commands: `XDELEX` and `XACKDEL`; extension to `XADD` and `XTRIM`
+- Bitmap - `BITOP`: new operators: `DIFF`, `DIFF1`, `ANDOR`, and `ONE`
+- Query Engine - new SVS-VAMANA vector index type which supports vector compression
+- More than 15 performance and resource utilization improvements
+- New metrics: per-slot usage metrics, key size distributions for basic data types, and more
 
-### New Features
+### Binary distributions
 
-- https://github.com/redis/redis/pull/14065 `VSIM`: Add new `WITHATTRIBS` to return the JSON attribute associated with an element
+- Alpine and Debian Docker images - https://hub.docker.com/_/redis
+- Install using snap - see https://github.com/redis/redis-snap
+- Install using brew - see https://github.com/redis/homebrew-redis
+- Install using RPM - see https://github.com/redis/redis-rpm
+- Install using Debian APT - see https://github.com/redis/redis-debian
 
-### Bug fixes
 
-- https://github.com/redis/redis/pull/14085 A short read may lead to an exit() on a replica
-- https://github.com/redis/redis/pull/14092 db->expires is not defragmented
+### Operating systems we test Redis 8.2 on
+
+- Ubuntu 22.04 (Jammy Jellyfish), 24.04 (Noble Numbat)
+- Rocky Linux 8.10, 9.5
+- AlmaLinux 8.10, 9.5
+- Debian 12 (Bookworm)
+- macOS 13 (Ventura), 14 (Sonoma), 15 (Sequoia)
+
+### Security fixes (compared to 8.2-RC1)
+
+- (CVE-2025-32023) Fix out-of-bounds write in `HyperLogLog` commands
+- (CVE-2025-48367) Retry accepting other connections even if the accepted connection reports an error
+
+### New Features (compared to 8.2-RC1)
+
+- https://github.com/redis/redis/pull/14141 Keyspace notifications - new event types:
+  - `OVERWRITTEN` - the value of a key is completely overwritten
+  - `TYPE_CHANGED` - key type change
+
+### Bug fixes (compared to 8.2-RC1)
+
+- https://github.com/redis/redis/pull/14162 Crash when using evport with I/O threads
+- https://github.com/redis/redis/pull/14163 `EVAL` crash when error table is empty
+- https://github.com/redis/redis/pull/14144 Vector sets - RDB format is not compatible with big endian machines
+- https://github.com/redis/redis/pull/14165 Endless client blocking for blocking commands
+- https://github.com/redis/redis/pull/14164 Prevent `CLIENT UNBLOCK` from unblocking `CLIENT PAUSE`
+- https://github.com/redis/redis/pull/14216 TTL was not removed by the `SET` command
+- https://github.com/redis/redis/pull/14224 `HINCRBYFLOAT` removes field expiration on replica
+
+### Performance and resource utilization improvements (compared to 8.2-RC1)
+
+- [#Q6430](https://github.com/RediSearch/RediSearch/pull/6430) More compression variants for the SVS-VAMANA vector index
+- [#Q6535](https://github.com/RediSearch/RediSearch/pull/6535) `SHARD_K_RATIO` parameter - favor network latency over accuracy for KNN vector query in a Redis cluster (unstable feature) (MOD-10359)
+- https://github.com/redis/redis/pull/14144 Vector set - improve RDB loading / RESTORE speed by storing the worst link info 
+
+### Modules API
+
+- https://github.com/redis/redis/pull/14051 `RedisModule_Get*`, `RedisModule_Set*` - allow modules to access Redis configurations
+- https://github.com/redis/redis/pull/14114 `RM_UnsubscribeFromKeyspaceEvents` - unregister a module from specific keyspace notifications
 
 
 Hashes
@@ -52,27 +95,27 @@ MSYS2 Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : C5F8975B202B93209B6EB43B2D1755F969C071BBC4412D504D65881D520DC36F
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.3-Windows-x64-msys2.zip
+Hash      : C9FE9567180D732CD3BF01597B7F4421E04E95C811D6C623EB2FAA822FAA3398
+Path      : D:\a\redis-windows\redis-windows\Redis-8.2.0-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : 9F8636B6C56E9121CAF9205FDA063710370EB76E195686E7AE66AA5CB63B5BF8
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.3-Windows-x64-msys2-with-Service.zip
+Hash      : BD3A8205E1897690B86B655E22E13C6A62129B4A646B811432EE655B4EEB45A6
+Path      : D:\a\redis-windows\redis-windows\Redis-8.2.0-Windows-x64-msys2-with-Service.zip
 
 Cygwin Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : E34E09391BF5BCA1FCD98D73C7D70CA6AFE5023D6E172698E7154DB5919C5750
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.3-Windows-x64-cygwin.zip
+Hash      : 553EF3364B328C1F772A25B518D554AA3AD32AB9C16F6A6F97A67BCB859FD157
+Path      : D:\a\redis-windows\redis-windows\Redis-8.2.0-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : A91F55B276057CC6EB60B88A4934CB5617F89746ED21572B565455A6BDF881F5
-Path      : D:\a\redis-windows\redis-windows\Redis-8.0.3-Windows-x64-cygwin-with-Service.zip
+Hash      : 43A968C7995A3375A1C184871279BA56F2C320417B50B1DAD82806AFB73D6952
+Path      : D:\a\redis-windows\redis-windows\Redis-8.2.0-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/16099580910]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/16713054756]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
