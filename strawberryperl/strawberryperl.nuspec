@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>strawberryperl</id>
-    <version>5.40.2.2</version>
+    <version>5.42.0.1</version>
     <title>Strawberry Perl</title>
     <authors>shawnlaffan,KMX,Curtis Jewell,Adam Kennedy</authors>
     <owners>Thilas,alanstevens</owners>
@@ -26,7 +26,7 @@ By default, Strawberry Perl is installed in `C:\Strawberry\`. This can be change
     <summary>Strawberry Perl is a binary distribution of Perl for the Windows operating system.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases)
 
-Strawberry Perl 5.40.2.1.
+Strawberry Perl 5.42.0.1.
 
 MSI, portable and PDL editions.
 
@@ -34,7 +34,6 @@ Compiled using GCC 13.2 with UCRT.
 
 Main differences from a standard Windows perl build using GCC:
 
-   * A version of https://github.com/Perl/perl5/pull/23179 is used. This has been modified to allow for version differences from perl 5.42 which it targets.  
    * Perl has been compiled using the same optimisations as Strawberry Perl 5.38.2.2. This uses additional options compared to the default `-Os`.  `Config_heavy.pl` has then been updated to use `-O2` when building CPAN distributions.]]></releaseNotes>
     <copyright>Copyright © KMX</copyright>
     <tags>strawberryperl admin perl script gcc cpan</tags>
