@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.17.13</version>
+    <version>4.17.14</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,13 +18,17 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.17.13
+## 4.17.14
 
-By EmperorPinguin:
-- AI: build more workers
-- AI: Better settler automation
+Fixed map editor tile click not displaying tile stats
 
-Fix combat conditionals not working correctly - By SeventhM]]></releaseNotes>
+Ranged strength comparison for unique units correctly translated
+
+By SeventhM:
+- Fix Ruin rewards with multiple triggerables only giving the first effect 
+- Add in Target Unit check for uniques when entering combat 
+
+Add countable for `[stat] Per Turn` - By RobLoach]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
