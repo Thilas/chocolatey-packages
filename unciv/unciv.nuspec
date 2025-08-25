@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.17.16</version>
+    <version>4.17.17</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,19 +18,17 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.17.16
+## 4.17.17
 
-AI spy city selection greatly improved
+Force rankings doesn't evaluate all unit conditionals as multiplicative
 
-Changing mods while images load no longer displays multiple images on the last mod
+Handle mods removing techs, adding/removing eras
 
-Removed city-state icons for cities in unit overview
+Post-battle movement doesn't occur if during the battle the unit lost movement points
 
-Replacement improvements also provide resources that require the original improvement
+conditionals in event choices work again
 
-Only heal on current tile if it's not a dangerous tile
-
-Fixed several problems with improvement-creating buildings]]></releaseNotes>
+AI updates - By EmperorPinguin]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
