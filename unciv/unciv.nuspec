@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.17.17</version>
+    <version>4.17.18</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,17 +18,19 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.17.17
+## 4.17.18
 
-Force rankings doesn't evaluate all unit conditionals as multiplicative
+Peace trade no longer generates notification when it 'ends'
 
-Handle mods removing techs, adding/removing eras
+Inquisitors disrupt religion in other civs as well
 
-Post-battle movement doesn't occur if during the battle the unit lost movement points
+Fixed automated move with escorted unit crash
 
-conditionals in event choices work again
+By RobLoach:
+- modding: Add a 'Play Sound' unique 
+- modding: Add unique to get resources from a percent of stat 
 
-AI updates - By EmperorPinguin]]></releaseNotes>
+Added more option autosaves from 500 to 10000 - By Emandac]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
