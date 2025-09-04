@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.17.18</version>
+    <version>4.17.19</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,19 +18,21 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.17.18
+## 4.17.19
 
-Peace trade no longer generates notification when it 'ends'
+Added map autosave
 
-Inquisitors disrupt religion in other civs as well
+CPU performance improvements
 
-Fixed automated move with escorted unit crash
+Notification categories can me minimized by clicking on the title
 
 By RobLoach:
-- modding: Add a 'Play Sound' unique 
-- modding: Add unique to get resources from a percent of stat 
+- BNW: Fix getting Cultural Victory through Domination 
+- Modding: Trigger Event unit action text is the Event text 
 
-Added more option autosaves from 500 to 10000 - By Emandac]]></releaseNotes>
+Fixed max window discrepancy in Windows platform - By SidedYapper - New contributor!
+
+Fix human-human relationship incorrectly showing 'Friend' in Diplomacy screen, as well as inconsistent colors - By unciv-loof - New contributor!]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
