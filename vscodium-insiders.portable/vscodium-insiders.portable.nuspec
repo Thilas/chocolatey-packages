@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium-insiders.portable</id>
-    <version>1.104.5935</version>
+    <version>1.104.5959</version>
     <title>VSCodium - Insiders (Portable)</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -29,7 +29,7 @@ VS Code is a lightweight but powerful source code editor which runs on your desk
     <summary>VSCodium - Insiders (Portable)</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/VSCodium/vscodium-insiders/releases)
 
-update vscode to [8bdbcf0e32b1b6e4b328dd86656279860f24123a](https://github.com/microsoft/vscode/tree/8bdbcf0e32b1b6e4b328dd86656279860f24123a)
+update vscode to [7be2a0b2e60c47a0dbd586fc56b64b55e03bd954](https://github.com/microsoft/vscode/tree/7be2a0b2e60c47a0dbd586fc56b64b55e03bd954)
 
 
 
@@ -39,101 +39,101 @@ update vscode to [8bdbcf0e32b1b6e4b328dd86656279860f24123a](https://github.com/m
   <tr>
     <td rowspan="8">Windows</td>
     <td>User Installer</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodiumUserSetup-x64-1.104.05935-insider.exe">VSCodiumUserSetup-x64-1.104.05935-insider.exe</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodiumUserSetup-x64-1.104.05959-insider.exe">VSCodiumUserSetup-x64-1.104.05959-insider.exe</a></td>
   </tr>
   <tr>
     <td>System Installer</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodiumSetup-x64-1.104.05935-insider.exe">VSCodiumSetup-x64-1.104.05935-insider.exe</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodiumSetup-x64-1.104.05959-insider.exe">VSCodiumSetup-x64-1.104.05959-insider.exe</a></td>
   </tr>
   <tr>
     <td>.zip</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-win32-x64-1.104.05935-insider.zip">VSCodium-win32-x64-1.104.05935-insider.zip</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-win32-x64-1.104.05959-insider.zip">VSCodium-win32-x64-1.104.05959-insider.zip</a></td>
   </tr>
   <tr>
     <td>.msi - updates enabled</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-x64-1.104.05935-insider.msi">VSCodium-x64-1.104.05935-insider.msi</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-x64-1.104.05959-insider.msi">VSCodium-x64-1.104.05959-insider.msi</a></td>
   </tr>
   <tr>
     <td>.msi - updates disabled</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-x64-updates-disabled-1.104.05935-insider.msi">VSCodium-x64-updates-disabled-1.104.05935-insider.msi</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-x64-updates-disabled-1.104.05959-insider.msi">VSCodium-x64-updates-disabled-1.104.05959-insider.msi</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-win32-x64-1.104.05935-insider.tar.gz">vscodium-reh-win32-x64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-win32-x64-1.104.05959-insider.tar.gz">vscodium-reh-win32-x64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-win32-x64-1.104.05935-insider.tar.gz">vscodium-reh-web-win32-x64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-win32-x64-1.104.05959-insider.tar.gz">vscodium-reh-web-win32-x64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-cli-win32-x64-1.104.05935-insider.tar.gz">vscodium-cli-win32-x64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-cli-win32-x64-1.104.05959-insider.tar.gz">vscodium-cli-win32-x64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td rowspan="5">macOS</td>
     <td>.dmg</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium.x64.1.104.05935-insider.dmg">VSCodium.x64.1.104.05935-insider.dmg</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium.x64.1.104.05959-insider.dmg">VSCodium.x64.1.104.05959-insider.dmg</a></td>
   </tr>
   <tr>
     <td>.zip</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-darwin-x64-1.104.05935-insider.zip">VSCodium-darwin-x64-1.104.05935-insider.zip</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-darwin-x64-1.104.05959-insider.zip">VSCodium-darwin-x64-1.104.05959-insider.zip</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-darwin-x64-1.104.05935-insider.tar.gz">vscodium-reh-darwin-x64-1.104.05935.-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-darwin-x64-1.104.05959-insider.tar.gz">vscodium-reh-darwin-x64-1.104.05959.-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-darwin-x64-1.104.05935-insider.tar.gz">vscodium-reh-web-darwin-x64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-darwin-x64-1.104.05959-insider.tar.gz">vscodium-reh-web-darwin-x64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-cli-darwin-x64-1.104.05935-insider.tar.gz">vscodium-cli-darwin-x64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-cli-darwin-x64-1.104.05959-insider.tar.gz">vscodium-cli-darwin-x64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
   <td rowspan="8">Linux</td>
     <td>.deb</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/codium-insiders_1.104.05935_amd64.deb">codium-insiders_1.104.05935_amd64.deb</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/codium-insiders_1.104.05959_amd64.deb">codium-insiders_1.104.05959_amd64.deb</a></td>
   </tr>
   <tr>
     <td>.rpm</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/codium-insiders-1.104.05935-el8.x86_64.rpm">codium-insiders-1.104.05935-el8.x86_64.rpm</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/codium-insiders-1.104.05959-el8.x86_64.rpm">codium-insiders-1.104.05959-el8.x86_64.rpm</a></td>
   </tr>
   <tr>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-linux-x64-1.104.05935-insider.tar.gz">VSCodium-linux-x64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-linux-x64-1.104.05959-insider.tar.gz">VSCodium-linux-x64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>AppImage</td>
     <td>
-      <a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-Insiders-1.104.05935.glibc2.29-x86_64.AppImage">VSCodium-Insiders-1.104.05935.glibc2.29-x86_64.AppImage</a><br />
-      <a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-Insiders-1.104.05935.glibc2.29-x86_64.AppImage.zsync">VSCodium-Insiders-1.104.05935.glibc2.29-x86_64.AppImage.zsync</a>
+      <a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-Insiders-1.104.05959.glibc2.29-x86_64.AppImage">VSCodium-Insiders-1.104.05959.glibc2.29-x86_64.AppImage</a><br />
+      <a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-Insiders-1.104.05959.glibc2.29-x86_64.AppImage.zsync">VSCodium-Insiders-1.104.05959.glibc2.29-x86_64.AppImage.zsync</a>
     </td>
   </tr>
   <tr>
     <td>Snap</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/codium-insiders_1.104.05935_amd64.snap">codium-insiders_1.104.05935_amd64.snap</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/codium-insiders_1.104.05959_amd64.snap">codium-insiders_1.104.05959_amd64.snap</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-linux-x64-1.104.05935-insider.tar.gz">vscodium-reh-linux-x64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-linux-x64-1.104.05959-insider.tar.gz">vscodium-reh-linux-x64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-linux-x64-1.104.05935-insider.tar.gz">vscodium-reh-web-linux-x64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-linux-x64-1.104.05959-insider.tar.gz">vscodium-reh-web-linux-x64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-cli-linux-x64-1.104.05935-insider.tar.gz">vscodium-cli-linux-x64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-cli-linux-x64-1.104.05959-insider.tar.gz">vscodium-cli-linux-x64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td rowspan="2">Alpine</td>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-alpine-x64-1.104.05935-insider.tar.gz">vscodium-reh-alpine-x64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-alpine-x64-1.104.05959-insider.tar.gz">vscodium-reh-alpine-x64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-alpine-x64-1.104.05935-insider.tar.gz">vscodium-reh-web-alpine-x64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-alpine-x64-1.104.05959-insider.tar.gz">vscodium-reh-web-alpine-x64-1.104.05959-insider.tar.gz</a></td>
   </tr>
 </table>
 
@@ -143,78 +143,78 @@ update vscode to [8bdbcf0e32b1b6e4b328dd86656279860f24123a](https://github.com/m
   <tr>
     <td rowspan="4">Windows</td>
     <td>User Installer</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodiumUserSetup-arm64-1.104.05935-insider.exe">VSCodiumUserSetup-arm64-1.104.05935-insider.exe</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodiumUserSetup-arm64-1.104.05959-insider.exe">VSCodiumUserSetup-arm64-1.104.05959-insider.exe</a></td>
   </tr>
   <tr>
     <td>System Installer</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodiumSetup-arm64-1.104.05935-insider.exe">VSCodiumSetup-arm64-1.104.05935-insider.exe</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodiumSetup-arm64-1.104.05959-insider.exe">VSCodiumSetup-arm64-1.104.05959-insider.exe</a></td>
   </tr>
   <tr>
     <td>.zip</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-win32-arm64-1.104.05935-insider.zip">VSCodium-win32-arm64-1.104.05935-insider.zip</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-win32-arm64-1.104.05959-insider.zip">VSCodium-win32-arm64-1.104.05959-insider.zip</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-cli-win32-arm64-1.104.05935-insider.tar.gz">vscodium-cli-win32-arm64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-cli-win32-arm64-1.104.05959-insider.tar.gz">vscodium-cli-win32-arm64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td rowspan="5">macOS</td>
     <td>.dmg</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium.arm64.1.104.05935-insider.dmg">VSCodium.arm64.1.104.05935-insider.dmg</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium.arm64.1.104.05959-insider.dmg">VSCodium.arm64.1.104.05959-insider.dmg</a></td>
   </tr>
   <tr>
     <td>.zip</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-darwin-arm64-1.104.05935-insider.zip">VSCodium-darwin-arm64-1.104.05935-insider.zip</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-darwin-arm64-1.104.05959-insider.zip">VSCodium-darwin-arm64-1.104.05959-insider.zip</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-darwin-arm64-1.104.05935-insider.tar.gz">vscodium-reh-darwin-arm64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-darwin-arm64-1.104.05959-insider.tar.gz">vscodium-reh-darwin-arm64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-darwin-arm64-1.104.05935-insider.tar.gz">vscodium-reh-web-darwin-arm64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-darwin-arm64-1.104.05959-insider.tar.gz">vscodium-reh-web-darwin-arm64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-cli-darwin-arm64-1.104.05935-insider.tar.gz">vscodium-cli-darwin-arm64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-cli-darwin-arm64-1.104.05959-insider.tar.gz">vscodium-cli-darwin-arm64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td rowspan="7">Linux</td>
     <td>.deb</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/codium-insiders_1.104.05935_arm64.deb">codium-insiders_1.104.05935_arm64.deb</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/codium-insiders_1.104.05959_arm64.deb">codium-insiders_1.104.05959_arm64.deb</a></td>
   </tr>
   <tr>
     <td>.rpm</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/codium-insiders-1.104.05935-el8.aarch64.rpm">codium-insiders-1.104.05935-el8.aarch64.rpm</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/codium-insiders-1.104.05959-el8.aarch64.rpm">codium-insiders-1.104.05959-el8.aarch64.rpm</a></td>
   </tr>
   <tr>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-linux-arm64-1.104.05935-insider.tar.gz">VSCodium-linux-arm64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-linux-arm64-1.104.05959-insider.tar.gz">VSCodium-linux-arm64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Snap</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/codium-insiders_1.104.05935_arm64.snap">codium-insiders_1.104.05935_arm64.snap</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/codium-insiders_1.104.05959_arm64.snap">codium-insiders_1.104.05959_arm64.snap</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-linux-arm64-1.104.05935-insider.tar.gz">vscodium-reh-linux-arm64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-linux-arm64-1.104.05959-insider.tar.gz">vscodium-reh-linux-arm64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-linux-arm64-1.104.05935-insider.tar.gz">vscodium-reh-web-linux-arm64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-linux-arm64-1.104.05959-insider.tar.gz">vscodium-reh-web-linux-arm64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-cli-linux-arm64-1.104.05935-insider.tar.gz">vscodium-cli-linux-arm64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-cli-linux-arm64-1.104.05959-insider.tar.gz">vscodium-cli-linux-arm64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td rowspan="2">Alpine</td>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-alpine-arm64-1.104.05935-insider.tar.gz">vscodium-reh-alpine-arm64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-alpine-arm64-1.104.05959-insider.tar.gz">vscodium-reh-alpine-arm64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-alpine-arm64-1.104.05935-insider.tar.gz">vscodium-reh-web-alpine-arm64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-alpine-arm64-1.104.05959-insider.tar.gz">vscodium-reh-web-alpine-arm64-1.104.05959-insider.tar.gz</a></td>
   </tr>
 </table>
 
@@ -224,27 +224,27 @@ update vscode to [8bdbcf0e32b1b6e4b328dd86656279860f24123a](https://github.com/m
   <tr>
     <td rowspan="6">Linux</td>
     <td>.deb</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/codium-insiders_1.104.05935_armhf.deb">codium-insiders_1.104.05935_armhf.deb</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/codium-insiders_1.104.05959_armhf.deb">codium-insiders_1.104.05959_armhf.deb</a></td>
   </tr>
   <tr>
     <td>.rpm</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/codium-insiders-1.104.05935-el8.armv7hl.rpm">codium-insiders-1.104.05935-el8.armv7hl.rpm</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/codium-insiders-1.104.05959-el8.armv7hl.rpm">codium-insiders-1.104.05959-el8.armv7hl.rpm</a></td>
   </tr>
   <tr>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-linux-armhf-1.104.05935-insider.tar.gz">VSCodium-linux-armhf-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-linux-armhf-1.104.05959-insider.tar.gz">VSCodium-linux-armhf-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-linux-armhf-1.104.05935-insider.tar.gz">vscodium-reh-linux-armhf-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-linux-armhf-1.104.05959-insider.tar.gz">vscodium-reh-linux-armhf-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-linux-armhf-1.104.05935-insider.tar.gz">vscodium-reh-web-linux-armhf-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-linux-armhf-1.104.05959-insider.tar.gz">vscodium-reh-web-linux-armhf-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-cli-linux-armhf-1.104.05935-insider.tar.gz">vscodium-cli-linux-armhf-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-cli-linux-armhf-1.104.05959-insider.tar.gz">vscodium-cli-linux-armhf-1.104.05959-insider.tar.gz</a></td>
   </tr>
 </table>
 
@@ -254,15 +254,15 @@ update vscode to [8bdbcf0e32b1b6e4b328dd86656279860f24123a](https://github.com/m
   <tr>
     <td rowspan="3">Linux</td>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-linux-ppc64le-1.104.05935-insider.tar.gz">VSCodium-linux-ppc64le-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-linux-ppc64le-1.104.05959-insider.tar.gz">VSCodium-linux-ppc64le-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-linux-ppc64le-1.104.05935-insider.tar.gz">vscodium-reh-linux-ppc64le-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-linux-ppc64le-1.104.05959-insider.tar.gz">vscodium-reh-linux-ppc64le-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-linux-ppc64le-1.104.05935-insider.tar.gz">vscodium-reh-web-linux-ppc64le-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-linux-ppc64le-1.104.05959-insider.tar.gz">vscodium-reh-web-linux-ppc64le-1.104.05959-insider.tar.gz</a></td>
   </tr>
 </table>
 
@@ -272,15 +272,15 @@ update vscode to [8bdbcf0e32b1b6e4b328dd86656279860f24123a](https://github.com/m
   <tr>
     <td rowspan="3">Linux</td>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-linux-riscv64-1.104.05935-insider.tar.gz">VSCodium-linux-riscv64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-linux-riscv64-1.104.05959-insider.tar.gz">VSCodium-linux-riscv64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-linux-riscv64-1.104.05935-insider.tar.gz">vscodium-reh-linux-riscv64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-linux-riscv64-1.104.05959-insider.tar.gz">vscodium-reh-linux-riscv64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-linux-riscv64-1.104.05935-insider.tar.gz">vscodium-reh-web-linux-riscv64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-linux-riscv64-1.104.05959-insider.tar.gz">vscodium-reh-web-linux-riscv64-1.104.05959-insider.tar.gz</a></td>
   </tr>
 </table>
 
@@ -290,15 +290,15 @@ update vscode to [8bdbcf0e32b1b6e4b328dd86656279860f24123a](https://github.com/m
   <tr>
     <td rowspan="3">Linux</td>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/VSCodium-linux-loong64-1.104.05935-insider.tar.gz">VSCodium-linux-loong64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/VSCodium-linux-loong64-1.104.05959-insider.tar.gz">VSCodium-linux-loong64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-linux-loong64-1.104.05935-insider.tar.gz">vscodium-reh-linux-loong64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-linux-loong64-1.104.05959-insider.tar.gz">vscodium-reh-linux-loong64-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-linux-loong64-1.104.05935-insider.tar.gz">vscodium-reh-web-linux-loong64-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-linux-loong64-1.104.05959-insider.tar.gz">vscodium-reh-web-linux-loong64-1.104.05959-insider.tar.gz</a></td>
   </tr>
 </table>
 
@@ -308,11 +308,11 @@ update vscode to [8bdbcf0e32b1b6e4b328dd86656279860f24123a](https://github.com/m
   <tr>
     <td rowspan="2">Linux</td>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-linux-s390x-1.104.05935-insider.tar.gz">vscodium-reh-linux-s390x-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-linux-s390x-1.104.05959-insider.tar.gz">vscodium-reh-linux-s390x-1.104.05959-insider.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05935-insider/vscodium-reh-web-linux-s390x-1.104.05935-insider.tar.gz">vscodium-reh-web-linux-s390x-1.104.05935-insider.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium-insiders/releases/download/1.104.05959-insider/vscodium-reh-web-linux-s390x-1.104.05959-insider.tar.gz">vscodium-reh-web-linux-s390x-1.104.05959-insider.tar.gz</a></td>
   </tr>
 </table>]]></releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini, The VSCodium contributors</copyright>
