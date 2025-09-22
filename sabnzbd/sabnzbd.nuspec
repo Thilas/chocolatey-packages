@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>4.5.3</version>
+    <version>4.5.4-Beta1</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>dtgm,Thilas</owners>
@@ -32,8 +32,15 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 4.5.3
+Release Notes - SABnzbd 4.5.4 Beta 1
 =========================================================
+
+## Bug fixes and changes in 4.5.4
+
+* Handle `S04 - 10` (anime) episode notation for Sorting and Duplicate Detection.
+* Active connections counter in Status window were not updated correctly.
+* Windows: Release is now signed using SignPath Foundation certificate.
+* Windows: Start SABnzbd directly from the installer.
 
 ## Bug fixes and changes in 4.5.3
 
@@ -95,7 +102,12 @@ Release Notes - SABnzbd 4.5.3
 
 * Read `ISSUES.txt` or https://sabnzbd.org/wiki/introduction/known-issues
 
+## Code Signing Policy
+
+Windows code signing is provided by SignPath.io using a SignPath Foundation certificate.
+
 ## About
+
 SABnzbd is an open-source cross-platform binary newsreader.
 It simplifies the process of downloading from Usenet dramatically, thanks to its web-based
 user interface and advanced built-in post-processing options that automatically verify, repair,
