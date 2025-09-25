@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.18.1</version>
+    <version>4.18.2</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,14 +18,22 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.18.1
+## 4.18.2
+
+Can no longer repair improvements in neutral territory (exploit)
+
+Fixed crash on declare war with triggers
 
 By RobLoach:
-- Add Global Uniques to the Civilopedia 
-- Add `Adopt [policy/belief]` Unique 
-- Add diplomacy status to `civFilter` 
+- BNW: Fix logic around Cultural Victories 
+- Add `if no Civ has adopted [policy/belief]` Conditional 
 
-New Screen 'start game' button alignment - By SidedYapper]]></releaseNotes>
+By unciv-loof:
+- Fix multiplayer auth popup causing duplicate actions on turn end 
+- CS military rank tribute based on number of alive players 
+- Show button to forcibly resign player after 2 days inactivity 
+
+AI: less worker priority for jungles - By EmperorPinguin]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
