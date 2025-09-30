@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.18.2</version>
+    <version>4.18.3</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,22 +18,23 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.18.2
+## 4.18.3
 
-Can no longer repair improvements in neutral territory (exploit)
+Buildings can now include '[relativeAmount]% weight to this choice for AI decisions'
 
-Fixed crash on declare war with triggers
+Re-added changes for puppet city unique - By Emandac
+
+Flash `ChatButton` on New Chat Messages - By touhidurrr
 
 By RobLoach:
-- BNW: Fix logic around Cultural Victories 
-- Add `if no Civ has adopted [policy/belief]` Conditional 
+- Add Great Admiral 
+- Allow weighted AI decisions in Event Choices 
+
+AI valuea space resources and Manhattan project more - By EmperorPinguin
 
 By unciv-loof:
-- Fix multiplayer auth popup causing duplicate actions on turn end 
-- CS military rank tribute based on number of alive players 
-- Show button to forcibly resign player after 2 days inactivity 
-
-AI: less worker priority for jungles - By EmperorPinguin]]></releaseNotes>
+- Prevent skip/resign button showing before first turn in MP games
+- No special treatment for spectators to skip/resign players]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
