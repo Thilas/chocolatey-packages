@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>4.5.4-Beta2</version>
+    <version>4.5.4-RC1</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>dtgm,Thilas</owners>
@@ -32,12 +32,14 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 4.5.4 Beta 2
+Release Notes - SABnzbd 4.5.4 Release Candidate 1
 =========================================================
 
 ## Bug fixes and changes in 4.5.4
 
 * Add option to History details to mark job as `Completed`.
+* New Notification option `Quota` added (enabled by default) for all
+  Notification services. Will send notifications at 75%, 90% and 100% quota usage.
 * Handle `S04 - 10` (anime) episode notation for Sorting and Duplicate Detection.
 * Add Move to Top/Bottom options to Multi-Operations.
 * Require correct server test in setup wizard.
@@ -46,9 +48,14 @@ Release Notes - SABnzbd 4.5.4 Beta 2
 * Let Unrar handle rename of invalid characters on Windows filesystem.
 * Active connections counter in Status window were not updated correctly.
 * Job setting changes during URL-grabbing would sometimes be ignored.
+* Some `.par2` files could be left because they were not fully parsed.
+* Applying changes to Server configuration showed `Failure` while the page reloaded.
+* No longer using vendored `sabnzbd.rarfile` module, switched to `rarfile>=4.2`.
+* When using Socks5 proxy, `Local IPv4 address` could not be determined.
 * Linux: Enable `Make Windows compatible` automatically if needed.
 * Windows: Release is now signed using SignPath Foundation certificate.
 * Windows: Start SABnzbd directly from the installer.
+* Windows and macOS: Use Python 3.14 for binaries.
 
 ## Bug fixes and changes in 4.5.3
 
