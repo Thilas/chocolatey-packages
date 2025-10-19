@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.18.6</version>
+    <version>4.18.7</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,19 +18,17 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.18.6
+## 4.18.7
 
-Game startup performance improvements
+Improve Civilopedia display of GlobalUniques - By SomeTroglodyte
 
-Mod preview performance improvements
-
-Avoid rare crash concurrent modification when calculating construction costs
+Naval Tradition Policy under Commerce as per Civ V - By JhandeFlores
 
 By RobLoach:
-- Modding: Ancient Ruins can have unit-related conditionals 
-- AbsoluteUnits: Add Great Admiral by Basil 
+- Fix Ancient Ruins when there are conditionals 
+- Add Leader Titles unique 
 
-Allow naval units to be spawn in water city - By Emandac]]></releaseNotes>
+Modding/Feature: Allow units to destroy cities instead of capturing - By PhiRite]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
