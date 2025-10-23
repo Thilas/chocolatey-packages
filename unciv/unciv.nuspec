@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.18.8</version>
+    <version>4.18.9</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,18 +18,17 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.18.8
+## 4.18.9
 
-Remove building-improvement if the building is no longer buildable
+Updated Libgdx to 1.14.0 - solving Wayand and Android bugs
 
-By RobLoach:
-- Add 'when not stacked with a [mapUnitFilter] unit' Conditional 
-- Fix relevent Civ for within tiles Conditional 
-- City Screen: Display Stockpile Amount Available for Cost 
+Fix super-rare bug on bringing in allies when declaring war
 
-Display promises in diplomacy overview for human players - By unciv-loof
+Fix Leader Titles when with a suffixing title - By RobLoach
 
-Fix battle notification translations - by dadadnet (new contributor!)]]></releaseNotes>
+By SomeTroglodyte: 
+- Selecting local mods without preview will now display an avatar 
+- Workaround for certain rare Java Runtime quirks (construction queue crash)]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
