@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>4.5.4</version>
+    <version>4.5.5</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>dtgm,Thilas</owners>
@@ -32,8 +32,14 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 4.5.4
+Release Notes - SABnzbd 4.5.5
 =========================================================
+
+## Bug fixes and changes in 4.5.5
+
+* macOS: Failed to start on versions of macOS older than 11.
+  Python 3.14 dropped support for macOS 10.13 and 10.14.
+  Because of that macOS 10.15 is required to run 4.5.5.
 
 ## Bug fixes and changes in 4.5.4
 
