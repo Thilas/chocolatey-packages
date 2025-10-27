@@ -138,12 +138,12 @@ jobs:
           cleanup: ${{ inputs.cleanup }}
 
       - name: Download Packages artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Packages
 
       - name: Download Test artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: Test
 
