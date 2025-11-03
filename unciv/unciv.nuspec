@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.18.11</version>
+    <version>4.18.12</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,17 +18,15 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.18.11
-
-Happiness shown in city stat overview
+## 4.18.12
 
 By SomeTroglodyte:
-- Show Mod json parse errors right after download 
-- Fix translation of multiple conditionals of the same type 
-- Fix upgrading from Unit overview won't show changes
-- Make ToastPopups stay on screen when tapped, for leisurely reading
+- Align buttons on MainMenuScreen 
+- Adapt main menu background maps to aspect ratio 
+- Fix resource stats in Civilopedia 
 
-Fix City-States asking you to find Natural Wonders they already found - By RobLoach]]></releaseNotes>
+By SidedYapper:
+- Added popup for 'about tab' when clicking Version in main menu]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
