@@ -6,7 +6,7 @@
     <version>5.42.0.1</version>
     <title>Strawberry Perl</title>
     <authors>shawnlaffan,KMX,Curtis Jewell,Adam Kennedy</authors>
-    <owners>Thilas,alanstevens</owners>
+    <owners>Thilas</owners>
     <licenseUrl>https://github.com/StrawberryPerl/Perl-Dist-Strawberry/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://strawberryperl.com/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@58d4825d117dae7fcf9100ba5d4fa0e4563ff7f7/strawberryperl/icon.png</iconUrl>

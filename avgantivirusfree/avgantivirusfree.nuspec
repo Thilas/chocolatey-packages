@@ -6,7 +6,7 @@
     <version>18.1817.821</version>
     <title>AVG Antivirus Free</title>
     <authors>AVG Technologies</authors>
-    <owners>dtgm,Thilas</owners>
+    <owners>Thilas</owners>
     <licenseUrl>http://www.avg.com/eula</licenseUrl>
     <projectUrl>http://free.avg.com/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@02aa2a68eb365843accd2b582985118e151c531e/avgantivirusfree/icon.png</iconUrl>

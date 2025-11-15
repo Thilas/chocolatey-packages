@@ -6,7 +6,7 @@
     <version>4.37.0</version>
     <title>Eclipse</title>
     <authors>Eclipse Foundation</authors>
-    <owners>Utrecht,Almere,Thilas</owners>
+    <owners>Thilas</owners>
     <licenseUrl>https://www.eclipse.org/org/documents/epl-v10.php</licenseUrl>
     <projectUrl>https://www.eclipse.org/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@8e49b572ba0d78626a9cff9c09d932d76274795b/eclipse/icon.png</iconUrl>

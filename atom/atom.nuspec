@@ -6,7 +6,7 @@
     <version>1.63.1</version>
     <title>Atom</title>
     <authors>GitHub Inc.</authors>
-    <owners>bradgearon,Thilas</owners>
+    <owners>Thilas</owners>
     <licenseUrl>https://github.com/atom/atom/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://atom.io/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@058df13746c9cfa791d72eedd05f888d48a1bc1a/atom/icon.png</iconUrl>

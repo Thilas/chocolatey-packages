@@ -6,7 +6,7 @@
     <version>4.5.5</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
-    <owners>dtgm,Thilas</owners>
+    <owners>Thilas</owners>
     <licenseUrl>https://github.com/sabnzbd/sabnzbd/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>https://sabnzbd.org/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@7de16ead548f4491ce159aa5c8704cb1ed9412b2/sabnzbd/icon.png</iconUrl>

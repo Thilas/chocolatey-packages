@@ -6,7 +6,7 @@
     <version>1.79.0</version>
     <title>PsInfo</title>
     <authors>Mark Russinovich</authors>
-    <owners>Thilas,dtgm</owners>
+    <owners>Thilas</owners>
     <licenseUrl>https://learn.microsoft.com/en-us/sysinternals/license-terms</licenseUrl>
     <projectUrl>https://learn.microsoft.com/en-us/sysinternals/downloads/psinfo</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
