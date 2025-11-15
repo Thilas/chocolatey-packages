@@ -6,7 +6,7 @@
     <version>10.0.0-preview1</version>
     <title>ILSpy</title>
     <authors>SharpDevelop Team</authors>
-    <owners>dtgm,Thilas</owners>
+    <owners>Thilas</owners>
     <licenseUrl>https://github.com/icsharpcode/ILSpy/blob/master/doc/license.txt</licenseUrl>
     <projectUrl>https://github.com/icsharpcode/ILSpy</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@02e39ee2c2509f429162c3afb6919cbdb5999278/ilspy/icon.png</iconUrl>
@@ -67,9 +67,6 @@ And many other fixes, for a full list click [here](https://github.com/icsharpcod
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/ilspy</packageSourceUrl>
     <docsUrl>https://github.com/icsharpcode/ILSpy/wiki</docsUrl>
     <bugTrackerUrl>https://github.com/icsharpcode/ILSpy/issues</bugTrackerUrl>
-    <dependencies>
-      <dependency id="dotnet-6.0-desktopruntime" />
-    </dependencies>
   </metadata>
   <files>
     <file src="legal\**" target="legal" />

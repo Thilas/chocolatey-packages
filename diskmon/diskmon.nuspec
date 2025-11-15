@@ -6,7 +6,7 @@
     <version>2.2.0</version>
     <title>DiskMon</title>
     <authors>Mark Russinovich</authors>
-    <owners>Thilas,dtgm</owners>
+    <owners>Thilas</owners>
     <licenseUrl>https://learn.microsoft.com/en-us/sysinternals/license-terms</licenseUrl>
     <projectUrl>https://learn.microsoft.com/en-us/sysinternals/downloads/diskmon</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@de52ec688c3894483381c83c0c964fbb3b5eb960/diskmon/icon.png</iconUrl>

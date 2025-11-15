@@ -6,7 +6,7 @@
     <version>21.2.0</version>
     <title>Kodi</title>
     <authors>XBMC Foundation</authors>
-    <owners>dtgm,Thilas</owners>
+    <owners>Thilas</owners>
     <licenseUrl>https://github.com/xbmc/xbmc/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://kodi.tv/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@82f4f776a22eba1824666293707a33eef623d12c/kodi/icon.png</iconUrl>

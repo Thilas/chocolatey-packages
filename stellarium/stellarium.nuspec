@@ -6,7 +6,7 @@
     <version>25.3.0</version>
     <title>Stellarium</title>
     <authors>Stellarium Developers</authors>
-    <owners>Thilas,dtgm</owners>
+    <owners>Thilas</owners>
     <licenseUrl>https://github.com/Stellarium/stellarium/blob/master/COPYING</licenseUrl>
     <projectUrl>https://www.stellarium.org/</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@8ef5d8c85c2a0dbef6eefad0a8a31de8d953c339/stellarium/icon.png</iconUrl>

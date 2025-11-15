@@ -22,9 +22,6 @@
     <docsUrl>https://marble.kde.org/documentation.php</docsUrl>
     <mailingListUrl>https://mail.kde.org/mailman/listinfo/marble-devel</mailingListUrl>
     <bugTrackerUrl>https://marble.kde.org/support.php</bugTrackerUrl>
-    <dependencies>
-      <dependency id="vcredist2013" />
-    </dependencies>
   </metadata>
   <files>
     <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
