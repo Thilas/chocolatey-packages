@@ -34,9 +34,9 @@ jobs:
       test: ${{ github.event_name == 'pull_request' || github.event.schedule == '0 4 * * *' || inputs.type == 'Test' }}
       force: ${{ inputs.type == 'Force update' }}
       # For some weird reasons, the basic test cases are failing
-      # test_cases: |
-      #   - Start program
-      #     Start-Program ILSpy -Shim -TimeoutSec 120
-      #   - Close program
-      #     Close-Program ILSpy
+      test_cases: |
+        - Start program
+          Start-Program ILSpy -Shim -TimeoutSec 120
+        - Close program
+          Close-Program ILSpy
     secrets: inherit
