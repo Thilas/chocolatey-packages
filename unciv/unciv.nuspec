@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.18.17</version>
+    <version>4.18.18</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,23 +18,16 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.18.17
+## 4.18.18
 
-Memory + CPU performance improvements
+CPU performance improvements
 
-By RobLoach:
-- Fix Null Exception in searching Civilopedia 
-- Modding: Allow removing Religions and Beliefs 
+By EmperorPinguin:
+- AI: Separate encampment-finding logic from ruins-finding 
+- AI: Better 'city to attack' logic 
+- AI: Simplify target selection for city bombardment 
 
-By SomeTroglodyte:
-- Swapping for Escort formation pairs 
-- Make Notifications setting 'Disabled' useful 
-
-Generic'd Gold from pillaging encampments and cities unique - By PLynx01
-
-Using Renamed Unit Names in Battle Notifications - By GameCobra
-
-Enable espionage by default in new games - By unciv-loof]]></releaseNotes>
+Fix battle notification order - By SomeTroglodyte]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
