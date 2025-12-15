@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.19.0</version>
+    <version>4.19.1</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,22 +18,18 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.19.0
-
-By EmperorPinguin:
-- CPU performance improvements
-- AI don't build units which cannot attack 
-- AI: Better 'tile-to-work' picking 
-
-By SomeTroglodyte:
-- Faster mod download
-- Fix VictoryScreen crash loopholes
-
-Add Hindi language - By monikaanaaya2021-cmd
+## 4.19.1
 
 By RobLoach:
-- civFilter: Add a 'Known' filter 
-- civilopedia: Add Technologies that provide Resources]]></releaseNotes>
+- options: Add Micro, FullHD, and QuadHD screen sizes 
+- Display City-Wide stockpiled resources in city
+
+By SomeTroglodyte:
+- Add diplomacy actions to game console 
+- Harden mod manager against invalid local preview files 
+- Improve unit tests speed by reducing Translation tests overhead 
+
+Fix crash on reloading/cloning victory data - By SeventhM]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
