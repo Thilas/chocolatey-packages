@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>4.6.0-Alpha2</version>
+    <version>4.6.0-Beta1</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>Thilas</owners>
@@ -32,10 +32,10 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 4.6.0 Alpha 2
+Release Notes - SABnzbd 4.6.0 Beta 1
 =========================================================
 
-This is the second test release of version 4.6.
+This is the first beta release of version 4.6.
 
 ## New features in 4.6.0
 
