@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>4.6.0-Beta1</version>
+    <version>4.6.0-Beta2</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>Thilas</owners>
@@ -32,15 +32,15 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 4.6.0 Beta 1
+Release Notes - SABnzbd 4.6.0 Beta 2
 =========================================================
 
-This is the first beta release of version 4.6.
+This is the second beta release of version 4.6.
 
 ## New features in 4.6.0
 
-* Added default support for NNTP Pipelining which eliminates idle waiting
-  between requests, significantly improving speeds on high-latency connections.
+* Added support for NNTP Pipelining which eliminates idle waiting between
+  requests, significantly improving speeds on high-latency connections.
   Read more here: https://sabnzbd.org/wiki/advanced/nntp-pipelining
 * Dynamically increase Assembler limits on faster connections.
 * Improved disk speed measurement in Status window.
@@ -49,13 +49,15 @@ This is the first beta release of version 4.6.
 * If a download only has `.nzb` files inside, the new downloads
   will include the name of the original download.
 * Dropped support for Python 3.8.
+* Windows: Added Windows ARM (portable) release.
 
 ## Bug fixes since 4.5.0
 
 * `Check before download` could get stuck or fail to reject.
-* Windows: Tray icon disappears after Explorer restart.
+* No error was shown in case NZB upload failed.
 * Correct mobile layout if `Full Width` is enabled.
 * Aborted Direct Unpack could result in no files being unpacked.
+* Windows: Tray icon disappears after Explorer restart.
 * macOS: Slow to start on some network setups.
 
 
