@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>ilspy</id>
-    <version>10.0.0-preview1-20251115</version>
+    <version>10.0.0-preview2</version>
     <title>ILSpy</title>
     <authors>SharpDevelop Team</authors>
     <owners>Thilas</owners>
@@ -26,190 +26,79 @@
     <summary>ILSpy is the open-source .NET assembly browser and decompiler.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/icsharpcode/ILSpy/releases)
 
-This preview release is based on [preview 6 of .NET 10.0](https://dotnet.microsoft.com/en-us/download/dotnet/10.0). Please make sure that you have it installed on your machine beforehand.
+This preview release is based on [.NET 10.0](https://dotnet.microsoft.com/en-us/download/dotnet/10.0). Please make sure that you have it installed on your machine beforehand.
 
 # New Language Features
-* #3467: C# 12 `InlineArray`s
-* #3500: Added .NET 10 as test target
-* #3500: Added minimal language feature support to successfully detect new code patterns used in .NET 10
+* Update pattern detection to Roslyn 5.0 RTM
+* C# 13: `allows ref struct` constraint
+* C# 14: `extension` members
 
 # Enhancements
-* #3519: Add API diff feature. Please see the PR for how this feature works, and in the collapsed region at the end of the release notes how such an API diff report could look like (full file is attached to release as *ICSharpCode.Decompiler9.1to10Preview1Changes_ApiDiff.md*).
-* #3494: Add dynamic ILSpy settings options to ILSpyCmd
-* #3489: Make `WholeProjectDecompiler.CreateDecompiler` protected virtual to make the decompilation pipeline extensible.
+* `CSharpConversions`: General improvements, fixing various missing rules for C# up to version 9.
+* #3344: Support `ckfinite` IL opcode in decompiler
+* #3563: Disassembler: Add support for ildasm /caverbal format
+* Detection of records and primary constructors: various bugfixes and improvements. (Special thanks to @sonyps5201314 and @mmusu3)
+
+# User Interface
+* #3521: Add API to set an initially highlighted entity after navigation
+* Navigate visible history (see #3591 by @miloush)
+* Improve WordBreak in CustomDialog (see #3535 by @CreateAndInject)
+* Use AssemblyWarning when AssemblyReference load faulted (see #3013 by @workgroupengineering)
+* Refactoring of EntityToString API (see #3635)
+* Removed translations (see #3648)
 
 # Contributions
-* Add configuration option to check for overflow and underflow (see #3484 by @ds5678)
-* Allow creating a MetadataFile with a MetadataReader / MetadataStringDecoder (see #3487 by @lordmilko)
-* Add an option to not transform `Activator.CreateInstance<T>()` to `new T()` (see #3497 by @DoctorKrolic)
-* `TargetFramework` and `TargetServices` APIs are now public (see #3501 by @nikitalita)
-* Support disassembling single file bundle for ILSpy (see #3398 by @cshung)
-* Fix stack overflow exception in CSharpResolver (see #3471 by @ds5678)
-* Handle explicit optional parameter after default parameter (see #3470 by @ds5678)
-* Fix disassembler output, correcting `flag(NUM)` to `flags(NUM)` (see #3473 by @hez2010)
-* Fix null reference exception when writing resource files (see #3474 by @ds5678)
-* Fix SDK-style (modern) inter-project references (see #3502 by @petercrabtree)
-* Fix incorrect method match for static methods with instance signature (see #3504 by @MSchmoecker)
+* Allow extracting multiple package entries (see #3508 by @CreateAndInject)
+* Support `allows ref struct` constraint (see #3537 by @jjonescz)
+* Allow passing an `IDecompilerTypeSystem` rather than a `DecompilerTypeSystem` to `CSharpDecompiler` (see #3529 by @lordmilko)
+* Add `DecompilerSettings.ExpandParamsArguments` (see #3534 by @MSchmoecker)
+* Add `DecompilerSettings.AlwaysMoveInitializer`: Always move initializer from static constructor to field initializer (see #3540 by @miloush)
+* Improve decompilation of unmanaged function pointers (see #3620 by @ds5678)
+* Improve decompilation of pre-increment operators (see #3472 by @ds5678)
+* Fix #3462: Scrolling with scroll wheel breaks after using file search (see #3538 by @tom-englert)
+* Support batch PDB generation (see #3619 by @sonyps5201314)
+* Fixes for primary constructors (see #3614 by @mmusu3)
+* Improve inlining of boxed values (see #3587 by @ds5678)
+* List name first in ILSpy title for multiple instances (see #3589 by @miloush)
+* Improve Framework Id detection (see #3581 by @ds5678)
+* Enable detection of .NET version without TargetFrameworkAttribute (see #3580 by @ds5678)
+* Do not create object initializers for tuples (see #3579 by @ds5678)
+* Fix lower case type name conflicting with variable name (see #3572 by @ds5678)
+* Fix regression in decompiling local functions with default parameters (see #3560 by @ds5678)
+* Copy-propagate the stack slot for collection initializers (see #3554 by @ds5678)
+* Normalize UTF-8 BOM Marks and ps1 Indention (see #3546 by @petercrabtree)
+* Minor Dev Environment Fixes (.editorconfig cleanup, typo fix, .gitignore tweak) (see #3544 by @petercrabtree)
+* Replace GeneratePdbForAssembly with GeneratePdbForAssemblies to improve user experience and remove redundant code. (see #3630 by @sonyps5201314)
+* Fix the issue where PDBs generated by ILSpy do not match (see #3629 by @sonyps5201314)
+* Do not use ObservableObject when ObservableObjectBase is sufficient. (see #3644 by @tom-englert)
 
-# Performance
-* #3486: Remove XML serialization from DecompilerSettings in ILSpy
+# API Clean-up
+* Removed legacy `UnresolvedUsingScope`
+* Renamed `ResolvedUsingScope`  to `UsingScope`
+* Removed legacy `ToTypeReference`
+* Removed `ITypeReference` and implementations
 
 # Bug fixes
-* Fix #3464: Missing cast in interpolated string
-* Fix #3482: Drag and Drop is no longer working in the Assemblies tree view.
-* Fix #3492: Do not crash, if field used by `RuntimeHelpers.InitializeArray` is malformed.
+* Fix #3524: Property without backing field cannot have an initializer.
+* Fix #3512: Local function name collides with local variable name
+* Fix #2165: DeclareVariables step must update ResolveResult annotation when using out var.
+* Fix #3518 by replacing `FixLoneIsInst` with an inlining restriction.
+* Fix #3465: Operator '>' cannot be applied to operands of type 'X' and 'X'
+* Fix #3468: Try harder to avoid ref locals if `UseRefLocalsForAccurateOrderOfEvaluation` is not enabled.
+* Fix #3323: Simplify cleanup in AwaitInFinallyTransform, ensuring that we do not miss any containers.
+* Fix #1873: Clear ILRange in CopyPropagation
+* Fix #1789: missing hyperlink for `MethodGroupResolveResult`.
+* Fix #3476: Scroll position not restored when navigating back
+* Fix #3545: Covariant return not detected for abstract override property
+* Fix #3549: Do not crash on encountering nil tokens.
+* Fix #3543: Missing parentheses around field assignment expression in list initializers
+* DebugDirectoryTreeNode: AddressOfRawData and PointerToRawData columns should use hex display.
+* DebugDirectoryTreeNode: PointerToRawData was always showing 0 and AddressOfRawData was showing the wrong value.
+* Fix #3577: Properly infer the switch governing type and preserve conversions
+* Fix #3626: Do not emit named arguments for bool constants, if it causes the call to become ambiguous.
+* Fix #3612: WholeProjectDecompiler.CleanUpName does not count bytes on Unix.
 
-And many other fixes, for a full list click [here](https://github.com/icsharpcode/ILSpy/compare/v9.1...v10.0-preview1).
-
-<details>
-<summary>ICSharpCode.Decompiler Assembly Changes (API diff)</summary>
-
-## Changed Types
-### ICSharpCode.Decompiler.DecompilerSettings
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `Clone() : DecompilerSettings` | Method | <span style="color: red">**Removed**</span> |
-| `ParamsCollections : bool` | Property | <span style="color: green">**Added**</span> |
-| `UseObjectCreationOfGenericTypeParameter : bool` | Property | <span style="color: green">**Added**</span> |
-| `InlineArrays : bool` | Property | <span style="color: green">**Added**</span> |
-| `CheckForOverflowUnderflow : bool` | Property | <span style="color: green">**Added**</span> |
-| `Clone() : DecompilerSettings` | Method | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.Solution.SolutionCreator
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `WriteSolutionFile(string, IEnumerable<ProjectItem>) : void` | Method | <span style="color: red">**Removed**</span> |
-| `WriteSolutionFile(string, List<ProjectItem>) : void` | Method | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.Semantics.Conversion
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `InlineArrayConversion : Conversion` | Field | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.TypeSystem.KnownAttribute
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `ParamCollection : KnownAttribute` | Field | <span style="color: green">**Added**</span> |
-| `InlineArray : KnownAttribute` | Field | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.TypeSystem.TypeSystemOptions
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `ParamsCollections : TypeSystemOptions` | Field | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.TypeSystem.TypeSystemExtensions
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `IsArrayInterfaceType(this IType) : bool` | Method | <span style="color: green">**Added**</span> |
-| `IsInlineArrayType(this IType) : bool` | Method | <span style="color: green">**Added**</span> |
-| `GetInlineArrayLength(this IType) : int?` | Method | <span style="color: green">**Added**</span> |
-| `GetInlineArrayElementType(this IType) : IType` | Method | <span style="color: green">**Added**</span> |
-| `IsDefaultValueAssignmentAllowed(this IParameter) : bool` | Method | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.Metadata.MetadataFile
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `MetadataFile(MetadataFileKind, string, MetadataReaderProvider, MetadataReaderOptions, int, bool)` | Constructor | <span style="color: red">**Removed**</span> |
-| `MetadataFile(MetadataFileKind, string, MetadataReaderProvider, MetadataReaderOptions, int, bool, MetadataStringDecoder?)` | Constructor | <span style="color: green">**Added**</span> |
-| `MetadataFile(MetadataFileKind, string, MetadataReader, int, bool)` | Constructor | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.Metadata.PEFile
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `PEFile(string, PEStreamOptions, MetadataReaderOptions)` | Constructor | <span style="color: red">**Removed**</span> |
-| `PEFile(string, Stream, PEStreamOptions, MetadataReaderOptions)` | Constructor | <span style="color: red">**Removed**</span> |
-| `PEFile(string, PEReader, MetadataReaderOptions)` | Constructor | <span style="color: red">**Removed**</span> |
-| `PEFile(string, PEStreamOptions, MetadataReaderOptions, MetadataStringDecoder?)` | Constructor | <span style="color: green">**Added**</span> |
-| `PEFile(string, Stream, PEStreamOptions, MetadataReaderOptions, MetadataStringDecoder?)` | Constructor | <span style="color: green">**Added**</span> |
-| `PEFile(string, PEReader, MetadataReaderOptions, MetadataStringDecoder?)` | Constructor | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.IL.OpCode
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `LdElemaInlineArray : OpCode` | Field | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.IL.Block
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `GetContainingStatement(ILInstruction) : ILInstruction?` | Method | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.IL.ILInstruction
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `Extract(ILTransformContext) : ILVariable` | Method | <span style="color: red">**Removed**</span> |
-| `MatchLdElemaInlineArray(out IType?, out ILInstruction?) : bool` | Method | <span style="color: green">**Added**</span> |
-| `Extract(ILTransformContext) : ILVariable?` | Method | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.CSharp.LanguageVersion
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `CSharp13_0 : LanguageVersion` | Field | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.CSharp.OutputVisitor.InsertParenthesesVisitor
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `VisitInterpolation(Interpolation) : void` | Method | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.CSharp.ProjectDecompiler.IProjectInfoProvider
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `CheckForOverflowUnderflow : bool` | Property | <span style="color: green">**Added**</span> |
-
-## Added Types
-
-### ICSharpCode.Decompiler.IL.LdElemaInlineArray
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `ArraySlot : SlotInfo` | Property | <span style="color: green">**Added**</span> |
-| `IndicesSlot : SlotInfo` | Property | <span style="color: green">**Added**</span> |
-| `Type : IType` | Property | <span style="color: green">**Added**</span> |
-| `Array : ILInstruction` | Property | <span style="color: green">**Added**</span> |
-| `Indices : InstructionCollection<ILInstruction>` | Property | <span style="color: green">**Added**</span> |
-| `ResultType : StackType` | Property | <span style="color: green">**Added**</span> |
-| `IsReadOnly : bool` | Property | <span style="color: green">**Added**</span> |
-| `DirectFlags : InstructionFlags` | Property | <span style="color: green">**Added**</span> |
-| `LdElemaInlineArray(IType, ILInstruction, params ILInstruction[])` | Constructor | <span style="color: green">**Added**</span> |
-| `Clone() : ILInstruction` | Method | <span style="color: green">**Added**</span> |
-| `WriteTo(ITextOutput, ILAstWritingOptions) : void` | Method | <span style="color: green">**Added**</span> |
-| `AcceptVisitor(ILVisitor) : void` | Method | <span style="color: green">**Added**</span> |
-| `AcceptVisitor<T>(ILVisitor<T>) : T` | Method | <span style="color: green">**Added**</span> |
-| `AcceptVisitor<C,T>(ILVisitor<C,T>, C) : T` | Method | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.CSharp.ProjectDecompiler.TargetFramework
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `Identifier : string` | Property | <span style="color: green">**Added**</span> |
-| `Moniker : string` | Property | <span style="color: green">**Added**</span> |
-| `VersionString : string` | Property | <span style="color: green">**Added**</span> |
-| `VersionNumber : int` | Property | <span style="color: green">**Added**</span> |
-| `Profile : string` | Property | <span style="color: green">**Added**</span> |
-| `IsPortableClassLibrary : bool` | Property | <span style="color: green">**Added**</span> |
-| `TargetFramework(string, int, string)` | Constructor | <span style="color: green">**Added**</span> |
-
-### ICSharpCode.Decompiler.CSharp.ProjectDecompiler.TargetServices
-
-| Member | Type | Operation |
-|--------|------|-----------|
-| `DetectTargetFramework(MetadataFile) : TargetFramework` | Method | <span style="color: green">**Added**</span> |
-| `GetPlatformName(PEFile) : string` | Method | <span style="color: green">**Added**</span> |
-| `DetectTargetFrameworkNET20(MetadataFile, IAssemblyResolver, TargetFramework) : TargetFramework` | Method | <span style="color: green">**Added**</span> |
-</details>]]></releaseNotes>
+And many other fixes, for a full list click [here](https://github.com/icsharpcode/ILSpy/compare/v10.0-preview1...v10.0-preview2).]]></releaseNotes>
     <copyright>Copyright © SharpDevelop Team</copyright>
     <tags>ilspy foss dotnet assembly decompiler</tags>
     <!-- <projectSourceUrl>https://github.com/icsharpcode/ILSpy</projectSourceUrl> -->
