@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.19.4</version>
+    <version>4.19.5</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,23 +18,22 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.19.4
+## 4.19.5
 
-minor perf(cpu): better order for 'ignore terrain change' operations
+Add '[resource] of [civ] Civilizations' Countable - By RobLoach
 
-By RobLoach:
-- Correct MP games' first turn time 
-- Restore Civilopedia Event-based Tutorials 
+By SomeTroglodyte:
+- Civilopedia Subcategories 
+- Improve 'unit can be promoted' notifications 
+- Fix dev console crashable from autocomplete code 
 
-By EmperorPinguin:
-- AI: don't send workers to other civ's territory 
-- AI: keep wandering if inadvertently ended up in foreign territory 
+By SeventhM:
+- Fix Civi-based triggers ignoring changes from prior triggers 
+- Fix triggerables not multiplying correctly under some circumstances 
 
-MP server: Display URL errors & optimize redirects - By touhidurrr
+Reload multiplayer text on connection success - By touhidurrr
 
-Change mounted attack sounds - By SomeTroglodyte
-
-Gain city-only stockpiles from provides/consumes uniques - By SeventhM]]></releaseNotes>
+Prevent wandering if unit has no movement - By EmperorPinguin]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
