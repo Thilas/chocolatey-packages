@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.19.6</version>
+    <version>4.19.7</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,23 +18,19 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.19.6
+## 4.19.7
 
-Units unset sleep/automation on manual repair commands
+modchecker: Improvements can grant sight on tiles
 
-Fixed crash on unit wander
+Handle case of viewing charts before any turn has happened
 
-By SomeTroglodyte:
-- Options reworked - faster opening 
-- Redo Notification log page in empire overview 
-- Fix links to Translation wiki 
+modding: Rebel unit unique - By chenxing61
 
-By RobLoach:
-- Add Remaining Civilopedia Sub-Categories 
-- Fix notification of perpetual stat conversion 
-- Fix Resource Production Modifier Calculations 
+Traded Declarations of War can affect single Civ instead of both trading Civs - By itanasi
 
-Carrying conditional and countable - By PhiRite]]></releaseNotes>
+Fixed notifications log - By SomeTroglodyte
+
+Fix bug with 'Unit can be promoted' notification - By Nicholas-py]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
