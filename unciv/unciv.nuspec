@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.19.9</version>
+    <version>4.19.10</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,13 +18,15 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.19.9
+## 4.19.10
 
-Fixed mp server change on options, crashing the game
+Add '[cityFilter] Cities of [civFilter] Civilizations' countable - By RobLoach
 
-Modding: Resolved 'divide by zero' errors in expressions by defaulting to zero
+Food consumption by population unique - By PLynx01
 
-Add city context to stat and resource countables - By SeventhM]]></releaseNotes>
+Fix VictoryScreen Charts Visibility for Spectator and Layout - By SomeTroglodyte
+
+Customizable game duration during online games - By AubertJocelyn (new contributor!)]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
