@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.19.11</version>
+    <version>4.19.12</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,21 +18,19 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.19.11
+## 4.19.12
 
-'Unit can be promoted' notification shows correct unit name
+Policies from overridden policy branches no longer 'stick around' to affect the UI
 
-Fixed DOF diplomacy changes for 3rd party civs
+Added stockpiled resource stockpiles to resource overview
 
-Added limit to diplomatic modifiers that accumulate, specifically to negative protected-city-state modifiers
+Added 'Set [stockpile] to [amount]' triggered unique
 
-City state quests are 'consistent random'
+Don't copy mod list download error to clipboard without human approval
 
-Fixed great people not creating improvements
+Download all possible mods when loading a game with missing mods, before notifying of problems
 
-Sending a unit where it can't move any closer, no longer makes the unit image disappear
-
-'Must not be on [amount] largest landmasses' compatible with resource - By chenxing61]]></releaseNotes>
+Don't crash when finding civ-equivalent unit if the replacement unit doesn't exist in the ruleset]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
