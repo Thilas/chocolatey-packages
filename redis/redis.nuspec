@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>8.4.0</version>
+    <version>8.4.1</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -29,59 +29,108 @@ You should use it for local development and follow Redis official guidance to de
     <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/redis-windows/redis-windows/releases)
 
-This is the General Availability release of Redis 8.4 in Redis Open Source.
+Update urgency: `SECURITY`: There are security fixes in the release.
 
-### Major changes compared to 8.2
-
-- [DIGEST](https://redis.io/docs/latest/commands/digest/), [DELEX](https://redis.io/docs/latest/commands/delex/); [SET](https://redis.io/docs/latest/commands/set/) extensions - atomic compare-and-set and compare-and-delete for string keys
-- [MSETEX](https://redis.io/docs/latest/commands/msetex/) - atomically set multiple string keys and update their expiration
-- [XREADGROUP](https://redis.io/docs/latest/commands/xreadgroup/) - new `CLAIM` option for reading both idle pending and incoming stream entries
-- [CLUSTER MIGRATION](https://redis.io/docs/latest/commands/cluster-migration/) - atomic slot migration
-- [CLUSTER SLOT-STATS](https://redis.io/docs/latest/commands/cluster-slot-stats/) - per-slot usage metrics: key count, CPU time, and network I/O
-- Redis query engine: [FT.HYBRID](https://redis.io/docs/latest/commands/ft.hybrid/) - hybrid search and fused scoring
-- Redis query engine: I/O threading with performance boost for search and query commands (`FT.*`) 
-- I/O threading: substantial throughput increase (e.g. >30% for caching use cases (10% `SET`, 90% `GET`), 4 cores)
-- JSON: substantial memory reduction for homogenous arrays (up to 92%)
-
-### Binary distributions
-
-- Alpine and Debian Docker images - https://hub.docker.com/_/redis
-- Install using snap - see https://github.com/redis/redis-snap
-- Install using brew - see https://github.com/redis/homebrew-redis
-- Install using RPM - see https://github.com/redis/redis-rpm
-- Install using Debian APT - see https://github.com/redis/redis-debian
+### Security fixes
 
 
-### Operating systems we test Redis 8.4 on
+- RedisTimeSeries/RedisTimeSerieshttps://github.com/redis/redis/pull/1837, RedisJSON/RedisJSONhttps://github.com/redis/redis/pull/1474 Hide Personally Identifiable Information from server log
+- RedisBloom/RedisBloom#936 Cuckoo filter: crash on RDB load on 0 buckets (MOD-11593)
+- RedisBloom/RedisBloom#945 Bloom filter: crash on RDB load on large number of filters (MOD-11590)
 
-- Ubuntu 22.04 (Jammy Jellyfish), 24.04 (Noble Numbat)
-- Rocky Linux 8.10, 9.5
-- AlmaLinux 8.10, 9.5
-- Debian 12 (Bookworm), Debian 13 (Trixie)
-- macOS 13 (Ventura), 14 (Sonoma), 15 (Sequoia)
-
-### Bug fixes (compared to 8.4-RC1)
-
-- https://github.com/redis/redis/pull/14524 `XREADGROUP CLAIM` returns strings instead of integers
-- https://github.com/redis/redis/pull/14529 Add variable key-spec flags to `SET IF*` and `DELEX`
-- [#P928](https://github.com/RedisBloom/RedisBloom/pull/928) Potential memory leak (MOD-11484)
-- [#T1801](https://github.com/RedisTimeSeries/RedisTimeSeries/pull/1801), [#T1805](https://github.com/RedisTimeSeries/RedisTimeSeries/pull/1805) macOS build failures (MOD-12293)
-- [#J1438](https://github.com/RedisJSON/RedisJSON/pull/1438) `JSON.NUMINCRBY` - wrong result on integer array with non-integer increment (MOD-12282)
-- [#J1437](https://github.com/RedisJSON/RedisJSON/pull/1437) Thread safety issue related to ASM and shared strings (MOD-12013)
+### Bug fixes
 
 
-### Performance and resource utilization improvements (compared to 8.4-RC1)
+- https://github.com/redis/redis/pull/14637 Atomic slot migration: wrong adjacent slot range behavior
+- https://github.com/redis/redis/pull/14567 Atomic slot migration: support delay trimming slots after finishing migrating slots
+- https://github.com/redis/redis/pull/14746 `CLUSTER SLOT-STATS`: Fix few memory tracking bugs
+- RedisTimeSeries/RedisTimeSerieshttps://github.com/redis/redis/pull/1864 Atomic slot migration: time series limitations (MOD-13611)
+- RediSearch/RediSearch#6973 Correct empty string token counting in byteOffset calculations to ensure accurate text position tracking (MOD-11233)
+- RediSearch/RediSearch#6995 Prevent `FT.INFO` command fanout to replicas to reduce unnecessary cluster traffic
+- RediSearch/RediSearch#7154 Display Background Indexing OOM warning in `FT.AGGREGATE` when memory limits are approached (MOD-11817)
+- RediSearch/RediSearch#7219 Resolve concurrency issue in `FT.AGGREGATE`reducer that caused intermittent errors (MOD-12243)
+- RediSearch/RediSearch#7255 Correct `BM25STD` underflow wraparound to prevent incorrect scoring (MOD-12223)
+- RediSearch/RediSearch#7264 Ensure accurate `totalDocsLen` updates to maintain correct document statistics (MOD-12234)
+- RediSearch/RediSearch#7275 Report used memory as unsigned long to prevent overflow (RED-169833)
+- RediSearch/RediSearch#7350 `FT.CREATE` with LeanVec parameters on non-Intel architectures (RED-176382)
+- RediSearch/RediSearch#7371 Validate `search-min-operation-workers` min value correctly (MOD-12383)
+- RediSearch/RediSearch#7430 Prevent coordinator deadlock in `FT.HYBRID` queries by avoiding index read lock (MOD-12489)
+- RediSearch/RediSearch#7435 Ensure full profile output on timeout with `RETURN` policy in `FT.PROFILE` (MOD-12320)
+- RediSearch/RediSearch#7446 Remove outdated validation from debug aggregate in cluster mode (MOD-12435)
+- RediSearch/RediSearch#7455 Ensure internal cursors are deleted immediately in cluster mode (MOD-12493)
+- RediSearch/RediSearch#7458 Correct GC regression that caused stability issues (MOD-12538)
+- RediSearch/RediSearch#7460 Prevent potential double-free on error path in Fork GC (MOD-12521)
+- RediSearch/RediSearch#7499 Propagate `HGETALL` command in HDT mode (MOD-12662)
+- RediSearch/RediSearch#7534 Reduce number of worker threads asynchronously to prevent performance degradation (MOD-12252, MOD-11658)
+- RediSearch/RediSearch#7553 Handle `WITHSCORES` correctly when SCORE is sent alone without extra fields in coordinator (MOD-12647)
+- RediSearch/RediSearch#7560 Properly handle connection closing in IO thread at shutdown and fix searchRequestCtx freeing on error (MOD-12699)
+- RediSearch/RediSearch#7685 Resolve cursor logical leak that could lead to resource exhaustion (MOD-12807)
+- RediSearch/RediSearch#7710 Support for `WITHCOUNT` in `FT.AGGREGATE` (MOD-11751)
+- RediSearch/RediSearch#7794 Correctly handle binary data with embedded NULLs to prevent crashes (MOD-13010)
+- RediSearch/RediSearch#7812 Correct SVS GC for no-workers case (MOD-12983)
+- RediSearch/RediSearch#7815 Fix command routing in cluster mode by not relying on shard index (MOD-13049)
+- RediSearch/RediSearch#7823 Support vector blob only through parameter in `FT.HYBRID`(MOD-13123)
+- RediSearch/RediSearch#7873 Handle warnings in empty `FT.AGGREGATE` replies in cluster mode (MOD-12640)
+- RediSearch/RediSearch#7897 Remove asserts from DownloadFile to prevent crash (MOD-13096)
+- RediSearch/RediSearch#7901 Support multiple warnings in reply to prevent warning loss (MOD-13252)
+- RediSearch/RediSearch#7903 Eliminate memory leak in `FT.HYBRID` queries with Active-Active enabled (MOD-13143)
+- RediSearch/RediSearch#7886 Remove non-TEXT fields from spec's keys dictionary to prevent incorrect field handling (MOD-13150)
+- RediSearch/RediSearch#7905 Remove non-TEXT fields from spec's keys dictionary and refactor keys dict (MOD-13150, MOD-13151)
+- RediSearch/RediSearch#7978 Avoid using negative key position values during command registration (MOD-13332)
+- RediSearch/RediSearch#8052 Resolve incorrect results when using `LOAD *` with `FT.HYBRID` (MOD-12736, MOD-13556)
+- RediSearch/RediSearch#8083 Correct `FULLTEXT` field metric count accuracy (MOD-13432)
+- RediSearch/RediSearch#8089 Handle edge case in clusterset (MOD-13562)
+- RediSearch/RediSearch#8151 Correct `FT.PROFILE` shard total profile time calculation (MOD-13735, MOD-13181)
+- RediSearch/RediSearch#8153 Resolve config registration issue (RED-171841)
+- RediSearch/RediSearch#7449 Ensure `FT.HYBRID` respects timeout settings (MOD-11004)
+- RediSearch/RediSearch#7238 Initialize GIL_TIME properly for `FT.PROFILE` (MOD-12553)
+- RediSearch/RediSearch#7453 Error behavior on early bailout and split OOM warning for shard and coordinator (MOD-12449)
+- RediSearch/RediSearch#7615 Parameter `numDocs` from non-optimized Wildcard iterator (MOD-12392)
+- RediSearch/RediSearch#7165 (Redis Enterprise only) `FT.DROPINDEX` as touches-arbitrary-keys for proper cluster handling causing crash on A-A (MOD-11090)
+- RediSearch/RediSearch#7023 (Redis Enterprise only) Ensure all `FT.SUG*` commands are hashslot-aware to prevent cluster routing errors (MOD-11756)
 
-- https://github.com/redis/redis/pull/14480, https://github.com/redis/redis/pull/14516 Optimize `XREADGROUP`
+### Performance and resource utilization improvements
 
-### known bugs and limitations
+- RediSearch/RediSearch#7496 Vector search performance improvements (MOD-12011, MOD-12063, MOD-12629, MOD-12346)
+- RediSearch/RediSearch#7519 Reduce number of worker threads asynchronously to improve resource utilization (MOD-12252, MOD-11658)
+- RediSearch/RediSearch#7694 Use asynchronous jobs in GC for SVS to reduce blocking (MOD-12668)
+- RediSearch/RediSearch#7730 Support `filter_policy` and `batch_size` parameters for vector similarity search tuning (MOD-13007, MOD-12371)
+- RediSearch/RediSearch#7782 Resolve SVS GC failures when worker threads are disabled (MOD-12983)
+- RediSearch/RediSearch#7572 Implement ASM state machine on notifications (MOD-12170)
+- RediSearch/RediSearch#7829 ASM-aware search flow for Active-Active deployments (MOD-12171, MOD-12169)
+- RediSearch/RediSearch#7589 Support multiple slot ranges in `search.CLUSTERSET` for flexible cluster topology updates (MOD-11657)
+- RediSearch/RediSearch#7862 Support subquery count in `FT.HYBRID` (MOD-11858, MOD-13146)
+- RediSearch/RediSearch#7893 Request policy support for cursor operations (MOD-13146, MOD-9573, MOD-8104)
+- RediSearch/RediSearch#8087 Warning when cursor may give inaccurate results due to Active-Active replication (MOD-12899)
+- RediSearch/RediSearch#7445 Remove outdated validation from Debug Aggregate in cluster mode (MOD-12435)
+- RediSearch/RediSearch#7384 Reduce index load from RDB temporary memory overhead (MOD-12212)
 
-- When executing `FT.SEARCH`, `FT.AGGREGATE`, `FT.CURSOR`, `FT.HYBRID`, `TS.MGET`, `TS.MRANGE`, `TS.MREVRANGE`, and `TS.QUERYINDEX` while an atomic slot migration process is in progress, the results may be partial or contain duplicates
-- `FT.PROFILE`, `FT.EXPLAIN`, and `FT.EXPLACINCLI` do not contain the `FT.HYBRID` option
-- Metrics from `FT.HYBRID` command are not displayed on `FT.INFO` and `INFO`
-- `FT.HYBRID`: the `EXPLAINSCORE`, `SHARD_K_RATIO`, `YIELD_DISTANCE_AS`, and `WITHCURSOR` options are not supported
-- `FT.HYBRID`: post-filtering (after `COMBINE` step) using `FILTER` is not supported
-- `FT.HYBRID`: the default response format considers only `key_id` and `score`. This may change for delivering the entire document content
+### Metrics
+
+- RediSearch/RediSearch#7960 Persist query warnings across cursor reads (MOD-12984)
+- RediSearch/RediSearch#7612 Track `maxprefixexpansions` errors and warnings in info (MOD-12417)
+- RediSearch/RediSearch#7872 Handle warnings in empty `FT.AGGREGATE` replies in cluster mode (MOD-12640)
+- RediSearch/RediSearch#7900 Support multiple warnings in reply (MOD-13252)
+- RediSearch/RediSearch#7576 Track OOM errors and warnings in info (MOD-12418)
+- RediSearch/RediSearch#7507 Track timeout errors and warnings in info (MOD-12419)
+- RediSearch/RediSearch#7341 Rename `FT.PROFILE` counter fields for clarity (MOD-6056)
+- RediSearch/RediSearch#7436, RediSearch/RediSearch#7427 Enhance `FT.PROFILE` with vector search execution details (MOD-12263)
+- RediSearch/RediSearch#7573 Debug support for `FT.PROFILE` command (MOD-12627)
+- RediSearch/RediSearch#7736 Add `Internal cursor reads` metric to cluster `FT.PROFILE` output (MOD-12414)
+- RediSearch/RediSearch#7692 Declare query error struct on `_FT.CURSOR PROFILE` (MOD-12955)
+- RediSearch/RediSearch#7848 Store and display shard ID in profile output (MOD-12321)
+- RediSearch/RediSearch#7422 Track syntax and argument errors in query error metrics (MOD-12416)
+- RediSearch/RediSearch#7552 Add `active_io_threads` metric (MOD-12069, MOD-12695)
+- RediSearch/RediSearch#7622 Add `active_coord_threads` metric (MOD-12694, MOD-12069)
+- RediSearch/RediSearch#7564 Add `active_worker_threads` metric (MOD-12694, MOD-12069)
+- RediSearch/RediSearch#7626 Add `*_pending_jobs` metrics for job queues (MOD-12069)
+- RediSearch/RediSearch#7658 Add pending workers admin jobs metric (MOD-12069, MOD-12791)
+- RediSearch/RediSearch#7731 Add `active_topology_update_threads` metric (MOD-12069, MOD-12790)
+- RediSearch/RediSearch#7760 Extend indexing metrics for more detailed performance data (MOD-12070)
+
+### Configuration parameters
+
+- RediSearch/RediSearch#7083 Add default scorer configuration option (MOD-10037)
 
 
 Hashes
@@ -90,27 +139,27 @@ MSYS2 Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 8A751B5CC12DEED06457D35F8E7B9E4BBFA00145EE8474A19FCD480A2FD98CD5
-Path      : D:\a\redis-windows\redis-windows\Redis-8.4.0-Windows-x64-msys2.zip
+Hash      : FE37D2645B3EE573AD1F314D62F51926D500AA301681D80A11CC8D18CB1CFD2C
+Path      : D:\a\redis-windows\redis-windows\Redis-8.4.1-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : 802D61D8AE38D73B261E11B744E71104D303233504166D5DB23FA37DD736822E
-Path      : D:\a\redis-windows\redis-windows\Redis-8.4.0-Windows-x64-msys2-with-Service.zip
+Hash      : C2688F8D3C281C280F011DEB038E02842FC99BF8E3D984922B80CECAC0206422
+Path      : D:\a\redis-windows\redis-windows\Redis-8.4.1-Windows-x64-msys2-with-Service.zip
 
 Cygwin Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 63A192DE32055FA2C32A957A75AC9442276DB87CF4890FEC2C345F87109FC6B8
-Path      : D:\a\redis-windows\redis-windows\Redis-8.4.0-Windows-x64-cygwin.zip
+Hash      : 4783C960CB8B9F2C14807DDB41D1E29DB720FC28AEF07A17F6FE3603B582EE3D
+Path      : D:\a\redis-windows\redis-windows\Redis-8.4.1-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : D1301D1E3F8C2FE262CD6558559A2880D33CBE2ABE58457F6715876C02BCC976
-Path      : D:\a\redis-windows\redis-windows\Redis-8.4.0-Windows-x64-cygwin-with-Service.zip
+Hash      : 98257D5171BD5A7A6A0209C01CEA792AED3B956CCC13D5D0CB09924D8489AB29
+Path      : D:\a\redis-windows\redis-windows\Redis-8.4.1-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/19560683311]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/21795340361]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
