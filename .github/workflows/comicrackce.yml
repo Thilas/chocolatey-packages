@@ -37,5 +37,5 @@ jobs:
         - Start program
           Start-Program "ComicRack Community Edition" -Shortcut
         - Close program
-          Close-Program rundll32
+          Close-Program ComicRack
     secrets: inherit

@@ -105,6 +105,9 @@ And many other fixes, for a full list click [here](https://github.com/icsharpcod
     <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/ilspy</packageSourceUrl>
     <docsUrl>https://github.com/icsharpcode/ILSpy/wiki</docsUrl>
     <bugTrackerUrl>https://github.com/icsharpcode/ILSpy/issues</bugTrackerUrl>
+    <dependencies>
+      <dependency id="dotnet-10.0-desktopruntime" version="10.0.0" />
+    </dependencies>
   </metadata>
   <files>
     <file src="legal\**" target="legal" />
