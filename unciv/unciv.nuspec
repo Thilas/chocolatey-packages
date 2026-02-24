@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.19.14</version>
+    <version>4.19.15</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,19 +18,22 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.19.14
+## 4.19.15
 
-Add star icon to resources on map that are currently provided
+More explicit warning about large maps causing memory crashes 
 
-Consistent XP cost for next N promotions vs single promotion
+Catch base terrains with occursOn in ruleset validation
 
-AI denounce automation - By unciv-loof
+Removing improvement-creating buildings where the no city tile has the improvement, no longer crashes
 
-By AutumnPizazz:
-- Add game option to hide victory screen statistics 
-- Change 'Set [stockpile] to [amount]' to 'Set [stockpile] to [countable]' 
+Cities can attack revealed invisible units
 
-MapGeneration supports multiple Mountains, Hills, Ice, Snow, Lakes, and Vegetation. - By Ambeco]]></releaseNotes>
+By Ambeco:
+- Adding alternate pathing algorithm 
+- Jungles again no longer spawn on hills 
+- MapGeneration ignores rareFeatures when placing normal tiles 
+
+Add max(), min() functions to countable expressions - By AutumnPizazz]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
