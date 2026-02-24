@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>comicrackce</id>
-    <version>0.9.182</version>
+    <version>0.0.0</version>
     <title>ComicRack Community Edition</title>
     <authors>cYo Soft, Community Edition</authors>
     <owners>Thilas</owners>
