@@ -51,10 +51,12 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco feature enable -n=allowGlobalConfirmation
 "@ > $bootstraPath
 if ($packageName) {
+    $chocoInstallCommand = "choco install $packageName --version $version --source `"$packageName;chocolatey`" $ChocoParameters"
     @"
 '--> Installing $packageName.$version'
+'$chocoInstallCommand'
 `$sw = [System.Diagnostics.Stopwatch]::StartNew()
-choco install $packageName --version $version --source "$packageName;chocolatey" $ChocoParameters
+$chocoInstallCommand
 '--> Package installed in {0}' -f `$sw.Elapsed
 "@ >> $bootstraPath
 }

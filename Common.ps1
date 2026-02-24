@@ -1,6 +1,6 @@
 ﻿$ErrorActionPreference = 'Stop'
 
-if (!(Get-Module AU)) {
+if (!(Get-Module AU, Chocolatey-AU)) {
     Import-Module AU
 }
 
