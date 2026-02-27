@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>5.0.0-Beta1</version>
+    <version>5.0.0-Beta2</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>Thilas</owners>
@@ -32,10 +32,10 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 5.0.0 Beta 1
+Release Notes - SABnzbd 5.0.0 Beta 2
 =========================================================
 
-This is the first beta release of version 5.0.
+This is the second beta release of version 5.0.
 
 Due to several fundamental changes we decided to
 not just call this 4.6 but promote it to 5.0!
@@ -56,6 +56,8 @@ not just call this 4.6 but promote it to 5.0!
 * No longer show tracebacks in the browser, only in the logs.
 * Dropped support for Python 3.8.
 * Windows: Added Windows ARM (portable) release.
+* Windows and macOS: Update Python to 3.14.3, Unrar to 7.20,
+  par2cmdline-turbo to 1.4 and 7zip to 26.00.
 
 ## Bug fixes since 4.5.0
 
@@ -90,7 +92,7 @@ It simplifies the process of downloading from Usenet dramatically, thanks to its
 user interface and advanced built-in post-processing options that automatically verify, repair,
 extract and clean up posts downloaded from Usenet.
 
-(c) Copyright 2007-2025 by The SABnzbd-Team (sabnzbd.org)]]></releaseNotes>
+(c) Copyright 2007-2026 by The SABnzbd-Team (sabnzbd.org)]]></releaseNotes>
     <copyright>Copyright © The SABnzbd-team</copyright>
     <tags>sabnzbd admin download binary usenet newsreader</tags>
     <projectSourceUrl>https://github.com/sabnzbd/sabnzbd</projectSourceUrl>
