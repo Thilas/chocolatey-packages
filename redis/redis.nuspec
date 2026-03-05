@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>8.6.1</version>
+    <version>8.6.1.1</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -46,27 +46,27 @@ MSYS2 Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 9DC415C605705DE58C531386EFD28FF6B2D8757B58ED97C078BB1F058D63792A
+Hash      : 9A94110749314132633716790BDC0FAEAC8FFB911FDE9FAFB71A9CD1F78B0B4B
 Path      : D:\a\redis-windows\redis-windows\Redis-8.6.1-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : 1F9A58E6FFCC63C9B1180E3B35407705C4481950B00A68F941A9CCDD20B62C7F
+Hash      : BD803F1CFF821A398417690C17A224EE92B773F502CCD47A23F656F9032A10D9
 Path      : D:\a\redis-windows\redis-windows\Redis-8.6.1-Windows-x64-msys2-with-Service.zip
 
 Cygwin Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 5174C0378F34E9411EE811D37D17747783DEEC84DA01FB436B6B14FE081A1318
+Hash      : 039D2032F8AB3BD46D1CD21614E5DDC5B673B08B242D62821D049B2ED51CF978
 Path      : D:\a\redis-windows\redis-windows\Redis-8.6.1-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : 97701326CA0556F015DDBE338F170A69810F6D6D5FB4178FA1DAA369F5D66589
+Hash      : 20A955A9CA9EBEA61D2565F9E3A064AA79210E500AE947145397526679355428
 Path      : D:\a\redis-windows\redis-windows\Redis-8.6.1-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/22300868672]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/22705087995]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
