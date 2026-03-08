@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>subtitleedit</id>
-    <version>4.0.15</version>
+    <version>5.0.0-beta4</version>
     <title>Subtitle Edit</title>
     <authors>Nikolaj Lynge Olsson</authors>
     <owners>Thilas</owners>
@@ -26,27 +26,24 @@ Example: `choco install subtitleedit --params "/NoDesktopIcon /NoSetFileTypes"`
     <summary>Subtitle Edit is a free (open source) editor for video subtitles - a subtitle editor :)</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/SubtitleEdit/subtitleedit/releases)
 
-## [Change log](https://raw.githubusercontent.com/SubtitleEdit/subtitleedit/master/Changelog.txt)
+**Build Configuration:** Release
+**Build Date:** 2026-03-08 11:58:08 UTC
 
-## Files
-**[SubtitleEdit-4.0.15-Setup.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/4.0.15/SubtitleEdit-4.0.15-Setup.zip)**
-Windows installer version, .NET 4.8, 64/32-bit (will run 64 bit on 64-bit OS - so do use 64-bit codecs/VLC on 64-bit OS!)
-Thx to XhmikosR for creating the Windows installer :)
-Thx to LeonCheung for gfx :)
-SHA256 Checksum: `af9c17279b46b5e20624b99f2eec1fe376c8bc5abeeaf553fadbec588ebff22f`
-SubtitleEdit-4.0.15-Setup.exe SHA256 Checksum: `015a789165dbf16054303c45c55bdbd0be4986a2cd5357f6f1894b7a1dd3d004`
+### Downloads
+- **Windows x64 installer (Inno Setup):** [SubtitleEdit-Windows-x64-Setup.exe](https://github.com/SubtitleEdit/subtitleedit/releases/download/5.0.0-beta4/SubtitleEdit-Windows-x64-Setup.exe)
+- **Windows x64:** [SubtitleEdit-Windows-x64.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/5.0.0-beta4/SubtitleEdit-Windows-x64.zip)
+- **Windows ARM64:** [SubtitleEdit-Windows-ARM64.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/5.0.0-beta4/SubtitleEdit-Windows-ARM64.zip)
+- **macOS ARM64 (Apple Silicon - M1/M2/M3/M4 architecture):** [SubtitleEdit-macOS-ARM64.dmg](https://github.com/SubtitleEdit/subtitleedit/releases/download/5.0.0-beta4/SubtitleEdit-macOS-ARM64.dmg)
+- **macOS x64 (Intel 64-bit):** [SubtitleEdit-macOS-x64.dmg](https://github.com/SubtitleEdit/subtitleedit/releases/download/5.0.0-beta4/SubtitleEdit-macOS-x64.dmg)
+- **Linux x64:** [SubtitleEdit-Linux-x64.tar.gz](https://github.com/SubtitleEdit/subtitleedit/releases/download/5.0.0-beta4/SubtitleEdit-Linux-x64.tar.gz)
 
-**[SE4015.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/4.0.15/SE4015.zip)**
-Portable version, .NET 4.8, 64/32-bit (will run 64 bit on 64-bit OS - so do use 64-bit codecs/VLC on 64-bit OS!)
-This version is for Linux users too: https://www.nikse.dk/SubtitleEdit/Help#linux
-SHA256 Checksum: `2ea55b3d84f5b293dd2dc83b720d94ad689ababfd88c80c64dca102152426c07`
+### Installation
+1. Read and fix requirements, please see [System Requirements](https://github.com/niksedk/subtitleedit-avalonia#system-requirements)
+2. Download the appropriate package for your platform
+3. Extract the archive (or use installer if available)
+4. Run the executable (on macOS, the app is unsigned - see [System Requirements](https://github.com/niksedk/subtitleedit-avalonia#system-requirements) for how to allow it).
 
-**[SE4015FI.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/4.0.15/SE4015FI.zip)**
-Portable version of SE with Finnish dictionaries, .NET 4.8, 64/32-bit (will run 64 bit on 64-bit OS - so do use 64-bit codecs/VLC on 64-bit OS!)
-Spell check component: http://voikko.sourceforge.net/
-Thx to vm for Finnish language file :)
-Thx to SimplyTheBOSS for testing + OCR helper files :)
-SHA256 Checksum: `c555d13d3b43d55af67aeb9660fa4013d2b629a2e3616caa1d63d602f457d981`]]></releaseNotes>
+*This is an automated build from the GitHub Actions workflow.*]]></releaseNotes>
     <copyright>Copyright © Nikse</copyright>
     <tags>subtitleedit admin subtitle editor video OCR sync merge split convert</tags>
     <projectSourceUrl>https://github.com/SubtitleEdit/subtitleedit</projectSourceUrl>
