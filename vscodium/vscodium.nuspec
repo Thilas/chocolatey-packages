@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>vscodium</id>
-    <version>1.110.1571</version>
+    <version>1.110.11607</version>
     <title>VSCodium</title>
     <authors>Microsoft,Peter Squicciarini,The VSCodium contributors</authors>
     <owners>Thilas</owners>
@@ -45,48 +45,13 @@ Example: `choco install vscodium --params "/NoDesktopIcon /NoAddToPath"`
     <summary>VSCodium</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/VSCodium/vscodium/releases)
 
-update vscode to [1.110.0](https://code.visualstudio.com/updates/v1_110)
-
-With this version of VSCodium, you can use the following new settings:
-
-| Setting                                         | Type   | Default | Description                                       |
-| ----------------------------------------------- | ------ | ------- | ------------------------------------------------- |
-| `workbench.experimental.fontSize`               | number | 13      | Global workbench font size (6-32px)               |
-| `workbench.sideBar.experimental.fontFamily`     | string | `""`    | Side bar font family (both primary and secondary) |
-| `workbench.sideBar.experimental.fontSize`       | number | 13      | Side bar font size                                |
-| `workbench.statusBar.experimental.fontFamily`   | string | `""`    | Status bar font family                            |
-| `workbench.statusBar.experimental.fontSize`     | number | 12      | Status bar font size                              |
-| `workbench.tabs.experimental.fontFamily`        | string | `""`    | Editor tabs font family                           |
-| `workbench.tabs.experimental.fontSize`          | number | 13      | Editor tabs font size                             |
-| `workbench.bottomPane.experimental.fontFamily`  | string | `""`    | Bottom panel font family                          |
-| `workbench.bottomPane.experimental.fontSize`    | number | 13      | Bottom panel font size                            |
-| `workbench.activityBar.experimental.fontFamily` | string | `""`    | Activity bar font family                          |
-| `workbench.activityBar.experimental.fontSize`   | number | 16      | Activity bar font size                            |
-
-It's fixing an old issue of Visual Studio Code.
+update vscode to [1.110.1](https://code.visualstudio.com/updates/v1_110)
 
 ## What's Changed
-* feat: add per-area font customization (fontFamily + fontSize) by @xiaolai in https://github.com/VSCodium/vscodium/pull/2626
-* feat(1.109): update patches by @daiyam in https://github.com/VSCodium/vscodium/pull/2688
-* feat(windows): use versioned update by @daiyam in https://github.com/VSCodium/vscodium/pull/2690
-* feat(windows): disable versioned update by @daiyam in https://github.com/VSCodium/vscodium/pull/2691
-* fix(snap): re-add snap update service by @daiyam in https://github.com/VSCodium/vscodium/pull/2697
-* feat(1.110): update patches by @daiyam in https://github.com/VSCodium/vscodium/pull/2704
-* feat: add patch for workbench's font family by @daiyam in https://github.com/VSCodium/vscodium/pull/2706
-* feat(1.110): update patches by @daiyam in https://github.com/VSCodium/vscodium/pull/2715
-* fix: use correct org for admx by @daiyam in https://github.com/VSCodium/vscodium/pull/2716
-* fix: scm panel by @daiyam in https://github.com/VSCodium/vscodium/pull/2718
-* fix(font): button on extensions panel by @daiyam in https://github.com/VSCodium/vscodium/pull/2719
-* build(deps): bump crazy-max/ghaction-import-gpg from 6 to 7 by @dependabot[bot] in https://github.com/VSCodium/vscodium/pull/2726
-* build(deps): bump actions/download-artifact from 7 to 8 by @dependabot[bot] in https://github.com/VSCodium/vscodium/pull/2727
-* build(deps): bump actions/upload-artifact from 6 to 7 by @dependabot[bot] in https://github.com/VSCodium/vscodium/pull/2728
-* build(deps): bump docker/setup-qemu-action from 3 to 4 by @dependabot[bot] in https://github.com/VSCodium/vscodium/pull/2729
-* feat: update patch by @daiyam in https://github.com/VSCodium/vscodium/pull/2731
+* fix(font-size): detect and apply padding and margin at 0 by @daiyam in https://github.com/VSCodium/vscodium/pull/2737
 
-## New Contributors
-* @xiaolai made their first contribution in https://github.com/VSCodium/vscodium/pull/2626
 
-**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.109.51242...1.110.01571
+**Full Changelog**: https://github.com/VSCodium/vscodium/compare/1.110.11602...1.110.11607
 
 ## x86 64bits
 
@@ -94,101 +59,101 @@ It's fixing an old issue of Visual Studio Code.
   <tr>
     <td rowspan="8">Windows</td>
     <td>User Installer</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodiumUserSetup-x64-1.110.01571.exe">VSCodiumUserSetup-x64-1.110.01571.exe</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodiumUserSetup-x64-1.110.11607.exe">VSCodiumUserSetup-x64-1.110.11607.exe</a></td>
   </tr>
   <tr>
     <td>System Installer</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodiumSetup-x64-1.110.01571.exe">VSCodiumSetup-x64-1.110.01571.exe</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodiumSetup-x64-1.110.11607.exe">VSCodiumSetup-x64-1.110.11607.exe</a></td>
   </tr>
   <tr>
     <td>.zip</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-win32-x64-1.110.01571.zip">VSCodium-win32-x64-1.110.01571.zip</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-win32-x64-1.110.11607.zip">VSCodium-win32-x64-1.110.11607.zip</a></td>
   </tr>
   <tr>
     <td>.msi - updates enabled</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-x64-1.110.01571.msi">VSCodium-x64-1.110.01571.msi</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-x64-1.110.11607.msi">VSCodium-x64-1.110.11607.msi</a></td>
   </tr>
   <tr>
     <td>.msi - updates disabled</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-x64-updates-disabled-1.110.01571.msi">VSCodium-x64-updates-disabled-1.110.01571.msi</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-x64-updates-disabled-1.110.11607.msi">VSCodium-x64-updates-disabled-1.110.11607.msi</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-win32-x64-1.110.01571.tar.gz">vscodium-reh-win32-x64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-win32-x64-1.110.11607.tar.gz">vscodium-reh-win32-x64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-win32-x64-1.110.01571.tar.gz">vscodium-reh-web-win32-x64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-win32-x64-1.110.11607.tar.gz">vscodium-reh-web-win32-x64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-cli-win32-x64-1.110.01571.tar.gz">vscodium-cli-win32-x64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-cli-win32-x64-1.110.11607.tar.gz">vscodium-cli-win32-x64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td rowspan="5">macOS</td>
     <td>.dmg</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium.x64.1.110.01571.dmg">VSCodium.x64.1.110.01571.dmg</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium.x64.1.110.11607.dmg">VSCodium.x64.1.110.11607.dmg</a></td>
   </tr>
   <tr>
     <td>.zip</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-darwin-x64-1.110.01571.zip">VSCodium-darwin-x64-1.110.01571.zip</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-darwin-x64-1.110.11607.zip">VSCodium-darwin-x64-1.110.11607.zip</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-darwin-x64-1.110.01571.tar.gz">vscodium-reh-darwin-x64-1.110.01571..tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-darwin-x64-1.110.11607.tar.gz">vscodium-reh-darwin-x64-1.110.11607..tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-darwin-x64-1.110.01571.tar.gz">vscodium-reh-web-darwin-x64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-darwin-x64-1.110.11607.tar.gz">vscodium-reh-web-darwin-x64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-cli-darwin-x64-1.110.01571.tar.gz">vscodium-cli-darwin-x64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-cli-darwin-x64-1.110.11607.tar.gz">vscodium-cli-darwin-x64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
   <td rowspan="8">Linux</td>
     <td>.deb</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/codium_1.110.01571_amd64.deb">codium_1.110.01571_amd64.deb</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/codium_1.110.11607_amd64.deb">codium_1.110.11607_amd64.deb</a></td>
   </tr>
   <tr>
     <td>.rpm</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/codium-1.110.01571-el8.x86_64.rpm">codium-1.110.01571-el8.x86_64.rpm</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/codium-1.110.11607-el8.x86_64.rpm">codium-1.110.11607-el8.x86_64.rpm</a></td>
   </tr>
   <tr>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-linux-x64-1.110.01571.tar.gz">VSCodium-linux-x64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-linux-x64-1.110.11607.tar.gz">VSCodium-linux-x64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>AppImage</td>
     <td>
-      <a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-1.110.01571.glibc2.30-x86_64.AppImage">VSCodium-1.110.01571.glibc2.30-x86_64.AppImage</a><br />
-      <a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-1.110.01571.glibc2.30-x86_64.AppImage.zsync">VSCodium-1.110.01571.glibc2.30-x86_64.AppImage.zsync</a>
+      <a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-1.110.11607.glibc2.30-x86_64.AppImage">VSCodium-1.110.11607.glibc2.30-x86_64.AppImage</a><br />
+      <a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-1.110.11607.glibc2.30-x86_64.AppImage.zsync">VSCodium-1.110.11607.glibc2.30-x86_64.AppImage.zsync</a>
     </td>
   </tr>
   <tr>
     <td>Snap</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/codium_1.110.01571_amd64.snap">codium_1.110.01571_amd64.snap</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/codium_1.110.11607_amd64.snap">codium_1.110.11607_amd64.snap</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-linux-x64-1.110.01571.tar.gz">vscodium-reh-linux-x64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-linux-x64-1.110.11607.tar.gz">vscodium-reh-linux-x64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-linux-x64-1.110.01571.tar.gz">vscodium-reh-web-linux-x64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-linux-x64-1.110.11607.tar.gz">vscodium-reh-web-linux-x64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-cli-linux-x64-1.110.01571.tar.gz">vscodium-cli-linux-x64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-cli-linux-x64-1.110.11607.tar.gz">vscodium-cli-linux-x64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td rowspan="2">Alpine</td>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-alpine-x64-1.110.01571.tar.gz">vscodium-reh-alpine-x64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-alpine-x64-1.110.11607.tar.gz">vscodium-reh-alpine-x64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-alpine-x64-1.110.01571.tar.gz">vscodium-reh-web-alpine-x64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-alpine-x64-1.110.11607.tar.gz">vscodium-reh-web-alpine-x64-1.110.11607.tar.gz</a></td>
   </tr>
 </table>
 
@@ -198,78 +163,78 @@ It's fixing an old issue of Visual Studio Code.
   <tr>
     <td rowspan="4">Windows</td>
     <td>User Installer</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodiumUserSetup-arm64-1.110.01571.exe">VSCodiumUserSetup-arm64-1.110.01571.exe</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodiumUserSetup-arm64-1.110.11607.exe">VSCodiumUserSetup-arm64-1.110.11607.exe</a></td>
   </tr>
   <tr>
     <td>System Installer</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodiumSetup-arm64-1.110.01571.exe">VSCodiumSetup-arm64-1.110.01571.exe</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodiumSetup-arm64-1.110.11607.exe">VSCodiumSetup-arm64-1.110.11607.exe</a></td>
   </tr>
   <tr>
     <td>.zip</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-win32-arm64-1.110.01571.zip">VSCodium-win32-arm64-1.110.01571.zip</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-win32-arm64-1.110.11607.zip">VSCodium-win32-arm64-1.110.11607.zip</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-cli-win32-arm64-1.110.01571.tar.gz">vscodium-cli-win32-arm64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-cli-win32-arm64-1.110.11607.tar.gz">vscodium-cli-win32-arm64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td rowspan="5">macOS</td>
     <td>.dmg</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium.arm64.1.110.01571.dmg">VSCodium.arm64.1.110.01571.dmg</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium.arm64.1.110.11607.dmg">VSCodium.arm64.1.110.11607.dmg</a></td>
   </tr>
   <tr>
     <td>.zip</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-darwin-arm64-1.110.01571.zip">VSCodium-darwin-arm64-1.110.01571.zip</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-darwin-arm64-1.110.11607.zip">VSCodium-darwin-arm64-1.110.11607.zip</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-darwin-arm64-1.110.01571.tar.gz">vscodium-reh-darwin-arm64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-darwin-arm64-1.110.11607.tar.gz">vscodium-reh-darwin-arm64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-darwin-arm64-1.110.01571.tar.gz">vscodium-reh-web-darwin-arm64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-darwin-arm64-1.110.11607.tar.gz">vscodium-reh-web-darwin-arm64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-cli-darwin-arm64-1.110.01571.tar.gz">vscodium-cli-darwin-arm64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-cli-darwin-arm64-1.110.11607.tar.gz">vscodium-cli-darwin-arm64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td rowspan="7">Linux</td>
     <td>.deb</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/codium_1.110.01571_arm64.deb">codium_1.110.01571_arm64.deb</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/codium_1.110.11607_arm64.deb">codium_1.110.11607_arm64.deb</a></td>
   </tr>
   <tr>
     <td>.rpm</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/codium-1.110.01571-el8.aarch64.rpm">codium-1.110.01571-el8.aarch64.rpm</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/codium-1.110.11607-el8.aarch64.rpm">codium-1.110.11607-el8.aarch64.rpm</a></td>
   </tr>
   <tr>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-linux-arm64-1.110.01571.tar.gz">VSCodium-linux-arm64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-linux-arm64-1.110.11607.tar.gz">VSCodium-linux-arm64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Snap</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/codium_1.110.01571_arm64.snap">codium_1.110.01571_arm64.snap</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/codium_1.110.11607_arm64.snap">codium_1.110.11607_arm64.snap</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-linux-arm64-1.110.01571.tar.gz">vscodium-reh-linux-arm64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-linux-arm64-1.110.11607.tar.gz">vscodium-reh-linux-arm64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-linux-arm64-1.110.01571.tar.gz">vscodium-reh-web-linux-arm64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-linux-arm64-1.110.11607.tar.gz">vscodium-reh-web-linux-arm64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-cli-linux-arm64-1.110.01571.tar.gz">vscodium-cli-linux-arm64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-cli-linux-arm64-1.110.11607.tar.gz">vscodium-cli-linux-arm64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td rowspan="2">Alpine</td>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-alpine-arm64-1.110.01571.tar.gz">vscodium-reh-alpine-arm64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-alpine-arm64-1.110.11607.tar.gz">vscodium-reh-alpine-arm64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-alpine-arm64-1.110.01571.tar.gz">vscodium-reh-web-alpine-arm64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-alpine-arm64-1.110.11607.tar.gz">vscodium-reh-web-alpine-arm64-1.110.11607.tar.gz</a></td>
   </tr>
 </table>
 
@@ -279,27 +244,27 @@ It's fixing an old issue of Visual Studio Code.
   <tr>
     <td rowspan="6">Linux</td>
     <td>.deb</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/codium_1.110.01571_armhf.deb">codium_1.110.01571_armhf.deb</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/codium_1.110.11607_armhf.deb">codium_1.110.11607_armhf.deb</a></td>
   </tr>
   <tr>
     <td>.rpm</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/codium-1.110.01571-el8.armv7hl.rpm">codium-1.110.01571-el8.armv7hl.rpm</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/codium-1.110.11607-el8.armv7hl.rpm">codium-1.110.11607-el8.armv7hl.rpm</a></td>
   </tr>
   <tr>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-linux-armhf-1.110.01571.tar.gz">VSCodium-linux-armhf-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-linux-armhf-1.110.11607.tar.gz">VSCodium-linux-armhf-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-linux-armhf-1.110.01571.tar.gz">vscodium-reh-linux-armhf-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-linux-armhf-1.110.11607.tar.gz">vscodium-reh-linux-armhf-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-linux-armhf-1.110.01571.tar.gz">vscodium-reh-web-linux-armhf-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-linux-armhf-1.110.11607.tar.gz">vscodium-reh-web-linux-armhf-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>CLI</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-cli-linux-armhf-1.110.01571.tar.gz">vscodium-cli-linux-armhf-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-cli-linux-armhf-1.110.11607.tar.gz">vscodium-cli-linux-armhf-1.110.11607.tar.gz</a></td>
   </tr>
 </table>
 
@@ -309,15 +274,15 @@ It's fixing an old issue of Visual Studio Code.
   <tr>
     <td rowspan="3">Linux</td>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-linux-ppc64le-1.110.01571.tar.gz">VSCodium-linux-ppc64le-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-linux-ppc64le-1.110.11607.tar.gz">VSCodium-linux-ppc64le-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-linux-ppc64le-1.110.01571.tar.gz">vscodium-reh-linux-ppc64le-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-linux-ppc64le-1.110.11607.tar.gz">vscodium-reh-linux-ppc64le-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-linux-ppc64le-1.110.01571.tar.gz">vscodium-reh-web-linux-ppc64le-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-linux-ppc64le-1.110.11607.tar.gz">vscodium-reh-web-linux-ppc64le-1.110.11607.tar.gz</a></td>
   </tr>
 </table>
 
@@ -327,15 +292,15 @@ It's fixing an old issue of Visual Studio Code.
   <tr>
     <td rowspan="3">Linux</td>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-linux-riscv64-1.110.01571.tar.gz">VSCodium-linux-riscv64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-linux-riscv64-1.110.11607.tar.gz">VSCodium-linux-riscv64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-linux-riscv64-1.110.01571.tar.gz">vscodium-reh-linux-riscv64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-linux-riscv64-1.110.11607.tar.gz">vscodium-reh-linux-riscv64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-linux-riscv64-1.110.01571.tar.gz">vscodium-reh-web-linux-riscv64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-linux-riscv64-1.110.11607.tar.gz">vscodium-reh-web-linux-riscv64-1.110.11607.tar.gz</a></td>
   </tr>
 </table>
 
@@ -345,15 +310,15 @@ It's fixing an old issue of Visual Studio Code.
   <tr>
     <td rowspan="3">Linux</td>
     <td>.tar.gz</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/VSCodium-linux-loong64-1.110.01571.tar.gz">VSCodium-linux-loong64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/VSCodium-linux-loong64-1.110.11607.tar.gz">VSCodium-linux-loong64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-linux-loong64-1.110.01571.tar.gz">vscodium-reh-linux-loong64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-linux-loong64-1.110.11607.tar.gz">vscodium-reh-linux-loong64-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-linux-loong64-1.110.01571.tar.gz">vscodium-reh-web-linux-loong64-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-linux-loong64-1.110.11607.tar.gz">vscodium-reh-web-linux-loong64-1.110.11607.tar.gz</a></td>
   </tr>
 </table>
 
@@ -363,11 +328,11 @@ It's fixing an old issue of Visual Studio Code.
   <tr>
     <td rowspan="2">Linux</td>
     <td>Remote Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-linux-s390x-1.110.01571.tar.gz">vscodium-reh-linux-s390x-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-linux-s390x-1.110.11607.tar.gz">vscodium-reh-linux-s390x-1.110.11607.tar.gz</a></td>
   </tr>
   <tr>
     <td>Web Host</td>
-    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.01571/vscodium-reh-web-linux-s390x-1.110.01571.tar.gz">vscodium-reh-web-linux-s390x-1.110.01571.tar.gz</a></td>
+    <td><a href="https://github.com/VSCodium/vscodium/releases/download/1.110.11607/vscodium-reh-web-linux-s390x-1.110.11607.tar.gz">vscodium-reh-web-linux-s390x-1.110.11607.tar.gz</a></td>
   </tr>
 </table>]]></releaseNotes>
     <copyright>Copyright © Microsoft Corporation, Peter Squicciarini, The VSCodium contributors</copyright>
@@ -377,7 +342,7 @@ It's fixing an old issue of Visual Studio Code.
     <docsUrl>https://code.visualstudio.com/docs</docsUrl>
     <bugTrackerUrl>https://github.com/VSCodium/vscodium/issues</bugTrackerUrl>
     <dependencies>
-      <dependency id="vscodium.install" version="[1.110.1571]" />
+      <dependency id="vscodium.install" version="[1.110.11607]" />
     </dependencies>
   </metadata>
   <files />
