@@ -7,7 +7,7 @@ $packageArgs = @{
     packageName    = 'procexp'
     url            = 'https://download.sysinternals.com/files/ProcessExplorer.zip'
     unzipLocation  = $toolsDir
-    checksum       = 'b335da33330a7bc3a888ed04cc505daa95cfaef911563d9d5033e1e3dfd4150e'
+    checksum       = 'd5b989c7d4265d6689e4588eecac7af229521b0e3567834275b021ffb311d9c4'
     checksumType   = 'sha256'
     validExitCodes = @(0)
 }
