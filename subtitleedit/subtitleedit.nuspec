@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>subtitleedit</id>
-    <version>5.0.0-beta8</version>
+    <version>5.0.0-beta9</version>
     <title>Subtitle Edit</title>
     <authors>Nikolaj Lynge Olsson</authors>
     <owners>Thilas</owners>
@@ -27,15 +27,15 @@ Example: `choco install subtitleedit --params "/NoDesktopIcon /NoSetFileTypes"`
     <releaseNotes><![CDATA[[Releases](https://github.com/SubtitleEdit/subtitleedit/releases)
 
 **Build Configuration:** Release
-**Build Date:** 2026-03-14 06:45:37 UTC
+**Build Date:** 2026-03-17 19:51:37 UTC
 
 ### Downloads
-- **Windows x64 installer (Inno Setup):** [SubtitleEdit-Windows-x64-Setup.exe](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta8/SubtitleEdit-Windows-x64-Setup.exe)
-- **Windows x64:** [SubtitleEdit-Windows-x64.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta8/SubtitleEdit-Windows-x64.zip)
-- **Windows ARM64:** [SubtitleEdit-Windows-ARM64.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta8/SubtitleEdit-Windows-ARM64.zip)
-- **macOS ARM64 (Apple Silicon - M1/M2/M3/M4 architecture):** [SubtitleEdit-macOS-ARM64.dmg](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta8/SubtitleEdit-macOS-ARM64.dmg)
-- **macOS x64 (Intel 64-bit):** [SubtitleEdit-macOS-x64.dmg](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta8/SubtitleEdit-macOS-x64.dmg)
-- **Linux x64:** [SubtitleEdit-Linux-x64.tar.gz](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta8/SubtitleEdit-Linux-x64.tar.gz)
+- **Windows x64 installer (Inno Setup):** [SubtitleEdit-Windows-x64-Setup.exe](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta9/SubtitleEdit-Windows-x64-Setup.exe)
+- **Windows x64:** [SubtitleEdit-Windows-x64.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta9/SubtitleEdit-Windows-x64.zip)
+- **Windows ARM64:** [SubtitleEdit-Windows-ARM64.zip](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta9/SubtitleEdit-Windows-ARM64.zip)
+- **macOS ARM64 (Apple Silicon - M1/M2/M3/M4 architecture):** [SubtitleEdit-macOS-ARM64.dmg](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta9/SubtitleEdit-macOS-ARM64.dmg)
+- **macOS x64 (Intel 64-bit):** [SubtitleEdit-macOS-x64.dmg](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta9/SubtitleEdit-macOS-x64.dmg)
+- **Linux x64:** [SubtitleEdit-Linux-x64.tar.gz](https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.0.0-beta9/SubtitleEdit-Linux-x64.tar.gz)
 
 ### Installation
 1. Read and fix requirements, please see [System Requirements](https://github.com/niksedk/subtitleedit-avalonia#system-requirements)
