@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.19.19</version>
+    <version>4.20.0</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,17 +18,21 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.19.19
+## 4.20.0
 
-Reset tileset settings when deleting the mod that contained the tileset
+By unciv-loof:
+- Fix embassy trade logic bug 
+- Popup after other civ responds to a demand 
 
-AIs ignore demands/declarations of friendship from dead civs
+By SeventhM:
+- Add conditionals for current unit movement 
+- Fix unavailable unique being ignored in unexpected places 
 
-By Ambeco:
-- AStar pathing no longer treats rivers as multi-turn obstacles 
-- flat earth hexigonal no longer crashes 
+Theoretical improvements to workerAutomation performance - By Ambeco
 
-Bugfix: don't try to buy missionaries in cities with a civilian unit - By EmperorPinguin]]></releaseNotes>
+Fixed translation in multiplayer game preview description - By evanofficial (new contributor!)
+
+'Upon signing a peace treaty' unique - By PLynx01]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
