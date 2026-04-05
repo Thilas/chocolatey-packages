@@ -6,11 +6,11 @@ $packageArgs = @{
     softwareName   = 'Stellarium *'
     fileType       = 'exe'
     # url            = ''
-    url64bit       = 'https://github.com/Stellarium/stellarium/releases/download/v25.4/stellarium-25.4-qt6-win64.exe'
+    url64bit       = 'https://github.com/Stellarium/stellarium/releases/download/v26.1/stellarium-26.1-qt6-win64.exe'
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
     # checksum       = ''
     # checksumType   = ''
-    checksum64     = '7628a371c88d74ff56980b00f100beef60a18aced23db5ca8cd7ce7679c3dc9f'
+    checksum64     = 'f48d9ccc850e4143da4f8442c14b328c111294f6fcd4f1bf6a0a81801849c48b'
     checksumType64 = 'sha256'
     validExitCodes = @(0)
 }

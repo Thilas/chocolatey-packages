@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>stellarium</id>
-    <version>25.4.0</version>
+    <version>26.1.0</version>
     <title>Stellarium</title>
     <authors>Stellarium Developers</authors>
     <owners>Thilas</owners>
@@ -18,166 +18,120 @@
 
 **The installers are located in the "Assets" section at the end of these release notes!**
 
-[![Github Release](https://img.shields.io/github/downloads/Stellarium/stellarium/v25.4/total.svg)](https://github.com/Stellarium/stellarium/releases/v25.4)
+[![Github Release](https://img.shields.io/github/downloads/Stellarium/stellarium/v26.1/total.svg)](https://github.com/Stellarium/stellarium/releases/v26.1)
 
-## Release notes
-Glad to announce the release of Stellarium 25.4 for all platforms. This is our final release in 2025 with exciting features and many bug fixes.
+Glad to announce the release of Stellarium 26.1 for all platforms. This is our first release in 2026 with exciting features and many 
+bug fixes.
 
 The major changes of this version:
-- Added initial support of narration
-- Added new sky cultures
-- Many improvements in Sky Culture Maker plugin
-- Many improvements in Core
+- Added two new sky cultures
+- Added Time Navigator plugin
+- Many improvements for support Windows/arm64
+- Many significant improvements in sky cultures support
+- Many improvements in plugins
+- Many improvements in Core and GUI
 - Many updates in sky cultures
 
 Thanks to all the developers, testers, and users who made this release possible with your contributions and feedback.
 
 ## What's Changed
 Full list of changes:
-- Added new sky culture: Balinese (GH: #4625)
-- Added new sky culture: Indian (Nakshatras) [from Susanne M. Hoffmann with B.S. Shylaja]
-- Added new sky culture: Norse (Edda) [from the German Studies, University of Jena]
-- Added new sky culture: Chinese (Journey to the West) [from two Chinese colleagues]
-- Added initial support of narration (cmake flag ENABLE_SPEECH)
-- Added discovery circumstances for newly discovered comets
-- Added missing timezone
-- Added Latin zodiac in Greek (Dante) sky culture
-- Added Latin zodiac in Greek (Leiden Aratea) sky culture
-- Added Greek zodiac in Greek (Farnese) sky culture
-- Added Greek zodiac in Greek (Almagest) sky culture
-- Added report failures to load textures obtained from network too
-- Added constellation descriptions to Modern sky culture
-- Added VS2026 multi-config section and fix VS2022 statement in BUILDING.md (GH: #4676)
-- Added more logging categories (GH: #4652)
-- Added missing context in Modern sky culture constellation names
-- Added ability to inhibit screensaver in fullscreen via CLI (Windows only) (GH: #4507)
-- Added object type support for custom object
-- Added obj type in search result, indicating SIMBAD result with fetched object types
-- Added all native names to name search (GH: #4608)
-- Added the star "Celestial Pig's Eye" in Chinese sky culture (GH: #4598)
-- Added Visual Studio 2022 build instructions
-- Added ability to see colored labels for satellites in both modes (GH: #4588)
-- Added polar distance info into InfoMap data
-- Added extinction effect into drawing of satellites (GH: #4585)
-- Added new set of navigational stars (XIX century)
-- Added ability to use polar distance instead of declination in equatorial coordinates (GH: #4571, #4529)
-- Added Nova Centauri 2025
-- Added support for translating separated Constellations section
-- Fixed crash when ENABLE_SPEECH is not defined
-- Fixed typos (GH: #4653, #4646)
-- Fixed structure of many sky cultures
-- Fixed observe magnitude limit (GH: #4633)
-- Fixed discovery circumstances for minor planets
-- Fixed some debug messages with paths
-- Fixed hardware detection in linux/aarch64 (RPi4)
-- Fixed hardware detection in OpenBSD
-- Fixed typo in Babylonian (MUL.APIN) sky culture
-- Fixed checking updates
-- Fixed build with Qt6.10 (GH: #4667)
-- Fixed IPA for Russian Siberian sky culture
-- Fixed GUI issue in Solar System Editor plugin (GH: #4661)
-- Fixed altitude representation in decimal degrees in AstroCalc/Phenomena tool (GH: #4582)
-- Fixed deleted lines during creation of a constellation end up in the output in Sky Culture Maker plugin (GH: #4593)
-- Fixed Observability Analysis plugin crash (GH: #4618)
-- Fixed start with empty observing list (GH: #4641)
-- Fixed documentation (GH: #4627)
-- Fixed getting screenshot HiDPI scaling on Wayland
-- Fixed bookmarks for minor planets orbital elements
-- Fixed indication satellite in penumbra (GH: #4615)
-- Fixed helplabel font in bottom bar (GH: #4614)
-- Fixed a use after free (GH: #4581)
-- Fixed loading localization in some specific cases (GH: #4605)
-- Fixed translations issue (GH: #4607)
-- Fixed loading star catalogs
-- Fixed setting SkyculturePartition colors (GH: #4575)
-- Fixed reading the setting for enabling abbreviations of constellations
-- Fixed missing config option
-- Fixed tooltip
-- Fixed the positioning of the star "Auxiliary Road " in Chinese Chenzhuo sky culture (GH: #4576)
-- Fixed description of few scripts
-- Fixed classification issue in Sky Culture Maker plugin
-- Fixed issue in Sky Culture Maker plugin: Drawn constellations are not reset after "Export and Exit" (GH: #4557)
-- Fixed issue in Sky Culture Maker plugin: Stop drawing line key (Double Right Click) only works when Star/DSO is selected (GH: #4557)
-- Fixed issue in Sky Culture Maker plugin: Not all sky culture description input fields that are marked required are actually checked (GH: #4557)
-- Fixed issue in Sky Culture Maker plugin: No formal checks for 'Constellations' input field in sky culture description (GH: #4557)
-- Fixed some issues in the Chinese Chenzhuo sky culture (GH: #4544)
-- Fixed Sardinian sky culture: Allow elongation-dependent name for Venus (GH: #4549)
-- Fixed abbreviations in Indian sky culture (GH: #4545)
-- Changed core: Allow negative hour angles (GH: #4584)
-- Changed core: Compute correct longitude position even if skyculture partition is not shown
-- Changed core: Recreate viewport effect on screen scaling change
-- Changed core: Take changes in magnitude due to proper motion when getting vmag with extinction (GH: #4638)
-- Changed core: Retrieve all cultural names on search (GH: #4608)
-- Changed core: Extend global zone in lv0-2 catalogs to 200,000 years due to GH #4501
-- Changed core: Need to normalize binary stars' cartesian position to fix wrong parallax effect for binary stars (GH: #4596)
-- Changed core: Minor dynamic resolution changes (GH: #4672)
-- Changed core: Don't forget to run markdownToHTML on an SC description section
-- Changed core: Scale Custom Object pointer with the screen
-- Changed core: Scale nomenclature pointer with the screen
-- Changed core: Scale star pointer with the screen
-- Changed core: Properly scale SolarSystem pointer with the screen
-- Changed core: Properly scale meteor shower icon on the screen
-- Changed core: Scale meteor shower, satellite, DSO pointers with the screen
-- Changed visual type of monthly graph in AstroCalc tool
-- Changed GUI: Don't force button sizes in ScriptConsole
-- Changed GUI: Make combobox dropdown actually drop down
-- Changed NLS: Simplify 'pronounce' .po entries of Chinese sky cultures (GH: #4538)
-- Changed Calendars plugin: Allow exporting displayed list
-- Changed Sky Culture Maker plugin: Remove "test only" warning and enable translation signal (GH: #4696)
-- Changed Sky Culture Maker plugin: Tell what fields are incomplete on export error (GH: #4697)
-- Changed Sky Culture Maker plugin: Use artIntensity from ConstellationMgr (GH: #4682)
-- Changed Sky Culture Maker plugin: Tweak the Close dialog text
-- Changed Sky Culture Maker plugin: Use better button labels in the Close dialog
-- Changed Sky Culture Maker plugin: Fix UX issues with aborting and hiding dialogs + missing translations (GH: #4568, #4665)
-- Changed Sky Culture Maker plugin: Fix Thickness of constellation lines in SCM is not tied to Stellarium's settings (GH: #4659, #4664)
-- Changed Sky Culture Maker plugin: Move constellation descriptions to the Constellations dialog
-- Changed Sky Culture Maker plugin: Option to merge constellation lines into polylines (GH: #4563)
-- Changed Sky Culture Maker plugin: Don't exit on "Export and Exit" when export failed (GH: #4580)
-- Changed Oculars plugin: Try a drop shadow to increase GUI panel clarity (GH: #4560)
-- Updated DSO catalog (v3.22; GH: #4634)
-- Updated CalcMySky to v0.4.0
-- Updated Babylonian sky cultures (slightly reworked, some typos, issues in "SC 2.0")
-- Updated Chinese (Song Dynasty) sky culture
-- Updated BAS_Messier_Tour.ssc script
-- Updated Maori sky culture
-- Updated Modern (IAU) sky culture: a few more bynames (GH: #4617)
-- Updated Arabic (Arabian peninsula) sky culture
-- Updated description of Arabic (Arabian peninsula) sky culture (GH: #4535)
-- Updated Chinese sky cultures: complete the entries on planets (GH: #4558)
-- Updated IAU-star names in Modern (IAU) sky culture
-- Updated the list of contributors
-- Updated photometry data of satellites 
-- Updated default list of satellites
-- Updated the default list of locations
-- Updated the default catalog of exoplanets
-- Updated default catalog of pulsars
-- Updated names of DSO
-- Updated orbital elements for minor bodies of Solar system
-- Updated discovery circumstances for comets and minor planets
+- Added support to non-standard regions in list of sky cultures (GH: #4843)
+- Added Chinese (Xianglin Star Chart) and Manchu sky cultures (GH: #4779)
+- Added ability to change the density of grid lines (GH: #4773)
+- Added ability to disabling show an OAG angular limits (GH: #4688)
+- Added FOV-dependent Moon enlargement (GH: #4806)
+- Added Time Navigator plugin (GH: #4817)
+- Added "Planetary Events" feature for Time Navigator plugin (GH: #4828)
+- Added missing full stops in narration
+- Added Mongolian and Hieroglyph fallback fonts (Windows)
+- Added improvements for ASCOM telescopes
+- Added support of new time step: Metonic cycle (GH: #4769)
+- Added examples for select the planetary features in scripts (GH: #4761)
+- Added missing flag for InfoBox (GH: #4734)
+- Added link to MPC's list of bright minor planets in opposition available for 2026 into Solar System Editor plugin (GH: #4730)
+- Added vcs-browser URL into metadata (GH: #4714)
+- Fixed path to territory.geojson
+- Fixed translation regions in GUI
+- Fixed visual style for new feature in the Sky Cultures tab
+- Fixed observing list window displaying incorrect list name after delete (GH: #4837)
+- Fixed crash when trying to reach View dialog (GH: #4841)
+- Fixed comet tail extinction (GH: #4827)
+- Fixed deleting items from observing lists (GH: #4826)
+- Fixed saving description in observing lists (GH: #4824)
+- Fixed compilation on Windows
+- Fixed compilation on macOS Tahoe
+- Fixed orbital parameter of HIP91919 and parallax of HIP 28360 (GH: #4818)
+- Fixed crash: avoid NaN result (GH: #4619)
+- Fixed scaling of meteor shower icon
+- Fixed scaling of other object pointers
+- Fixed size of meteor shower, satellite, DSO pointers
+- Fixed wrong defaults in Extinction (GH: #4619)
+- Fixed typo in asterism (GH: #4801)
+- Fixed spelling error
+- Fixed an assertion (GH: #4803)
+- Fixed compilation for Qt5
+- Fixed select single constellation in some languages (GH: #4775)
+- Fixed sync for InfoBox's flags
+- Fixed detecting dependencies for Text-To-Speech feature (GH: #4765)
+- Fixed docs
+- Fixed scripting API docs
+- Fixed typos in sky cultures
+- Fixed compilation with Qt 6.10+: QXlsx switched to master to avoid compiling issue when Qt 6.10+ is used
+- Fixed Spelling in Roman calendar in Calendars plugin (GH: #4727)
+- Fixed year of copyright and version of application
+- Fixed crash at exit from Stellarium (GH: #4713)
+- Fixed DOI for citation
+- Changed core And GUI: Expansion of skycultures through spatial and temporal extent (GH: #4683)
+- Changed core: Change how zoom limits for map in sce are handled (GH: #4846)
+- Changed core: Make object searches return StelObjectP
+- Changed core: Rewrite SearchDialog logic
+- Changed core: Strip away some HTML decoration from infostring and narration
+- Changed core: Use translation setting for Zodiac/Lunar Station infostring labels (GH: #4830)
+- Changed core: Refinements for TextToSpeech output (GH: #4706)
+- Changed core: Increase minimum number of facets of the planetary mesh
+- Changed core: Allow Vec4 in RemoteControl API (GH: #4780)
+- Changed core: Re-enable high graphics mode for OpenBSD and NetBSD operating systems
+- Changed core: Added improvements for support ARM64 architecture on Windows
+- Changed core: Re-enable high graphics mode for OpenBSD and NetBSD
+- Changed core: Take care of application font change (GH: #4620)
+- Changed logger: fix for Haiku OS name detection
+- Changed logger: improved hardware detection for OpenBSD
+- Changed logger: cosmetic fixes for Solar System Editor plugin
+- Changed scripting engine: Also remove labels, skyImages and screenImages when clearing the scene in a script (GH: #4781)
+- Changed behavior of AstroCalc/Phenomena tool: do not disable selection of the objects when list of phenomena is empty (the mode "Last selected object" is enabled)
+- Changed OnlineQueries plugin: Updated ASE URL (GH: #4763)
+- Updated albedo texture of the Moon
+- Updated planetary nomenclature
+- Updated default list of comets and minor planets
 - Updated translations
-- Updated Stellarium User Guide
-- Updated template for Stellarium User Guide (GH: #4681)
-- Updated planetary nomenclature data
-- Restored mistakenly altered Sun texture
-- Removed copies of images from root directory
-- Removed extraneous brackets in IPA of Balinese sky culture
-- Removed outdated core: Unuse StelSkyDrawer::getBortleScaleIndex in ZL
-- Removed the kludge in Constellation
+- Updated default catalog of exoplanets
+- Updated list of contributors
+- Updated discovery circumstances for comets and minor planets
+- Updated photometry data for artificial satellites
+- Updated Babylonian (MUL.APIN) sky culture
+- Updated Norse (Edda) sky culture
+- Updated Help dialog: added Scenery3D movement keys
+- Updated DSO catalog to v3.23
+- Removed a broken duplicate of page_surveys
+- Removed ridiculously huge minimumSize from culturesListWidget
+- Removed duplicate sky culture layout from Survey tab
+- Removed code for autoselect of the discrete graphics cards (GH: #4758)
 
 ## Packages notes
 package | note
 ------------|---------
-stellarium-25.4.tar.gz | Source code of Stellarium 25.4 
-stellarium-25.4.tar.bz2 | Source code of Stellarium 25.4
-stellarium-25.4.tar.xz | Source code of Stellarium 25.4
-stellarium-25.4.zip | Source code of Stellarium 25.4
-stellarium-25.4-qt5-win64.exe | Stellarium 25.4 for Windows (x86_64; Windows 7+) based on Qt 5.12.6 (Visual Studio 2017)
-stellarium-25.4-qt6-win64.exe | Stellarium 25.4 for Windows (x86_64; Windows 10+) based on Qt 6.8.3 (Visual Studio 2022)
-stellarium-25.4-qt6-arm64.exe | Stellarium 25.4 for Windows (ARM64; Windows 10+) based on Qt 6.8.3 (Visual Studio 2022)
-Stellarium-25.4-qt6-macOS.zip | Stellarium 25.4 for macOS (universal; macOS 12.0+) based on Qt 6.9.3 (AppleClang 17.0.0)
-Stellarium-25.4-qt5-x86_64.zip | Stellarium 25.4 for macOS (x86_64; macOS 10.13+) based on Qt 5.12.12 (AppleClang 13.0.0)
-Stellarium-25.4-qt5-x86_64.AppImage | Stellarium 25.4 for Linux (amd64; glibc 2.35) based on Qt 5.15.3 (GCC 11.4.0)
-Stellarium-25.4-qt6-x86_64.AppImage | Stellarium 25.4 for Linux (amd64; glibc 2.35) based on Qt 6.2.4 (GCC 11.4.0)
+stellarium-26.1.tar.gz | Source code of Stellarium 26.1 
+stellarium-26.1.tar.bz2 | Source code of Stellarium 26.1
+stellarium-26.1.tar.xz | Source code of Stellarium 26.1
+stellarium-26.1.zip | Source code of Stellarium 26.1
+stellarium-26.1-qt5-win64.exe | Stellarium 26.1 for Windows (x86_64; Windows 7+) based on Qt 5.12.6 (Visual Studio 2017)
+stellarium-26.1-qt6-win64.exe | Stellarium 26.1 for Windows (x86_64; Windows 10+) based on Qt 6.9.3 (Visual Studio 2022)
+stellarium-26.1-qt6-arm64.exe | Stellarium 26.1 for Windows (ARM64; Windows 10+) based on Qt 6.5.3 (Visual Studio 2022)
+Stellarium-26.1-qt6-macOS.zip | Stellarium 26.1 for macOS (universal; macOS 12.0+) based on Qt 6.9.3 (AppleClang 21.0.0)
+Stellarium-26.1-qt5-x86_64.zip | Stellarium 26.1 for macOS (x86_64; macOS 10.13+) based on Qt 5.12.12 (AppleClang 13.0.0)
+Stellarium-26.1-qt5-x86_64.AppImage | Stellarium 26.1 for Linux (amd64; glibc 2.35) based on Qt 5.15.3 (GCC 11.4.0)
+Stellarium-26.1-qt6-x86_64.AppImage | Stellarium 26.1 for Linux (amd64; glibc 2.35) based on Qt 6.2.4 (GCC 11.4.0)
 
 ## Verify
 ### GPG signature
@@ -188,7 +142,7 @@ Stellarium-25.4-qt6-x86_64.AppImage | Stellarium 25.4 for Linux (amd64; glibc 2.
   **id:** `rsa4096/BF38D4D02A328DFF 2012-04-07`
   **fingerprint:** `7915 1C2E 6351 E727 8DA1  A730 BF38 D4D0 2A32 8DFF`
 3. Verify the binary file is valid (tarball for example)
-  `gpgv --keyring ./stellarium.gpg stellarium-25.4.tar.gz.asc stellarium-25.4.tar.gz`]]></releaseNotes>
+  `gpgv --keyring ./stellarium.gpg stellarium-26.1.tar.gz.asc stellarium-26.1.tar.gz`]]></releaseNotes>
     <copyright>Copyright © Stellarium Developers</copyright>
     <tags>stellarium admin planetarium sky stars constellations</tags>
     <projectSourceUrl>https://github.com/Stellarium/stellarium</projectSourceUrl>
