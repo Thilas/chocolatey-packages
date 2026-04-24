@@ -7,7 +7,7 @@ Package can be verified like this:
 
 1. Go to
 
-   x32: https://github.com/idrassi/HashCheck/releases/download/v2.5.0/HashCheckSetup-v2.5.0.1.exe
+   x32: https://github.com/idrassi/HashCheck/releases/download/v2.6.0/HashCheckSetup-v2.6.0.0.exe
 
    to download the installer.
 
@@ -15,7 +15,7 @@ Package can be verified like this:
    - Use powershell function 'Get-FileHash'
    - Use Chocolatey utility 'checksum.exe'
 
-   checksum32: 08B24442831FB903500460132BA9CAE2F415EE640FD0FDABB1E9082EA680BC52
+   checksum32: 3E10F172A65E952158F5F6013004FA7531BEB8D1FFBF82F3A521A981A5C44695
 
 File 'LICENSE.txt' is obtained from:
    https://github.com/idrassi/HashCheck/blob/master/license.txt

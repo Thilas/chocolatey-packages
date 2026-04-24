@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>hashcheck</id>
-    <version>2.5.0</version>
+    <version>2.6.0</version>
     <title>HashCheck Shell Extension</title>
     <authors>Kai Liu,Christopher Gurnee,David B. Trout,Tim Schlueter,Mounir IDRASSI</authors>
     <owners>Thilas</owners>
@@ -14,7 +14,51 @@
     <description><![CDATA[The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer. In addition to integrating file checksumming functionality into Windows, HashCheck can also create and verify SFV files (and other forms of checksum files, such as .md5 files). It is fast and efficient, with a very light disk and memory footprint, and it is open-source.
 ]]></description>
     <summary>The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer.</summary>
-    <releaseNotes>[Releases](https://github.com/idrassi/HashCheck/releases)</releaseNotes>
+    <releaseNotes><![CDATA[[Releases](https://github.com/idrassi/HashCheck/releases)
+
+## HashCheck 2.6
+
+HashCheck 2.6 brings native Windows 11 Explorer context menu support, command-line checksum creation, new XXH3 algorithms, Unix LF checksum output, long-path fixes, and multiple reliability and performance improvements.
+
+### Highlights
+
+- Added native Windows 11 Explorer context menu support using IExplorerCommand, while keeping the legacy context menu integration for older Windows versions.
+- Added HashCheckPackageHost.exe to create or verify checksum files without launching Explorer.
+    - Supports /create, /verify, and /options.
+    - Supports silent checksum creation with /output, /hash, /encoding, and /eol.
+- Added XXH3 checksum support:
+    - XXH3-64
+    - XXH3-128
+    - Includes save formats, verification parsing, file filters, options UI, and tests.
+- Added a dedicated Verify Checksum File context menu entry for recognized checksum files.
+- Added an option to save checksum files using Unix LF line endings.
+- Updated BLAKE3 to version 1.8.2 and added gated x64 oneTBB-based BLAKE3 acceleration support.
+- Improved hashing buffer selection, using adaptive read buffers depending on the target path.
+
+### Fixed Issues
+
+- Fixed verifier status sorting so failures are shown first. Fixes #33.
+- Sorted checksum output after hashing for deterministic output order. Fixes #15, #4, and #29.
+- Improved default checksum save names by using a shared filename stem when appropriate. Fixes #11.
+- Fixed child checksum save locations to use absolute paths. Fixes #7.
+- Retried file opens with long-path prefixes to better support very long paths. Fixes #22 and #1.
+- Installed the shell extension under Program Files instead of system directories. Fixes #32, #2, and #20.
+- Improved CRC32 update performance. Fixes #30.
+- Added Unix line ending support for checksum files. Fixes #21.
+
+### Other Changes
+
+- Sorted checksum saves from the Properties tab.
+- Retried checksum output file creation using long-path prefixes.
+- Improved Windows 11 Explorer command responsiveness.
+- Added a Windows 11 context menu command for HashCheck options.
+- Improved installer logging, AppX registration diagnostics, uninstall cleanup, and reboot-required notifications.
+- Removed Windows 11 package assets during uninstall.
+- Hardened shell extension cleanup, worker shutdown, registry access, file size handling, ReadFile error handling, and memory allocation paths.
+- Updated code signing certificate and release metadata.
+
+
+**Full Changelog**: https://github.com/idrassi/HashCheck/compare/v2.5.0...v2.6.0]]></releaseNotes>
     <copyright>Copyright © 2008-2009 Kai Liu.  All rights reserved.
 Copyright © 2014, 2016 Christopher Gurnee.  All rights reserved.
 Copyright © 2014 Software Development Laboratories ("Fish" (David B. Trout))
