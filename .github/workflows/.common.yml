@@ -88,14 +88,14 @@ jobs:
 
       - name: Upload Packages artifact
         if: ${{ always() && hashFiles('Packages/*.nupkg') }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Packages
           path: Packages/*.nupkg
 
       - name: Upload Test artifact
         if: ${{ hashFiles('Packages/*.nupkg') }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Test
           path: test.ps1
@@ -170,7 +170,7 @@ jobs:
           "path=$path" >> $env:GITHUB_OUTPUT
 
       - name: Upload Information artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Information ${{ env.package_name }} ${{ env.package_version }} on ${{ matrix.os }}
           path: ${{ steps.information.outputs.path }}
@@ -205,7 +205,7 @@ jobs:
 
       - name: Upload failure screenshot into Information artifact
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Information ${{ env.package_name }} ${{ env.package_version }} on ${{ matrix.os }}
           path: desktop*.png
