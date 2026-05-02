@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>5.0.0</version>
+    <version>5.0.1</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>Thilas</owners>
@@ -32,15 +32,18 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 5.0.0
+Release Notes - SABnzbd 5.0.1
 =========================================================
 
 In this fifth major release of SABnzbd, we included:
+
 * Smarter (and potentially faster) downloads with NNTP Pipelining and Direct Write.
 * Reliability gains from a reworked cache and safer processing.
 * A significant number of bug fixes and platform updates.
 
-Please note the breaking changes described below!
+## Bug fixes in 5.0.1
+
+* Queued downloads from older versions did not load after updating.
 
 ## New features in 5.0.0
 
