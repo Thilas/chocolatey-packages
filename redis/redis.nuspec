@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>8.6.2</version>
+    <version>8.6.3</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -29,21 +29,51 @@ You should use it for local development and follow Redis official guidance to de
     <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/redis-windows/redis-windows/releases)
 
+Update urgency: `SECURITY`: There are security fixes in the release.
+
 ### Security fixes
 
-- https://github.com/redis/redis/pull/14824 Potential UAF: don't use reply copy avoidance for module strings
+- (CVE-2026-23479) Use-After-Free in unblock client flow may lead to Remote Code Execution.
+- (CVE-2026-25243) Invalid memory access in `RESTORE` may lead to Remote Code Execution
+- (CVE-2026-23631) Lua Use-After-Free may lead to remote code execution
+- (CVE-2026-25588) Invalid memory access in `RESTORE` may lead to Remote Code Execution (Time Series)
+- (CVE-2026-25589) Invalid memory access in `RESTORE` may lead to Remote Code Execution (Probabilistic)
 
 ### Bug fixes
 
-- https://github.com/redis/redis/pull/14848 Crash during command processing on replicas performing full synchronization
-- https://github.com/redis/redis/pull/14794 New `XIDMPRECORD` internal command and AOFRW emission to restore stream IDMP state
-- https://github.com/redis/redis/pull/14816 setModuleEnumConfig() passing prefixed name to module callbacks
-- https://github.com/redis/redis/pull/14858 Streams: Ensures `XADD` with `IDMP`/`IDMPAUTO` that hits an existing IID records the metadata change
-- https://github.com/redis/redis/pull/14855, https://github.com/redis/redis/pull/14831, https://github.com/redis/redis/pull/14817 Potential memory leaks
-- https://github.com/redis/redis/pull/14869 Streams: IDMP cron expiration not working after RDB load
-- https://github.com/redis/redis/pull/14847 Potential crash during ACL checks on wrong-arity commands
-- https://github.com/redis/redis/pull/14883 `HSETEX`, `HGETEX` do not validate that `FIELDS` is specified only once
-- https://github.com/redis/redis/pull/14897 Streams: IDMP-related bugs
+- `SUBSCRIBE`, `PSUBSCRIBE`, `SSUBSCRIBE`: crash on OOM (RED-167788)
+- `CONFIG SET`: some settings allow invalid characters (RED-167787)
+- `SCRIPT DEBUG`: potential crash on scripts (RED-175507)
+- `VADD`: crash or buffer overflow on large `REDUCE` value (RED-170921)
+- `VSET`: crash on huge allocations (MOD-12678)
+- Potential crash on disconnections and TLS failures (Time Series) (MOD-14850)
+- RediSearch/RediSearch#8745 Crash when many keys receive expirations under heavy TTL activity (MOD-14500)
+- RediSearch/RediSearch#8848 HNSW vector index memory growth under high-churn workloads until shard restart (MOD-13761)
+- RediSearch/RediSearch#8205, RediSearch/RediSearch#8259 `FT.HYBRID` `VSIM RANGE` + `FILTER` incorrectly returns zero results (MOD-12370, MOD-13884)
+- RediSearch/RediSearch#9182 `FT.PROFILE HYBRID` returns an empty reply (MOD-14778)
+- RediSearch/RediSearch#8129, RediSearch/RediSearch#8140 `FT.PROFILE` reports an incorrect shard total profile time (MOD-13735, MOD-13181)
+- RediSearch/RediSearch#9047 `FT.PROFILE` output is inconsistent when a profiled value is missing (MOD-10560)
+- RediSearch/RediSearch#8791 `FT.EXPLAIN` does not lock, causing a race with concurrent index changes (MOD-14461)
+- RediSearch/RediSearch#8382 Crash when indexing negative zero (-0.0) (MOD-13904)
+- RediSearch/RediSearch#8590 `FILTER` returns inconsistent results with multiple indexes sharing field aliases (MOD-14063)
+- RediSearch/RediSearch#8660 `FILTER` behavior depends on property order in the expression (MOD-14065)
+- RediSearch/RediSearch#8593 Filter expressions are evaluated for indexes that do not match the document type (MOD-14064)
+- RediSearch/RediSearch#8591 Documents are inconsistently included or excluded depending on the indexing path taken (MOD-13948)
+- RediSearch/RediSearch#8589 `RENAME` notification handler loads the wrong key, causing stale index entries after a rename (MOD-14328)
+- RediSearch/RediSearch#9012 `PERSIST` and `HPERSIST` notifications are not reflected in index expiration tracking (MOD-14800)
+- RediSearch/RediSearch#9079 `FT.SPELLCHECK` treats `PARAMS` placeholders as literal terms instead of resolving them (MOD-10596)
+- RediSearch/RediSearch#8462 GC out-of-memory on replica shards leaves the replica in an inconsistent state (MOD-14066)
+- RediSearch/RediSearch#9066 Race condition in `FT.HYBRID` causes intermittent failures under concurrent hybrid query load (MOD-14732)
+- RediSearch/RediSearch#8109, RediSearch/RediSearch#8149 Configuration registration omits module parameters, causing them to be unexposed or misapplied (RED-171841)
+- RediSearch/RediSearch#9163 Crash on `FT.SEARCH` when topology validation fails (for example, some nodes unreachable) (MOD-14475)
+- RediSearch/RediSearch#8395 `FT.SEARCH` fails with "Query requires unavailable slots" after shard restart or failover (MOD-13828)
+- RediSearch/RediSearch#8451 `FT.INFO`-style output no longer reports zero-index summary data when no indices exist (MOD-14079)
+- RediSearch/RediSearch#9078 `FT.CREATE` now rejects schema definitions with invalid option combinations at creation time (MOD-14655)
+- RediSearch/RediSearch#8051, RediSearch/RediSearch#8114 Crash diagnostics now include the `IndexSpec` of the index the failing thread was working on (MOD-7574)
+
+### Metrics
+
+- RediSearch/RediSearch#8210, RediSearch/RediSearch#8231 `FT.PROFILE`: added queue time tracking (MOD-13602)
 
 
 Hashes
@@ -52,27 +82,27 @@ MSYS2 Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : C2BCAA8CE0F4B942F749C491327DCF126A98169E0BDE59013251E179D6F86B8B
-Path      : D:\a\redis-windows\redis-windows\Redis-8.6.2-Windows-x64-msys2.zip
+Hash      : 1EC06008CC19B4135F5910A03212B49C6C2B478FF0C8F04A6831F29087FB77BD
+Path      : D:\a\redis-windows\redis-windows\Redis-8.6.3-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : 8749B3D21603FC941161B583BA9B2F8F7902CEB0393D03347BACDEF3174A8CB3
-Path      : D:\a\redis-windows\redis-windows\Redis-8.6.2-Windows-x64-msys2-with-Service.zip
+Hash      : E37ECCF8E532F4112428225370CFCD5607CC47104EB0A208CE9D43DF334569E6
+Path      : D:\a\redis-windows\redis-windows\Redis-8.6.3-Windows-x64-msys2-with-Service.zip
 
 Cygwin Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : DA4848D79779149D1673ED689FA29D272147FAC49E533BA9382276C44D4AD5DF
-Path      : D:\a\redis-windows\redis-windows\Redis-8.6.2-Windows-x64-cygwin.zip
+Hash      : 65AD5E79D88F2326CEB2409C825C9434D3D6ED29A5EDC0AB876A582E33C1F5E8
+Path      : D:\a\redis-windows\redis-windows\Redis-8.6.3-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : AD83275AAAC25FCAEB13BEBD51266609759E75AFE593EB8A8F90E37E06711274
-Path      : D:\a\redis-windows\redis-windows\Redis-8.6.2-Windows-x64-cygwin-with-Service.zip
+Hash      : C93E94FEB498B6F9FF9085352FC53BACBBB5433BC7E718A311EB5EB0380D669D
+Path      : D:\a\redis-windows\redis-windows\Redis-8.6.3-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/23520668563]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/25411817221]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
