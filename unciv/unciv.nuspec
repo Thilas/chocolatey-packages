@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.20.5</version>
+    <version>4.20.6</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,19 +18,17 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.20.5
+## 4.20.6
 
-modding: Correctly ignore possible filtering uniques for ruleset-disabled uniques
+By SeventhM:
+- Allow enabling embassies in Global/Policy/Era uniques instead of just techs 
+- Fix redundant requirement for sending embassies 
+- Add countables for worked tiles/population 
+- Fix edge case where Great Prophet costs are wrong 
 
-modding: Check for event loops that the AI can get stuck in
+Improve language handling and slightly ease use of first-run language picker - By SomeTroglodyte
 
-By SomeTroglodyte:
-- Improve Civilopedia around Diplomacy concepts depending on Embassies
-- Fixed map editor crash 
-
-Trigger upon losing unit unique - By PLynx01
-
-Handle display cutout in all orientations and fix rotation - By Gatien-L]]></releaseNotes>
+CPU performance improvements - By Ambeco]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
