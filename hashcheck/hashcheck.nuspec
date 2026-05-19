@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>hashcheck</id>
-    <version>2.6.1</version>
+    <version>2.6.2</version>
     <title>HashCheck Shell Extension</title>
     <authors>Kai Liu,Christopher Gurnee,David B. Trout,Tim Schlueter,Mounir IDRASSI</authors>
     <owners>Thilas</owners>
@@ -16,18 +16,20 @@
     <summary>The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/idrassi/HashCheck/releases)
 
-## HashCheck 2.6.1
+## HashCheck 2.6.2
 
-  HashCheck 2.6.1 is a maintenance release focused on Windows 11 context menu behavior and serialized checksum processing.
+HashCheck 2.6.2 is a maintenance release focused on queued checksum processing controls and installer behavior on pre-Windows 11 systems.
 
-  ### Fixed Issues
-  * Hid packaged Windows 11 Explorer commands from the classic **Show more options** menu so the legacy menu no longer shows duplicate HashCheck entries. Fixes #34 .
-  * Serialized checksum creation, verification, and Properties-tab hashing jobs per user session to avoid multiple concurrent HashCheck jobs competing for disk I/O when several checksum files are opened at once. Addresses #5 .
+### Fixed Issues
 
-  ### Other Changes
-  * Added `/noqueue` command-line and export variants for callers that need to bypass job serialization.
+* Fixed installer behavior on pre-Windows 11 systems by skipping Windows 11 sparse package assets and registration on downlevel Windows while keeping the legacy shell extension path. Fixes #37.
 
-  Full Changelog: [v2.6.0...v2.6.1](https://github.com/idrassi/HashCheck/compare/v2.6.0...v2.6.1)]]></releaseNotes>
+### Other Changes
+
+* Added a **Run now** action for queued checksum creation, verification, and Properties-tab hashing jobs. Queued dialogs can now bypass the queue on demand while preserving FIFO order for remaining jobs. Relates to #5.
+* Added localized **Run now** UI strings across the existing translations.
+
+**Full Changelog**: https://github.com/idrassi/HashCheck/compare/v2.6.1...v2.6.2]]></releaseNotes>
     <copyright>Copyright © 2008-2009 Kai Liu.  All rights reserved.
 Copyright © 2014, 2016 Christopher Gurnee.  All rights reserved.
 Copyright © 2014 Software Development Laboratories ("Fish" (David B. Trout))
