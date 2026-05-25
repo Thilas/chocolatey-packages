@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>ilspy</id>
-    <version>10.0.1</version>
+    <version>10.1.0</version>
     <title>ILSpy</title>
     <authors>SharpDevelop Team</authors>
     <owners>Thilas</owners>
@@ -32,20 +32,20 @@
 
 This release is based on [.NET 10.0](https://dotnet.microsoft.com/en-us/download/dotnet/10.0). Please make sure that you have it installed on your machine beforehand.
 
-# Bug fixes
-
-* Fix #3723: InvalidCastException when navigating to Metadata -> Tables -> 00 Module node
-* Fix #3718: Incorrect current line, when click on ResolutionScope link in 01 TypeRef table
-* Fix #3711: InvalidCastException when "Loading..." node is selected
-* Fix #3703: Primary constructor is public
+# New Language Features
+* .NET 11: [runtime-async](https://github.com/dotnet/runtime/blob/main/docs/design/specs/runtime-async.md) support. See also [Runtime libraries are now compiled with runtime-async](https://github.com/dotnet/core/blob/main/release-notes/11.0/preview/preview4/runtime.md#runtime-libraries-are-now-compiled-with-runtime-async). Implemented via #3731
 
 # Enhancements
 
-* #3715: Add CompilerOptions.UseRoslyn4_14_0
-* #3713: Use releaseTag with fallback to downloadUrl in updates.xml
-* #3695: .NET 11 for Tests
+* #3730: List/extract embedded resources, decompile BAML to XAML in ilspycmd. This was added to address existing workarounds for decompilation skills.
+* #3732: Reduce build warnings: lift IDisposable, fix CS9336 precedence bug, dispose evicted assemblies
 
-For a full list of changes click [here](https://github.com/icsharpcode/ILSpy/compare/v10.0...v10.0.1).]]></releaseNotes>
+# Bug fixes
+
+* Fix #3734: Search pane flickers when navigating to search result in large assembly
+* Fix #3705: Code window is empty when select a .baml and refresh
+
+For a full list of changes click [here](https://github.com/icsharpcode/ILSpy/compare/v10.0.1...v10.1).]]></releaseNotes>
     <copyright>Copyright © SharpDevelop Team</copyright>
     <tags>ilspy foss dotnet assembly decompiler</tags>
     <!-- <projectSourceUrl>https://github.com/icsharpcode/ILSpy</projectSourceUrl> -->
