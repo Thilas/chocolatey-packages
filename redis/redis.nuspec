@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>8.6.3</version>
+    <version>8.8.0</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -29,52 +29,44 @@ You should use it for local development and follow Redis official guidance to de
     <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/redis-windows/redis-windows/releases)
 
-Update urgency: `SECURITY`: There are security fixes in the release.
+This is the General Availability release of Redis 8.8 in Redis Open Source.
 
-### Security fixes
+### Major changes compared to 8.6
 
-- (CVE-2026-23479) Use-After-Free in unblock client flow may lead to Remote Code Execution.
-- (CVE-2026-25243) Invalid memory access in `RESTORE` may lead to Remote Code Execution
-- (CVE-2026-23631) Lua Use-After-Free may lead to remote code execution
-- (CVE-2026-25588) Invalid memory access in `RESTORE` may lead to Remote Code Execution (Time Series)
-- (CVE-2026-25589) Invalid memory access in `RESTORE` may lead to Remote Code Execution (Probabilistic)
+- New data structure: Array (@antirez)
+- Subkey notification for hash fields - field-level notifications
+- `INCREX`: a window counter rate limiter combining `INCR`, `INCRBY`, `INCRBYFLOAT`, bounds, and expiration (@raffertyyu + Redis team)
+- `XNACK`: a new streams command - allow consumers to explicitly release pending messages
+- `ZUNION`, `ZINTER`, `ZUNIONSTORE`, `ZINTERSTORE`: new `COUNT` aggregator
+- `JSON.SET`: new `FPHA` argument to specify the FP type for homogeneous FP arrays
+- `TS.RANGE`, `TS.REVRANGE`, `TS.MRANGE`, `TS.MREVRANGE`: multiple aggregators in a single command
+- `FT.HYBRID` `KNN` clause: new argument to request fewer candidates per shard
+- `FT.PROFILE` `HYBRID`: profiling support for `FT.HYBRID`
+- Performance improvements
 
-### Bug fixes
+### Binary distributions
 
-- `SUBSCRIBE`, `PSUBSCRIBE`, `SSUBSCRIBE`: crash on OOM (RED-167788)
-- `CONFIG SET`: some settings allow invalid characters (RED-167787)
-- `SCRIPT DEBUG`: potential crash on scripts (RED-175507)
-- `VADD`: crash or buffer overflow on large `REDUCE` value (RED-170921)
-- `VSET`: crash on huge allocations (MOD-12678)
-- Potential crash on disconnections and TLS failures (Time Series) (MOD-14850)
-- RediSearch/RediSearch#8745 Crash when many keys receive expirations under heavy TTL activity (MOD-14500)
-- RediSearch/RediSearch#8848 HNSW vector index memory growth under high-churn workloads until shard restart (MOD-13761)
-- RediSearch/RediSearch#8205, RediSearch/RediSearch#8259 `FT.HYBRID` `VSIM RANGE` + `FILTER` incorrectly returns zero results (MOD-12370, MOD-13884)
-- RediSearch/RediSearch#9182 `FT.PROFILE HYBRID` returns an empty reply (MOD-14778)
-- RediSearch/RediSearch#8129, RediSearch/RediSearch#8140 `FT.PROFILE` reports an incorrect shard total profile time (MOD-13735, MOD-13181)
-- RediSearch/RediSearch#9047 `FT.PROFILE` output is inconsistent when a profiled value is missing (MOD-10560)
-- RediSearch/RediSearch#8791 `FT.EXPLAIN` does not lock, causing a race with concurrent index changes (MOD-14461)
-- RediSearch/RediSearch#8382 Crash when indexing negative zero (-0.0) (MOD-13904)
-- RediSearch/RediSearch#8590 `FILTER` returns inconsistent results with multiple indexes sharing field aliases (MOD-14063)
-- RediSearch/RediSearch#8660 `FILTER` behavior depends on property order in the expression (MOD-14065)
-- RediSearch/RediSearch#8593 Filter expressions are evaluated for indexes that do not match the document type (MOD-14064)
-- RediSearch/RediSearch#8591 Documents are inconsistently included or excluded depending on the indexing path taken (MOD-13948)
-- RediSearch/RediSearch#8589 `RENAME` notification handler loads the wrong key, causing stale index entries after a rename (MOD-14328)
-- RediSearch/RediSearch#9012 `PERSIST` and `HPERSIST` notifications are not reflected in index expiration tracking (MOD-14800)
-- RediSearch/RediSearch#9079 `FT.SPELLCHECK` treats `PARAMS` placeholders as literal terms instead of resolving them (MOD-10596)
-- RediSearch/RediSearch#8462 GC out-of-memory on replica shards leaves the replica in an inconsistent state (MOD-14066)
-- RediSearch/RediSearch#9066 Race condition in `FT.HYBRID` causes intermittent failures under concurrent hybrid query load (MOD-14732)
-- RediSearch/RediSearch#8109, RediSearch/RediSearch#8149 Configuration registration omits module parameters, causing them to be unexposed or misapplied (RED-171841)
-- RediSearch/RediSearch#9163 Crash on `FT.SEARCH` when topology validation fails (for example, some nodes unreachable) (MOD-14475)
-- RediSearch/RediSearch#8395 `FT.SEARCH` fails with "Query requires unavailable slots" after shard restart or failover (MOD-13828)
-- RediSearch/RediSearch#8451 `FT.INFO`-style output no longer reports zero-index summary data when no indices exist (MOD-14079)
-- RediSearch/RediSearch#9078 `FT.CREATE` now rejects schema definitions with invalid option combinations at creation time (MOD-14655)
-- RediSearch/RediSearch#8051, RediSearch/RediSearch#8114 Crash diagnostics now include the `IndexSpec` of the index the failing thread was working on (MOD-7574)
+- Alpine and Debian Docker images - https://hub.docker.com/_/redis
+- Install using snap - see https://github.com/redis/redis-snap
+- Install using brew - see https://github.com/redis/homebrew-redis
+- Install using RPM - see https://github.com/redis/redis-rpm
+- Install using Debian APT - see https://github.com/redis/redis-debian
 
-### Metrics
+### Operating systems we test Redis 8.8 on
 
-- RediSearch/RediSearch#8210, RediSearch/RediSearch#8231 `FT.PROFILE`: added queue time tracking (MOD-13602)
+- Ubuntu 22.04 (Jammy Jellyfish), 24.04 (Noble Numbat), 26.04 (Resolute Raccoon)
+- Rocky Linux 8.10, 9.7, 10.1
+- AlmaLinux 8.10, 9.7, 10.1
+- Debian 12.13 (Bookworm), Debian 13.4 (Trixie)
+- Alpine 3.23
+- macOS 14.8.4 (Sonoma), 15.7.4 (Sequoia), 26.3 (Tahoe) - for both Intel and ARM
 
+### Bug fixes (compared to 8.8-RC1)
+
+- https://github.com/redis/redis/pull/15237 `INCREX` syntax update
+- https://github.com/redis/redis/pull/15005 Memory tracking can be enabled at runtime in non-clustered mode 
+- RedisTimeSeries/RedisTimeSerieshttps://github.com/redis/redis/pull/1930 Cluster topology changes during a multi-shard command are not handled (MOD-14439)
+- RedisBloom/RedisBloomhttps://github.com/redis/redis/pull/1007 Memory leak on RDB load (MOD-15418)
 
 Hashes
 =========
@@ -82,27 +74,27 @@ MSYS2 Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 1EC06008CC19B4135F5910A03212B49C6C2B478FF0C8F04A6831F29087FB77BD
-Path      : D:\a\redis-windows\redis-windows\Redis-8.6.3-Windows-x64-msys2.zip
+Hash      : 8AF6FD6C4AAC3E13DED36F249DA8114B3BE32DF60AB589DA7C3513AA8B1A86CD
+Path      : D:\a\redis-windows\redis-windows\Redis-8.8.0-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : E37ECCF8E532F4112428225370CFCD5607CC47104EB0A208CE9D43DF334569E6
-Path      : D:\a\redis-windows\redis-windows\Redis-8.6.3-Windows-x64-msys2-with-Service.zip
+Hash      : 41FF9E3FFAF9C9E764197F4498B1E4AC56AFCA65BAC4600E750DCCAC97A00673
+Path      : D:\a\redis-windows\redis-windows\Redis-8.8.0-Windows-x64-msys2-with-Service.zip
 
 Cygwin Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 65AD5E79D88F2326CEB2409C825C9434D3D6ED29A5EDC0AB876A582E33C1F5E8
-Path      : D:\a\redis-windows\redis-windows\Redis-8.6.3-Windows-x64-cygwin.zip
+Hash      : 939391F3E0749F7BC8C499CBE5861340A57C7180800890E1823CAD5747B7A471
+Path      : D:\a\redis-windows\redis-windows\Redis-8.8.0-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : C93E94FEB498B6F9FF9085352FC53BACBBB5433BC7E718A311EB5EB0380D669D
-Path      : D:\a\redis-windows\redis-windows\Redis-8.6.3-Windows-x64-cygwin-with-Service.zip
+Hash      : AC209A5D391CAB6A20BA84C5EA9C425422A61198F94B12540038C5118AC226D1
+Path      : D:\a\redis-windows\redis-windows\Redis-8.8.0-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/25411817221]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/26426616394]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
