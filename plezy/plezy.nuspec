@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>plezy</id>
+    <version>2.3.0</version>
+    <title>Plezy</title>
+    <authors>edde746</authors>
+    <owners>Thilas</owners>
+    <licenseUrl>https://github.com/edde746/plezy/blob/main/LICENSE</licenseUrl>
+    <projectUrl>https://plezy.app/</projectUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/Thilas/chocolatey-packages@b0d17e170ac112cb96f334d788459de8ac3035c5/plezy/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description><![CDATA[A beautiful client for Plex & Jellyfin
+
+Stream your media library with HDR, Dolby Vision, offline downloads, and a gorgeous experience across all your devices.
+
+**Features**
+
+- Wide Codec Support
+- HDR10+
+- Subtitles
+- Cross-Platform
+- Offline
+- Watch Together
+- Tracker Sync
+- Skip intros
+- Chapter support
+- Gestures
+]]></description>
+    <summary>A modern client for Plex and Jellyfin on desktop, mobile, and TV. Built with Flutter for native performance and a clean interface.</summary>
+    <releaseNotes><![CDATA[[Releases](https://github.com/edde746/plezy/releases)
+
+## Added
+
+- Jellyfin unwatched library filter
+- Jellyfin folder browsing and playback
+
+## Fixed
+
+- Android TrueHD passthrough detection
+- Android display mode matching
+- Android MPEG-TS seeking
+- Android WebVTT subtitle positioning
+- iOS PiP subtitles
+- TV media detail rail focus, sizing, and light-theme text colors
+- TV alpha jump bar visibility
+- TV episode backdrop selection
+- TV detail reveal behavior without input
+- TV virtual keyboard focus and text entry
+- TV root menu navigation handling
+- Duplicate Continue Watching entries
+- Duplicate native download tasks
+- Jellyfin negotiated subtitle playback
+
+## Improved
+
+- TV media detail presentation
+- Download manager task tracking
+
+**Full Changelog**: https://github.com/edde746/plezy/compare/2.2.0...2.3.0]]></releaseNotes>
+    <copyright>Copyright © edde746</copyright>
+    <tags>plezy foss client plex jellyfin media mpv</tags>
+    <projectSourceUrl>https://github.com/edde746/plezy</projectSourceUrl>
+    <packageSourceUrl>https://github.com/Thilas/chocolatey-packages/tree/master/plezy</packageSourceUrl>
+    <bugTrackerUrl>https://github.com/edde746/plezy/issues</bugTrackerUrl>
+    <dependencies>
+      <dependency id="vcredist140" version="14.51.36231" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="legal\**" target="legal" />
+    <file src="tools\**" target="tools" exclude="**\*.Tests.ps1" />
+  </files>
+</package>
