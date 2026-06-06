@@ -18,7 +18,7 @@ $locations | ForEach-Object {
     if (Test-Path $path) {
         # Unregister and clean dll
         $exeToRun = "$Env:SystemRoot\{0}\regsvr32.exe" -f $_.System
-        $statements = '/u /i /n /s "{0}"' -f $path
+        $statements = '/u /i:"NoRebootPrompt" /n /s "{0}"' -f $path
         Start-ChocolateyProcessAsAdmin -ExeToRun $exeToRun -Statements $statements -ValidExitCodes $validExitCodes | Out-Null
         Get-Item "$directory\HashCheck.dll.?" | Remove-Item -ErrorAction SilentlyContinue
         if (!(Get-ChildItem $directory | Select-Object -First 1)) { Remove-Item $directory -ErrorAction SilentlyContinue }
