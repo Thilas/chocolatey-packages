@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.20.10</version>
+    <version>4.20.11</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,14 +18,21 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.20.10
+## 4.20.11
+
+Fix double buttons for great people for constructing great improvements
+
+Fixed custom file directories on Android
+
+Approve values of 0 for certain mod constants in validator - By unciv-loof
 
 By SomeTroglodyte: 
-- Free policy notifications open policy screen 
-- A new triggerable Unique to choose a music track 
-- Better Scenario starts with fewer surprises 
+- Fix black outlines for Stat symbols in notifications
+- Fix TriggerUponLosingUnit 
+- Fix Android on screen keyboard show/hide
+- Minor CPU optimization
 
-Boreal map type - By unciv-loof]]></releaseNotes>
+Add 'Vegetation' to Marsh - By EmperorPinguin]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
