@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>lavfilters</id>
-    <version>0.81.0</version>
+    <version>0.82.0</version>
     <title>LAV Filters</title>
     <authors>Hendrik Leppkes</authors>
     <owners>Thilas</owners>
@@ -16,19 +16,15 @@
     <summary>Open-Source DirectShow Media Splitter and Decoders</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/Nevcairiel/LAVFilters/releases)
 
-**0.81.0 - 2026/01/12**
-**LAV Splitter**
-- NEW: Support for APV (Advanced Professional Video) video streams
-- Fixed: VVC in MP4 without CTTS did not play properly
-- Fixed: AV1 streams with invalid metadata did not get handled correctly
+**0.82.0 - 2026/06/10
+LAV Splitter**
+- NEW: Support for demuxing Dolby Vision Enhancement Layer streams
+- NEW: Support for Animated WebP images
+- Changed: When demuxing Blu-ray discs, Dolby Vision metadata is available on the primary video stream
 
 **LAV Video**
-- NEW: Support for decoding APV (Advanced Professional Video)
-- Changed: Re-designed pixel format mapping to be based on a heuristic rather then hard-coded, improving support for rarely-used formats
-- Fixed: Deinterlacing of 4:2:2 videos was broken in 0.80
-
-**LAV Audio**
-- Fixed: Bitstreaming TrueHD from Blu-rays with seamless branching could result in out-of-sync audio, or a noticeable gap]]></releaseNotes>
+- NEW: Support for Animated WebP images
+- Changed: Hardware decoding support for DVDs has been removed]]></releaseNotes>
     <copyright>Copyright © Hendrik Leppkes</copyright>
     <tags>lavfilters admin ffmpeg DirectShow filter codec video audio subtitles</tags>
     <!-- <projectSourceUrl>https://github.com/Nevcairiel/LAVFilters</projectSourceUrl> -->
