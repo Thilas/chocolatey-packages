@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.20.12</version>
+    <version>4.20.13</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,17 +18,21 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.20.12
+## 4.20.13
 
-By xplon:
-- Hide icons when translating spy names 
-- Warn about translatable ruleset name collisions 
+Large memory performance improvements for large maps  
+
+Modding: show exact location of json file errors
 
 By SomeTroglodyte:
-- Improve context menu indicator size 
-- Console: 'civ add' and 'civ remove' commands 
+- Context menu visual indicators 
+- Modding: Fixed 'empty name' problems 
+- Fix expansion clearing barbarian camps leaving obsolete quests 
+- City buy tile context menu, to buy several tiles at once 
 
-Add missing newline in advanced game settings - By unciv-loof]]></releaseNotes>
+Avoid centering on hidden wonder locations - By xplon
+
+Respect alternative promotion prerequisites in validation - By superdusto]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
