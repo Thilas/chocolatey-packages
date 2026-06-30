@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.20.16</version>
+    <version>4.20.17</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,19 +18,15 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.20.16
+## 4.20.17
 
-By unciv-loof:
-- Cap force bonus from AdditionalAttacks based on movement points 
-- Fix German unique ability 
-- Fix force calculation when measuring military presence near border 
+CPU performance improvements
 
-Make 'Barbarian encampment' improvement moddable - By SomeTroglodyte
+fix: Avoid crash when removing encampments from map editor
 
-By BobbyCobby:
-- Clearer mod update icon
+Adjust lake and coastline formation of Boreal map type - By unciv-loof
 
-Fix map preview crash when changing rulesets - By Angais]]></releaseNotes>
+Console: Allow setting strategic resource deposit amount - By SomeTroglodyte]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
