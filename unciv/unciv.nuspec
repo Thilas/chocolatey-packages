@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.20.17</version>
+    <version>4.20.18</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,15 +18,23 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.20.17
+## 4.20.18
 
-CPU performance improvements
+Conditional worker uniques no longer cause crashes when disabled
 
-fix: Avoid crash when removing encampments from map editor
+Improvement hotkeys can no longer trigger twice when 2 improvements have the same key
 
-Adjust lake and coastline formation of Boreal map type - By unciv-loof
+Specific civ images override style images
 
-Console: Allow setting strategic resource deposit amount - By SomeTroglodyte]]></releaseNotes>
+Resolved A* 'units with no movement consider occupied tiles moveable to' bug
+
+City borders and city buttons no longer disappear near the south edge
+
+CPU improvements 
+
+By unciv-loof:
+- Add mirroring type to map editor
+- Reorder map types]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
