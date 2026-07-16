@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.21.0</version>
+    <version>4.21.1</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,17 +18,28 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.21.0
+## 4.21.1
 
-Personalities displayed in Civilopedia - By SomeTroglodyte 
+Fixed stockpiled resource trade not actually transferring
 
-Reworked VictoryScreen - By cy-elec
+By SomeTroglodyte:
+- Build weight unique for personalities 
+- Fix flat earth map generation with no ice 
 
-Modding: Allow for 0 as a parameter for uniques looking for a number or above - By SeventhM
+By Angais:
+- Fix map notification tile selection 
+- Fix options cleanup on outside close 
 
-Many, many small fixes - By Angais (with LLM assist)
+Replace arrow Unicode characters for wider compatibility - By cy-elec
 
-Avoid duplicate EventChoice entries in allICivilopediaText - By xplon]]></releaseNotes>
+By SeventhM:
+- Fix uniques for losing hp missing full combat context
+
+implement 'other' parameter for mapunit - By O-spin
+
+Fix inverted force-resign bank update - By L3odr0id
+
+Clean up licensing information - By Wuzzy2]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
