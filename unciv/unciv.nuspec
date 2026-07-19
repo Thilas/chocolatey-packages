@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.21.1</version>
+    <version>4.21.2</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,28 +18,26 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.21.1
+## 4.21.2
 
-Fixed stockpiled resource trade not actually transferring
+Disable constructions per city/game instead of client wide - By unciv-loof
+
+Replace -NC sounds with libre ones - By Wuzzy2
+
+Add [Resource] to tile. (Credit to Robloach) - By chenxing61
+
+Implement impi unique extra ranged attack - By O-spin
+
+Mod checker locates recursive citywide-resource countable in <for every [resource]> - By mvanhorn
 
 By SomeTroglodyte:
-- Build weight unique for personalities 
-- Fix flat earth map generation with no ice 
-
-By Angais:
-- Fix map notification tile selection 
-- Fix options cleanup on outside close 
-
-Replace arrow Unicode characters for wider compatibility - By cy-elec
-
-By SeventhM:
-- Fix uniques for losing hp missing full combat context
-
-implement 'other' parameter for mapunit - By O-spin
-
-Fix inverted force-resign bank update - By L3odr0id
-
-Clean up licensing information - By Wuzzy2]]></releaseNotes>
+- Button to check a Mod directly from the Mod manager screen
+- Politics overview 'Ball of Yarn' makeover
+- New city overview column: Majority Religion
+- Allow pixel unit art option and modded extraImages for units to coexist
+- Make no-barbarians games ignore OneTimeRebel and OneTimeAmountRebels triggereables
+- Fix RekMod Moai can be built on water tiles with a resource
+- Prettify the city-state diplomacy page when a CS has _many_ protectors]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
