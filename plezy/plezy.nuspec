@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>plezy</id>
-    <version>2.3.0</version>
+    <version>2.9.1</version>
     <title>Plezy</title>
     <authors>edde746</authors>
     <owners>Thilas</owners>
@@ -31,34 +31,18 @@ Stream your media library with HDR, Dolby Vision, offline downloads, and a gorge
     <summary>A modern client for Plex and Jellyfin on desktop, mobile, and TV. Built with Flutter for native performance and a clean interface.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/edde746/plezy/releases)
 
-## Added
-
-- Jellyfin unwatched library filter
-- Jellyfin folder browsing and playback
-
 ## Fixed
 
-- Android TrueHD passthrough detection
-- Android display mode matching
-- Android MPEG-TS seeking
-- Android WebVTT subtitle positioning
-- iOS PiP subtitles
-- TV media detail rail focus, sizing, and light-theme text colors
-- TV alpha jump bar visibility
-- TV episode backdrop selection
-- TV detail reveal behavior without input
-- TV virtual keyboard focus and text entry
-- TV root menu navigation handling
-- Duplicate Continue Watching entries
-- Duplicate native download tasks
-- Jellyfin negotiated subtitle playback
+- Jellyfin home screen offline loops
+- Playback crashes on older Android and Fire OS devices
+- Back navigation on media and catalog details
+- Music volume persistence and mini-player interactions
+- D-pad volume and sync sliders
+- Keyboard shortcut recording
+- Live TV guide long-press actions and recording sheets
+- Watch Together leave and end-session actions
 
-## Improved
-
-- TV media detail presentation
-- Download manager task tracking
-
-**Full Changelog**: https://github.com/edde746/plezy/compare/2.2.0...2.3.0]]></releaseNotes>
+**Full Changelog**: https://github.com/edde746/plezy/compare/2.9.0...2.9.1]]></releaseNotes>
     <copyright>Copyright © edde746</copyright>
     <tags>plezy foss client plex jellyfin media mpv</tags>
     <projectSourceUrl>https://github.com/edde746/plezy</projectSourceUrl>
