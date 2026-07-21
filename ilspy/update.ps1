@@ -8,7 +8,7 @@ function global:au_GetLatest {
         -Repository 'icsharpcode/ILSpy' `
         -GetTagName { param($TagName) $TagName -replace '-final$', '' } `
         -FileType 'zip' `
-        -IsUri64 { param($Uri) $Uri -match '_binaries_.+\bx64\b' }
+        -IsUri64 { param($Uri) $Uri -match '_(binaries|windows)_.+\bx64\b' -and $Uri -notmatch '_selfcontained_' }
 }
 
 function global:au_BeforeUpdate { Get-RemoteFiles -Purge -NoSuffix }
