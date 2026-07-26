@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.21.3</version>
+    <version>4.21.4</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,25 +18,27 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.21.3
+## 4.21.4
 
-Fixed mosque of djenne not working until industrial age
+CPU performance improvements for map lag and map generation latency
 
-By Fanfblrik: 
-- Don't wipe city-state relations on liberation 
-- Freeze Demographics rankings to turn-start snapshots 
+perf: improve fps in technology picker screen - By shwwwa
 
-fix: MP upload no longer causes improvements to advance - By cy-elec
+By Angais:
+- Fix city-state wary probability calculation 
+- Fix join-war penalty calculation
 
 By WhoIsJohannes:
-- AI improvements: parallel settlers, expansion un-latch, research agreements, annex guard 
-- CPU performance improvements 
+- Fix two AI evaluation bugs: inverted WLTKD luxury priority, defensive-pact ally force using wrong civ 
+- Fix two AI spaceship-race bugs: dead space-resource reserve, war push overwriting parts
+
+By Fanfblrik:
+- City-states found first city in place by default (opt-out unique) 
+- Start bias unique (Maritime Coast via CityStateType uniques) 
 
 By SomeTroglodyte:
-- Fix 'on losing unit' triggers running when a new unit can't be placed
-- Allow limited conditionals on UniqueType.HiddenFromCivilopedia
-- Catch load from custom location exceptions
-- Fix the tile info 'needs tech' line]]></releaseNotes>
+- Ruleset validator: Warn about potential infinite loops Free building -> Remove building
+- Allow specific commit links in 'Download mod from URL']]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
