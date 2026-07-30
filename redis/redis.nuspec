@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>8.8.1</version>
+    <version>8.10.0</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -29,11 +29,58 @@ You should use it for local development and follow Redis official guidance to de
     <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/redis-windows/redis-windows/releases)
 
-SECURITY: There is a security fix in the release.
+This is the General Availability release of Redis 8.10 in Redis Open Source.
 
-### Security fixes
+### Major changes compared to 8.8
 
-- RedisBloom/RedisBloomhttps://github.com/redis/redis/pull/1044 Crafted RESTORE payloads in RedisBloom and TDigest may trigger out-of-bounds writes, potentially leading to remote code execution
+- Compact hashes - a new hash encoding that reduces memory usage by storing hash field names just once for keys that share a schema
+- New command: `HIMPORT` - high-throughput compact hash bulk insertion
+- TLS peer certificate-based server-to-server authentication
+- New commands: `LMOVEM`, `BLMOVEM` - move multiple elements between lists
+- New command: `SUNIONCARD` - get the cardinality of the union of multiple sets
+- New command: `SDIFFCARD` - get the cardinality of the difference between sets
+- New command: `BACKUP` - node-side implementation for backup and restore based on multi-part AOF (MP-AOF)
+- `XREAD`, `XREADGROUP` - new `MAXCOUNT` and `MAXSIZE` arguments to cap the cumulative reply entries and size
+- New command: `FT.ALIASLIST` - get all aliases for the index 
+- Stemmer support for Malay and Tagalog languages 
+- JSONPath extensions
+- New commands: `TS.NRANGE`, `TS.NREVRANGE` - Query a range across multiple time series; group results by timestamp 
+- New command: `TS.READ` - optionally blocking read
+- New command: `TS.QUERYLABELS` - Get a list of labels and label-values 
+- New command: `TS.MRANGE`, `TS.MREVRANGE` - new `EXCLUDEEMPTY` argument to exclude series with no reported samples 
+- Performance improvements 
+
+### Binary distributions
+
+- Alpine and Debian Docker images - https://hub.docker.com/_/redis
+- Install using snap - see https://github.com/redis/redis-snap
+- Install using brew - see https://github.com/redis/homebrew-redis
+- Install using RPM - see https://github.com/redis/redis-rpm
+- Install using Debian APT - see https://github.com/redis/redis-debian
+
+
+### Operating systems we test Redis 8.10 on
+
+- Ubuntu 22.04 (Jammy Jellyfish), 24.04 (Noble Numbat), 26.04 (Resolute Raccoon)
+- Rocky Linux 8.10, 9.7, 10.1
+- AlmaLinux 8.10, 9.7, 10.1
+- Debian 12.13 (Bookworm), Debian 13.4 (Trixie)
+- Alpine 3.23
+- macOS 14.8.4 (Sonoma), 15.7.4 (Sequoia), 26.3 (Tahoe) - for both Intel and ARM
+
+### Bug fixes (compared to 8.10-RC2)
+
+- https://github.com/redis/redis/pull/15513 Prevented a division-by-zero error when active defragmentation thresholds are configured with equal or reversed value
+- https://github.com/redis/redis/pull/15453 Clients blocked on `BLPOP`, `BLMOVE`, or `BLMOVEM` could remain blocked after `SORT` with `STORE` replaced the target key with a list
+- https://github.com/redis/redis/pull/15499 Memory usage reported for compressed replication clients could be lower than the actual memory consumed
+- https://github.com/redis/redis/pull/15518 notify modules when node's own ip/port changes
+- https://github.com/redis/redis/pull/15539 Loading an AOF file with an RDB preamble could fail when active defragmentation was enabled
+- RediSearch/RediSearchhttps://github.com/redis/redis/pull/10528 Crash in the numeric range tree when background garbage collection encounters an empty leaf during active indexing on a numeric field. (MOD-16877)
+- RediSearch/RediSearchhttps://github.com/redis/redis/pull/10605 FT.CREATE and FT.ALTER now reject an empty string as a field name, preventing a crash loop in the fork-GC on indexes with an empty TAG field. (MOD-17034)
+- RediSearch/RediSearchhttps://github.com/redis/redis/pull/10488 FT.INFO reports a negative num_records after garbage collection on indexes that include an INDEXMISSING field. (MOD-16940)
+- RediSearch/RediSearchhttps://github.com/redis/redis/pull/10568 Cluster FT.AGGREGATE fails with SEARCH_FIELD_DUP when a GROUPBY contains multiple REDUCE COLLECT calls over the same field differing only in option-keyword casing. (MOD-16365)
+- RediSearch/RediSearchhttps://github.com/redis/redis/pull/10605 FT.CREATE and FT.ALTER now return an error when a field name is an empty string; previously such schemas were accepted silently. (MOD-17034)
+- RediSearch/RediSearchhttps://github.com/redis/redis/pull/10522 coord_total_query_warnings_timeout double-counts timeout warnings for FT.SEARCH queries that use a hybrid (vector + filter) execution path. (MOD-15973)
 
 
 Hashes
@@ -42,27 +89,27 @@ MSYS2 Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 1A0741A8F997A50AD7A32370E9DDF719ED3D5D87701324C57B7B34518B980460
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.1-Windows-x64-msys2.zip
+Hash      : 743A39B0A97D0B8EC8355591CD31874DD9DA8B0F48A7D6BECDDACDB082CE6C30
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.0-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : 3BCF22CA661C23EF50622601E475CF9E531AA8545946D31406CB286B8B4B5814
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.1-Windows-x64-msys2-with-Service.zip
+Hash      : 525B2AC16F45943973F44B7C49A5DCE2FF5A21B8C1C93EC059F4902B1C5BD622
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.0-Windows-x64-msys2-with-Service.zip
 
 Cygwin Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : F8CA3BF169A7ED626E75ACAD1B5384CD06D13DFC832F67E83D08756EA8F9109E
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.1-Windows-x64-cygwin.zip
+Hash      : 65D88D3439512F1BB0305219AF233CFAA2273C237332B14B99412C09C954C624
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.0-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : 44680A33DDF4D611DE9BE2D1EE349CF764481A1DE33001A0949C3EBAD49163BB
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.1-Windows-x64-cygwin-with-Service.zip
+Hash      : A10E2C091F783989B037105D54E9983CD1A3C997879206BFC9D107FDD65E4AE6
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.0-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/30059357876]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/30506022474]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
