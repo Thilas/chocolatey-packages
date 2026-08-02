@@ -8,9 +8,9 @@ $packageArgs = @{
     packageName    = 'subtitleedit'
     softwareName   = 'Subtitle Edit*'
     fileType       = 'exe'
-    url64bit       = 'https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.1.0/SubtitleEdit-Windows-x64-Setup.exe'
+    url64bit       = 'https://github.com/SubtitleEdit/subtitleedit/releases/download/v5.2.0-beta1/SubtitleEdit-Windows-x64-Setup.exe'
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-    checksum64     = '7d7f7dc728d8ef69b2a23a9d237119f4fe18d22ad386121e8649182eedc4fe40'
+    checksum64     = 'd721c06210aeafa2b52ced0678064864301c48a5c6f98f5ad4c663c10dddbf07'
     checksumType64 = 'sha256'
     validExitCodes = @(0)
 }
