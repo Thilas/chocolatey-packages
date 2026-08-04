@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>ilspy</id>
-    <version>11.0.0-preview1</version>
+    <version>11.0.0-rc</version>
     <title>ILSpy</title>
     <authors>SharpDevelop Team</authors>
     <owners>Thilas</owners>
@@ -26,102 +26,66 @@
     <summary>ILSpy is the open-source .NET assembly browser and decompiler.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/icsharpcode/ILSpy/releases)
 
-> [!WARNING]
-> **We DO NOT own the domain ilspy[.]org** See #3709
-> Download ILSpy only from GitHub Releases!
-
 This release is based on [.NET 10.0](https://dotnet.microsoft.com/en-us/download/dotnet/10.0). Please make sure that you have it installed on your machine beforehand.
 
 Note for Mac users: see https://github.com/icsharpcode/ILSpy/wiki/Build-Artifacts#running-the-macos-artifact because the ILSpy.app is neither signed nor notarized.
 
-# Avalonia Cross Platform Port
-
-* PR #3755: Avalonia 12 Port and Removal of the WPF UI
-* PR #3759: Metadata explorer cleanup, flags-filter fixes, and WPF row-details parity
-* PR #3766: Round-trip the legacy WPF SessionSettings shape
-* PR #3768: Build, test, and package ILSpy on Linux and macOS in CI
-* PR #3861: Show text-based resources inline with syntax highlighting
-* PR #3875: Avalonia 12.1
-* PR #3876: Keep BAML decompilation working when WPF assemblies are missing
-
 # New Features
 
-* PR #3847: Unpack !AvaloniaResources into per-file resource tree nodes
-* PR #3801: Fix #3797: resolve ilspycmd -t type names with fuzzy matching
-* PR #3789: Add a bookmarks feature for the decompiled C# view
-* PR #3786: Add omnibar breadcrumb and search bar above the decompiled code
-* PR #3769: Make the override modifier a link to the overridden member
-* PR #3762: Add Open from NuGet feed dialog for browsing and opening packages
-
+* PR #3936: Add "Open from running process" dialog
+* PR #3951: Add --dump-table metadata dump mode to ilspycmd
+* PR #3924: ilspycmd: add --member for single-member decompilation
 
 # User Interface
 
-* PR #3857: Fix #2078: Generic local functions not highlighted properly
-* PR #3855: Fix #3845: Add option to expand XML documentation comments
-* PR #3814: Toggle the fold under the right-click, not at the caret
-* PR #3812: Syntax-colour analyzer signatures with bold type names (#2164)
+* PR #3932: Metadata row details: full-width layout and a decompiler-styled editor for text blobs
+* PR #3927: Fix #2879: show stored FieldList/MethodList values for memberless types
+* PR #3922: Fix #749: toggle a member's fold together with its documentation
+* PR #3923: Fix #781: click highlights member references, Ctrl+Click navigates
+* PR #3918: Fix #633: Overrides analysis and this/base keyword navigation
+* PR #3906: Show hover tooltips for dynamic member accesses
 
 # Enhancements
 
-* PR #3872: Decompile await on dynamic expressions
-* PR #3837: Fix #3804: decompile foreach over inline array
-* PR #3791: Fix #3777: decompile runtime async without a separate C# 15 setting
-* PR #3843: Bound XamarinCompressedFileLoader against crafted XALZ headers
-* PR #3842: Bound WebCilFile section access against mapped-view length
-* PR #3841: Harden BAML reader against crafted-resource crashes
-* PR #3816: Allow overriding an assembly's target framework for reference resolution
-* PR #3840: Bound .rsrc resource-tree parsing against crafted input
-* PR #3838: Guard against OOB read when bundle signature is at file start
-* PR #3818: Display the IL 'tail.' prefix in C# output
-* PR #3808: Migrate the VS extension to an SDK-style VSIX (dotnet build) and retire the VS2017/2019 add-in
-* PR #3802: Fix #3799 and three related stackalloc initializer decompilation defects
-* PR #3780: Compute public-key tokens with a managed SHA-1
-
-# Documentation
-
-* PR #3868: CONTRIBUTING.md for the AI era
-* PR #3870: Add decompiler architecture document
+* PR #3933: Convert float/double += 1 into increment and decrement expressions
+* PR #3926: Generate and resolve xml doc ID strings at the metadata level
+* PR #3917: Represent VB.NET parameterized properties as accessor methods in C# output
+* PR #3899: Don't undo the compiler's &&-to-& optimization
+* PR #3889: Reimplement cross-platform single-instance handling
+* PR #3904: Proper event tracing for ICSharpCode.Decompiler and ICSharpCode.ILSpyX
+* PR #3902: Beautify enum declarations by referencing previously declared members
 
 # Testing / Infrastructure
 
-* PR #3771: Run the decompiler test suite on Linux
-* PR #3788: Use cross-platform separators for the FSharp.Core.dll test path
-* PR #3807: Adopt SDK default Compile items in Decompiler and Decompiler.Tests
-* PR #3815: Verify generated PDBs against the compiler's breakpoint map (PdbGen fixtures previously passed vacuously)
-* PR #3836: Don't assert decompiled local types match the signature
-* PR #3839: Add fine-grained debug steps with highlighting for C# and ILAst
-* PR #3849: Set OpenSSL SHA1 flag in build scripts
-* PR #3859: Add test coverage for untested corners of implemented language features
-* PR #3874: Upload TestCases folder as artifact when CI tests fail
+* PR #3943: Do not pass /shared to compilers that cannot reach a compiler server
+* PR #3941: Skip redundant push builds for branches with an open PR
+* PR #3928: Add pretty test for C# 13 ref struct interfaces / allows ref struct
+* PR #3919: Preserve Debug Steps tree state across filter sessions
+* PR #3914: Support Roslyn 1.x/2.x compiler configurations in tests on non-Windows
+* PR #3915: Revive TypeInferenceTests from NRefactory and cover the C# standard inference rules
+* PR #3912: Revive NRefactory conversion tests and cover all of C# standard chapter 10
+* PR #3907: Generate version-info files with CRLF on all platforms
 
 # Contributions
 
-* PR #3851: Fix #3850: recover ReadOnlySpan<T> array literals from the legacy lazy cache — @sailro, thank you!
-* PR #3878: Handle negative dictionary capacity in string switch transform — @ds5678, thank you!
-* PR #3828: Fix #3826: wrap an overflowing constant subexpression in unchecked() — @sailro, thank you!
-* PR #3831: Fix #3825: reconstruct async iterators with [EnumeratorCancellation] and await in finally — @sailro, thank you!
-* PR #3830: Fix #3827: keep the while-loop for a ref local used after the loop (avoid an uninitialized hoisted ref decl) — @sailro, thank you!
-* PR #3823: Fix #3821: keep ref-struct conditional as if/return, not ?. / ?? (CS8978) — @sailro, thank you!
-* PR #3822: Fix #3820: decompile dynamic ~ as ~x instead of an unsupported-opcode error — @sailro, thank you!
-* PR #3796: Fix decompiler tests project inside VS — @DoctorKrolic, thank you!
-* PR #3787: dev: fix editorconfig parsing on some editors — @mochaaP, thank you!
-* PR #3879: Fix the "Use nested namespace structure" option — @ds5678, thank you!
+* PR #3903: Provide a WholeProjectDecompiler constructor with no default parameter values — @ds5678, thank you!
+* PR #3934: Publicize `IProjectFileWriter` implementations — @ds5678, thank you!
+* PR #3910: Fix #3909: emit nullable override disambiguators — @sailro, thank you!
+* PR #3911: Fix #3908: use the async iterator element type for yield — @sailro, thank you!
+* PR #3896: Fix #3895: keep byref-like ToString in string concatenation — @sailro, thank you!
+* PR #3893: Fix #3892: preserve unsafe for pointer constructors — @sailro, thank you!
 
 # Bug Fixes
 
-* PR #3881: Reject negative char index in the length-and-char string switch
-* PR #3866: Fix #3475: Emit 'true ? null : new { ... }' for null of anonymous type
-* PR #3864: Fix #3860: Avoid 'out var' if the variable recurs in the argument list
-* PR #3873: Fix dynamic event-assignment decompilation leaking is-event opcode
-* PR #3863: Simplify hoisted null-guard fold to reference-type constructor chains
-* PR #3852: Fix #3824: fold a hoisted argument null-guard at the ILAst level
-* PR #3832: Fix #3754: omit async stepping info for runtime-async methods
-* PR #3806: Fix Export NullReferenceException for images/resourcexsd.baml
-* PR #3792: Fix #3774: keep field initializers when decompiling a static ctor alone
-* PR #3790: Skip missing session assemblies when navigating on launch
-* PR #3776: Escape reserved Windows device names in output file names
-
-For a full list of changes click [here](https://github.com/icsharpcode/ILSpy/compare/v10.1...v11.0-preview1).]]></releaseNotes>
+* PR #3949: Fix #3803: Crash on nested deconstruction of custom structs
+* PR #3947: Fix #3230: do not emit base-list interfaces the base list cannot name
+* PR #3948: Fix #3652: Apostrophe in identifiers must not start a char literal
+* PR #3929: Fix #2032: avoid propagating mutated SROA fields
+* PR #3942: Fix #3938: nested-type members must not inherit ExtensionInfo
+* PR #3916: Fix #1603: recognize foreach over enumerators that cannot be disposable
+* PR #3905: Fix #1638: identify renamed yield state machine members via method impls
+* PR #3898: Fix #3891: don't reduce nesting when there is no else block
+* PR #3886: Fix #3858: Detect automatic events on the ILAst instead of the C# AST]]></releaseNotes>
     <copyright>Copyright © SharpDevelop Team</copyright>
     <tags>ilspy foss dotnet assembly decompiler</tags>
     <!-- <projectSourceUrl>https://github.com/icsharpcode/ILSpy</projectSourceUrl> -->
