@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.21.7</version>
+    <version>4.21.8</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,23 +18,25 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.21.7
+## 4.21.8
 
-CPU and memory performance improvements 
+Fixed rivers on water near Rock of Gibraltar
 
-ANR Bugfix: Only rebuild the minimap on drag, IF the minimap size actually changed.
+Resolved OOM errors on crash screen
 
-Hopefully solved Android 11/12 notch areas on some phones
+Resolved ANRs from tech picker and notification overview screens
 
-Fixed improvements not shown in map editor
+Fixed checking tile resource filters in dev console, for resources with revealing tech
+
+AI 'trade for war declaration' reworked to disallow 'kamikaze wars'
+
+Nicer trade overview UI
 
 By unciv-loof:
-- Display players' average turn times in MP preview 
-- Fix Korean tech boost UA 
+- Non vanilla ranking types 
+- Hide average turn time until a full turn has been played 
 
-Fixes for AI bugs - By ssamt
-
-fix: preserve carrier payloads during paradrop and transform - By mvanhorn]]></releaseNotes>
+Max players with spectator - By SomeTroglodyte]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
