@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>plezy</id>
-    <version>2.13.0</version>
+    <version>2.14.0</version>
     <title>Plezy</title>
     <authors>edde746</authors>
     <owners>Thilas</owners>
@@ -33,69 +33,79 @@ Stream your media library with HDR, Dolby Vision, offline downloads, and a gorge
 
 ## New features
 
-- Emby joins Plex and Jellyfin as a first-class backend: same onboarding, browsing, search, watch state and downloads
-- TrueHD audio is packed into a MAT/IEC 61937 carrier and bitstreams to the receiver
-- Android Automotive: the app reads the vehicle's driver-distraction state, scales the whole interface (adjustable in Appearance), keeps music playing while parked but silences it while driving, and never starts video in a moving car
-- Every tracker sign-in dialog (Trakt, Simkl, MDBList, MAL, AniList) shows a QR code and a copyable link, and fits on TV screens
-- MDBList syncs watched history, scrobbles and ratings
-- Linux renders video on a native Wayland plane, which carries HDR (PQ/HLG on BT.2020) instead of the 8-bit sRGB texture path
-- Android TV refreshes the Watch Next row in the background without the app open
-- tvOS Top Shelf fetches Continue Watching live and shows poster art
-- The player and TV home show a clock in the system's 12/24-hour format
-- Library context menus gain a watchlist toggle
-- Appearance gains a toggle to hide the Explore tab
-- Text subtitles can be anchored to the bottom of the screen, in the black bars under widescreen video
-- Android downloads can follow the app onto adoptable storage
-- Playback Buffer offers Auto, Large and Extra Large read-ahead tiers instead of a fixed 50 seconds
+- Audio and subtitle sync sliders cover ±10 seconds in 50 ms steps
+- The bundled ffmpeg enables the loudnorm filter for volume normalization
 
 ## Playback
 
-- Plex transcodes open at the resume position instead of buffering forever
-- On transcodes, subtitles are delivered by the server again: Plex burns them in, Jellyfin burns bitmaps or streams text files, and the open guard no longer drops them
-- A server that keeps refusing a stream at open now shows an actionable dialog instead of retrying silently
-- A stalled ExoPlayer session recovers, handing off to mpv at the position reached, instead of spinning on a frozen frame
-- TrueHD leaves the carrier and decodes when playback speed is not 1x, or when a stream contradicts its container
-- Every AudioTrack release is reported, so a failed release can recover instead of pinning playback in buffering
-- A keyboard Enter no longer switches the app into focus navigation
-- Skips count from where a jump actually landed, not from a stale target
-- The remote stays on the player surface when the window regains focus
-- Escape only exits fullscreen the player itself entered
-- Linux stops scheduling a second audio recovery after resume, removing a double stutter
-- Watch Together ignores clock replies from anyone but the host, and the playback anchor holds while the host reloads
-- Marking something watched clears its resume position and its queued progress
-- A refreshed Discover row overrides a stale local watch patch instead of losing to it
+- Plex video transcodes use fMP4 HLS, so HEVC presets stop corrupting
+- Plex transcodes seek in-band instead of pre-warming at the resume offset
+- Same-day Specials no longer hijack up next
+- Episode advances that fail on a transient server blip are retried
+- Playback no longer fails when a preference write is refused
+- TrueHD offers its MAT carrier on Android 10–12 audio routes
+- Timeline heartbeats stop once a Plex server terminates the session
+- ExoPlayer track labels say AAC instead of mp4a.40.2
+- Emby scrub previews load from the server's BIF index
+- iOS and tvOS keep HDR and Dolby Vision when the video is zoomed
+- tvOS schedules frames with more presentation lead
+
+## Subtitles
+
+- Korean glyphs render on the MPV path via a bundled Hangul font
+- Disabling subtitles clears the displayed ASS cue immediately
+- ASS frames that overflow the glyph atlas render as a flattened composite
+- External subtitle files load with the media whether or not they are selected
+- Android renders every PGS composition object and keeps the PGS display-plane aspect
 
 ## Music
 
-- Shuffle now shuffles the head of the queue too, not just the tail
-- A gaplessly advanced track reports its own timeline, so Plex no longer records a phantom play and Last.fm scrobble
+- Hardware media keys work while the app is in the foreground on Android
+- iOS music playback gains lock-screen and headphone controls
 
-## Live TV
+## Plex
 
-- Guide rows navigate in the order they are displayed across multiple DVRs
-- A guide emptied by the favorites filter says so and offers "Show All Channels"
+- Live TV favorite updates persist again
+- PIN sign-in keeps polling after transient network errors
+
+## Watch Together
+
+- Lobby guests are told the room's control mode
+
+## Downloads & profiles
+
+- The parallel download limit stays intact on slow networks
+- Offline downloads stay visible when a profile's servers are unreachable
 
 ## Android, TV & automotive
 
-- Fire TV Stick 4K stops tunneling 24p content, ending the judder; Audio Passthrough moves from the player sheet to Settings > Video Playback
-- Single-line and multiline text entry uses the native Android IME again
-- tvOS: Siri Remote swipes scale to the focused item, and one flick can no longer move focus two steps
-- Plex validates a failover candidate with the server itself before switching endpoints
-- Capped Plex transcodes keep compatible audio copied through instead of degrading it
-- The Plex sign-in dialog fits a QR code on a car screen
+- MKV files with late track metadata play again
+- A backgrounded TV stops the server session when it releases the player
+- Quality labels stay visible when rating badges crowd the detail line
+- TV pauses on the first Select press after skipping the intro
+- Parked playback is no longer blocked when the car service gives no verdict
+- The background Watch Next refresh is removed
 
 ## UI
 
-- Sheets size to their content instead of filling 75% of the window
-- Delete-from-server dialogs name the exact item and warn when sibling episodes or file parts go with it
-- A Plex Home user reads as "user via account" in one translated chip
-- The profile picker keeps its highlight while its list sorts
-- Shorter navigation labels on phones, and all 21 locales are complete
-- The platform launch screen stays behind the loading frame on TV
+- The sidebar's Libraries section stays collapsed across restarts
+- Phone back exits the player even with the controls up
+- Escape leaves fullscreen instead of quitting the app on desktop
+- Player, downloads and server-setup text that was left in English is now translated
+
+## macOS
+
+- Every audio format, including compressed formats, routes through CoreAudio
 
 ## Windows
 
-- Preference-store writes fall back to an in-place rewrite when another reader blocks the atomic rename]]></releaseNotes>
+- The MSVC runtime is bundled, so an outdated redistributable no longer crashes launch
+
+## Linux
+
+- VAAPI hardware decode and AV1 software fallback are restored in the bundled libmpv
+- The Flutter-texture fallback is removed; video always renders on the native Wayland plane
+- HDR transactions and plane presentation are bounded against unacknowledged frames]]></releaseNotes>
     <copyright>Copyright © edde746</copyright>
     <tags>plezy foss client plex jellyfin media mpv</tags>
     <projectSourceUrl>https://github.com/edde746/plezy</projectSourceUrl>
