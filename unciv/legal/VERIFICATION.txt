@@ -7,7 +7,7 @@ Package can be verified like this:
 
 1. Go to
 
-   x64: https://github.com/yairm210/Unciv/releases/download/4.21.8/Unciv-Windows64.zip
+   x64: https://github.com/yairm210/Unciv/releases/download/4.21.9/Unciv-Windows64.zip
 
    to download the installer.
 
@@ -15,7 +15,7 @@ Package can be verified like this:
    - Use powershell function 'Get-FileHash'
    - Use Chocolatey utility 'checksum.exe'
 
-   checksum64: 4E347D81E6169AAB5BBEB93C356AB98814A6B1E532A939009A26C985BB52986A
+   checksum64: BC5894B11EB0BD45F221FAA11F016F31D2002F3C80D7171383E6703FA648F3BB
 
 File 'LICENSE.txt' is obtained from:
    https://github.com/yairm210/Unciv/blob/master/LICENSE
