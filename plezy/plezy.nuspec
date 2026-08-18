@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>plezy</id>
-    <version>2.14.0</version>
+    <version>2.15.0</version>
     <title>Plezy</title>
     <authors>edde746</authors>
     <owners>Thilas</owners>
@@ -33,79 +33,63 @@ Stream your media library with HDR, Dolby Vision, offline downloads, and a gorge
 
 ## New features
 
-- Audio and subtitle sync sliders cover ±10 seconds in 50 ms steps
-- The bundled ffmpeg enables the loudnorm filter for volume normalization
+- Multi-version movies and episodes get a split Play button
+- Player changes can be saved globally, per library, per show or movie, or not at all
+- Search results show their source server and library
+- Plex artist pages group albums by release type
+- Connected MDBList watchlists can be selected in Explore
+- iOS and tvOS system video controls add skip buttons
 
 ## Playback
 
-- Plex video transcodes use fMP4 HLS, so HEVC presets stop corrupting
-- Plex transcodes seek in-band instead of pre-warming at the resume offset
-- Same-day Specials no longer hijack up next
-- Episode advances that fail on a transient server blip are retried
-- Playback no longer fails when a preference write is refused
-- TrueHD offers its MAT carrier on Android 10–12 audio routes
-- Timeline heartbeats stop once a Plex server terminates the session
-- ExoPlayer track labels say AAC instead of mp4a.40.2
-- Emby scrub previews load from the server's BIF index
-- iOS and tvOS keep HDR and Dolby Vision when the video is zoomed
-- tvOS schedules frames with more presentation lead
-
-## Subtitles
-
-- Korean glyphs render on the MPV path via a bundled Hangul font
-- Disabling subtitles clears the displayed ASS cue immediately
-- ASS frames that overflow the glyph atlas render as a flattened composite
-- External subtitle files load with the media whether or not they are selected
-- Android renders every PGS composition object and keeps the PGS display-plane aspect
+- Video starts faster through cached metadata and parallelized setup
+- Play actions show loading feedback during fetches
+- Network prefetching removes gaps between music tracks
+- ExoPlayer seeks correctly in MKVs with late track metadata
+- Android MPV renders software-decoded Dolby Vision correctly
+- Compatible Android routes can bitstream DTS-HD MA
+- Android falls back to FFmpeg DTS decoding when passthrough is unavailable
+- Android passthrough only enables compatible audio routes
+- Plex Live TV can select and burn embedded DVB subtitles
+- Right-arrow focus reaches the last player control
+- Timed-out endpoint probes close promptly
 
 ## Music
 
-- Hardware media keys work while the app is in the foreground on Android
-- iOS music playback gains lock-screen and headphone controls
+- Plex playlists prefer user-assigned posters
+- Album and playlist grids have consistent card spacing
 
-## Plex
+## Plex & Live TV
 
-- Live TV favorite updates persist again
-- PIN sign-in keeps polling after transient network errors
+- Live TV guide reloads preserve focus and apply day picks immediately
+- Older Plex servers regain show logos in Continue Watching
 
-## Watch Together
+## TV & profiles
 
-- Lobby guests are told the room's control mode
+- D-pad navigation preserves collection and playlist grid positions
+- Closing Fire TV system overlays no longer reopens the profile picker
 
-## Downloads & profiles
+## UI & translations
 
-- The parallel download limit stays intact on slow networks
-- Offline downloads stay visible when a profile's servers are unreachable
+- Sheet Back-button hover circles are centered
+- Missing translations are filled; unused keys are removed
 
-## Android, TV & automotive
+## tvOS
 
-- MKV files with late track metadata play again
-- A backgrounded TV stops the server session when it releases the player
-- Quality labels stay visible when rating badges crowd the detail line
-- TV pauses on the first Select press after skipping the intro
-- Parked playback is no longer blocked when the car service gives no verdict
-- The background Watch Next refresh is removed
-
-## UI
-
-- The sidebar's Libraries section stays collapsed across restarts
-- Phone back exits the player even with the controls up
-- Escape leaves fullscreen instead of quitting the app on desktop
-- Player, downloads and server-setup text that was left in English is now translated
+- Apple TV Direct Play no longer develops recurring stutter or passthrough dropouts
 
 ## macOS
 
-- Every audio format, including compressed formats, routes through CoreAudio
+- Audio falls back to AVFoundation when CoreAudio fails
+- The nonfunctional audio-passthrough option is removed
 
 ## Windows
 
-- The MSVC runtime is bundled, so an outdated redistributable no longer crashes launch
+- HDR letterbox bars render true black
 
 ## Linux
 
-- VAAPI hardware decode and AV1 software fallback are restored in the bundled libmpv
-- The Flutter-texture fallback is removed; video always renders on the native Wayland plane
-- HDR transactions and plane presentation are bounded against unacknowledged frames]]></releaseNotes>
+- Wayland playback no longer crashes with software GL]]></releaseNotes>
     <copyright>Copyright © edde746</copyright>
     <tags>plezy foss client plex jellyfin media mpv</tags>
     <projectSourceUrl>https://github.com/edde746/plezy</projectSourceUrl>
