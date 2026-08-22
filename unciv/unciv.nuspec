@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.21.10</version>
+    <version>4.21.11</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,19 +18,23 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.21.10
+## 4.21.11
 
-By unciv-loof:
-- Squash notifications when many units can be promoted 
-- Preserve scroll position of civ list in victory screen after updating selection 
+Fixed repair functions for when there is only a pillaged road
 
-Disable legion being able to repair - By O-spin
+Avoid ANRs when opening civilopedia
 
 By SomeTroglodyte:
-- Fix improvement picker hiding researchable improvements and failing to hide others 
-- Try to create and index the save destination *extra* early for cheap Android devices
+- Fix Future Tech not counting for Contest Technologies quest 
+- Fix ImprovementPicker not offering Improvements needing a removal 
 
-Use live data for latest turn in charts - By ssamt]]></releaseNotes>
+Reduce autosave memory spikes - By mvanhorn
+
+AI: Better picking of next unit to construct - By WhoIsJohannes
+
+Crude mod author block list - By unciv-loof
+
+Fixed crash when activating 2 cityscreen arrow buttons at the same time]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
