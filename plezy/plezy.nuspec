@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>plezy</id>
-    <version>2.16.0</version>
+    <version>2.17.0</version>
     <title>Plezy</title>
     <authors>edde746</authors>
     <owners>Thilas</owners>
@@ -33,52 +33,132 @@ Stream your media library with HDR, Dolby Vision, offline downloads, and a gorge
 
 ## New features
 
-- Search results can be filtered by media type
-- The sidebar is restyled as an M3 Expressive navigation rail
+- Live TV recording on Jellyfin and Emby
+- Match Content Resolution on Android TV
+- FFmpeg demuxes every container on Android
+- Anchored grouping, filter, and sort menus on desktop
+- Cmd+, / Ctrl+, opens settings
+- Full details sheet from the TV detail hero
+
+## Performance
+
+- Cold start reaches the first screen ~500 ms sooner
+- D-pad browse on TV drops far fewer frames
+- Player chrome no longer rebuilds on every tick
+- Artwork nothing displays is no longer decoded
 
 ## Playback
 
-- Playback stats show the source audio track and codec during passthrough
-- Compressed embedded MKV subtitles render on the ExoPlayer path
-- Android MPV no longer shows a blue screen for hardware-decoded HEVC on Nvidia Shield
+- Downloaded subtitles apply instead of failing
+- Quoted mpv.conf values take effect
+- Preferred languages no longer match unrelated tracks
+- Back dismisses the skip prompt instead of exiting
+- Speed changes apply everywhere on Android
+- A secondary subtitle no longer replaces the primary
+- A cleared intro pattern no longer marks every chapter
+- Back works after a fast controls show/hide
+- Play/pause no longer crashes during teardown
+- Progress reporting survives failed retries
+- Dismissing Still Watching re-arms the sleep timer
+- Scoped audio sync offsets display correctly
+- Audio codec and bitrate in the ExoPlayer overlay
+- iPadOS PiP no longer resizes with SRT subtitles
 
 ## Plex
 
-- Artwork is requested at native size instead of server-side upscales
+- Tags with spaces, symbols, or commas remove correctly
+- Recording indicators appear in the EPG
+- Scheduled programmes offer Manage, not Record
+- "Other Videos" render as 16:9 thumbnails
+- Unreachable servers show an error, not empty lists
+- Discover keeps its hubs when one leg fails
+- Plex QR and browser sign-in can be cancelled
 
 ## Jellyfin & Emby
 
-- Items removed from Emby Continue Watching no longer reappear
+- Date Added sorting works on rows and albums
+- Unplayed Next Up items sort correctly
+- Editing a release date updates the year
+- The guide keeps already-airing programmes
+- Two profiles on one server no longer share caches
+- Add-server lists existing servers, per backend
 
 ## Explore & trackers
 
-- The Seerr request action appears on items opened from Discover hubs and search
-- AniList and MAL entries set to rewatching stay rewatching when scrobbled
+- Jellyseerr request states decode correctly
+- Failed requests can be re-requested
+- Queued tracker writes purge on disconnect and expiry
+- Rewatch updates use post-write state
+- Dismissing device-code sign-in cancels the attempt
+- Concurrent tracker sign-ins on one network succeed
 
-## TV & profiles
+## Downloads
 
-- Waking the device mid-video resumes playback instead of a stuck profile picker
-- D-pad focus follows the played item when Continue Watching reorders
-- Posters and thumbnails load at full resolution on low-end TV hardware
+- Recovery finds files on a custom location
+- One offline server no longer stalls the queue
+- Queued items resume when their server returns
+- Partly cancelled seasons no longer show completed
+- Deleting a season no longer orphans thumbnails
+- Offline metadata resolves per profile
+- Cancelled downloads no longer commit empty files
+
+## Profiles & startup
+
+- Managing a PIN-protected profile requires its PIN
+- The mandatory profile picker cannot open twice
+- Returning from playback keeps the detail page
+- Repair works on the startup-failure screen
 
 ## UI
 
-- Closing context menus no longer scrolls detail pages to the top or resets the season selector
+- The wheel scrolls the page over hub rows
+- Detail hero chips fit on one row
+- Episode rows show the real episode number
+- Library switcher and profile menu are sheets on phones
+- Hub "see all" cards match their source rows
+- Profile and connection focus chrome matches settings
+- Explore no longer scrolls the app bar away
+- The file-info spinner dismisses with its card
+- Library tabs refetch after long backgrounding
+
+## TV
+
+- The floating sidebar paints a panel
+- Slimmer detail rail and spaced hero on 1080p
+- The hub focus glow no longer flashes early
+- D-pad traversal works with the rail collapsed
+- Action-bar focus survives rebuilds
+- Leaving a text field no longer eats the next back
+- Plex QR Retry and Cancel share one row
+
+## Remote & controllers
+
+- Pairing no longer hangs on unroutable addresses
+- The desktop shows its listen addresses
+- The remote reconnects after backgrounding
+- Fixed the top crash in LAN discovery
+- Gamepad disconnect stops runaway key repeat
+- Discord presence reconnects
 
 ## Desktop
 
-- Quitting hides the window immediately instead of showing teardown
+- Libraries survive a server timeout
+- Windows restores onto a live monitor without a flash
+- Windows keeps the maximized state
+- Windows preserves Dynamic Refresh Rate
+- Windows HDR restores on the recorded display
 
 ## tvOS
 
-- Dolby Direct Play no longer develops continuous judder
-- Adding a server no longer freezes remote input at the username field
-- Siri Remote swipe navigation matches the native focus-engine feel
+- Dolby passthrough no longer drops audio periodically
+- Dolby passthrough no longer buzzes after 30-40 minutes
 
 ## Linux
 
-- Audio Normalization no longer causes startup audio stutter
-- Wayland HDR no longer flickers to SDR every few seconds]]></releaseNotes>
+- Responsive player UI while video plays
+- Scrub thumbnails appear during playback
+- Video recovers after a workspace switch
+- Plex sign-in and update links open on all distros]]></releaseNotes>
     <copyright>Copyright © edde746</copyright>
     <tags>plezy foss client plex jellyfin media mpv</tags>
     <projectSourceUrl>https://github.com/edde746/plezy</projectSourceUrl>
