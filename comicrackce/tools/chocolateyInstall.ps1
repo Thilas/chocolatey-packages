@@ -2,7 +2,7 @@
 
 # *** Automatically filled ***
 $softwareName = 'ComicRack Community Edition'
-$version      = '0.9.182'
+$version      = '0.9.184'
 # *** Automatically filled ***
 
 $info = Get-UninstallRegistryKey $softwareName
@@ -17,9 +17,9 @@ $packageArgs = @{
     packageName    = 'comicrackce'
     softwareName   = $softwareName
     fileType       = 'exe'
-    url64bit       = 'https://github.com/maforget/ComicRackCE/releases/download/v0.9.182/ComicRackCESetup_v0.9.182.exe'
+    url64bit       = 'https://github.com/maforget/ComicRackCE/releases/download/v0.9.184/ComicRackCESetup_v0.9.184.exe'
     silentArgs     = '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-    checksum64     = 'df9a5d9ccab86508400990f1c4b8f8e3580e478bec4eac3d3d8adcb880617100'
+    checksum64     = '5115e88df7f618330811599ac05b713e5e6de899daefb28b0563ce33c4d784bd'
     checksumType64 = 'sha256'
     validExitCodes = @(0, 3010, 1641)
 }
