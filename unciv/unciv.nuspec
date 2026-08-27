@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.21.12</version>
+    <version>4.21.13</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,21 +18,17 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.21.12
+## 4.21.13
 
-Reduce RAM when saving/loading to/from files
+Massive Application Not Responding cleanup for Android
 
-Fix rare crashes when handling events while screens are being changed
+Minor CPU performance improvements
 
-Fix crash on Options re-open with force-close, e.g. toggling 'Enable out-of-game turn notifications' - By SomeTroglodyte 
+Spectator-as-civ sees 'units moving to tiles' only for the civ's units
 
-AI does not see unexplored tiles for tile value when assessing settler locations - By ssamt 
+AI sets production focus for wonders and spaceship parts - By ssamt
 
-Clarify distance-based unit cycle option - By mvanhorn
-
-Population in cities countable - By PLynx01
-
-Modding: Downgrade 'same name for multiple entries' to 'OK', lowest level of warning, since most cases are benign]]></releaseNotes>
+AStar movement fix - By Ambeco]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
