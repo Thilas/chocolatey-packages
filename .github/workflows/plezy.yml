@@ -51,7 +51,7 @@ jobs:
                   [System.Web.HttpUtility]::UrlEncode($_.Name)
                   [System.Web.HttpUtility]::UrlEncode($file.file_name)
               )
-              $installer = Join-Path $PSScriptRoot $file.file_name
+              $installer = Join-Path $PWD $file.file_name
               try {
                   [System.Net.WebClient]::new().DownloadFile($url, $installer)
                   $fileHash = Get-FileHash $installer -Algorithm SHA256
