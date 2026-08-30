@@ -35,6 +35,37 @@ jobs:
       force: ${{ inputs.type == 'Force update' }}
       test_cases: |
         - Start program
+          # Install latest Vulkan Runtime
+          Invoke-RestMethod -Uri 'https://vulkan.lunarg.com/sdk/files.json' -UseBasicParsing
+          | ForEach-Object { $_.windows.PSObject.Properties }
+          | Where-Object { $_.Value.acl -eq 'public' }
+          | Sort-Object -Descending { $_.Name -as [version] }
+          | Select-Object -First 1
+          | ForEach-Object {
+              'Installing Vulkan Runtime {0} released on {1}...' -f $_.Name, $_.Value.release_date
+              $file = $_.Value.files | Where-Object { $_.name -eq 'Runtime' -and $_.acl -eq 'public' -and $_.uploaded }
+              if (!$file -or $file -is [array]) {
+                  Write-Error 'Runtime installer not found.'
+              }
+              $url = 'https://sdk.lunarg.com/sdk/download/{0}/windows/{1}' -f @(
+                  [System.Web.HttpUtility]::UrlEncode($_.Name)
+                  [System.Web.HttpUtility]::UrlEncode($file.file_name)
+              )
+              $installer = Join-Path $PSScriptRoot $file.file_name
+              try {
+                  [System.Net.WebClient]::new().DownloadFile($url, $installer)
+                  $fileHash = Get-FileHash $installer -Algorithm SHA256
+                  if ($fileHash.Hash -ne $file.sha) {
+                      Write-Error 'Runtime installer does not match expected hash.'
+                  }
+                  $process = Start-Process -FilePath $installer -ArgumentList '/S' -PassThru -Wait
+                  if ($process.ExitCode -ne 0) {
+                      Write-Error 'Runtime installer failed.'
+                  }
+              } finally {
+                  Remove-Item $installer -ErrorAction SilentlyContinue
+              }
+          }
           Start-Program Plezy -Shortcut
         - Close program
           Close-Program plezy
