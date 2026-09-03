@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.21.15</version>
+    <version>4.21.16</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,21 +18,21 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.21.15
+## 4.21.16
 
-Avoid ANRs in multiple places
+Fixed visual flash when entering a city
 
-Performance improvements
+Don't allow removing features for improvements, if it requires an unresearched tech
 
-Remove initial Android screen orientation restriction for 'user landscape' - now takes whatever orientation is set for the device
+Decrease time-to-first-pixels for better user experience
 
-Air unit list visible on carriers
+AI doesn't accept trades to declare war against multiple civs
 
-Resolved map bounds restrictions on spectator-as-civ by removing restrictions entirely
+Better multiplayer UUID handling - By dangdinhbaohoang12
 
-UI doesn't crash if construction list changed while we try and select a queue entry that no longer exists
+Correct numeric localization and stat icon suppression - By mvanhorn
 
-Better use of multiple slot types on carriers - By SomeTroglodyte]]></releaseNotes>
+Increase luxury diversity - By O-spin]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
