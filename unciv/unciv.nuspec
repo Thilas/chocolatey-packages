@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.21.16</version>
+    <version>4.21.17</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,21 +18,18 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.21.16
+## 4.21.17
 
-Fixed visual flash when entering a city
+Decrease initial startup time
 
-Don't allow removing features for improvements, if it requires an unresearched tech
+By Angais:
+- AI: Keep inquisitor conversion targets in owned cities 
+- Retain lost data when saving games 
+- Fixed trade evaluation error  
 
-Decrease time-to-first-pixels for better user experience
-
-AI doesn't accept trades to declare war against multiple civs
-
-Better multiplayer UUID handling - By dangdinhbaohoang12
-
-Correct numeric localization and stat icon suppression - By mvanhorn
-
-Increase luxury diversity - By O-spin]]></releaseNotes>
+By varchasgopalaswamy:
+- Fixed tile info update bug when changing perspective in spectator 
+- fixed city selection bug bug]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
