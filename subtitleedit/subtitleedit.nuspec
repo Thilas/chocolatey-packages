@@ -57,6 +57,7 @@ See the full [Change Log](https://raw.githubusercontent.com/SubtitleEdit/subtitl
     <bugTrackerUrl>https://github.com/SubtitleEdit/subtitleedit/issues</bugTrackerUrl>
     <dependencies>
       <dependency id="chocolatey-core.extension" version="1.3.3" />
+      <dependency id="dotnet-10.0-desktopruntime" version="10.0.0" />
     </dependencies>
   </metadata>
   <files>
