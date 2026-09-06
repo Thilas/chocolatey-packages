@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>plezy</id>
-    <version>2.18.0</version>
+    <version>2.19.0</version>
     <title>Plezy</title>
     <authors>edde746</authors>
     <owners>Thilas</owners>
@@ -33,69 +33,113 @@ Stream your media library with HDR, Dolby Vision, offline downloads, and a gorge
 
 ## New features
 
-- Search the Live TV guide for channels and programs
-- Music sessions restore paused on launch
-- Account preferences section
+- Separate Off, Show button, and Automatic modes for intro and credits skipping
+- Audio, subtitle, and video-format previews on detail pages
+- Collection headers with artwork, summaries, and item counts
+- A Show Watched Indicators toggle
+- An optional Remember Brightness Level setting
+
+## Performance
+
+- Faster D-pad scrolling on Android TV and Fire TV
+- Smoother TV home navigation
+- Smoother software-decoded playback on lower-end Android GPUs
+- Faster loading of large download lists
+- Opening large logs no longer freezes or crashes the app
+- Server connections no longer stall on an unavailable IPv4 or IPv6 path
 
 ## Playback
 
-- Android playback moves to the mpv player backend
-- ExoPlayer stays selectable under Settings > Playback > Player Backend
-- 10-bit and HDR video reach the display untouched on Android
-- Software-decoded HDR stays HDR on Android
-- Stopping HDR playback no longer leaves the TV black for up to 30 seconds
-- Apple devices keep hardware decoding through a transient decode error
-- Playback starts again after a failed player handoff instead of needing a restart
-- Android direct play no longer switches to the mpv backend mid-episode
-- Android direct play honors DTS-HD MA and container aspect ratios
-- The play-next prompt shows the next episode's thumbnail
-- Play Next Countdown is configurable from 0 to 30 seconds
-- Brightness swipe, volume swipe, and pinch-to-zoom each have their own switch
-- A Deinterlacing toggle for DVD-era content on the mpv backend
-- A 140% zoom preset
-- A separate default streaming quality for cellular connections
+- Fewer dropped frames with subtitles or audio passthrough on Android
+- Subtitle Render Resolution works on the Android mpv backend
+- Subtitles stay on the picture with ambient lighting enabled
+- Dolby Vision profile 7 and Dolby Vision/HDR10+ files play on affected Fire TV devices
+- High-bitrate HEVC plays without green flashes or smeared frames on affected Fire TV devices
+- Faster H.264 High 10 playback startup on Android devices without a compatible hardware decoder
+- Unsupported AV1 profiles play without green or black video on Android
+- Deinterlacing works for software-decoded video on Android and Linux
+- Dolby and DTS passthrough works with more Android receiver setups
+- Passthrough audio recovers after HDMI route changes
+- 44.1 kHz 5.1 audio stays in surround on Android
+- Closing hardware-decoded playback no longer hangs on Android
+- Special characters survive in Android media titles and subtitle paths
+- External players start unwatched items from the beginning on Android
+- Audio selection follows playback preferences rather than the library language
+- Long opening chapters no longer trigger Skip Intro
 
 ## Plex
 
-- A quality preset direct plays a file already under it instead of transcoding
-- Shows with credits detection disabled no longer get a skip-credits action
-- Instant Mix reports failures instead of doing nothing
-- Home-video libraries offer User Rating and Plays sorts
+- Live TV honors the selected quality preset
+- Live TV seeks land at the correct time after tuning or replacing a stream
+- Other Videos libraries appear in search results
+- Watchlist actions work for library and Explore titles
+- A Play Smaller Videos at Original Quality toggle
+- Local connections stay local after device sleep
+- Plex Home playback picks up Account preferences changes
+- Subtitle selection follows the server setting
 
 ## Jellyfin & Emby
 
-- A device without a hardware decoder is no longer handed that codec's transcode
-- Servers with an AV1 encoder can transcode to AV1
-- Audio can no longer be what blocks direct play
-- A video-only transcode copies DTS or TrueHD instead of re-encoding it
+- Jellyfin Live TV works with MPEG-TS-only tuners
+- Jellyfin Live TV honors the selected quality preset
+- Jellyfin Live TV supports compatible direct-play streams
+- Playback, subtitles, scrub previews, and library notifications work with Jellyfin 12
+- Emby quality-limited playback works on devices with AV1 support
 
 ## Explore & trackers
 
-- Sign in to Seerr with Quick Connect
-- Seerr accepts a URL typed without http:// or https://
+- Find library copies under native, romaji, and localized titles
+- Report unchecked servers without losing known library copies
+- Seerr request actions reflect current account permissions
+- Seerr authentication-proxy errors no longer disconnect valid sessions
+- Advanced Seerr anime requests use Sonarr anime defaults
+- Editable tags on advanced Seerr requests
+
+## Watch Together
+
+- Transfer hosting to another participant without leaving the room
+- Speed-change notifications name the participant
+- Rooms stay synchronized through buffering and system clock changes
+- Reconnecting no longer silently joins a reused room code
+- Self-hosted relays need updating before clients for automatic room recovery
 
 ## Downloads
 
-- Downloaded tracks are filed under Music/Artist/Album with real track names
+- Downloaded episodes show resume progress
+- Download queue failures show an error
+- Collection downloads respect cellular-download restrictions
 
 ## UI
 
-- A Grid Spacing setting controls the gap between library posters
-- Settings are reorganized into General, Appearance, and Playback homes
-- Artwork and library requests are several times faster on Android
+- Home and libraries refresh automatically when server content changes
+- D-pad focus stays on the same title after sorting or refreshing
+- Phones support rotation with side navigation in landscape
+- Phone detail pages center their logos, metadata, and actions
+- Android Automotive screens stay clear of side system bars
+- Grid Spacing applies to horizontal media rows
+- The first sidebar library selection opens the correct library
+- Deleting an item closes its detail page, not the screen above it
+- Hero titles and logos stay legible in light theme
+- Live TV channel logos stay legible on light backgrounds
+- The player clock stays hidden on portrait phones
+- Tighter spacing around search filters
 
 ## TV
 
-- Mark a whole season watched from the show screen
-- TrueHD, DTS-HD MA, and E-AC3 bitstream to the receiver on Android TV
-- Bitstream passthrough is on by default on Android TV
-- HDR letterbox bars are black instead of gray on Fire TV
+- Show details display the focused episode title
+- Play follows the focused episode on show details
+- Edit mpv.conf line by line with the system keyboard
+- Profile pickers and players keep remote focus
+- Explore descriptions are reachable with the D-pad
+- Audio passthrough defaults on for Apple TV
+- ExoPlayer plays DTS-HD audio on receivers without DTS-HD support
 
 ## Desktop
 
-- Text and icons render correctly on macOS again
-- Video stays visible while the player UI is on screen on Windows
-- Always on Top persists across episodes]]></releaseNotes>
+- Windows starts without a preinstalled Vulkan loader
+- Windows remembers snapped window size and position
+- Less HDR-to-SDR playback overhead on Qualcomm Windows GPUs
+- Steam Input no longer doubles controller actions on Linux]]></releaseNotes>
     <copyright>Copyright © edde746</copyright>
     <tags>plezy foss client plex jellyfin media mpv</tags>
     <projectSourceUrl>https://github.com/edde746/plezy</projectSourceUrl>
