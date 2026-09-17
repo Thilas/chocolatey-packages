@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.22.0</version>
+    <version>4.22.1</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,35 +18,19 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.22.0
+## 4.22.1
 
-Invisible units no longer invisible to their own civ
+Fixed crash on 'ID from clipboard' when clipboard not set
 
-Remember last civilopedia position
+Scrollable events show scrollbars
 
-New game screen: Start fresh if the latest game start is erroring
+Allow modders to specify modOptions.constants.maxRiverLength as 0 to avoid river generation entirely
 
-When selecting custom maps, don't overwrite the ruleset if the current mods are a superset of the map's required mods
+Tweaked auto map size - By O-spin
 
-By unciv-loof:
-- Automation setting for specialist control in new cities 
-- Set default max coast extension to 3 instead of 2 
+Performance improvements - By Ambeco
 
-By JN0V:
-- Add countable 'Known [civFilter] Civilizations' 
-- Victories can carry uniques, and decide who may achieve them 
-- Add victory milestone 'Have at least [amount] [countable]' 
-- Fix possible crash when scrolling to the selected construction queue entry 
-
-By LouisDeconinck:
-- Fix terrain changes from gifted improvements 
-- Fix health of units recruited from encampments 
-
-fix: prevent owned roads from being charged as neutral roads - By mvanhorn
-
-fix mod translation not enabled in restored new game screen - By finalpatch
-
-AStar correctly paths around allies - By Ambeco]]></releaseNotes>
+Add map generator settings clipboard actions - By LouisDeconinck]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
