@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>8.8.2</version>
+    <version>8.10.2</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -33,16 +33,11 @@ Update urgency: `SECURITY`: There are security fixes in the release.
 
 ### Security fixes
 
-- (CVE-2026-62356) Miscalculated buffer size in `CMSketch` RDB loading may lead to heap OOB write
-- Out-of-bounds access in TopK heap cleanup path (MOD-15410)
-- Use-after-free in the TLS pending-data list when a command closes another pending connection
-- https://github.com/redis/redis/pull/15478 ACL key permission bypass in `SORT`, `GEORADIUS`/`GEORADIUSBYMEMBER` and `XREAD`/`XREADGROUP`: the keys validated by ACL could differ from the keys the command actually accesses
-- A malicious RDB payload with an out-of-range `SLOT_INFO` slot id causes memory corruption during RDB loading, which may lead to Remote Code Execution
-- Vector Sets: missing node level validation when loading a vector set from RDB may lead to out-of-bounds access
-- Vector Sets: use-after-free when `VREM` mutates the HNSW graph while background `VSIM` threads are still running
-- Vector Sets: a negative `hnsw_search()` return was treated as a huge unsigned count, reading past the end of the result arrays
-- TLS client certificate authentication bypass: a Common Name containing an embedded NUL byte was truncated, allowing a client to authenticate as another (possibly privileged) ACL user
-- https://github.com/redis/redis/pull/15594 Use-after-free in the blocked-client list when reprocessing a command evicts another client blocked on the same key
+- https://github.com/redis/redis/pull/15673 Commands queued in a transaction could still access keys whose ACL permissions were revoked before the transaction was executed
+- https://github.com/redis/redis/pull/15722 The cluster bus protocol has no authentication of its own unless `tls-cluster` is enabled, so any host able to reach a node's bus port could join the cluster and threaten it. A cluster node now warns at startup when its bus port is left unauthenticated, and the new `cluster-bus-port-protected-mode` option (default `no`) makes refusing to run in that state an explicit choice: set it to `yes` and the node starts only when `tls-cluster` authenticates the bus
+- TimeSeries: Prevented Redis from crashing when adding samples to a compressed Time Series key restored from a malformed RDB payload
+- RedisSearch: KNN queries on indexes with very long vector field names could cause the server to crash
+- Vector Sets: Deeply nested JSON used in Vector Set queries could cause the server to crash
 
 Hashes
 =========
@@ -50,27 +45,27 @@ MSYS2 Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 7E79469CB8644A5C1CC466625CAD5B4A68F34AF207CA2C6779B3128E010CB453
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.2-Windows-x64-msys2.zip
+Hash      : 7C8CEBD50347EAA1D9E784DA842ED47A4F33394637835531D6614777B950EE85
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.2-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : 3B86882C4B8358DA5AFCF36029F4B79CF3748C5C393C624B6CB00152095182E1
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.2-Windows-x64-msys2-with-Service.zip
+Hash      : AA43EDCF35773607A29D3D5A9F6FD6825D2C8177E6E83CA91F91866A9329DA27
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.2-Windows-x64-msys2-with-Service.zip
 
 Cygwin Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 9E603AD77224B30AC090BA963735B6A014373F6510001F0D9AF3B8C3415B9A17
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.2-Windows-x64-cygwin.zip
+Hash      : 6DE5CC7F5ADBF97B5928B13766383D4AD424626EF3D8B313FFFF12D820EC6FC1
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.2-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : EC6C628FCB0616B42831EAFAEF31069A5D5767D9480FDCD2724D637F0B1A8CB8
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.2-Windows-x64-cygwin-with-Service.zip
+Hash      : C9E9D4DC5347620F7514FCE4F2999802F1F984F9788C5FAC1A2710295D8F86C4
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.2-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/32123662518]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/35294974076]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
