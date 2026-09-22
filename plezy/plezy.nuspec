@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>plezy</id>
-    <version>2.20.0</version>
+    <version>2.21.0</version>
     <title>Plezy</title>
     <authors>edde746</authors>
     <owners>Thilas</owners>
@@ -33,103 +33,107 @@ Stream your media library with HDR, Dolby Vision, offline downloads, and a gorge
 
 ## New features
 
-- Discord shows a Listening card while music plays
-- Original quality shows the source bitrate in the quality menu
+- Library filters take multiple values, exclusions and ranges
+- Downloads tabs can group, sort and filter
+- Tag suggestions in the tag editor
+- Quick Tag in the item context menu
+- Shuffle Starts at Beginning setting
+- A volume pill shows every volume change in the player
+- Cmd+R or Ctrl+R refreshes the current page on desktop
+- The Watch Together session code is large enough to read across a room
+- Flatpak bundle for Linux
 
 ## Performance
 
-- The performance overlay no longer delays the playback it measures
-- The performance overlay reports cache use instead of N/A
-- Less CPU spent on logging while browsing and playing
+- Libraries in folder view open with fewer server requests
+- Collections without a backdrop skip the poster blur on Reduced visual effects
 
 ## Playback
 
-- A failed open shows a Retry screen instead of a snackbar and an empty player
-- A file that cannot start fails in seconds instead of after thirty
-- Slow software decoding keeps playing instead of failing with a video output error
-- A wedged player recovers with Retry instead of needing a force stop
-- Back leaves the player instead of stopping responding
-- Starting another item from a shelf no longer strands a frozen player
-- Playback ends with an audio error instead of freezing when the audio device stops responding
-- Normalize Loudness applies on Android, as a stereo mix
-- Normalize Loudness overrides Audio Passthrough instead of being ignored
-- Dolby Vision Profile 5 plays with correct color on Google TV
-- Dolby Vision Profile 5 plays at full rate on boxes wired to a non-Dolby Vision TV
-- Letterbox bars are black instead of gray during HDR playback
-- 4K HEVC Main 10 uses hardware decoding on more Android decoders
-- AV1 keeps hardware decoding on Pixel 6 and newer through ambient mode and lock
-- 5.1 audio bitstreams instead of downmixing to stereo on TVs that report an offload-only HDMI port
-- Plezy is no longer killed mid-playback on low-memory TV boxes
-- A track choice made just before leaving the item is remembered
-- Remembered track selections apply on Jellyfin instead of being dropped
-- Plezy says when a track choice can only apply to the current playback
-- The audio and subtitle menu ticks the track that is playing
-
-## Display matching
-
-- Deinterlaced content no longer drops every other frame with Match Content Frame Rate
-- Frame-rate matching works on 90 Hz and 120 Hz panels
-- 24p content matches 120 Hz instead of 48 Hz on high-refresh panels
-- Content at odd rates such as 23.81 fps matches a near-native mode instead of 60 Hz
-- HDR survives on displays that advertise HDR per resolution
-- Playback resumes after the display has finished switching modes
-- Android hardware playback follows refresh-rate changes the TV makes itself
-- The display returns to its own mode after playback ends
+- Ambient lighting turned on in settings applies when playback starts
+- Subtitles stay in place with Ambient lighting after moving to the next episode
+- NVScaler skips HDR content from the first frame
+- NVScaler comes back for an SDR episode that follows an HDR one
+- Files whose tracks end early finish and offer Play Next
+- Switching episode or quality in place waits for the new file's first frame
+- The skip badge matches the distance the playhead moved
+- A slow server response no longer overwrites a replaced play queue
+- The player no longer leaks memory each time it closes
+- Transcoded playback starts through reverse proxies that send chunked responses
+- Dolby Vision Profile 8 keeps HDR on TVs without Dolby Vision
+- HDR10+ switches the TV to HDR10+ instead of HDR10 on Apple TV
+- DTS-HD MA bitstreams in full instead of as DTS core on more TVs
+- Fewer E-AC-3 passthrough dropouts on Fire TV
+- Watch Together rooms start on Apple TV and with display matching on
+- Playing alone in a Watch Together room starts on the first Play press
 
 ## Subtitles
 
-- Korean subtitles render instead of separated jamo
-- Typeset signs land on their cut on low-end Android boxes
-- Positioned subtitles stay inside the picture on Android hardware playback, with a new Use margins setting
-- The next episode plays its own subtitle track instead of the previous one's
+- PGS subtitles no longer draw a box behind the text
+- Subtitles no longer make video stutter on low-end Android boxes
 
 ## Live TV
 
-- Rewinding a channel plays from that point instead of skipping ahead
-- Capped quality presets remux instead of re-encoding on Plex
-- Capped quality presets allow direct play on Jellyfin and Emby
-- Original quality is no longer capped at 8 Mbps on Jellyfin and Emby
-- Emby channels direct play mpegts
+- Live TV shows in system media controls, Now Playing and Google Assistant
+- Next and previous change channel from media controls and the companion remote
+- A short rewind at the live edge moves back instead of doing nothing
+- Guide reloads and recording rule runs report failures instead of claiming success
+- Favorite channels are included in settings export
+
+## Jellyfin & Emby
+
+- External players open ISO files from Jellyfin
+- Downloads keep their SRT subtitles on Jellyfin
+- The Collections tab lists collections on Emby servers without a collections folder
+
+## Explore & trackers
+
+- Unwatching resets MAL and AniList progress instead of deleting the list entry
+- A failed watchlist add on Plex shows an error instead of doing nothing
+
+## Downloads
+
+- Downloads stop before the device runs out of storage
+- Show and season badges count downloaded episodes
+- Downloads from different servers no longer merge into one show or album
+- A shared download removed from a profile leaves that profile's list
+- The offline play-next card shows its thumbnail on Jellyfin and Emby
 
 ## UI
 
-- Bottom navigation labels stay on one line in every language and font size
-- Posters and thumbnails render sharper
-- Durations under a minute show seconds
+- Error messages no longer show raw technical text
+- Titles without a logo get a wider slot and shrink to fit instead of truncating
+- Low-density phones get the phone layout instead of the tablet one
+- Hovering an always-open sidebar no longer dims the content
+- Settings that fail to apply show why instead of crashing
+- Out-of-date translations refreshed in every language
 
 ## TV
 
-- The control bar stays up long enough to walk with a remote, and never hides while paused
-- Repeated skip presses move by the configured step instead of running away
-- The focused row stays on screen in reorderable lists
-- Arrow keys move through Edit Metadata choices instead of selecting one
+- Plezy no longer renders upside down on some Android TV boxes
+- The on-screen keyboard takes D-pad input on Chromecast with Google TV
+- The focused player control is a solid disc that stands out over video
+- Holding Select opens the context menu on playlist items
+- The server activities cancel button is reachable with a remote
 
 ## Android
 
-- The taskbar no longer covers the video after folding or unfolding
-- Servers behind a user-installed certificate authority connect again
-- Downloads work on Plex servers reached over IPv6
-- Playback no longer stutters while the Watch Next shelf updates
-- Fewer stalls and less judder during hardware playback
-
-## tvOS
-
-- Live TV in HLG keeps HDR instead of falling back to SDR
-- Episode auto-advance no longer blanks the picture and cuts HDMI audio
+- Non-16:9 video is letterboxed again on Android 7 and 8
+- High-bitrate AV1 plays smoothly on Pixel 6 and newer
+- Locking and unlocking during playback no longer blacks out the picture or desyncs audio
+- The display no longer switches between 120 and 60 Hz mid-playback
+- Frame pacing recovers after seeking on some tablets
+- The performance overlay reports dropped frames accurately
 
 ## Desktop
 
-- Closing Plezy on Windows no longer crashes
-- TrueHD falls back to PCM instead of opening to silence on Windows
-
-## Linux
-
-- Startup no longer hangs at "Connecting to servers..." on hosts without xdg-user-dirs
-- Plezy starts on hosts without D-Bus or NetworkManager
-- Source and AUR builds play against a system libmpv older than the pinned one
-- mpv log lines no longer put a Plex token in the system journal
-- CJK and Hangul text renders instead of tofu
-- The performance overlay reports the display refresh rate]]></releaseNotes>
+- HDR plays in HDR on macOS instead of tone-mapped to SDR
+- Audio device changes no longer crash playback on macOS
+- The player's fullscreen button follows fullscreen state on Windows
+- The window no longer stays blank when FancyZones resizes it at launch
+- Plezy no longer leaves .sentry-native folders in random directories on Windows
+- Companion Remote can host on more Linux and Windows network adapters
+- Discord presence hides while paused]]></releaseNotes>
     <copyright>Copyright © edde746</copyright>
     <tags>plezy foss client plex jellyfin media mpv</tags>
     <projectSourceUrl>https://github.com/edde746/plezy</projectSourceUrl>
