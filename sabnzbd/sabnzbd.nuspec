@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sabnzbd</id>
-    <version>5.1.3</version>
+    <version>5.2.0-Beta1</version>
     <title>SABnzbd</title>
     <authors>The SABnzbd-team</authors>
     <owners>Thilas</owners>
@@ -32,119 +32,36 @@ SABnzbd is an open-source cross-platform binary newsreader written in Python. It
     <summary>Free and easy binary newsreader</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/sabnzbd/sabnzbd/releases)
 
-Release Notes - SABnzbd 5.1.3
+Release Notes - SABnzbd 5.2.0 Beta 1
 =========================================================
 
-## Security fixes
+This is the first test release of version 5.2.0.
+We are still working on several other features, but hope you will already enjoy
+the current improvements and give us feedback!
 
-SABnzbd 5.1.1, 5.1.2 and 5.1.3 resolve a number of security vulnerabilities.
+## New features in 5.2.0
 
-Over the past releases, several security researchers have put a lot of time and effort
-examining SABnzbd, responsibly reporting their findings, and helping us verify the fixes.
-We are grateful for their hard work, it has made SABnzbd meaningfully safer for everyone.
+* Downloaded data will be written directly to disk (if your hardware supports it),
+  which greatly reduces memory and CPU usage on systems with SSD's.
+  Additionally, several other performance improvements were made.
+* Search your Indexers and Add downloads directly from within SABnzbd.
+* Changed the internal webserver from CherryPy to Starlette.
+* Overview of Active Sessions is available when username and password are enabled.
+* Only allow proxied requests from hosts configured in `xff_trusted_hosts`.
 
-For most users the risk is limited: you are only affected if your setup is exposed to
-untrusted parties. The web interface issues only apply if it can be reached by someone
-you do not trust. By default, SABnzbd is only accessible from your own device and
-`External internet access` is set to `No access`. If either of those is still at its
-default, or if you use a proxy service for authentication, you are not affected.
-The download-processing issues only apply if SABnzbd handles NZBs from a source you
-do not fully trust, such as a public indexer.
-If none of that describes your setup, you were never at risk.
+## Bug fixes in 5.2.0
 
-The safest action is simply to update to 5.1.3.
-Full details, affected versions, actions and mitigations for each vulnerability are described at:
-https://sabnzbd.org/5-1-vulnerabilities
-
-Vulnerabilities resolved:
-
-* GHSA-q326-jpxx-jmjc: `__wrapped__` dispatch bypass allows unauthenticated API access, fixed in 5.1.3.
-* GHSA-mjwj-v5mr-cmcg: PAR2 symlink bypass allows pickle remote code execution, fixed in 5.1.3.
-* GHSA-rgqj-28c2-gxwp: Critical remote code execution via authentication bypass on configuration endpoints, fixed in 5.1.2.
-* GHSA-75g3-96fr-7p2r: High-severity path traversal during post-processing via crafted PAR2/SFV files, fixed in 5.1.2.
-* GHSA-xrfq-jhgh-wqch: Critical authentication bypass allowing a valid session without credentials, fixed in 5.1.1.
-
-If you rely on the SABnzbd username and password to keep out untrusted parties, and your
-setup was exposed, it is recommended that you rotate your SABnzbd username/password and
-API-key, Usenet server passwords, indexer API-keys used in RSS-feeds, and notification
-service credentials after updating. See the page above for the full guidance.
-
-## Other changes and bug fixes in 5.1.3
-
-* Tighten Compact display mode.
-* Directly show usenet server errors instead of parsing them.
-* Prevent `database is locked` error when re-evaluating stored RSS jobs.
-* Added tooltip to explain search filters in Queue and History.
-* Windows and macOS: Updated 7zip to 26.03.
-
-## Other bug fixes in 5.1.2
-
-* RSS filters were not applied directly.
-
-## Other bug fixes in 5.1.1
-
-* Styling cache issues could occur after updating.
-* RSS items were removed too eagerly from RSS-history after download.
-* The RSS-feed `Clear Downloaded` button did not do anything.
-
-## Changelog 5.1.0
-
-This release brings a fundamental improvement to "Retry": instead of
-re-downloading any files with missing data, only the articles that were actually
-missing are fetched again. RSS got an overhaul under the hood, the interface is
-refreshed, and we added quite a long list of long-requested features and bugfixes.
-
-## New features in 5.1.0
-
-* Refreshed the interface.
-* When Retrying a job, only the actually missing articles are tried again.
-  This only works for jobs downloaded in 5.1.0 (or newer).
-* RSS items are now stored in the database instead of on disk.
-* New RSS `Age` rule to filter jobs based on their age.
-* Downloaded RSS items are cleared from the RSS database after 3 days.
-* Added support for filename and path pattern matching to the `Cleanup List`.
-* `Unwanted extensions` will also be removed after unpacking.
-* Allow job setting changes directly from `Extra queue columns`.
-* Added support for unpacking `.tar` files during post-processing.
-* Improved anonymization of the logs when using `Show Logging`.
-* Added `SAB_FILES` environment variable to Post-processing scripts,
-  listing all files that resulted from the job.
-* New Servers will default to 16 connections instead of 8.
-* Use media duration as part of `Ignore Samples` detection.
-* Added option to (auto) sort the queue by Remaining Percentage.
-* Improved support for screen readers.
-* Parsing of header-encrypted RARs will use significantly fewer resources.
-* Add Ayatana AppIndicator tray support on GNOME.
-* Removed redundant `INSTALL.txt` file.
-* Dropped support for Python 3.9.
-* Windows and macOS: Updated Python to 3.14.6, Unrar to 7.23 and 7zip to 26.02.
-
-## Bug fixes in 5.1.0
-
-* Prevent incorrect warnings about non-writeable directories.
-* Files unrelated to job could get removed by the `Cleanup List` logic.
-* Prevent path traversal in orphaned job APIs.
-* `Disk Full` errors from unrar were not handled gracefully during unpacking.
-* Memory leak could occur during article decoding.
-* In containers (like Docker), the Article Cache could exceed the memory limit.
-* Diskspace checks would be too strict when unpacking to different disk.
-* Prevent deadlock when a second signal arrives during shutdown procedure.
-* Verification using SFV-checks could fail, even though files were correct.
-* Don't log Warning during clean shutdowns.
-* Windows: Uninstall would not remove Settings or Windows Service.
-* Windows: Warn for OS-limit if more than 1024 connections are configured.
-* macOS: AppleDouble files could result in failures in `Moving` stage.
-* macOS: Restarting the application resulted in Terminal window.
-* macOS: Included par2cmdline-turbo will now use all available CPU-features.
+* Jobs with `Repair` priority would not always be at the top of the queue.
+* Failure to read one RSS URL would stop the whole readout instead of continuing to the next.
+* Prevent potential XSS in the History from malicious Script output (GHSA-rpwc-qfxm-7h2v)
+  or malicious NNTP responses (GHSA-c5x2-896f-g5g8).
+* Correct `articles_success` to `articles_failed` in Server statistics API-call.
+* macOS: Tray icon would not show on macOS 26.
 
 ## Upgrade notices
 
 * You can directly upgrade from version 3.0.0 and newer.
 * Upgrading from older versions will require performing a `Queue repair`.
-
-## Known problems and solutions
-
-* Read `ISSUES.txt` or https://sabnzbd.org/wiki/introduction/known-issues
 
 ## Code Signing Policy
 
