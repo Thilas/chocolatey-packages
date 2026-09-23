@@ -7,7 +7,7 @@ Package can be verified like this:
 
 1. Go to
 
-   x64: https://github.com/icsharpcode/ILSpy/releases/download/v11.0/ILSpy_windows_11.0.0.9375-x64.zip
+   x64: https://github.com/icsharpcode/ILSpy/releases/download/v11.1/ILSpy_windows_11.1.0.9782-x64.zip
 
    to download the installer.
 
@@ -15,7 +15,7 @@ Package can be verified like this:
    - Use powershell function 'Get-FileHash'
    - Use Chocolatey utility 'checksum.exe'
 
-   checksum64: 6D97E8519D5666E1E9D9B187644F1B507094B2EF9BC9DA18EA880CFF3774B785
+   checksum64: 37A9A19220F7621D9BC7AD9A00ED6F98E6A7A90F582165E52170E90B1B22138A
 
 File 'LICENSE.txt' is obtained from:
    https://github.com/icsharpcode/ILSpy/blob/master/doc/license.txt
