@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.22.2</version>
+    <version>4.22.3</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,21 +18,15 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.22.2
+## 4.22.3
 
-Spectator deselect sets UI correctly
-.
-Fix defensive pact count motivation clamp - By Angais
+Massive rendering lag improvement!!
+
+ANRs reduction when switching screens
 
 By SomeTroglodyte:
-- Fix layout for GPP table  
-- Crash fix for UI race conditions 
-
-fix: discover natural wonders when revealing the entire map - By mvanhorn
-
-Fix mod fonts missing from Font family selection - By ethanstoner
-
-AStar puts correct movement in PathsToTilesWithinTurn - By Ambeco]]></releaseNotes>
+- Disallow spectators to rename units
+- Allow unit rename to 'reset' to base unit name]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
