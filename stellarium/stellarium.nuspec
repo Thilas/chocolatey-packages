@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>stellarium</id>
-    <version>26.2.0.20260810</version>
+    <version>26.3.0</version>
     <title>Stellarium</title>
     <authors>Stellarium Developers</authors>
     <owners>Thilas</owners>
@@ -18,181 +18,166 @@
 
 **The installers are located in the "Assets" section at the end of these release notes!**
 
-[![Github Release](https://img.shields.io/github/downloads/Stellarium/stellarium/v26.2/total.svg)](https://github.com/Stellarium/stellarium/releases/v26.2)
+[![Github Release](https://img.shields.io/github/downloads/Stellarium/stellarium/v26.3/total.svg)](https://github.com/Stellarium/stellarium/releases/v26.3)
 
-Glad to announce the release of Stellarium 26.2 for all platforms. This is our second release in 2026 with exciting features and many bug fixes.
+Glad to announce the release of Stellarium 26.3 for all platforms. This is our third release in 2026 with exciting features and many bug fixes. 
 
 The major changes of this version:
-- Added new sky culture
-- Added new plugin: Planes
+- Added Potawatomi skyculture
+- Added new plugin: Object visibility
 - Many improvements in plugins
 - Many improvements in Core and GUI
 - Many updates in sky cultures
+- Improvements in scripting engine
 
 Thanks to all the developers, testers, and users who made this release possible with your contributions and feedback.
 
 ## What's Changed
 Full list of changes:
-- Added new IAU names since Nov 2025
-- Added IAU star names with only Gaia numbers
-- Added scripting command for Equation of Time (GH: #4975)
-- Added territory.geojson data for sky cultures
-- Added Chinese Yuan Dynasty sky culture (GH: #4948)
-- Added storage permission request for Android
-- Added a workaround for Intel's garbage GLSL sin & asin
-- Added a new lightweight atmosphere model
-- Added mutiple search path for plugins and data (GH: #4958)
-- Added ability translation of designations for axes of celestial coordinate systems (GH: #4962)
-- Added util to fetch new orbit data elemets from JPL for ssystem_major and updated orbital elements of the moons (GH: #4894, #4908)
-- Added visualization of star trails (GH: #1888)
-- Added "Common names" tab into SkyCultureMaker plugin (GH: #4657, #4912)
-- Added missing part of scripting docs
-- Added a filter to list only enabled surveys
-- Added new plugin: Planes (GH: #4926)
-- Added support for zooming the map in Location dialog
-- Added Byzantine calendar into Calendars plugin (GH: #4910, #4868)
-- Added AndroidManifest.xml and an icon
-- Added support building main executable for Android
-- Added support for high graphics mode on GLES3
-- Added hook for AstroCalc/Almanac tool to updating values when the date is changed (GH: #4906)
-- Added context for 3 constellation names to avoid conflicts with minor planets names (GH: #4898)
-- Added automatic update data after toggling the decimal degrees flag in AstroCalc/Positions tool (GH: #4896)
-- Added support for CelesTrak CSV instead of TLE in Satellites plugin
-- Added byname to constellation information and adjust format to SC editor in Sky Culture Maker plugin (GH: #4879)
-- Added new time steps for AstroCalc/Ephemeris tool
-- Added ability to use inex and tritos as periodic cycles
-- Added Gamepad Controller support for Remote Control plugin (GH: #4813)
-- Added ability to let SSO's have multiple epochs (GH: #4878)
-- Added missing package for qt6-based AppImage (GH: #4880)
-- Added improvements for ephemeris visualization (GH: #4850)
-- Added waitForKeypress() to support Bluetooth remote presentations (GH: #3556, #4864)
-- Fixed InfoString issue
-- Fixed blending issue in Satellites plugin
-- Fixed Exoplanets plugin: Ignore atmospheric extinction when distribution mode is enabled (GH: #4857)
-- Fixed coordinates of Boyden Observatory (GH: #4870)
-- Fixed nebula names in search results (GH: #4867)
-- Fixed grammar in typo reporting sentence in CONTRIBUTING.md (GH: #4861)
-- Fixed DSO names
-- Fixed showing the distance data in Pulsars plugin
-- Fixed error in LocationService in RemoteControl Plugin (GH: #4988)
-- Fixed Solar Corona refraction (GH: 4973)
-- Fixed outline data for M20 (GH: #4971)
-- Fixed drawing the protractors in Oculars plugin
-- Fixed drawing reticle in Oculars plugin
-- Fixed old-fashioned config store of dynamic moon scaling (GH: #4969)
-- Fixed asterism reference exclusion (GH: #4891)
-- Fixed build without media
-- Fixed Windows build with INDI
-- Fixed precision of GLSL ES StelProjector project and unproject
-- Fixed GLSL ES refraction precision
-- Fixed logic of survey/model choice
-- Fixed saving preferences for TextToSpeech feature
-- Fixed compiling with INDI 2.2.2 on NetBSD (GH: #4959)
-- Fixed single-constellation issue in AstroCalc tools (GH: #4874)
-- Fixed null pointer dereference
-- Fixed typos
-- Fixed rounding issue in Equation of Time plugin (GH: #4938)
-- Fixed scripting docs
-- Fixed missing translatable type of object
-- Fixed observing list designation column sorting (GH: #4916)
-- Fixed type of comment in the UI file
-- Fixed compilation on Android when missing fseeko()
-- Fixed compatibility of viewDialog with Qt5
-- Fixed missing excludes (GH: #4930)
-- Fixed broken outline shape on the top-left side of the map
-- Fixed the obtaining of distance in Pulsars plugin according to changes in ATNF Pulsars Catalogues v2.8.0
-- Fixed coordinates and altitude of North Georgia Astronomical Observatory (GH: #4923)
-- Fixed compilation of PFNGLMINSAMPLESHADINGPROC on Android
-- Fixed the WaitForKey script command (GH: #4866)
-- Fixed FOV of Trees landscape (fisheye example)
-- Fixed Calendars plugin: allow playing in dialog while main display is off (GH: #4917)
-- Fixed Calendars plugin: improve dialog visibility on Linux (GH: #4917)
-- Fixed tracked object jumps while zooming with viewport offset (GH: #4915, #4887)
-- Fixed visibility of progress bar for HiPS after surveys are disabled (GH: #4310)
-- Fixed internal format of dithering texture in GLES
-- Fixed shortening names of asteroids (GH: #4895)
-- Fixed build on GLES2-based Qt 6.9.3
-- Changed core: Don't create dithering texture in low graphics mode
-- Changed core: Protect the whole jpl_pleph with the mutex (GH: #5003)
-- Changed core: Make planet hint circle better visible again on scaled hiDPI screens
-- Changed core: Prevent occasional race condition in SolarSystem::computePositions()
-- Changed core: Don't show lunar 'halo' during solar eclipse
-- Changed core: Only suppress earth shadow when moon is actually scaled up
-- Changed core: Make RTS independent from scaling (GH: #4981)
-- Changed core: A few clarifications in skyculture names (GH: #4891)
-- Changed core: Pass log messages to the default handler on Android
-- Changed core: Use a gamma to reduce LW atmo banding on GLESv2 even more
-- Changed core: Use default atmosphere as the fallback
-- Changed core: Don't use GL_RGBA8 internal format in TextureAverageComputer
-- Changed core: Add a fallback for systems without VAO support in TextureAverageComputer
-- Changed core: Don't use GL_DRAW_FRAMEBUFFER{,_BINDING} in LW atmo and TextureAverageComputer
-- Changed core: Reduce banding of LW atmosphere in GLESv2
-- Changed core: Don't try to use RGBA16F FBO in GLESv2
-- Changed core: Don't require HighGraphicsFunctions in TextureAverageComputer
-- Changed core: Don't use RGBA16F for texture averaging in LW atmosphere
-- Changed core: Enable INDI client support on Windows
-- Changed core: Move sinh/asinh functions to the global shader prefix
-- Changed core: Use highp in all projections' shaders
-- Changed core: Project vertices of the Moon on the GPU instead of the CPU
-- Changed core: Render the Moon using a proper 3D model
-- Changed core: Compute Moon texture coordinates inside fragment shader
-- Changed core: Make TextureAverageComputer fully usable in GLESv3
-- Changed core: Make TextureAverageComputer check GLES-compatible
-- Changed core: Make atmosphere model selectable in GLES mode
-- Changed core: TextureAverageComputer: Wrap OpenGL calls in GL() macro
-- Changed core: Restore compilation without GUI (GH: #4849)
-- Changed core: Colored trails (GH: #4881)
-- Changed core: Make sure splash screen preserves OpenGL context
-- Changed Location dialog: Add a threshold for map clicks
-- Changed Location dialog: Use bilinear interpolation for upscaling the map
-- Changed Location dialog: Allow panning the map beyond ±180° longitude
-- Changed Location dialog: Move map point <-> lon/lat conversion to separate methods
-- Changed Location dialog: Don't resize Location dialog map on every paint
-- Changed Location dialog: show location filter circle
-- Changed Satellites plugin: draw satellites in point mode also in penumbra
-- Changed Satellites plugin: Switch to using CSV instead of TLE in default sources
-- Changed Satellites plugin: Move unzipping to a separate function
-- Changed Satellites plugin: Avoid nested resets of SatellitesListModel
-- Changed Satellites plugin: Print out the failing TLE line
-- Changed Satellites plugin: Print download error in addition to error string
-- Changed Telescope Control plugin: simplify initialization
-- Changed Japanese Yasui Map sky culture (GH: #4948)
-- Changed Korean Sky Culture (GH: #4968)
-- Updated Bali skyculture: Apply image compression
-- Updated the default list of satellites
-- Updated default catalog of pulsars
-- Updated the default catalog of exoplanets
-- Updated the orbital elements for minor bodies of Solar system
-- Updated the list of contributoirs
-- Updated the names of DSO
-- Updated the discovery circumstances data for comets and minor planets
-- Updated the territory data for 2 Arabic SC (GH: #4983)
-- Updated the default eyepieces reticles in Oculars plugin
-- Updated the translations
-- Updated the default bookmarks for Solar System Editor plugin
-- Updated the planetary features data
-- Updated the photometry data for satellites
-- Updated the list of groups of satellites
-- Updated the ephemeris for Himalia (Jupiter VI) (GH: #4708, #4894)
-- Updated rules for dependencies
-- Removed deleted constellations from Chinese SC (GH: #4987)
-- Removed deprecated TimeSpec use for UTC cases in Satellites plugin
-- Removed assertions for quite possible situations
+- Added new plugin 'Object visibility' (GH: #4933)
+- Added distance to label of geo targets in ArchaeoLines plugin (GH: #4903)
+- Added support for Alpha-5 TLE format in Satellites plugin (GH: #5054)
+- Added Scenery3D endpoints to openAPI specification in Remote Control plugin (GH: #5108)
+- Added new polygons and adjust period across all skycultures (GH: #5062)
+- Added slant and ground distance to aircraft info panel (GH: #5110)
+- Added tool to follow the location changes and return to back in AstroCalc/Eclipses tools (GH: #5096)
+- Added small speedup for filling the data in AstroCalc/WUT tool
+- Added sky culture loader to SCM (GH: #5019)
+- Added Potawatomi sky culture (GH: #4869)
+- Added dome mode for core.moveToSelectedObject() method
+- Added dome mode for core.moveToObject() method
+- Added ability to jump to specific circumstances for transit of planets in AstroCalc/Eclipses tool
+- Added ability to jump to specific circumstances for local eclipses in AstroCalc/Eclipses tool (GH: #5099)
+- Added NASA / Espenak terms for eclipse timings into AstroCalc/Eclipses tool (GH: #5093)
+- Added OpenAPI (SwaggerUI) into Remote Control plugin (GH: #5086)
+- Added context for Hydra (GH: #5089)
+- Added 2 bright novae
+- Added option to reposition toolbars in other corners (GH: #5022)
+- Added context for few UI elements
+- Added new tab "Twilight map" to Object Visibility plugin (GH: #5047)
+- Added Nova Tauri 2026
+- Added SN 2026sqf
+- Added ability to hiding the marker of CCD center in Oculars plugin (GH: #5072)
+- Added OHOS platform detection module (GH: #5065)
+- Added ability to finding the selected SSO in list of celestial bodies in AstroCalc/Ephemeris tool (GH: #5060)
+- Added new tab 'Twilight limits' to Object Visibility plugin (GH :#5041)
+- Added Tibetan spelling, transliteration and IPA for Tibetan sky culture (GH: #5036)
+- Added TCP transport for LX200 protocol in Telescope Control plugin (GH: #5030)
+- Added ability compiling via pkgsrc on Darwin platform without patches
+- Added sky HiPS display controls (GH: #5021)
+- Fixed axial rotation of Phoboes and Deimos 3D models (GH: #5112)
+- Fixed support for Alpha-5 TLE format in Satellites plugin in case where these data already in our JSON catalog
+- Fixed openAPI documentation in Remote Control plugin
+- Fixed documentation of Calendars plugin (GH: #4975)
+- Fixed SC time slider in ViewDialog can be more than currentYear (GH: #5111)
+- Fixed labels in Romanian sky culture (GH: #5010)
+- Fixed stupid typo in AstroCalc GUI
+- Fixed localization support of Remote Control plugin
+- Fixed localized output the list of sky cultures in Remote Control plugin (GH: #5109)
+- Fixed tool to getting a system info
+- Fixed sorting periodic comets in AstroCalc/WUT tool
+- Fixed sorting HIP-like stars (standard modern designation: CAT XXXXX)] in AstroCalc/WUT tool
+- Fixed sorting deep-sky objects in AstroCalc/WUT tool
+- Fixed sorting minor planets in AstroCalc/WUT tool
+- Fixed transit line in AstroCalc/Graphs/AltVsTime tool
+- Fixed missing translations
+- Fixed localization support for Potawatomi sky culture
+- Fixed Remote Control plugin
+- Fixed visual style for 3 buttons in Configuration dialog
+- Fixed saving/retrieving stored main window size on scaled screens (GH: #5082)
+- Fixed typos in sky cultures
+- Fixed deleting asteroids through Solar Sistem Editor plugin (GH: #5056)
+- Fixed link error when --as-needed linker flag set in Telescope Control plugin (GH: #5067)
+- Fixed leaking glow of active icon into the inactive one
+- Fixed build on Qt 5.12
+- Fixed asteroids with shortened names (GH; #5053)
+- Fixed close/cancel behaviour of Constellation Editor in SCM plugin
+- Fixed LX200 protocol incompatinilities  in Telescope Control plugin (GH: #5029)
+- Fixed segmenation fault for INDI/INDIGO drivers without UNPARK item in Telescope Control plugin (GH: #5024)
+- Fixed init sequence
+- Fixed missing headers
+- Fixed map regression in AstroCalc/Positions (GH: #4900)
+- Fixed localization support of Object Visibility plug-in
+- Fixed bookmarks for Solar System Editor plugin
+- Fixed translatability of new plugin
+- Fixed context for lunar mansions in JK sky cultures (GH: #5033)
+- Fixed translatability the description of script
+- Fixed removes nebulae images when program language is not English when core.clear() is called (GH: #5014)
+- Fixed compiling with QXlsx and Qt 6.10+
+- Fixed the ability to translation of calendars
+- Fixed build on macOS and Windows
+- Fixed uninitialized flags
+- Changed core: Improve legibility of text esp. in screenshots (GH: #5113)
+- Changed core: Make Lightweight atmosphere model the default
+- Changed core: Avoid duplicate computation
+- Changed core: Implement removal of tiles that go out of the viewport
+- Changed core: Update HiPS text & controls when a survey is changed
+- Changed core: Don't use long int to guarantee width, use qint64
+- Changed core: Set desktop file name for the application (GH: #5032)
+- Changed core: Replace an old-style connect in a commented out line
+- Changed core: New connect syntax for main program (GH: #5037)
+- Changed core: Use new connect syntax for gui classes (GH: #4984)
+- Changed core: Allow custom azimuth for lookZenith and lookNadir in alt-azimuthal mount mode
+- Changed core: Avoid downcasting GimbalOrbit to KeplerOrbit
+- Changed core: Avoid dereferencing invalid pointer
+- Changed core: Use the same rounding for window size as Qt does
+- Changed core: Remove useless static_cast<float>(M_PI) and the like
+- Changed core: Don't create a projector just to learn current FoV
+- Changed core: Force Nomenclature update on FOV change
+- Changed GUI: Compactification the tables in AstroCalc/Eclipses tool (GH: #5097)
+- Changed GUI: The "Use decimal degrees" option split into 2 new options (GH: #4992)
+- Changed GUI: Let's use same script sort order in GUI and Remote Control plugin (GH: #5075)
+- Changed GUI: Fix computation of physical canvas size in MapWidget
+- Changed GUI: Simplify layout in SC Exploration tab of the View dialog
+- Changed GUI: use regionKey() for sky culture region matching to avoid CJK substring issues (GH: #5031)
+- Changed GUI: Compactify View dialog
+- Changed SolarSystem: initialize compute pos algorithm choice inline
+- Changed SolarSystem: Remove grouping of marker display
+- Changed SolarSystem: initialize data with constants inline
+- Changed SolarSystem: Update gimbal position also when time is stopped (GH: #4963)
+- Changed Bright Novae plugin: nova light curve continuity (GH: #5069)
+- Changed Calendars plugin: Make Maya correlation date configurable
+- Changed Object Visibility plugin: Improve two first tabs (GH: #5081)
+- Changed GUI of Remote Control plugin
+- Changed Remote Control plugin: Extend script limits
+- Changed Remote Control plugin: Extend OpenAPI specs to adapt to latest changes in master
+- Changed Remote Control plugin: Further improve OpenAPI specs
+- Changed Sky Culture Maker plugin: Refactor constellation display name lookup (GH: #5101)
+- Changed Sky Culture Maker plugin: keep illustration names
+- Updated FastFloat to v8.2.0
+- Updated GCVS catalog
+- Updated messier_marathon.ssc script (GH: #5020
+- Updated CPM to version 0.42.3
+- Updated QXlsx to version 1.5.1.1
+- Updated table in AstroCalc/Eclipses/Transits tool
+- Updated Lokono sky culture: Upload artworks and update index.json (GH: #5105)
+- Updated definitions and artwork in Egyptian (Dendera) sky culture
+- Updated Balinese sky culture
+- Updated identifiers for periodic comets
+- Updated discovery circumstances for comets and minor planets
+- Updated default list of exoplanets
+- Updated list of planetary features
+- Updated default list of locations
+- Updated translations
+- Updated photometry data of satellites
+- Removed global SC beginTime and endTime (GH: #5070)
+- Removed XLSX support for Windows/Qt5 packages
+- Removed references to core.getSkyLanguage and core.setSkyLanguage (GH: #5013)
 
 ## Packages notes
 package | note
 ------------|---------
-stellarium-26.2.tar.gz | Source code of Stellarium 26.2 
-stellarium-26.2.tar.bz2 | Source code of Stellarium 26.2
-stellarium-26.2.tar.xz | Source code of Stellarium 26.2
-stellarium-26.2.zip | Source code of Stellarium 26.2
-stellarium-26.2-qt5-win64.exe | Stellarium 26.2 for Windows (x86_64; Windows 7+) based on Qt 5.12.6 (Visual Studio 2017)
-stellarium-26.2-qt6-win64.exe | Stellarium 26.2 for Windows (x86_64; Windows 10+) based on Qt 6.9.3 (Visual Studio 2022)
-stellarium-26.2-qt6-arm64.exe | Stellarium 26.2 for Windows (ARM64; Windows 10+) based on Qt 6.5.3 (Visual Studio 2022)
-Stellarium-26.2-qt6-macOS.zip | Stellarium 26.2 for macOS (universal; macOS 12.0+) based on Qt 6.9.3 (AppleClang 21.0.0)
-Stellarium-26.2-qt5-x86_64.zip | Stellarium 26.2 for macOS (x86_64; macOS 10.13+) based on Qt 5.12.12 (AppleClang 13.0.0)
-Stellarium-26.2-qt5-x86_64.AppImage | Stellarium 26.2 for Linux (amd64; glibc 2.35) based on Qt 5.15.3 (GCC 11.4.0)
-Stellarium-26.2-qt6-x86_64.AppImage | Stellarium 26.2 for Linux (amd64; glibc 2.35) based on Qt 6.2.4 (GCC 11.4.0)
+stellarium-26.3.tar.gz | Source code of Stellarium 26.3 
+stellarium-26.3.tar.bz2 | Source code of Stellarium 26.3
+stellarium-26.3.tar.xz | Source code of Stellarium 26.3
+stellarium-26.3.zip | Source code of Stellarium 26.3
+stellarium-26.3-qt5-win64.exe | Stellarium 26.3 for Windows (x86_64; Windows 7+) based on Qt 5.12.6 (Visual Studio 2017)
+stellarium-26.3-qt6-win64.exe | Stellarium 26.3 for Windows (x86_64; Windows 10+) based on Qt 6.9.3 (Visual Studio 2022)
+stellarium-26.3-qt6-arm64.exe | Stellarium 26.3 for Windows (ARM64; Windows 10+) based on Qt 6.5.3 (Visual Studio 2022)
+Stellarium-26.3-qt6-macOS.zip | Stellarium 26.3 for macOS (universal; macOS 12.0+) based on Qt 6.9.3 (AppleClang 21.0.0)
+Stellarium-26.3-qt5-x86_64.zip | Stellarium 26.3 for macOS (x86_64; macOS 10.13+) based on Qt 5.12.12 (AppleClang 13.0.0)
+Stellarium-26.3-qt5-x86_64.AppImage | Stellarium 26.3 for Linux (amd64; glibc 2.35) based on Qt 5.15.3 (GCC 11.4.0)
+Stellarium-26.3-qt6-x86_64.AppImage | Stellarium 26.3 for Linux (amd64; glibc 2.35) based on Qt 6.2.4 (GCC 11.4.0)
 
 ## Verify
 ### GPG signature
@@ -203,7 +188,7 @@ Stellarium-26.2-qt6-x86_64.AppImage | Stellarium 26.2 for Linux (amd64; glibc 2.
   **id:** `rsa4096/BF38D4D02A328DFF 2012-04-07`
   **fingerprint:** `7915 1C2E 6351 E727 8DA1  A730 BF38 D4D0 2A32 8DFF`
 3. Verify the binary file is valid (tarball for example)
-  `gpgv --keyring ./stellarium.gpg stellarium-26.2.tar.gz.asc stellarium-26.2.tar.gz`]]></releaseNotes>
+  `gpgv --keyring ./stellarium.gpg stellarium-26.3.tar.gz.asc stellarium-26.3.tar.gz`]]></releaseNotes>
     <copyright>Copyright © Stellarium Developers</copyright>
     <tags>stellarium admin planetarium sky stars constellations</tags>
     <projectSourceUrl>https://github.com/Stellarium/stellarium</projectSourceUrl>
