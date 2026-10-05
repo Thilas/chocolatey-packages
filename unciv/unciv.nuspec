@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.22.6</version>
+    <version>4.22.7</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,19 +18,23 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.22.6
+## 4.22.7
 
-Fixed F6 crashes
+Sharper text on Android - By finalpatch
 
-By dangdinhbaohoang12:
-- Prioritize roads when connecting new cities 
-- Prevent attacks with units after ownership change 
+game ends with no alive major civ - By ssamt
 
-By SomeTroglodyte: 
-- Fix Minimap derailing when passed an AI observing civ
-- Fix the debug tile coordinates shown on/for tiles 
+Block tile improvements when the stockpiled resource cost is unpaid - By mvanhorn
 
-Keep the world screen tutorial task card on screen and scrollable - By JN0V]]></releaseNotes>
+Adjust happiness threshold for AI valuation - By EmperorPinguin
+
+Desktop: fix fallback-font glyphs being clipped on the right - By xysggol
+
+By SomeTroglodyte:
+- Improve numeric text fields localized formatting and parsing
+- Add missing translation templates for battle notifications
+- Add flag for the Navajo language
+- Replace sort arrows across all translation files]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
