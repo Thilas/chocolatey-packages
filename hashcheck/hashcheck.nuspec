@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>hashcheck</id>
-    <version>2.6.2</version>
+    <version>2.6.3</version>
     <title>HashCheck Shell Extension</title>
     <authors>Kai Liu,Christopher Gurnee,David B. Trout,Tim Schlueter,Mounir IDRASSI</authors>
     <owners>Thilas</owners>
@@ -16,20 +16,33 @@
     <summary>The HashCheck Shell Extension makes it easy for anyone to calculate and verify checksums and hashes from Windows Explorer.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/idrassi/HashCheck/releases)
 
-## HashCheck 2.6.2
+## HashCheck 2.6.3
 
-HashCheck 2.6.2 is a maintenance release focused on queued checksum processing controls and installer behavior on pre-Windows 11 systems.
+HashCheck 2.6.3 adds separate checksum file creation and makes verification results easier to review. It also fixes installation issues and restores checksum file opening on Wine 9.0.
 
 ### Fixed Issues
 
-* Fixed installer behavior on pre-Windows 11 systems by skipping Windows 11 sparse package assets and registration on downlevel Windows while keeping the legacy shell extension path. Fixes #37.
+- Fixed Windows PowerShell module lookup when the installer is launched from PowerShell 7 (`pwsh`). The same correction applies during uninstall. Fixes #43.
+- Fixed opening checksum files on Wine 9.0, which stopped working in version 2.6.0. Fixes #41.
+- Fixed WinGet identification of this fork as `idrassi.HashCheckShellExtension`. Fixes https://github.com/idrassi/DirHash/issues/39.
+- Checksum loading errors now include the underlying cause. Verification stops if there isn't enough memory to load every entry, preventing incomplete results from being shown. Large checksum files still require substantial memory. Relates to #28.
 
 ### Other Changes
 
-* Added a **Run now** action for queued checksum creation, verification, and Properties-tab hashing jobs. Queued dialogs can now bypass the queue on demand while preserving FIFO order for remaining jobs. Relates to #5.
-* Added localized **Run now** UI strings across the existing translations.
+- Added **Create Separate Checksum Files...** to Explorer's context menus, including the Windows 11 menu. This creates a checksum file beside each input file, with options for the hash type and handling existing output files. It's also available through `HashCheckPackageHost.exe /create /separate`. Fixes #8.
+- The verification window can now be resized or maximized and remembers its size and position. A new **Copy...** menu supports copying all results or just the summary; **Ctrl+C** copies selected rows. Relates to #42.
+- Added colors to the verification summary. The match count turns green only when every listed file matches. Mismatches appear in red and unreadable files in yellow, while high contrast mode keeps system colors. Fixes #39.
+- Added an initial check that can flag missing or unreadable files before hashing starts. This check has a time limit so unavailable network paths don't keep it waiting indefinitely. Relates to #38.
+- Updated the application icons and added a dedicated installer icon. Thanks to @xmha97 for #45.
 
-**Full Changelog**: https://github.com/idrassi/HashCheck/compare/v2.6.1...v2.6.2]]></releaseNotes>
+
+## Merged PRs
+* Improve icons by @xmha97 in https://github.com/idrassi/HashCheck/pull/45
+
+## New Contributors
+* @xmha97 made their first contribution in https://github.com/idrassi/HashCheck/pull/45
+
+**Full Changelog**: https://github.com/idrassi/HashCheck/compare/v2.6.2...v2.6.3]]></releaseNotes>
     <copyright>Copyright © 2008-2009 Kai Liu.  All rights reserved.
 Copyright © 2014, 2016 Christopher Gurnee.  All rights reserved.
 Copyright © 2014 Software Development Laboratories ("Fish" (David B. Trout))
