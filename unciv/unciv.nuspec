@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.22.7</version>
+    <version>4.22.8</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,23 +18,22 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.22.7
+## 4.22.8
 
-Sharper text on Android - By finalpatch
+Liberated city states make peace with anyone they were at war with pre-liberation
 
-game ends with no alive major civ - By ssamt
+When loading a game that causes Out Of Memory, show error message instead of crashing
 
-Block tile improvements when the stockpiled resource cost is unpaid - By mvanhorn
-
-Adjust happiness threshold for AI valuation - By EmperorPinguin
-
-Desktop: fix fallback-font glyphs being clipped on the right - By xysggol
+Added 'Only the first available choice is offered' event unique, for switch/case style options
 
 By SomeTroglodyte:
-- Improve numeric text fields localized formatting and parsing
-- Add missing translation templates for battle notifications
-- Add flag for the Navajo language
-- Replace sort arrows across all translation files]]></releaseNotes>
+- Add science income without a research target to overflow, so it's not lost 
+- Allow finer control of the value for 'snapping' Sliders (not only for Android) 
+- Fix locale-dependent number formatting messing up some numbers
+
+Resolved 'doesn't work on Java 8', hopefully for future changes as well
+
+Update multiplayer game preview as players turns change, even if turn number is the same]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
