@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>plezy</id>
-    <version>2.22.0</version>
+    <version>2.23.0</version>
     <title>Plezy</title>
     <authors>edde746</authors>
     <owners>Thilas</owners>
@@ -33,141 +33,84 @@ Stream your media library with HDR, Dolby Vision, offline downloads, and a gorge
 
 ## New features
 
-- Search finds actors and directors on Plex, Jellyfin and Emby
-- Apple TV hands playback to external players such as Infuse
-- Audio Channels setting replaces Downmix to Stereo: Original, Up to 5.1 or Stereo
-- Desktop can refuse HEVC and AV1 so the server transcodes them (Settings > Playback > Video Codecs)
-- A plezy://live link tunes a Live TV channel on Android
-- Resetting all keyboard shortcuts asks for confirmation first
+- Downloads group movies and shows by collection: a Collections grouping in the Movies and TV Shows tabs opens an offline collection screen
+- Retry failed downloads in bulk from the Downloads app bar, or with Retry all on a show, season or album
+- File Info opens from the player settings sheet for the playing item
+- Disable Dolby Vision (Settings > Video Playback) plays the file's HDR10 or HLG layer instead, on Android MPV and Apple TV
+- Subtitle Position goes up to 150 on MPV, so subtitles can move down into the black bars
+- The Android MPV performance overlay shows the Dolby Vision source profile and decode path
 
 ## Playback
 
-- HDR stays on the hardware video plane on SDR displays from Android 9, so 4K HDR plays smoothly on weaker TV boxes
-- TrueHD bitstreams on Android routes that take raw TrueHD but not the MAT carrier
-- DTS decodes to multichannel instead of playing silence on TVs without DTS
-- Smoother MPV playback on Android: 1080i recordings, 24p on Fire TV, 59.94 Hz boxes and TrueHD under load
-- Audio no longer drops out on low-RAM Android boxes
-- MP4s without a ctts box (common in x265 releases) play at full speed with hardware decoding on Android
-- Dolby Vision Profile 5 renders correctly with software decoding on Android
-- A server refusing playback with HTTP 403 shows why instead of a raw error or a sign-in prompt
-- A failed start names the actual reason instead of "loading failed"
-- Playback speed returns to 1.0 when the next item has no custom speed
-- The Play Next countdown waits while Plezy is in the background
-- Arrow keys move between Play Next buttons instead of seeking
-- The screen can sleep while a playback error is showing
-- Retry after a failed start brings back system media controls
-- Leaving Picture-in-Picture works on iOS
-- Display matching on Windows picks 23.976, 29.97 and 59.94 Hz modes, honors the switch delay and restores HDR
-- The performance overlay shows the new refresh rate after a switch on Windows
-
-## Subtitles
-
-- An offset set with "Don't save" no longer carries into the next episode
-- The subtitle cycle shortcut can turn subtitles off
-- External subtitles with a backslash in their path load on MPV
-- External players on Android receive the item's external subtitles
-- A failed subtitle search shows a readable reason
-
-## Music
-
-- Gapless Plex albums prefetch the next track when transcoding
-- Every gapless track keeps Plezy's request headers
-- Companion Remote play, pause, seek and skip control music
-- Queues over 1,000 tracks restore on the right track
+- Plex movies split across several files play as one item, including from downloads and in external players
+- Resuming over a slow connection no longer fails after 30 seconds while the stream is still loading
+- Xvid and MPEG-2 video play on Android MPV instead of failing to start or playing audio only
+- The audio track picker tells DTS-HD MA, DTS-HD HRA, DTS:X and other DTS variants apart from their DTS core
+- Display matching on Android MPV finds the frame rate of MKV files that do not declare one
+- Turning Normalize Loudness on or off, changing speed or picking the stereo limit with passthrough no longer loses audio or freezes playback on Android TV
+- Streams no longer stall at start on networks whose DNS never answers IPv6 lookups
+- Resuming AV1 on Android hands the hardware decoder complete frames, fixing a stall on Fire TV
+- "Ends at" stays current while playback is paused
+- Enter skips the intro or credits on desktop while the controls are showing
+- Clicks that just miss a button or the seek bar on the desktop control bars no longer pause playback
+- The screen can sleep after pressing play at the end of an item
 
 ## Live TV
 
-- Emby plays HDHomeRun channels
-- Jellyfin live streams are released on the server when a tune is abandoned
-- Live TV stays available when a server check times out
-- Favorites from two Plex accounts in one profile stay separate
-- Emby schedules recordings without asking for a target library
-- The guide's day picker stays correct across daylight saving changes
-- Guide favorites toggle with a D-pad, and holding OK in Reorder Favorites no longer removes favorites in a burst
-- What's On is hidden when no Live TV server is Plex
-- A failed guide refresh keeps the loaded channels
-- Changing channel during stream recovery no longer reopens the previous channel
+- Live TV and Watch from Start match the display to the channel's presented frame rate, including after a channel change, on Android MPV and Apple TV, fixing judder and audio drift on interlaced channels
+- Watch from Start no longer skips about a minute when the display switches mode on Android MPV
 
 ## Plex
 
-- Collections open on servers that cap pages at 120 items
-- View All on music hubs lists their items
-- Hub detail screens honor every sort option
-- The metadata editor loads every field before editing
-- Back cancels a collection, playlist or shuffle launch
-- The server token is no longer sent over plain HTTP to remote or relay addresses
+- Smart playlists play from the tapped entry and continue through the playlist
+- Playing a playlist or collection in order no longer shows a "Shuffle" loading dialog
+- A stream stopped from the Plex dashboard stays stopped instead of restarting itself
+- Switching Plex Home users no longer shows the previous user's rows on Home
 
 ## Jellyfin & Emby
 
-- Emby season lists offer merged episode versions
-- Hidden libraries stay out of Continue Watching
-- Next Up rewatching applies to every Jellyfin account in a profile
-- Jellyfin remembers the subtitle actually selected
-- A capped quality no longer reports transcoding unavailable when the file already fits
-- The Apple TV Top Shelf shows Emby resume items
+- Emby search is fast again on large libraries and no longer fails with "Search could not reach any media server"
+- Search finds items in home video and music video libraries
+- Unaired placeholder episodes no longer appear in Recently Added, show downloads, sync rules or folder playback
+- The Jellyfin dashboard keeps Plezy's now-playing and transcode info
+
+## Servers & search
+
+- One unresponsive server no longer holds back other servers' search results and libraries
+- A server that takes more than 10 seconds to answer is waited on instead of being reported unreachable
 
 ## Explore & trackers
 
-- Anime movies and series no longer map to each other's MAL and AniList entries
-- A season not yet mapped no longer overwrites season 1's entry
-- Specials no longer rewind series progress
-- Manually marked anime episodes are counted once
-- Queued Trakt changes sync without rate-limit errors
-- Removing from a watchlist only deletes entries still on Plan to Watch
-- View All on TV Discover rows loads the full list
+- Plex Discover titles, summaries and shelf names follow the app language
+- Marking a show or season watched sends batched history writes to Simkl, Trakt and MDBList instead of one request per episode
+- Simkl requests are paced and back off when Simkl asks
+- Simkl sign-in uses Simkl's new device flow; Simkl settings offers Reconnect to move an existing sign-in over
 
 ## Downloads
 
-- Downloads work again on macOS
-- A downloaded movie or episode plays from the device while its server is reachable
-- The same title in two libraries or on two servers no longer overwrites the other's download
-- A resumed download continues where it stopped
-- Changing Download on Wi-Fi only applies to downloads already queued
-- Signing out of a Plex account keeps its downloads
-- Failed downloads show a readable reason
-- Sync rules can be removed with a remote or keyboard
-- Shared downloads queued by another profile start
-
-## Profiles & servers
-
-- Plezy stays online without internet when a local or loopback server is reachable
-- A server refusing the account no longer asks to sign in again
-- PIN-protected Plex Home users are no longer picked automatically at sign-in
-- A failed profile switch no longer asks for the previous profile's PIN
+- Android downloads resume where they stopped when the system interrupts them, instead of starting over from 0%
+- Android download progress no longer reads 100% at the halfway point, and large downloads and pause/resume continue instead of restarting
+- Download on Wi-Fi only starts downloads over a VPN and on Ethernet
+- A custom download folder no longer fills with numbered partial copies of an interrupted download
+- Watched episodes with a resume point are no longer deleted and re-downloaded on every launch
 
 ## UI
 
-- Library tabs show scrollbars on desktop
-- Libraries show load errors, and Refresh reloads the list
-- Manage Libraries offers admin actions only to server admins and keeps libraries that load while it is open
-- Playlist editing stays available after removing an item
-- Actor pages open when their server is offline
-- Use Home Layout applies immediately
-- Settings import rejects invalid values
-- A failed manual update check says so instead of reporting the latest version
-- Disabled buttons look disabled in the Mono theme
-- The search spinner no longer sticks after editing the query
+- Phone detail pages show IMDb, Rotten Tomatoes and TMDB ratings on their own row
 
 ## TV
 
-- Player controls hide after 5 seconds again with a remote
-- Library tabs keep their place when switching to Recommended
-- L1 and R1 no longer switch tabs behind a dialog or sheet
-- The skip button no longer takes focus from an open sheet
-- Plex, Tautulli and Jellyfin list Apple TV as tvOS with its device name
-
-## Android
-
-- Watch Next items no longer replay after a profile switch or relaunch
-- Memory limits for low-RAM devices take effect
+- The library A-Z bar stays clear of the screen edge and of the focused card
+- Down from the app bar moves into the grid after sorting or going back on View All, actor, collection, album, artist and playlist screens
+- The show detail hero shows the focused episode's IMDb score
 
 ## Desktop
 
-- The App Store build is named Plezy instead of Runner on Apple silicon Macs
-- A remote's Escape quits from Home in TV mode
-- Launching Plezy while it is closing no longer leaves no window on Windows
-- The Linux player no longer leaks memory or spins the CPU after a failed render
-- Server tokens stay out of MPRIS artwork, logs and the artwork cache]]></releaseNotes>
+- The window title bar follows the app theme on Linux and Windows
+- Discord Rich Presence no longer freezes Plezy on Windows while Discord is slow, and comes back after Discord restarts
+- Windows connects to servers that require TLS 1.3
+- Windows plays from servers using LibreSSL
+- Linux decodes video with NVDEC on NVIDIA GPUs]]></releaseNotes>
     <copyright>Copyright © edde746</copyright>
     <tags>plezy foss client plex jellyfin media mpv</tags>
     <projectSourceUrl>https://github.com/edde746/plezy</projectSourceUrl>
