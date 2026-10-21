@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>plezy</id>
-    <version>2.23.0</version>
+    <version>2.24.0</version>
     <title>Plezy</title>
     <authors>edde746</authors>
     <owners>Thilas</owners>
@@ -33,84 +33,122 @@ Stream your media library with HDR, Dolby Vision, offline downloads, and a gorge
 
 ## New features
 
-- Downloads group movies and shows by collection: a Collections grouping in the Movies and TV Shows tabs opens an offline collection screen
-- Retry failed downloads in bulk from the Downloads app bar, or with Retry all on a show, season or album
-- File Info opens from the player settings sheet for the playing item
-- Disable Dolby Vision (Settings > Video Playback) plays the file's HDR10 or HLG layer instead, on Android MPV and Apple TV
-- Subtitle Position goes up to 150 on MPV, so subtitles can move down into the black bars
-- The Android MPV performance overlay shows the Dolby Vision source profile and decode path
+- Detail pages show scores from connected Trakt, Simkl, MyAnimeList, AniList and MDBList accounts
+- Person pages show the biography, birth and death dates, and birthplace
+- Deinterlacing has a Film mode for telecined DVDs on MPV
+- Dolby Vision plays on macOS
+
+## Supporter
+
+- A one-time Supporter purchase on the App Store and Google Play unlocks themes and app icons
+- Five colour themes: Ember, Glacier, Forest, Plum and Paper
+- Custom themes with your own colours
+- 23 alternate app icons on iOS, tvOS and Android
+- Free in the Microsoft Store, Amazon Appstore, macOS and Linux versions
+- Not offered in the GitHub Android, iOS and Windows builds
+
+## Watch Together
+
+- Rooms run on Open Watch Party and work with other Open Watch Party apps
+- Rooms work across servers: each person plays their own copy from their Plex, Jellyfin or Emby servers
+- Room codes have six characters
+- Rooms use public relays by default
+- A custom relay must be an Open Watch Party relay
+- Everyone in a room needs this version of Plezy or another Open Watch Party app
+
+## Performance
+
+- Fewer dropped frames scrolling Home rows and library grids with the D-pad on TV boxes
+- Fewer dropped frames opening detail pages on TV boxes
+- Fewer dropped frames opening the player on TV boxes
+- Seek-bar previews load with about a third of the peak memory
 
 ## Playback
 
-- Plex movies split across several files play as one item, including from downloads and in external players
-- Resuming over a slow connection no longer fails after 30 seconds while the stream is still loading
-- Xvid and MPEG-2 video play on Android MPV instead of failing to start or playing audio only
-- The audio track picker tells DTS-HD MA, DTS-HD HRA, DTS:X and other DTS variants apart from their DTS core
-- Display matching on Android MPV finds the frame rate of MKV files that do not declare one
-- Turning Normalize Loudness on or off, changing speed or picking the stereo limit with passthrough no longer loses audio or freezes playback on Android TV
-- Streams no longer stall at start on networks whose DNS never answers IPv6 lookups
-- Resuming AV1 on Android hands the hardware decoder complete frames, fixing a stall on Fire TV
-- "Ends at" stays current while playback is paused
-- Enter skips the intro or credits on desktop while the controls are showing
-- Clicks that just miss a button or the seek bar on the desktop control bars no longer pause playback
-- The screen can sleep after pressing play at the end of an item
+- Subtitle lines no longer go missing after seeking or switching tracks
+- Normalize Loudness no longer stutters video on Android MPV
+- Normalize Loudness keeps 5.1 audio in 5.1 on Android MPV
+- 24 fps video on a 60 Hz display no longer judders every few seconds on Android MPV
+- 24 fps video no longer stutters on MediaTek TVs and projectors with motion processing on Android MPV
+- The next episode keeps HDR10 and Dolby Vision on Sony Bravia TVs with Android MPV
+- Dolby Vision profile 5 no longer plays magenta and green on iPad (10th and 11th generation)
+- Plex and Emby playback no longer crashes seconds in on 32-bit Android TV boxes
+- Skip Credits no longer appears in the middle of a movie
+- Previous restarts a movie
+- The audio output picked in the player is remembered across videos
+- Remember Player Changes set to Per library or Per show no longer carries changes into other libraries
+- Starting Picture-in-Picture no longer crashes on iPhone and iPad
+- Subtitles keep their size after locking an iPhone or iPad while the video is zoomed
+- A failed screenshot shows an error
+
+## Apple audio
+
+- 5.1 and 7.1 audio plays as multichannel instead of stereo on iPhone and iPad
+- Audio Passthrough on iPhone, iPad and Mac, for Dolby Atmos on AirPods and Mac speakers
+- With Audio Passthrough on, TrueHD Atmos and DTS:X play as spatial audio on iOS and tvOS 26
+- Audio Passthrough applies to music
+- The player settings show Spatial Audio or Dolby Atmos rendering on iPhone and iPad
+- Changing playback speed no longer freezes video on Apple devices
+- Audio no longer skips on AirPods on macOS 27
 
 ## Live TV
 
-- Live TV and Watch from Start match the display to the channel's presented frame rate, including after a channel change, on Android MPV and Apple TV, fixing judder and audio drift on interlaced channels
-- Watch from Start no longer skips about a minute when the display switches mode on Android MPV
+- Live TV buffers ~6 s before playing instead of stalling every few seconds
+- MPEG-2 channels no longer show a blank or stalling picture on Android MPV
+- The player's Go to Live control has a label
+- Program descriptions show on Jellyfin and Emby
 
 ## Plex
 
-- Smart playlists play from the tapped entry and continue through the playlist
-- Playing a playlist or collection in order no longer shows a "Shuffle" loading dialog
-- A stream stopped from the Plex dashboard stays stopped instead of restarting itself
-- Switching Plex Home users no longer shows the previous user's rows on Home
+- Posters and backdrops no longer fail to load in batches on Android
+- A server that comes back on a new address reconnects without restarting Plezy
+- Reconnect shows an error when nothing connects
 
 ## Jellyfin & Emby
 
-- Emby search is fast again on large libraries and no longer fails with "Search could not reach any media server"
-- Search finds items in home video and music video libraries
-- Unaired placeholder episodes no longer appear in Recently Added, show downloads, sync rules or folder playback
-- The Jellyfin dashboard keeps Plezy's now-playing and transcode info
-
-## Servers & search
-
-- One unresponsive server no longer holds back other servers' search results and libraries
-- A server that takes more than 10 seconds to answer is waited on instead of being reported unreachable
+- Seek-bar previews show again
+- Home rows follow the library order set in Manage Libraries
+- The Choose audio by language toggle is no longer inverted
+- Seasons without their own backdrop show the series backdrop
+- Emby search on large libraries returns people and movies instead of timing out
+- The Apple TV Top Shelf shows Continue Watching from Jellyfin 12 servers
 
 ## Explore & trackers
 
-- Plex Discover titles, summaries and shelf names follow the app language
-- Marking a show or season watched sends batched history writes to Simkl, Trakt and MDBList instead of one request per episode
-- Simkl requests are paced and back off when Simkl asks
-- Simkl sign-in uses Simkl's new device flow; Simkl settings offers Reconnect to move an existing sign-in over
+- Tracker scores on Explore items show which service they come from
+- Seerr artwork loads when Seerr's Enable Image Caching is on
 
 ## Downloads
 
-- Android downloads resume where they stopped when the system interrupts them, instead of starting over from 0%
-- Android download progress no longer reads 100% at the halfway point, and large downloads and pause/resume continue instead of restarting
-- Download on Wi-Fi only starts downloads over a VPN and on Ethernet
-- A custom download folder no longer fills with numbered partial copies of an interrupted download
-- Watched episodes with a resume point are no longer deleted and re-downloaded on every launch
+- Large downloads to a custom folder on Android finish instead of restarting from 0%
+- Pausing a download to a custom folder on Android resumes where it stopped
+- A download to a custom folder continues after Android closes Plezy instead of making a numbered copy
+- Numbered copies left in a custom folder by earlier versions are removed
 
 ## UI
 
-- Phone detail pages show IMDb, Rotten Tomatoes and TMDB ratings on their own row
+- Hero backdrops are sharp on portrait phones
+- The home hero carousel crossfades artwork between slides
+- Built-in labels such as Copy and Paste follow the app language
+- Rotating an Android phone no longer leaves the UI squeezed into part of the screen
+- Library grids no longer lose cards when a page reloads
+- Leaving the MPV config editor with the back arrow keeps the latest edits
+- The Android launcher icon is centred
 
 ## TV
 
-- The library A-Z bar stays clear of the screen edge and of the focused card
-- Down from the app bar moves into the grid after sorting or going back on View All, actor, collection, album, artist and playlist screens
-- The show detail hero shows the focused episode's IMDb score
+- Smaller wide cards and more space between rows on Home, Explore and library screens
+- Smaller hero title
+- Each grid density step gives a different card size
+- Grids default to normal spacing
+- The remote keeps working after closing Profiles or the PIN prompt opened from the avatar menu
+- Quick gamepad Back presses on a detail page no longer close the screen beneath it
 
 ## Desktop
 
-- The window title bar follows the app theme on Linux and Windows
-- Discord Rich Presence no longer freezes Plezy on Windows while Discord is slow, and comes back after Discord restarts
-- Windows connects to servers that require TLS 1.3
-- Windows plays from servers using LibreSSL
-- Linux decodes video with NVDEC on NVIDIA GPUs]]></releaseNotes>
+- Shaders and ambient lighting are no longer available on macOS
+- Chinese text no longer uses Japanese character forms on Windows
+- Linux shows Japanese, Korean and Traditional Chinese text in their own character forms]]></releaseNotes>
     <copyright>Copyright © edde746</copyright>
     <tags>plezy foss client plex jellyfin media mpv</tags>
     <projectSourceUrl>https://github.com/edde746/plezy</projectSourceUrl>
