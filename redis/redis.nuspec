@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>8.8.3</version>
+    <version>8.10.3</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -29,14 +29,11 @@ You should use it for local development and follow Redis official guidance to de
     <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/redis-windows/redis-windows/releases)
 
-Update urgency: `SECURITY`: There are security fixes in the release.
+Update urgency: SECURITY: There is a security fix in the release.
 
 ### Security fixes
 
-- https://github.com/redis/redis/pull/15673 Commands queued in a transaction could still access keys whose ACL permissions were revoked before the transaction was executed
-- https://github.com/redis/redis/pull/15722 The cluster bus protocol has no authentication of its own unless `tls-cluster` is enabled, so any host able to reach a node's bus port could join the cluster and threaten it. A cluster node now warns at startup when its bus port is left unauthenticated, and the new `cluster-bus-port-protected-mode` option (default `no`) makes refusing to run in that state an explicit choice: set it to `yes` and the node starts only when `tls-cluster` authenticates the bus
-- TimeSeries: Prevented Redis from crashing when adding samples to a compressed Time Series key restored from a malformed RDB payload
-- Vector Sets: Deeply nested JSON used in Vector Set queries could cause the server to crash
+- Heap buffer overflow when propagating a `PUBLISH`/`SPUBLISH` message larger than 4GB over the cluster bus in cluster mode
 
 Hashes
 =========
@@ -44,27 +41,27 @@ MSYS2 Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : C2EBC76C007A12C96D7DD64E252A194D9E6A06FE801DFB834CA071314FD662E7
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.3-Windows-x64-msys2.zip
+Hash      : AF16DF340525B431E9EC8DABFD625D5E7A233F82805B5418819904EA909C447F
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.3-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : 0F842DAFFB25797AD8717A19BC47D35FB04A3A94FE547E6FAC8C17EED3DB57FB
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.3-Windows-x64-msys2-with-Service.zip
+Hash      : FCFCA988BEE40378CEB8FBF6F44F0BB5D9EC131BD2599274513E710CA843D659
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.3-Windows-x64-msys2-with-Service.zip
 
 Cygwin Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : BB19F830CA5BF62718E81F230833F968B90ECFD675557CAF3C1478C4E65BD98C
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.3-Windows-x64-cygwin.zip
+Hash      : 8000848C48668C8CD32F21386CE951D0E02C1AEFAE39443AB9D3DE11FF8EBF9E
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.3-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : CE926F3C17728BD5250EFACFDA27ABACFE8AA13FB9F1B7545E974A3221F51467
-Path      : D:\a\redis-windows\redis-windows\Redis-8.8.3-Windows-x64-cygwin-with-Service.zip
+Hash      : B1ABDE6130EC8C1A60D8FF765AAFD9488E902EE7F9F05DC12BFFEBB9C089A4B5
+Path      : D:\a\redis-windows\redis-windows\Redis-8.10.3-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/35414969678]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/40432509982]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
