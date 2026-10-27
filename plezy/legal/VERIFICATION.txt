@@ -7,7 +7,7 @@ Package can be verified like this:
 
 1. Go to
 
-   x64: https://github.com/edde746/plezy/releases/download/2.24.0/plezy-windows-x64-portable.7z
+   x64: https://github.com/edde746/plezy/releases/download/2.25.0/plezy-windows-x64-portable.7z
 
    to download the installer.
 
@@ -15,7 +15,7 @@ Package can be verified like this:
    - Use powershell function 'Get-FileHash'
    - Use Chocolatey utility 'checksum.exe'
 
-   checksum64: F47C319A709DAD2065FFEF1050D6B06F3E37D85597973E6B99B1EDC22F7B4298
+   checksum64: B5A5BE093CDC1EC33C328FE7A3C68B8D0E3C2ADF032E12D6F1E49EC5EBC61000
 
 File 'LICENSE.txt' is obtained from:
    https://github.com/edde746/plezy/blob/main/LICENSE
