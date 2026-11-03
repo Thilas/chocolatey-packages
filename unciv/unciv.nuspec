@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.22.16</version>
+    <version>4.22.17</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,17 +18,23 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.22.16
+## 4.22.17
 
-Multiple 'automate promotions' options - 'for automated units'. 'for all units', 'for no units'
+Reduced memory when downloading games from multiplayer server
 
-Rendering performance improvements
+Nuke targets are scrollable, so too many targets don't make the 'nuke' button go off-screen
 
-Show available specialist slots in building list - By neolabs120-mobile
+Citybutton clicks show units again
 
-Sort pending trades by turn order - By unciv-loof
+Added search for saved games
 
-Keep Civilopedia entry names visible when selecting entries - By Kilo-cy]]></releaseNotes>
+Many small LLM fixes - By JoshKirk800 (new contributor!)
+
+Clarify nuclear death exclusions for combat uniques - By mvanhorn
+
+Harden minimap for empty explored region - By SomeTroglodyte
+
+Fix 'Off' promotion-automation option being untranslatable - By ibrahim-iqbal]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
