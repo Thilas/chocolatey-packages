@@ -6,6 +6,9 @@ param([switch] $Force)
 function global:au_GetLatest {
     Get-GitHubLatest `
         -Repository 'edde746/plezy' `
+        -ReleaseFilter { param($Release)
+            $Release.tag_name -notlike 'test-*'
+        } `
         -FileType '7z' `
         -IsUri64 { param($Uri) $Uri -match '\bwindows\b.+\bx64\b' }
 }
