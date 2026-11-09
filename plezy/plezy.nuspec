@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>plezy</id>
-    <version>2.25.0</version>
+    <version>2.26.0</version>
     <title>Plezy</title>
     <authors>edde746</authors>
     <owners>Thilas</owners>
@@ -33,63 +33,81 @@ Stream your media library with HDR, Dolby Vision, offline downloads, and a gorge
 
 ## New features
 
-- Skip Intro and Skip Credits recognise chapters with generic or non-English names
-- Add to… playlists and collections on Jellyfin and Emby
-- Scan Library Files on Jellyfin and Emby
-- New airings show a NEW badge in the Live TV guide
-- Explore can be the Startup Section
-- The Performance Overlay shows Direct Play or Transcoding
+- Shuffle a whole movie or TV library
+- A Genres tab in movie and show libraries
+- Continue Watching asks which copy to play when a title is in more than one library or server
+- Zoom can be remembered per show, per library or everywhere
+- Shader presets and Ambient lighting on iOS, Apple TV and macOS
+- Match Refresh Rate on macOS
+- A Linux AppImage, updatable with zsync
 
-## plezy:// links
+## Performance
 
-- Links can open Plezy in a chosen profile
-- Links play a movie or show by TMDB, TVDB, IMDb or Plex ID from any server
-- A show link plays the next episode, or shuffles the show
-- Show link on movies, shows, episodes and profiles gives the link and a QR code
-- Live TV links work on Apple TV
-- A link wakes Google TV from the screensaver
-- Outplayer, Infuse and VLC on iOS return to Plezy with where playback stopped
+- Desktop downloads run at full network speed
+- Lower CPU use for E-AC-3 passthrough on Android MPV
+- Lower CPU use on 32-bit Android devices
+- Faster audio decoding on ARM devices
+- Animated ASS subtitles use less CPU
+- Memory no longer grows with every seek in videos with subtitles
+- A video whose audio ends early no longer drains power on Android MPV
+- Resizing the window reloads posters far less often
+- Anime tracking downloads under 1 MB of ID data instead of ~8 MB
 
 ## Watch Together
 
-- Opening an ended room from Recent Rooms starts it again under the same code
-- A host playing a download shares it while its server is online
-- Guests play their own download of the room's file instead of streaming it
-- Videos played from Downloads join the room
+- A guest who switches to another version of the file stays in sync
+- The participant count on the Watch Together button can be clicked
 
 ## Playback
 
-- Normalize Loudness no longer silences 5.1 audio on some devices on Android MPV
-- Resuming no longer skips up to half a second of audio on Android MPV
-- Passthrough no longer stops playback after a display mode switch on Android MPV
-- Subtitle lines near the start of a video no longer go missing
-- Audio Passthrough stays on after a Dolby track fails to pass through on Apple devices
-- Plex shows play in season order even when episode air dates are wrong
-- Back on the Play Next prompt leaves the player
-- Audio Sync moves in 10 ms steps
-- The volume slider shows the level while dragging
+- Dolby Vision no longer plays green with Match Content Frame Rate on Android MPV
+- A paused video no longer turns black after switching apps on Android MPV
+- Subtitles stay in step with the picture on Android MPV
+- Letterboxed Dolby Vision has black bars instead of gray on some Android TV boxes on Android MPV
+- Unpausing with Passthrough no longer freezes the picture for a few frames on Android MPV
+- Try transcoding is offered when a Plex server refuses Original quality
+- Choosing between two same-language subtitle files no longer turns subtitles off on Jellyfin
+- The screen lock unlocks by tapping its button twice instead of a long press
+- A subtitle download that never appears says it may have failed
+- The brightness swipe works on the inner display of iPhone Duo
+
+## Profiles & startup
+
+- Ask for profile on app open also asks when the app resumes over an open video
+- A rejected Plex sign-in asks you to sign in again instead of going offline
+- Resuming the app no longer marks a reachable server offline
+- Plezy no longer crashes at launch on Android devices without Vulkan
 
 ## UI
 
-- Posters in dense grids are no longer cropped at the top and bottom
-- Profiles no longer show the Plex account name when only one account is signed in
-- Watch Together, themes, Supporter and newer settings are translated in every language
-- Explore posters load for Plex users with Seerr's Enable Image Caching on
-- Cancel on a download notification stops the download instead of restarting it
-- Continue Watching fits on the first screen of Home on compact phones
-- Screens and sheets stay clear of the status column on iPhone Duo
-- The Home profile avatar opens the profile menu instead of Control Center on iPhone Duo
+- The Supporter purchase is now called the Theme & Icon Pack
+- Continue Watching posters no longer switch between series and season after playback
+- Watch trailer in Explore plays the trailer of the copy in your library
+- Links that can't be opened show a message instead of doing nothing
+- Light themes no longer show a gray band under the Discover and Explore toolbars
+- The status bar no longer turns gray on Android 14 and older
+- The Companion Remote stays on its tab after reconnecting
+- Downloads are left out of iCloud Backup on iOS
+- Tabs sit in the vertical bar on iPhone Duo
+- Sheets and dialogs stay on one side of the fold on iPhone Duo
+- The vertical bar hides during playback on iPhone Duo
 
 ## TV
 
-- The remote keeps working after switching profiles
-- Backing out of a finished episode focuses the next episode in Continue Watching
-- The Apple TV Top Shelf shows series posters unless Episode Poster Style is Season Poster
+- Focus highlights show in light themes
+- Holding Select in lists runs the long-press action, such as picking a secondary subtitle
+- OK on some IR remotes no longer opens the long-press menu
+- The remote keeps working on a detail page after Apple TV wakes from sleep
+- The library header no longer slides while moving along the top row on Apple TV
+- Watch trailer on Apple TV opens the YouTube app
+- Explore no longer offers links Apple TV can't open
 
 ## Desktop
 
-- Skipping or closing a video no longer freezes the screen on macOS 27
-- Blacks are no longer washed out with HDR on in Windows]]></releaseNotes>
+- Plezy no longer opens to a blank white window on Windows
+- 10-bit H.264 no longer plays gray on NVIDIA RTX 50 GPUs on Windows
+- Leaving fullscreen during a refresh rate switch no longer leaves the display switched
+- Window buttons stay in place after leaving fullscreen on macOS]]></releaseNotes>
     <copyright>Copyright © edde746</copyright>
     <tags>plezy foss client plex jellyfin media mpv</tags>
     <projectSourceUrl>https://github.com/edde746/plezy</projectSourceUrl>
