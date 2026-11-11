@@ -88,14 +88,14 @@ jobs:
 
       - name: Upload Packages artifact
         if: ${{ always() && hashFiles('Packages/*.nupkg') }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: Packages
           path: Packages/*.nupkg
 
       - name: Upload Test artifact
         if: ${{ hashFiles('Packages/*.nupkg') }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: Test
           path: test.ps1
@@ -170,7 +170,7 @@ jobs:
           "path=$path" >> $env:GITHUB_OUTPUT
 
       - name: Upload Information artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: Information ${{ env.package_name }} ${{ env.package_version }} on ${{ matrix.os }}
           path: ${{ steps.information.outputs.path }}
@@ -205,7 +205,7 @@ jobs:
 
       - name: Upload failure screenshot into Information artifact
         if: ${{ failure() }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: Information ${{ env.package_name }} ${{ env.package_version }} on ${{ matrix.os }}
           path: desktop*.png
