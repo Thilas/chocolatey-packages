@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>4.22.19</version>
+    <version>5.0.0</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,19 +18,23 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 4.22.19
+## 5.0.0
 
-Preparations for web version :)
+Web version of Unciv! - By YosefLm
 
-By ibrahim-iqbal: 
-- Add an 'Off' label for the automatic promotions setting 
+skip 'player ready' screen for hotseat when changing options
 
-By Qualia-Li:
-- Fix loading screenshots darkening the map between turns 
-- Exclude foreign ships from AI naval defence counts 
-- Resolve reachable movement when approaching enemy cities 
+Automated Settlers can think a tile is good but it's actually unsettleable, if so, explore for a different tile
 
-Fix GreatPerson quest completion conditions - By TinyClayMan]]></releaseNotes>
+By mvanhorn:
+- Keep marble wonder production bonuses local to the owning city 
+- Prevent carrier healing moves from failing during payload placement 
+
+Research agreement trade is only valid while the offerer can pay - By Qualia-Li
+
+New CS bullying uniques for BNW's Gunboat Diplomacy - By HungLTL
+
+Do not match 'in cities following our religion' when neither side has a religion - By ibrahim-iqbal]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
