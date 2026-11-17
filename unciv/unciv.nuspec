@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>5.0.0</version>
+    <version>5.0.1</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,23 +18,26 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 5.0.0
+## 5.0.1
 
-Web version of Unciv! - By YosefLm
+Avoid ANR when opening empire overview screen from top bar
 
-skip 'player ready' screen for hotseat when changing options
+Add counterintelligence modifier uniques - By SeventhM
 
-Automated Settlers can think a tile is good but it's actually unsettleable, if so, explore for a different tile
+Naval AI: path to water attack stations instead of city centers - By DavidZal
 
-By mvanhorn:
-- Keep marble wonder production bonuses local to the owning city 
-- Prevent carrier healing moves from failing during payload placement 
+By ibrahim-iqbal:
+- Add the battle notification templates where only the city lost HP 
+- Charge 'Costs [amount] [stat] per turn' for improvements that are not roads 
+- Fix divide by zero in the trades overview when the viewer is the first civ 
 
-Research agreement trade is only valid while the offerer can pay - By Qualia-Li
+Seed the browser font fixture on the game origin - By YosefLm
 
-New CS bullying uniques for BNW's Gunboat Diplomacy - By HungLTL
-
-Do not match 'in cities following our religion' when neither side has a religion - By ibrahim-iqbal]]></releaseNotes>
+By SomeTroglodyte:
+- Language UI shows native names, fix off-by-two in completion percentages
+- Web version: Fix broken quoted parameters in dev console
+- Web version: Suppress double handling of Ctrl-keys by game and browser
+- Prettify web port a bit]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
