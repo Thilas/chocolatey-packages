@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>unciv</id>
-    <version>5.0.1</version>
+    <version>5.0.2</version>
     <title>Unciv</title>
     <authors>yairm210</authors>
     <owners>Thilas</owners>
@@ -18,26 +18,21 @@ Build your civilization, research technologies, expand your cities and defeat yo
     <summary>Civ V remake for Android &amp; Desktop</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/yairm210/Unciv/releases)
 
-## 5.0.1
+## 5.0.2
 
-Avoid ANR when opening empire overview screen from top bar
+Background work on unit actions :)
 
-Add counterintelligence modifier uniques - By SeventhM
+Fix crash when two autosaves overlap - By ibrahim-iqbal
 
-Naval AI: path to water attack stations instead of city centers - By DavidZal
+Reject online saves whose game speed is missing locally - By mvanhorn
 
-By ibrahim-iqbal:
-- Add the battle notification templates where only the city lost HP 
-- Charge 'Costs [amount] [stat] per turn' for improvements that are not roads 
-- Fix divide by zero in the trades overview when the viewer is the first civ 
+Show damaged city's healthbar when it's out of sight - By Qualia-Li
 
-Seed the browser font fixture on the game origin - By YosefLm
+Wrap map descriptions within the new-game options column - By Qualia-Li
 
-By SomeTroglodyte:
-- Language UI shows native names, fix off-by-two in completion percentages
-- Web version: Fix broken quoted parameters in dev console
-- Web version: Suppress double handling of Ctrl-keys by game and browser
-- Prettify web port a bit]]></releaseNotes>
+Use religion display name instead of name in notification - By unciv-loof
+
+Refresh owned tile images when the owner's era or style changes - By SwastikTripathi (new contributor!)]]></releaseNotes>
     <copyright>Copyright © yairm210</copyright>
     <tags>unciv foss 2D 4X civ civilization moddable</tags>
     <projectSourceUrl>https://github.com/yairm210/Unciv</projectSourceUrl>
