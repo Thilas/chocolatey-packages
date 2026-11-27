@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>plezy</id>
-    <version>3.0.0-beta1</version>
+    <version>3.0.0-beta2</version>
     <title>Plezy</title>
     <authors>edde746</authors>
     <owners>Thilas</owners>
@@ -37,7 +37,22 @@ Public beta of Plezy 3.0: Plezy rebuilt as a native app on every platform.
 
 Install notes, known limitations, how to report bugs and the vote on how 3.0 should ship are in the pinned announcement issue: #3165.
 
-SHA256SUMS lists the checksum of every file.]]></releaseNotes>
+SHA256SUMS lists the checksum of every file.
+
+## Changes since beta 1
+
+- TV: library grids use the 2.x sizes again and scroll more smoothly
+- Android TV: Watch Next artwork shows in launchers
+- Windows: starts when Credential Manager is full (#3169)
+- Item menus in a clearer order (#3171)
+- Season chips show watch progress (#3172)
+- Season cards open the show with that season selected
+- iPad: Libraries no longer freezes the app
+- Home: shortcut chips start with Live TV and your libraries
+- Downloads is its own page: a tab on phones, a sidebar entry elsewhere
+- Computers: rows fade at their edges and scroll with the mouse wheel, by dragging, or with ‹ › buttons
+- Mac: one universal build that also runs on Intel Macs
+- Crash reports are now sent to Plezy's own server (bugs.plezy.app)]]></releaseNotes>
     <copyright>Copyright © edde746</copyright>
     <tags>plezy foss client plex jellyfin media mpv</tags>
     <projectSourceUrl>https://github.com/edde746/plezy</projectSourceUrl>
