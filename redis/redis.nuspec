@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>redis</id>
-    <version>8.10.3</version>
+    <version>8.12.0</version>
     <title>Redis</title>
     <authors>Salvatore Sanfilippo,yes8080</authors>
     <owners>Thilas</owners>
@@ -29,11 +29,36 @@ You should use it for local development and follow Redis official guidance to de
     <summary>Redis is the open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</summary>
     <releaseNotes><![CDATA[[Releases](https://github.com/redis-windows/redis-windows/releases)
 
-Update urgency: SECURITY: There is a security fix in the release.
+This is the General Availability release of Redis 8.12 in Redis Open Source.
 
-### Security fixes
+### Major changes compared to 8.10
 
-- Heap buffer overflow when propagating a `PUBLISH`/`SPUBLISH` message larger than 4GB over the cluster bus in cluster mode
+- Compressed bitmaps — Integrated redis-roaring into Redis core for lower memory usage and faster bitmap operations. 
+Special thanks to Antonio Viggiano, the original creator of redis-roaring, for contributing this capability!
+- Substantial memory reduction for large sorted set with a new B+ tree encoding 
+- New command: `BITRANGEINTARRAY` equivalent to redis-roaring’s `R.RANGEINTARRAY`, to return set bit offsets within a specified range
+- Set member expiration: New commands: `SEXPIRE`,`SPEXPIRE`,`SEXPIREAT`,`SPEXPIREAT` - set expiration of a Set member; `STTL`, `SPTTL`, `SEXPIRETIME`,`SPEXPIRETIME` - retrieve remaining TTLs or expiration timestamps; `SETPERSIST` - remove the expiration of members 
+- New command: `BLESS` - avoid eviction of specified keys
+- New commands: `ZMOVE`, `BZMOVE` and ‘ZMOVEMEMBER‘ - atomic sorted-set moves for end-of-set batches and destination conditions 
+- Count-min-sketch extensions
+- Auto create JSON deep path
+- Opt-in SQ8 new compression is now available for HNSW vector indexes
+- `CLUSTER MIGRATION STATUS` now reports progress for both the snapshot and incremental migration phases
+- Redis query engine: `FT.ALTER` avoids unnecessary document reindexing during schema additions
+- Redis query engine: `EXPLAINSCORE` is now supported for `FT.HYBRID`
+- Redis query engine: `RETURN_STRICT` timeout handling is now enabled for local `FT.HYBRID` execution
+
+### Bug fixes (compared to 8.12 RC-3)
+
+- https://github.com/redis/redis/pull/16252 HOTKEYS GET reported a wrong collection-duration-ms after 2^31 milliseconds
+- https://github.com/redis/redis/pull/16219 HPERSIST ignored a replicated or AOF persist of a field the local clock had already expired
+- https://github.com/redis/redis/pull/16207 Replicas misbehaved when replication compression was enabled
+- https://github.com/redis/redis/pull/16267 BITCOUNT returned wrong results on AArch64 for large dense bitmaps 
+- https://github.com/redis/redis/pull/16081 Addresses and names announced on the cluster bus were accepted without validation 
+- RedisTimeSeries/RedisTimeSeries#2234 Fix a crash when loading persisted compaction rules with an invalid aggregation type (MOD-20881).
+- RedisJSON/RedisJSONhttps://github.com/redis/redis/pull/1692 Fix JSON.ARRINSERT partially modifying arrays before returning a validation error (MOD-9116).
+- RedisBloom/RedisBloomhttps://github.com/redis/redis/pull/1090 Improve TopK write performance by initializing the seed generator once, reducing per-command random-seed generation overhead.
+
 
 Hashes
 =========
@@ -41,27 +66,27 @@ MSYS2 Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : AF16DF340525B431E9EC8DABFD625D5E7A233F82805B5418819904EA909C447F
-Path      : D:\a\redis-windows\redis-windows\Redis-8.10.3-Windows-x64-msys2.zip
+Hash      : 867E67057399F016CA836379CFFFBA4F7BA6AEB410227F85C465071235F83140
+Path      : D:\a\redis-windows\redis-windows\Redis-8.12.0-Windows-x64-msys2.zip
 
 
 Algorithm : SHA256
-Hash      : FCFCA988BEE40378CEB8FBF6F44F0BB5D9EC131BD2599274513E710CA843D659
-Path      : D:\a\redis-windows\redis-windows\Redis-8.10.3-Windows-x64-msys2-with-Service.zip
+Hash      : A93AA37717C65E4B801758DBB430C70C9FEC4AB0BDB4878163D844AEB11EB2C7
+Path      : D:\a\redis-windows\redis-windows\Redis-8.12.0-Windows-x64-msys2-with-Service.zip
 
 Cygwin Builds Hashes
 ====================
 
 Algorithm : SHA256
-Hash      : 8000848C48668C8CD32F21386CE951D0E02C1AEFAE39443AB9D3DE11FF8EBF9E
-Path      : D:\a\redis-windows\redis-windows\Redis-8.10.3-Windows-x64-cygwin.zip
+Hash      : B5F0B8ED60BB98F014E05F25E3B355EDB1EE3C60F20C9B476A9D5B6415CDD289
+Path      : D:\a\redis-windows\redis-windows\Redis-8.12.0-Windows-x64-cygwin.zip
 
 
 Algorithm : SHA256
-Hash      : B1ABDE6130EC8C1A60D8FF765AAFD9488E902EE7F9F05DC12BFFEBB9C089A4B5
-Path      : D:\a\redis-windows\redis-windows\Redis-8.10.3-Windows-x64-cygwin-with-Service.zip
+Hash      : 6FF9EBF423B5360350DC9713FE0FA46A0602B2546C7B92562A7D5F18AF44E3DD
+Path      : D:\a\redis-windows\redis-windows\Redis-8.12.0-Windows-x64-cygwin-with-Service.zip
 
-From workflow: https://github.com/redis-windows/redis-windows/actions/runs/40432509982]]></releaseNotes>
+From workflow: https://github.com/redis-windows/redis-windows/actions/runs/46109486015]]></releaseNotes>
     <copyright>Copyright © Salvatore Sanfilippo</copyright>
     <tags>redis admin nosql database cache</tags>
     <projectSourceUrl>https://github.com/redis-windows/redis-windows</projectSourceUrl>
